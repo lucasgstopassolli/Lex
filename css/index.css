@@ -1,0 +1,47 @@
+    
+:root{
+    /*Paleta de cores padrão*/
+    --primary-50:  #fff2f0;
+    --primary-100: #ffe1dd;
+    --primary-200: #ffc9c2;
+    --primary-300: #ffa397;
+    --primary-400: #ff6e5b;
+    --primary-500: #ff4128;
+    --primary-600: #fa361c;
+    --primary-700: #d31a02;
+    --primary-800: #ad1a07;
+    --primary-900: #8f1c0d;
+    --primary-950: #4f0900;
+
+    --primary-5:  #fa361c00;
+    --primary-10: #fa361c1a;
+    --primary-20: #fa361c33;
+    --primary-30: #fa361c4d;
+    --primary-40: #fa361c66;
+    --primary-50: #fa361c80;
+    --primary-60: #fa361c99;
+    --primary-70: #fa361cb3;
+    --primary-80: #fa361ccc;
+    --primary-90: #fa361ce6;
+
+
+
+
+    /*Padões de estilo*/
+    --border-bt-primary: 2px solid var(--primary-600);
+    --background-bt-primary: linear-gradient(45deg, var(--primary-500) 0%, var(--primary-30) 50%, var(--primary-500) 100%);
+}
+
+body{
+    background: #0e0e11;
+}
+
+
+.button-style-1{
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: var(--border-bt-primary);
+    background: var(--background-bt-primary);
+    color: var(--primary-50);
+}
+
