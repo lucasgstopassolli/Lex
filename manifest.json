@@ -9,19 +9,45 @@
         "scripting",
         "tabs",
         "downloads",
-        "browsingData"
+        "browsingData",
+        "background",
+        "alarms",
+        "cookies",
+        "search"
     ],
     "host_permissions": [
-        "http://*/*",
-        "https://*/*"
+        "<all_urls>"
     ],
     "icons": {
-    "16": "/img/16.png",
-    "32": "/img/32.png",
-    "48": "/img/48.png",
-    "128": "/img/128.png"
+    "16": "img/16.png",
+    "32": "img/32.png",
+    "48": "img/48.png",
+    "128": "img/128.png"
     },
-    "action": {
-    "default_popup": "index.html"
-    }
+    "default_icon": {
+        "16": "img/16.png",
+        "32": "img/32.png",
+        "48": "img/48.png",
+        "128": "img/128.png"
+    },
+    "action":{
+        "default_icon": {
+            "16": "img/16.png",
+            "32": "img/32.png",
+            "48": "img/48.png",
+            "128": "img/128.png"
+        },
+        "default_popup": "index.html",
+        "default_title": "Nexus"
+    },
+    "background": {
+        "service_worker": "js/background.js",
+        "type": "module"
+    },
+    "web_accessible_resources": [{
+        "matches": ["<all_urls>"],
+        "resources": [
+            "/img/*"
+        ]
+    }]
   }
