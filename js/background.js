@@ -3,4 +3,3 @@ chrome.tabs.onActivated.addListener(
     chrome.tabs.get(activeInfo.tabId, tab => 
         {console.log("URL da aba ativa:", tab.url);});
 });
-

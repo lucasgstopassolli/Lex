@@ -27,9 +27,9 @@
     /*Padões de estilo*/
     --font-family: "Lato", "Arial", "Helvetica", "sans-serif";
     --secondary-color: #231c1c;
+    --tertiary-color: #1c0808;
     --border-bt-primary: 2px solid var(--primary-600);
-    --background-bt-primary: radial-gradient(circle, var(--transparency-20), var(--transparency-40));
-    --background-bt-primary-hover: radial-gradient(circle, transparent, var(--transparency-20));
+    --background-bt-primary: radial-gradient(circle, var(--transparency-10), var(--transparency-40));
 }
 
 html {
@@ -44,15 +44,17 @@ body{
     flex-direction: row;
 }
 
-.nav-bar{
+.nav-bar {
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 120px;
     gap: 16px;
-    padding: 16px;
-    background-color: #1b1515;
-    border-radius: 0px 8px 8px 0px;
+    padding: 16px;   
+    background: linear-gradient(90deg, var(--tertiary-color), #420909);
+    border: 2px solid transparent;
+    border-image: linear-gradient(90deg, var(--tertiary-color), var(--primary-700));
+    border-image-slice: 1;
 }
 
 .content{
@@ -81,6 +83,6 @@ body{
     border: var(--border-bt-primary);
     color: var(--secondary-color);
     font-weight: 600;
-    font-size: 16px;
+    font-size: 12px;
     font-family: var(--font-family);
 }
