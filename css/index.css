@@ -13,35 +13,74 @@
     --primary-900: #8f1c0d;
     --primary-950: #4f0900;
 
-    --primary-5:  #fa361c00;
-    --primary-10: #fa361c1a;
-    --primary-20: #fa361c33;
-    --primary-30: #fa361c4d;
-    --primary-40: #fa361c66;
-    --primary-50: #fa361c80;
-    --primary-60: #fa361c99;
-    --primary-70: #fa361cb3;
-    --primary-80: #fa361ccc;
-    --primary-90: #fa361ce6;
 
-
-
+    --transparency-10: #fa361c1a;
+    --transparency-20: #fa361c33;
+    --transparency-30: #fa361c4d;
+    --transparency-40: #fa361c66;
+    --transparency-50: #fa361c80;
+    --transparency-60: #fa361c99;
+    --transparency-70: #fa361cb3;
+    --transparency-80: #fa361ccc;
+    --transparency-90: #fa361ce6;
 
     /*Padões de estilo*/
+    --font-family: "Lato", "Arial", "Helvetica", "sans-serif";
+    --secondary-color: #231c1c;
     --border-bt-primary: 2px solid var(--primary-600);
-    --background-bt-primary: linear-gradient(45deg, var(--primary-500) 0%, var(--primary-30) 50%, var(--primary-500) 100%);
+    --background-bt-primary: radial-gradient(circle, var(--transparency-20), var(--transparency-40));
+    --background-bt-primary-hover: radial-gradient(circle, transparent, var(--transparency-20));
+}
+
+html {
+    min-width: 800px;
 }
 
 body{
-    background: #0e0e11;
+    background: var(--secondary-color);
+    font-family: var(--font-family);
+    margin: 0;
+    display: flex;
+    flex-direction: row;
 }
 
+.nav-bar{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 120px;
+    gap: 16px;
+    padding: 16px;
+    background-color: #1b1515;
+    border-radius: 0px 8px 8px 0px;
+}
+
+.content{
+    width: 100%;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
 
 .button-style-1{
-    padding: 8px 12px;
+    padding: 10px 14px;
     border-radius: 8px;
     border: var(--border-bt-primary);
     background: var(--background-bt-primary);
     color: var(--primary-50);
+    font-weight: 600;
+    font-size: 14px;
+    font-family: var(--font-family);
 }
 
+
+.input-url{
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: var(--border-bt-primary);
+    color: var(--secondary-color);
+    font-weight: 600;
+    font-size: 16px;
+    font-family: var(--font-family);
+}
