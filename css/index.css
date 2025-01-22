@@ -28,7 +28,6 @@
     --font-family: "Lato", "Arial", "Helvetica", "sans-serif";
     --secondary-color: #231c1c;
     --tertiary-color: #1c0808;
-    --border-bt-primary: 2px solid var(--primary-600);
     --background-bt-primary: radial-gradient(circle, var(--transparency-10), var(--transparency-40));
 }
 
@@ -61,28 +60,42 @@ body{
     width: 100%;
     padding: 16px;
     display: flex;
-    flex-direction: column;
     gap: 16px;
+}
+
+.lbl-cont{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .button-style-1{
     padding: 10px 14px;
     border-radius: 8px;
-    border: var(--border-bt-primary);
-    background: var(--background-bt-primary);
+    border: 1px solid var(--primary-600);
+    background: radial-gradient(circle, var(--transparency-10), var(--transparency-40));
     color: var(--primary-50);
     font-weight: 600;
     font-size: 14px;
     font-family: var(--font-family);
+    user-select: none;
 }
-
 
 .input-url{
     padding: 8px 12px;
     border-radius: 8px;
-    border: var(--border-bt-primary);
-    color: var(--secondary-color);
+    border: 1px solid var(--primary-600);
+    color: var(--primary-50);
     font-weight: 600;
     font-size: 12px;
+    font-family: var(--font-family);
+    text-overflow: ellipsis;
+    background-color: var(--transparency-10);
+}
+
+.label-input{
+    color: var(--primary-50);
+    font-weight: 600;
+    font-size: 14px;
     font-family: var(--font-family);
 }
