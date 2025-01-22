@@ -57,9 +57,17 @@ body{
 }
 
 .content{
+    gap: 16px;
     width: 100%;
     padding: 16px;
     display: flex;
+    flex-direction: column;
+}
+
+.content form{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 16px;
 }
 
@@ -67,6 +75,7 @@ body{
     display: flex;
     flex-direction: column;
     gap: 8px;
+    width: 100%;
 }
 
 .button-style-1{
@@ -79,6 +88,20 @@ body{
     font-size: 14px;
     font-family: var(--font-family);
     user-select: none;
+    cursor: pointer;
+}
+
+.button-style-2{
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--primary-800);
+    background: var(--primary-500);
+    color: var(--primary-50);
+    font-weight: 600;
+    font-size: 14px;
+    font-family: var(--font-family);
+    user-select: none;
+    cursor: pointer;
 }
 
 .input-url{
@@ -91,6 +114,7 @@ body{
     font-family: var(--font-family);
     text-overflow: ellipsis;
     background-color: var(--transparency-10);
+    width: 240px;
 }
 
 .label-input{
