@@ -20,12 +20,26 @@ function getDomainAndSlug() {
     });
 }
 
+async function getNonce(){
+    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    const tabId = tabs[0].id;
+    const result = await chrome.scripting.executeScript({
+    target: { tabId },
+    func: function(){
+        return Redirectioni10n.api.WP_API_nonce
+    },
+    world: 'MAIN', // to run in the window context and to be able to access variables from the page
+    });
+    return result[0].result || [];
+}
+
 // Chama a função para atualizar as variáveis após o carregamento da página
 document.addEventListener('DOMContentLoaded', function () {
     getDomainAndSlug();
 });
 
-// Função para criar o redirecionamento
+// Função para criar o redirecionamento 
+//IDEIA DESCARTADA, FUNÇÃO POUCO FLEXÍVEL
 function createRedirect(inputUrl, outputUrl) {
     if (!domain) {
         alert('Domínio não disponível');
@@ -39,7 +53,7 @@ function createRedirect(inputUrl, outputUrl) {
         headers: {
             "accept": "application/json, */*;q=0.1",
             "content-type": "application/json; charset=utf-8",
-            "x-wp-nonce": "c22eb79680",
+            "x-wp-nonce": getNonce(),
         },
         body: JSON.stringify({
             "id": 0,
