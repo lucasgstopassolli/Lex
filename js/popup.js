@@ -8,10 +8,10 @@ function ensureSlash(termUrl) {
 // Função para pegar o domínio, slug e url
 function getDomainAndSlug() {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        const urlObj = new URL(tabs[0].url); // Obtemos a URL da aba ativa
-        domain = urlObj.origin;  // Atribui o domínio globalmente
-        slug = urlObj.pathname;  // Atribui o slug globalmente
-        url = urlObj.href;  // Atribui a URL completa globalmente
+        const urlObj = new URL(tabs[0].url);
+        domain = urlObj.origin;
+        slug = urlObj.pathname;
+        url = urlObj.href;
 
         // Atualiza os campos no popup com as variáveis globais
         document.getElementById('url_domain').value = domain;
@@ -26,74 +26,16 @@ document.addEventListener('DOMContentLoaded', function () {
     getDomainAndSlug();
 });
 
-// Função para receber o valor do nonce 
-function getWpNonce(callback) {
-    window.addEventListener('load', () => {
-        try {
-            const nonce = Redirectioni10n.api.nonce;
-            if (nonce) {
-                callback(nonce);
-            } else {
-                console.error("Nonce não encontrado");
-            }
-        } catch (error) {
-            console.error("Erro ao obter nonce:", error);
-        }
-    });
-}
+// Função para enviar mensagem ao background
+function sendMessageToBackground(inputUrl, outputUrl) {
+    chrome.runtime.sendMessage({
+        action: "createRedirect",
+        inputUrl: inputUrl,
+        outputUrl: outputUrl, 
+        domain: domain 
+    })
+};
 
-//Função para realizar o redirecionamento
-function createRedirect(inputUrl, outputUrl) {
-    debugger
-    if (!domain) {
-        alert('Domínio não disponível');
-        return;
-    }
-    
-    let redirectionUrl = ensureSlash(domain) + "wp-admin/tools.php?page=redirection.php";
-    window.open(redirectionUrl + "&urlIn=" + inputUrl + "&urlOut=" + outputUrl, "_blank");
-
-    getWpNonce((wpNonce) => {
-        fetch(domain + "/wp-json/redirection/v1/redirect/", {
-            method: "POST",
-            headers: {
-                "accept": "application/json, */*;q=0.1",
-                "content-type": "application/json; charset=utf-8",
-                "x-wp-nonce": wpNonce
-            },
-            body: JSON.stringify({
-                "id": 0,
-                "url": inputUrl,
-                "title": "",
-                "match_data": {
-                    "source": {
-                        "flag_regex": false,
-                        "flag_trailing": true,
-                        "flag_case": true,
-                        "flag_query": "exact"
-                    },
-                    "options": {}
-                },
-                "match_type": "url",
-                "action_type": "url",
-                "position": 0,
-                "group_id": 1,
-                "action_code": 301,
-                "action_data": { "url": outputUrl }
-            }),
-            credentials: "include"
-        }).then(response => {
-            if (response.ok) {
-                console.log("Redirecionamento criado com sucesso");
-            } else {
-                console.error("Erro ao criar redirecionamento");
-            }
-        }).catch(error => console.error("Erro na requisição:", error));
-    });
-}
-
-
-// Adiciona evento de clique no botão "Criar redirect"
 document.getElementById('redirectBtn').addEventListener('click', 
     function (event) {
     event.preventDefault();  // Evita o envio do formulário
@@ -102,7 +44,7 @@ document.getElementById('redirectBtn').addEventListener('click',
     const outputUrl = document.getElementById('outputUrl').value;
 
     if (inputUrl && outputUrl) {
-        createRedirect(inputUrl, outputUrl);
+        window.open(redirectionUrl);
     } else {
         alert('Preencha os campos');
     }
