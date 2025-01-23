@@ -20,72 +20,84 @@ function getDomainAndSlug() {
     });
 }
 
-async function getNonce(){
-    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-    const tabId = tabs[0].id;
-    const result = await chrome.scripting.executeScript({
-    target: { tabId },
-    func: function(){
-        return Redirectioni10n.api.WP_API_nonce
-    },
-    world: 'MAIN', // to run in the window context and to be able to access variables from the page
-    });
-    return result[0].result || [];
-}
 
 // Chama a função para atualizar as variáveis após o carregamento da página
 document.addEventListener('DOMContentLoaded', function () {
     getDomainAndSlug();
 });
 
-// Função para criar o redirecionamento 
-//IDEIA DESCARTADA, FUNÇÃO POUCO FLEXÍVEL
+// Função para receber o valor do nonce 
+function getWpNonce(callback) {
+    window.addEventListener('load', () => {
+        try {
+            const nonce = Redirectioni10n.api.nonce;
+            if (nonce) {
+                callback(nonce);
+            } else {
+                console.error("Nonce não encontrado");
+            }
+        } catch (error) {
+            console.error("Erro ao obter nonce:", error);
+        }
+    });
+}
+
+//Função para realizar o redirecionamento
 function createRedirect(inputUrl, outputUrl) {
+    debugger
     if (!domain) {
         alert('Domínio não disponível');
         return;
     }
-
+    
     let redirectionUrl = ensureSlash(domain) + "wp-admin/tools.php?page=redirection.php";
-    window.open(redirectionUrl, '_blank');
+    window.open(redirectionUrl + "&urlIn=" + inputUrl + "&urlOut=" + outputUrl, "_blank");
 
-    fetch(ensureSlash(domain) + "wp-json/redirection/v1/redirect/", {
-        headers: {
-            "accept": "application/json, */*;q=0.1",
-            "content-type": "application/json; charset=utf-8",
-            "x-wp-nonce": getNonce(),
-        },
-        body: JSON.stringify({
-            "id": 0,
-            "url": inputUrl,
-            "title": "",
-            "match_data": {
-                "source": {
-                    "flag_regex": false,
-                    "flag_trailing": true,
-                    "flag_case": true,
-                    "flag_query": "exact"
-                },
-                "options": {}
+    getWpNonce((wpNonce) => {
+        fetch(domain + "/wp-json/redirection/v1/redirect/", {
+            method: "POST",
+            headers: {
+                "accept": "application/json, */*;q=0.1",
+                "content-type": "application/json; charset=utf-8",
+                "x-wp-nonce": wpNonce
             },
-            "match_type": "url",
-            "action_type": "url",
-            "position": 0,
-            "group_id": 1,
-            "action_code": 301,
-            "action_data": { "url": outputUrl }
-        }),
-        method: "POST",
-        mode: "cors",
-        credentials: "include"
-    }).then(() => window.location.reload())
-    .catch(error => console.error("Erro na requisição:", error));
+            body: JSON.stringify({
+                "id": 0,
+                "url": inputUrl,
+                "title": "",
+                "match_data": {
+                    "source": {
+                        "flag_regex": false,
+                        "flag_trailing": true,
+                        "flag_case": true,
+                        "flag_query": "exact"
+                    },
+                    "options": {}
+                },
+                "match_type": "url",
+                "action_type": "url",
+                "position": 0,
+                "group_id": 1,
+                "action_code": 301,
+                "action_data": { "url": outputUrl }
+            }),
+            credentials: "include"
+        }).then(response => {
+            if (response.ok) {
+                console.log("Redirecionamento criado com sucesso");
+            } else {
+                console.error("Erro ao criar redirecionamento");
+            }
+        }).catch(error => console.error("Erro na requisição:", error));
+    });
 }
 
-// Adiciona evento de clique no botão "Criar redirect"
-document.getElementById('redirectBtn').addEventListener('click', function (event) {
-    event.preventDefault();  // Evita o envio do formulário
 
+// Adiciona evento de clique no botão "Criar redirect"
+document.getElementById('redirectBtn').addEventListener('click', 
+    function (event) {
+    event.preventDefault();  // Evita o envio do formulário
+    
     const inputUrl = document.getElementById('inputUrl').value;
     const outputUrl = document.getElementById('outputUrl').value;
 
