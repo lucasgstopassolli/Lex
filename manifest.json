@@ -42,6 +42,14 @@
             ]
         }
     ],
+    "commands": {
+        "open-popup": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+2"
+            },
+            "description": "Open Nexus popup"
+        }
+    },
     "background": {
         "service_worker": "js/background.js",
         "type": "module"
