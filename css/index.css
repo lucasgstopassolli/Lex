@@ -1,4 +1,3 @@
-    
 :root{
     /*Paleta de cores padrão*/
     --primary-50:  #fff2f0;
@@ -12,8 +11,6 @@
     --primary-800: #ad1a07;
     --primary-900: #8f1c0d;
     --primary-950: #4f0900;
-
-
     --transparency-10: #fa361c1a;
     --transparency-20: #fa361c33;
     --transparency-30: #fa361c4d;
@@ -24,7 +21,6 @@
     --transparency-80: #fa361ccc;
     --transparency-90: #fa361ce6;
 
-
     --font-family: "Lato", "Arial", "Helvetica", "sans-serif";
     --secondary-color: #231c1c;
     --tertiary-color: #1c0808;
@@ -33,6 +29,7 @@
 
 html {
     min-width: 800px;
+
 }
 
 body{
@@ -40,19 +37,18 @@ body{
     font-family: var(--font-family);
     margin: 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .nav-bar {
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 120px;
+    flex-direction: row;
+    max-height: auto;
     gap: 16px;
-    padding: 16px;   
-    background: linear-gradient(90deg, var(--tertiary-color), #420909);
+    padding: 12px;   
+    background: linear-gradient(180deg, var(--tertiary-color), #420909);
     border: 2px solid transparent;
-    border-image: linear-gradient(90deg, var(--tertiary-color), var(--primary-700));
+    border-image: linear-gradient(180deg, var(--tertiary-color), var(--primary-700));
     border-image-slice: 1;
 }
 
@@ -63,20 +59,24 @@ body{
     display: flex;
 }
 
+
 .redirect-resources form{
-display: flex;
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 16px;
     width: 100%;
     justify-content: center;
+    align-content: space-between;
 }
 
 .options{
-    width: 100%;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     gap: 16px;
+    width: 100%;
+    justify-content: space-between;
 }
 
 
@@ -84,15 +84,17 @@ display: flex;
 /*Default Styles*/
 .lbl-cont{
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    flex-direction: row;
+    gap: 16px;
     width: 100%;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .button-style-1{
-    padding: 10px 14px;
+    padding: 12px 18px;
     border-radius: 8px;
-    border: 1px solid var(--primary-600);
+    border: 2px solid var(--primary-600);
     background: radial-gradient(circle, var(--transparency-10), var(--transparency-40));
     color: var(--primary-50);
     font-weight: 600;
@@ -100,10 +102,15 @@ display: flex;
     font-family: var(--font-family);
     user-select: none;
     cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
 }
 
 .button-style-2{
-    padding: 10px 14px;
+    max-height: fit-content;
+    padding: 12px 14px;
     border-radius: 8px;
     border: 1px solid var(--primary-800);
     background: var(--primary-500);
@@ -113,6 +120,11 @@ display: flex;
     font-family: var(--font-family);
     user-select: none;
     cursor: pointer;
+}
+
+
+#redirectBtn{
+    width: 100%;
 }
 
 .input-url{
@@ -125,7 +137,7 @@ display: flex;
     font-family: var(--font-family);
     text-overflow: ellipsis;
     background-color: var(--transparency-10);
-    width: 100%px;
+    width: 60%;
 }
 
 .label-input{

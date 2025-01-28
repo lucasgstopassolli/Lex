@@ -1,11 +1,5 @@
 let domain, slug, url;
 
-function copyPath() {
-    var copyText = document.getElementById("textPath");
-    copyText.select();
-    navigator.clipboard.writeText(copyText.value);
-}
-
 // Verificação se tem barra final
 function ensureSlash(termUrl) {
     return termUrl.endsWith('/') ? termUrl : termUrl + '/';
@@ -29,22 +23,17 @@ function getDomainAndSlug() {
     });
 }
 //Pegar o nonce da página
-// async function getNonce(){
-//     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-//     const tabId = tabs[0].id;
-//     const result = await chrome.scripting.executeScript({
-//     target: { tabId },
-//     func: function(){
-//         return Redirectioni10n.api.WP_API_nonce
-//     },
-//     world: 'MAIN', // to run in the window context and to be able to access variables from the page
-//     });
-//     return result[0].result || [];
-// }
-
-//Pega o nonce do formulário
-function getNonce(){
-    return document.getElementById('nonce').value;
+async function getNonce(){
+    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    const tabId = tabs[0].id;
+    const result = await chrome.scripting.executeScript({
+    target: { tabId },
+    func: function(){
+        return Redirectioni10n.api.WP_API_nonce
+    },
+    world: 'MAIN', // to run in the window context and to be able to access variables from the page
+    });
+    return result[0].result || [];
 }
 
 // Chama a função para atualizar as variáveis após o carregamento da página
@@ -53,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Função para criar o redirecionamento 
-function createRedirect(inputUrl, outputUrl) {
+async function createRedirect(inputUrl, outputUrl) {
     if (!domain) {
         alert('Domínio não disponível');
         return;
@@ -62,43 +51,50 @@ function createRedirect(inputUrl, outputUrl) {
     let redirectionUrl = ensureSlash(domain) + "wp-admin/tools.php?page=redirection.php";
     chrome.tabs.update({ url: redirectionUrl });
 
-    fetch(ensureSlash(domain) + "wp-json/redirection/v1/redirect/", {
-        headers: {
-            "accept": "application/json, */*;q=0.1",
-            "content-type": "application/json; charset=utf-8",
-            "x-wp-nonce": getNonce(),
-        },
-        body: JSON.stringify({
-            "id": 0,
-            "url": inputUrl,
-            "title": "",
-            "match_data": {
-                "source": {
-                    "flag_regex": false,
-                    "flag_trailing": true,
-                    "flag_case": true,
-                    "flag_query": "exact"
-                },
-                "options": {}
+    try {
+        // Aguarde o nonce antes de enviar a requisição
+        const nonce = await getNonce(); // Aguarda o nonce ser recuperado
+        fetch(ensureSlash(domain) + "wp-json/redirection/v1/redirect/", {
+            headers: {
+                "accept": "application/json, */*;q=0.1",
+                "content-type": "application/json; charset=utf-8",
+                "x-wp-nonce": nonce,
             },
-            "match_type": "url",
-            "action_type": "url",
-            "position": 0,
-            "group_id": 1,
-            "action_code": 301,
-            "action_data": { "url": outputUrl }
-        }),
-        method: "POST",
-        mode: "cors",
-        credentials: "include"
-    }).then(() => window.location.reload())
-    .catch(error => console.error("Erro na requisição:", error));
+            body: JSON.stringify({
+                "id": 0,
+                "url": inputUrl,
+                "title": "",
+                "match_data": {
+                    "source": {
+                        "flag_regex": false,
+                        "flag_trailing": true,
+                        "flag_case": true,
+                        "flag_query": "exact"
+                    },
+                    "options": {}
+                },
+                "match_type": "url",
+                "action_type": "url",
+                "position": 0,
+                "group_id": 1,
+                "action_code": 301,
+                "action_data": { "url": outputUrl }
+            }),
+            method: "POST",
+            mode: "cors",
+            credentials: "include"
+        }).then(() => window.location.reload())
+        .catch(error => console.error("Erro na requisição:", error));
+    } catch (error) {
+        console.error("Erro ao obter nonce:", error);
+    }
 }
+
 
 // Adiciona evento de clique no botão "Criar redirect"
 function handleRedirectEvent(event) {
     debugger;
-    event.preventDefault();  // Evita o envio do formulário
+    event.preventDefault();
 
     const inputUrl = document.getElementById('inputUrl').value;
     const outputUrl = document.getElementById('outputUrl').value;
@@ -112,7 +108,7 @@ function handleRedirectEvent(event) {
 
 // Adiciona evento de clique no botão "Criar redirect"
 document.getElementById('redirectBtn').addEventListener('click', function (event) {
-    event.preventDefault();  // Evita o envio do formulário
+    event.preventDefault();
 
     const inputUrl = document.getElementById('inputUrl').value;
     const outputUrl = document.getElementById('outputUrl').value;
@@ -126,65 +122,65 @@ document.getElementById('redirectBtn').addEventListener('click', function (event
 
 // Função para instalar o plugin Redirection
 // async function installRedirection() {
-    // Instalação do plugin
+//     // Instalação do plugin
 //     let redirectionInstallUrl = ensureSlash(domain) + "wp-admin/plugin-install.php?s=redirection&tab=search&type=term";
 //     chrome.tabs.update({ url: redirectionInstallUrl });
 
-//     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-//     const tabId = tabs[0].id;
+// //     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+// //     const tabId = tabs[0].id;
 
-//     await chrome.scripting.executeScript({
-//         target: { tabId },
+// //     await chrome.scripting.executeScript({
+// //         target: { tabId },
 
-//         func: function() {
-//             const buttonInstall = "#the-list > div.plugin-card.plugin-card-redirection > div.plugin-card-top > div.action-links > ul > li:nth-child(1) > a";
-//             const buttonActivate = "#the-list > div.plugin-card.plugin-card-redirection > div.plugin-card-top > div.action-links > ul > li:nth-child(1) > .button.activate-now.button-primary";
+// //         func: function() {
+// //             const buttonInstall = "#the-list > div.plugin-card.plugin-card-redirection > div.plugin-card-top > div.action-links > ul > li:nth-child(1) > a";
+// //             const buttonActivate = "#the-list > div.plugin-card.plugin-card-redirection > div.plugin-card-top > div.action-links > ul > li:nth-child(1) > .button.activate-now.button-primary";
 
-//             // Função para esperar um elemento aparecer no DOM
-//             function waitForElement(selector, callback) {
-//                 const observer = new MutationObserver((_, me) => {
-//                     if (document.querySelector(selector)) {
-//                         callback();
-//                         me.disconnect();
-//                         return;
-//                     }
-//                 });
+// //             // Função para esperar um elemento aparecer no DOM
+// //             function waitForElement(selector, callback) {
+// //                 const observer = new MutationObserver((_, me) => {
+// //                     if (document.querySelector(selector)) {
+// //                         callback();
+// //                         me.disconnect();
+// //                         return;
+// //                     }
+// //                 });
 
-//                 observer.observe(document, {
-//                     childList: true,
-//                     subtree: true
-//                 });
-//             }
+// //                 observer.observe(document, {
+// //                     childList: true,
+// //                     subtree: true
+// //                 });
+// //             }
 
-//             // Clica no primeiro elemento para instalar
-//             document.querySelector(buttonInstall).click();
+// //             // Clica no primeiro elemento para instalar
+// //             document.querySelector(buttonInstall).click();
 
-//             // Espera o próximo elemento aparecer e clica nele
-//             waitForElement(buttonActivate, () => {
-//                 document.querySelector(buttonActivate).click();
-//             });
-//         },
-//         world: 'MAIN', // to run in the window context and to be able to access variables from the page
-//     });
-// }
+// //             // Espera o próximo elemento aparecer e clica nele
+// //             waitForElement(buttonActivate, () => {
+// //                 document.querySelector(buttonActivate).click();
+// //             });
+// //         },
+// //         world: 'MAIN', // to run in the window context and to be able to access variables from the page
+// //     });
+// // }
 
-// // Função para esperar um elemento aparecer no DOM
-// function waitForElement(selector, callback) {
-//     const observer = new MutationObserver((mutations, me) => {
-//         if (document.querySelector(selector)) {
-//             callback();
-//             me.disconnect();
-//             return;
-//         }
-//     });
+// // // Função para esperar um elemento aparecer no DOM
+// // function waitForElement(selector, callback) {
+// //     const observer = new MutationObserver((mutations, me) => {
+// //         if (document.querySelector(selector)) {
+// //             callback();
+// //             me.disconnect();
+// //             return;
+// //         }
+// //     });
 
-//     observer.observe(document, {
-//         childList: true,
-//         subtree: true
-//     });
-// }
+// //     observer.observe(document, {
+// //         childList: true,
+// //         subtree: true
+// //     });
+// // }
 
-// // Adiciona evento de clique no botão "Instalar Redirection"
-// document.getElementById('redirectInstallBtn').addEventListener('click', function(event) {
-//     installRedirection();
-// });
+// // // Adiciona evento de clique no botão "Instalar Redirection"
+// // document.getElementById('redirectInstallBtn').addEventListener('click', function(event) {
+// //     installRedirection();
+// // });
