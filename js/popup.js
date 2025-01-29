@@ -1,3 +1,32 @@
+document.addEventListener("DOMContentLoaded", function () {
+    //Define o estado da janela
+    document.getElementById("initial-tab").classList.add("active");
+    //Define o botão inicial como ativo
+    document.getElementById("initialButton").classList.add("active");
+
+    document.addEventListener("click", function (event) {
+        let idTab = event.target.id;
+
+        document.querySelectorAll(".tab-button").forEach((tabButton) => {
+            tabButton.classList.remove("active");
+        });
+
+        if (document.getElementById(idTab)) {
+            document.getElementById(idTab).classList.add("active");
+        }
+        const tabOpen = {
+            'initialButton' : () => {document.getElementById("initial-tab").classList.add("active");},
+            'redirectionButton' : () => {document.getElementById("redirection-tab").classList.add("active");}
+        }
+
+        if (tabOpen[idTab]) {  
+            document.querySelectorAll(".tab").forEach((tab) => {         
+                tab.classList.remove("active");});
+            tabOpen[idTab]();
+        }
+    });
+});
+
 let domain, slug, url;
 
 // Verificação se tem barra final

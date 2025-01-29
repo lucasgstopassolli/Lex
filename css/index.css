@@ -40,11 +40,12 @@ body{
     flex-direction: column;
 }
 
+/* Navegation Bar */
 .nav-bar {
     display: flex;
     flex-direction: row;
     max-height: auto;
-    gap: 16px;
+    gap: 0px;
     padding: 12px;   
     background: linear-gradient(180deg, var(--tertiary-color), #420909);
     border: 2px solid transparent;
@@ -52,15 +53,15 @@ body{
     border-image-slice: 1;
 }
 
-/*Redirect Menu*/
-.redirect-resources{
+/* Redirect Menu */
+#redirection-tab .redirect-resources{
     gap: 16px;
     padding: 16px;
     display: flex;
 }
 
 
-.redirect-resources form{
+#redirection-tab .redirect-resources form{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -70,7 +71,7 @@ body{
     align-content: space-between;
 }
 
-.options{
+ #redirection-tab .options{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -79,9 +80,20 @@ body{
     justify-content: space-between;
 }
 
+#redirection-tab #redirectBtn{
+    width: 100%;
+}
 
+/* Default Styles */
 
-/*Default Styles*/
+.tab{
+    display: none;
+}
+
+.active{
+    display: block;
+}
+
 .lbl-cont{
     display: flex;
     flex-direction: row;
@@ -92,21 +104,29 @@ body{
 }
 
 .button-style-1{
-    padding: 12px 18px;
+    padding: 8px 18px;
     border-radius: 8px;
-    border: 2px solid var(--primary-600);
-    background: radial-gradient(circle, var(--transparency-10), var(--transparency-40));
+    border: 2px solid transparent;
+    background: none;
     color: var(--primary-50);
     font-weight: 600;
     font-size: 14px;
     font-family: var(--font-family);
-    user-select: none;
     cursor: pointer;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 4px;
+    outline: none;
 }
+
+.button-style-1.active{
+    transition: all ease 0.3s;
+    border: 2px solid var(--primary-600);
+    background: radial-gradient(circle, var(--transparency-10), var(--transparency-40));
+    outline: none;
+}
+
 
 .button-style-2{
     max-height: fit-content;
@@ -120,11 +140,6 @@ body{
     font-family: var(--font-family);
     user-select: none;
     cursor: pointer;
-}
-
-
-#redirectBtn{
-    width: 100%;
 }
 
 .input-url{
