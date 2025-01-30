@@ -115,7 +115,7 @@ body{
     cursor: pointer;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: normal;
     gap: 4px;
     outline: none;
 }
