@@ -36,9 +36,12 @@
     },
     "content_scripts": [
         {
-            "matches": ["*://*/wp-admin/tools.php?page=redirection.php"],
+            "matches": ["*://*/wp-admin/*"],
             "js": [
                 "js/redirection.js"
+            ],
+            "css": [
+                "css/pluginSearch.css"
             ]
         }
     ],

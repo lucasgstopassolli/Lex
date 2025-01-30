@@ -25,18 +25,19 @@
 
     <!-- Default tab -->
      <div id="initial-tab" class="tab">
-        <div class="default-tab">
+        <div class="ressources">
             <div class="default-tab-header">
-                <h1 style="color: white;">Seja bem-vindo ao Nexus</h1>
-                <p style="color: white;">Escolha uma das opções acima para começar</p>
+                <h1 style="color: white;">Instalar plugins</h1>
+                <button id="redirectInstallBtn" type="submit" class="button-style-2">Instalar <i>Redirecionamento</i></button>
+                <button id="backupInstallBtn" type="submit" class="button-style-2">Instalar <i>All-in-One WP Migration e Backup</i></button>
             </div>
         </div>
      </div>
 
-    <!-- Redirection -->
+    <!-- Redirection tab -->
     <div id="redirection-tab" class="tab">
-        <div class="redirect-resources">
-            <form action="#" method="get" class="div-standard">
+        <div class="ressources">
+            <form action="#" method="get">
                 <div class="lbl-cont">
                     <label for="" class="label-input">Domínio</label>
                     <input type="text" class="input-url" id="url_domain">
@@ -49,7 +50,6 @@
                     <label for="" class="label-input">Slug destino</label>
                     <input type="text" class="input-url" id="outputUrl">
                 </div>
-
                 <div class="lbl-cont">
                     <label for="" class="label-input">URL original</label>
                     <input type="text" class="input-url" id="url_">
@@ -57,7 +57,10 @@
                 <button id="redirectBtn" type="submit" class="button-style-2">Criar redirect</button>
             </form>
             <div class="options">
-                <button id="redirectInstallBtn" type="submit" class="button-style-2">Instalar Redirection</button>
+                <div class="lbl-cont helpers">
+                    <label for="" class="label-input">Nonce</label>
+                    <input type="text" class="input-url" id="nonceValue" readonly>
+                </div>
                 <button class="button-style-2">Parâmetros de consulta</button>
                 <button class="button-style-2">Corresponder</button>
                 <button class="button-style-2">Quando corresponder</button>

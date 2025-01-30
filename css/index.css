@@ -25,13 +25,18 @@
     --secondary-color: #231c1c;
     --tertiary-color: #1c0808;
     --background-bt-primary: radial-gradient(circle, var(--transparency-10), var(--transparency-40));
+
+}
+
+::selection {
+    background: var(--primary-500);
+    color: var(--primary-50);
 }
 
 html {
     min-width: 800px;
 
 }
-
 body{
     background: var(--secondary-color);
     font-family: var(--font-family);
@@ -53,15 +58,21 @@ body{
     border-image-slice: 1;
 }
 
+/* Default Menu */
+ #initial-tab .ressources .default-tab-header{
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+}
+
 /* Redirect Menu */
-#redirection-tab .redirect-resources{
+#redirection-tab .ressources{
     gap: 16px;
     padding: 16px;
     display: flex;
 }
-
-
-#redirection-tab .redirect-resources form{
+#redirection-tab .ressources form{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -70,7 +81,6 @@ body{
     justify-content: center;
     align-content: space-between;
 }
-
  #redirection-tab .options{
     display: flex;
     flex-direction: column;
@@ -79,21 +89,18 @@ body{
     width: 100%;
     justify-content: space-between;
 }
-
 #redirection-tab #redirectBtn{
     width: 100%;
 }
 
-/* Default Styles */
 
+/* Default Styles */
 .tab{
     display: none;
 }
-
 .active{
     display: block;
 }
-
 .lbl-cont{
     display: flex;
     flex-direction: row;
@@ -102,7 +109,6 @@ body{
     justify-content: space-between;
     align-items: center;
 }
-
 .button-style-1{
     padding: 8px 18px;
     border-radius: 8px;
@@ -118,16 +124,14 @@ body{
     align-items: normal;
     gap: 4px;
     outline: none;
+    user-select: none;
 }
-
 .button-style-1.active{
     transition: all ease 0.3s;
     border: 2px solid var(--primary-600);
     background: radial-gradient(circle, var(--transparency-10), var(--transparency-40));
     outline: none;
 }
-
-
 .button-style-2{
     max-height: fit-content;
     padding: 12px 14px;
@@ -141,7 +145,6 @@ body{
     user-select: none;
     cursor: pointer;
 }
-
 .input-url{
     padding: 8px 12px;
     border-radius: 8px;
@@ -154,10 +157,21 @@ body{
     background-color: var(--transparency-10);
     width: 60%;
 }
-
 .label-input{
     color: var(--primary-50);
     font-weight: 600;
     font-size: 14px;
     font-family: var(--font-family);
+}
+@keyframes pulseAnimation {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+    }
+
+    30% {
+        box-shadow: 0 0 0 5px rgba(255, 0, 0, 0.438);
+    }
+}
+.pulse-animation {
+    animation: pulseAnimation ease-in 1.5s infinite;
 }
