@@ -1,7 +1,7 @@
 {
     "name": "Nexus",
     "description": "Uma ferramenta simples que ajuda em tarefas diárias do Wordpress",
-    "version": "3.9.0",
+    "version": "1.0.0",
     "manifest_version": 3,
     "permissions": [
         "storage",
