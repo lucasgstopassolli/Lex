@@ -280,11 +280,40 @@ async function installBackup() {
     });
 }
 
+async function installreplaceImage() {
+    const redirectionInstallUrl = ensureSlash(domain) + 'wp-admin/plugin-install.php?s=replace%2520image&tab=search&type=term';
+    chrome.tabs.update({ url: redirectionInstallUrl });
+
+    chrome.tabs.onUpdated.addListener(function listener(tabId, changeInfo) {
+        if (changeInfo.status === "complete") {
+            chrome.tabs.onUpdated.removeListener(listener);
+            chrome.scripting.executeScript({
+                target: { tabId },
+                func: () => {
+                    const observer = new MutationObserver((mutations, observer) => {
+                        const pluginCard = document.querySelector('.plugin-card.plugin-card-enable-media-replace');
+                        if (pluginCard) {
+                            pluginCard.classList.add('pulse-animation');
+                            observer.disconnect();
+                        }
+                    });
+                    observer.observe(document.body, { childList: true, subtree: true });
+                }
+            });
+        }
+    });
+}
+
 // Adiciona evento de clique no botão
-document.getElementById('redirectInstallBtn').addEventListener('click', function(event) {
+document.getElementById('redirectInstallBtn').addEventListener('click', function() {
     installRedirection();
 });
 
-document.getElementById('backupInstallBtn').addEventListener('click', function(event) {
+document.getElementById('backupInstallBtn').addEventListener('click', function() {
     installBackup();
+});
+
+// Change 'input' to 'click' for the event listener
+document.getElementById('replaceImageBtn').addEventListener('click', function() {
+    installreplaceImage();
 });
