@@ -25,12 +25,12 @@
     --secondary-color: #231c1c;
     --tertiary-color: #1c0808;
     --background-bt-primary: radial-gradient(circle, var(--transparency-10), var(--transparency-40));
+    --default-shadow: 0 0 8px 6px var(--transparency-40)
 
 }
 
 ::selection {
-    background: var(--primary-500);
-    color: var(--primary-50);
+    background: var(--transparency-30);
 }
 
 html {
@@ -44,6 +44,11 @@ body{
     display: flex;
     flex-direction: column;
 }
+h1{
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 18px;
+}
 
 /* Navegation Bar */
 .nav-bar {
@@ -51,7 +56,7 @@ body{
     flex-direction: row;
     max-height: auto;
     gap: 0px;
-    padding: 12px;   
+    padding: 4px;   
     background: linear-gradient(180deg, var(--tertiary-color), #420909);
     border: 2px solid transparent;
     border-image: linear-gradient(180deg, var(--tertiary-color), var(--primary-700));
@@ -59,11 +64,19 @@ body{
 }
 
 /* Default Menu */
+#initial-tab .ressources{
+    gap: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+}
  #initial-tab .ressources .default-tab-header{
     display: flex;
     flex-direction: column;
-    padding: 16px;
     gap: 16px;
+    width: 100%;
 }
 
 /* Redirect Menu */
@@ -134,9 +147,9 @@ body{
 }
 .button-style-2{
     max-height: fit-content;
-    padding: 12px 14px;
+    padding: 10px 12px;
     border-radius: 8px;
-    border: 1px solid var(--primary-800);
+    border: 2px solid var(--primary-600);
     background: var(--primary-500);
     color: var(--primary-50);
     font-weight: 600;
@@ -144,11 +157,16 @@ body{
     font-family: var(--font-family);
     user-select: none;
     cursor: pointer;
+    transition: all ease 0.3s; 
+}
+.button-style-2:hover{
+    border: 2px solid var(--primary-500);
+    background: var(--primary-600);
 }
 .input-url{
     padding: 8px 12px;
     border-radius: 8px;
-    border: 1px solid var(--primary-600);
+    border: 2px solid var(--primary-800);
     color: var(--primary-50);
     font-weight: 600;
     font-size: 12px;
@@ -156,18 +174,23 @@ body{
     text-overflow: ellipsis;
     background-color: var(--transparency-10);
     width: 60%;
+    transition: all ease 0.3s;
+}
+.input-url:focus{
+    outline: none;
+    box-shadow: var(--default-shadow);
+    border: 2px solid var(--primary-600);
 }
 .label-input{
     color: var(--primary-50);
     font-weight: 600;
-    font-size: 14px;
+    font-size: 15px;
     font-family: var(--font-family);
 }
 @keyframes pulseAnimation {
     0% {
         box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
     }
-
     30% {
         box-shadow: 0 0 0 5px rgba(255, 0, 0, 0.438);
     }
