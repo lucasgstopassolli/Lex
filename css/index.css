@@ -79,6 +79,21 @@ h1{
     width: 100%;
 }
 
+#plugins-tab .ressources{
+    gap: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+}
+ #plugins-tab .ressources .default-tab-header{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
 /* Redirect Menu */
 #redirection-tab .ressources{
     gap: 16px;
@@ -108,10 +123,11 @@ h1{
 
 
 /* Default Styles */
-.tab{
+.tab {
     display: none;
 }
-.active{
+
+.active {
     display: block;
 }
 .lbl-cont{

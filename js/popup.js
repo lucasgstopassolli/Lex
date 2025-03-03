@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Mapeia qual aba deve abrir
         const tabOpen = {
             'initialButton': () => { document.getElementById("initial-tab").classList.add("active"); },
+            'pluginsButton': () => { document.getElementById("plugins-tab").classList.add("active"); },
             'redirectionButton': () => { document.getElementById("redirection-tab").classList.add("active"); }
         };
         // Remove 'active' das abas e ativa a correta
@@ -313,7 +314,11 @@ document.getElementById('backupInstallBtn').addEventListener('click', function()
     installBackup();
 });
 
-// Change 'input' to 'click' for the event listener
+
 document.getElementById('replaceImageBtn').addEventListener('click', function() {
     installreplaceImage();
+});
+
+document.getElementById('loginPressInstallBtn').addEventListener('click', function() {
+    installLoginPress();
 });
