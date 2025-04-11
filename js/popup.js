@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Define o estado inicial
-    document.getElementById("initial-tab").classList.add("active");
-    document.getElementById("initialButton").classList.add("active");
+    document.getElementById("redirection-tab").classList.add("active");
+    document.getElementById("redirectionButton").classList.add("active");
     document.addEventListener("click", function (event) {
         let idTab = event.target.id;
         // Lista de botões válidos
@@ -160,78 +160,78 @@ document.getElementById('redirectBtn').addEventListener('click', function (event
         alert('Preencha os campos');
     }
 });
+/*
+Função para instalar o plugin Redirection
+async function installRedirection() {
+    // Instalação do plugin
+    let redirectionInstallUrl = ensureSlash(domain) + "wp-admin/plugin-install.php?s=redirection&tab=search&type=term";
+    chrome.tabs.update({ url: redirectionInstallUrl });
 
-// Função para instalar o plugin Redirection
-// async function installRedirection() {
-//     // Instalação do plugin
-//     let redirectionInstallUrl = ensureSlash(domain) + "wp-admin/plugin-install.php?s=redirection&tab=search&type=term";
-//     chrome.tabs.update({ url: redirectionInstallUrl });
+    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    const tabId = tabs[0].id;
 
-//     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-//     const tabId = tabs[0].id;
+    await chrome.scripting.executeScript({
+        target: { tabId },
 
-//     await chrome.scripting.executeScript({
-//         target: { tabId },
+        func: function() {
+            const buttonInstall = "#the-list > div.plugin-card.plugin-card-redirection > div.plugin-card-top > div.action-links > ul > li:nth-child(1) > a";
+            const buttonActivate = "#the-list > div.plugin-card.plugin-card-redirection > div.plugin-card-top > div.action-links > ul > li:nth-child(1) > .button.activate-now.button-primary";
 
-//         func: function() {
-//             const buttonInstall = "#the-list > div.plugin-card.plugin-card-redirection > div.plugin-card-top > div.action-links > ul > li:nth-child(1) > a";
-//             const buttonActivate = "#the-list > div.plugin-card.plugin-card-redirection > div.plugin-card-top > div.action-links > ul > li:nth-child(1) > .button.activate-now.button-primary";
+            // Função para esperar um elemento aparecer no DOM
+            function waitForElement(selector, callback) {
+                const observer = new MutationObserver((_, me) => {
+                    if (document.querySelector(selector)) {
+                        callback();
+                        me.disconnect();
+                        return;
+                    }
+                });
 
-//             // Função para esperar um elemento aparecer no DOM
-//             function waitForElement(selector, callback) {
-//                 const observer = new MutationObserver((_, me) => {
-//                     if (document.querySelector(selector)) {
-//                         callback();
-//                         me.disconnect();
-//                         return;
-//                     }
-//                 });
+                observer.observe(document, {
+                    childList: true,
+                    subtree: true
+                });
+            }
 
-//                 observer.observe(document, {
-//                     childList: true,
-//                     subtree: true
-//                 });
-//             }
+            // Clica no primeiro elemento para instalar
+            document.querySelector(buttonInstall).click();
 
-//             // Clica no primeiro elemento para instalar
-//             document.querySelector(buttonInstall).click();
+            // Espera o próximo elemento aparecer e clica nele
+            waitForElement(buttonActivate, () => {
+                document.querySelector(buttonActivate).click();
+            });
+        },
+        world: 'MAIN', // to run in the window context and to be able to access variables from the page
+    });
+}
 
-//             // Espera o próximo elemento aparecer e clica nele
-//             waitForElement(buttonActivate, () => {
-//                 document.querySelector(buttonActivate).click();
-//             });
-//         },
-//         world: 'MAIN', // to run in the window context and to be able to access variables from the page
-//     });
-// }
+// Função para esperar um elemento aparecer no DOM
+function waitForElement(selector, callback) {
+    const observer = new MutationObserver((mutations, me) => {
+        if (document.querySelector(selector)) {
+            callback();
+            me.disconnect();
+            return;
+        }
+    });
 
-// // Função para esperar um elemento aparecer no DOM
-// function waitForElement(selector, callback) {
-//     const observer = new MutationObserver((mutations, me) => {
-//         if (document.querySelector(selector)) {
-//             callback();
-//             me.disconnect();
-//             return;
-//         }
-//     });
+    observer.observe(document, {
+        childList: true,
+        subtree: true
+    });
+}
 
-//     observer.observe(document, {
-//         childList: true,
-//         subtree: true
-//     });
-// }
+document.addEventListener('DOMContentLoaded', async function () {
+    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    const tabId = tabs[0].id;
 
-// document.addEventListener('DOMContentLoaded', async function () {
-//     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-//     const tabId = tabs[0].id;
+    await chrome.scripting.executeScript({
+        target: { tabId },
+    });
 
-//     await chrome.scripting.executeScript({
-//         target: { tabId },
-//     });
-
-//     document.querySelector(".plugin-card.plugin-card-redirection").classList.add("pulse-animation");
-// });
-
+    document.querySelector(".plugin-card.plugin-card-redirection").classList.add("pulse-animation");
+});
+*/
 //Pesquisa o plugin
 async function installRedirection() {
     const redirectionInstallUrl = ensureSlash(domain) + 'wp-admin/plugin-install.php?s=redirection&tab=search&type=term';
