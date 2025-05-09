@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -12,41 +12,61 @@
         rel="stylesheet">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/tabs.css">
     <link rel="stylesheet" href="css/symbols.css">
     <link rel="stylesheet" href="css/colorPicker.css">
+    <link rel="stylesheet" href="css/default.css">
+
 </head>
 
 <body>
     <!-- Nabegation bar -->
-    <div class="nav-bar">
-        <button id="initialButton" class="button-style-1 tab-button"><span class="material-symbols-outlined">home</span>Inicial</button>
-        <button id="pluginsButton" class="button-style-1 tab-button"><span class="material-symbols-outlined">extension</span>Plugins</button>
-        <button id="redirectionButton" class="button-style-1 tab-button"><span class="material-symbols-outlined">open_in_new</span>Redirection</button>
+    <div id="navBar" class="nav-bar">
+        <button id="initialButton" class="button-style-1 tab-button active"><span
+                class="material-symbols-outlined">home</span>Home</button>
+        <button id="pluginsButton" class="button-style-1 tab-button"><span
+                class="material-symbols-outlined">extension</span>Plugins</button>
+        <button id="redirectionButton" class="button-style-1 tab-button"><span
+                class="material-symbols-outlined">open_in_new</span>Redirection</button>
+        <button id="toolsButton" class="button-style-1 tab-button"><span
+                class="material-symbols-outlined">widgets</span>Tools</button>
     </div>
 
     <!-- Default tab -->
-     <div id="initial-tab" class="tab">
+    <div id="initial-tab" class="tab active">
         <div class="ressources">
-            <h1>TESTE</h1>
+            <form action="#" method="get">
+                <select class="input-default" name="" id="">
+                    <option value="">Select a tab</option>
+                    <option value="initial-tab">Home tab</option>
+                    <option value="plugins-tab">Plugins tab</option>
+                    <option value="redirection-tab">Redirection tab</option>
+                    <option value="tools-tab">Tools tab</option>
+                </select>
+                <button id="defaultTabBtn" type="submit" class="button-style-2">Set the default tab</button>
+            </form>
         </div>
-     </div>
+    </div>
 
     <!-- Plugins tab -->
     <div id="plugins-tab" class="tab">
         <div class="ressources">
             <div class="default-tab-header">
-                <h1 style="color: white;">Plugins (essenciais)</h1>
-                <button id="redirectInstallBtn" type="submit" class="button-style-2">Instalar <i>Redirecionamento</i></button>
-                <button id="backupInstallBtn" type="submit" class="button-style-2">Instalar <i>All-in-One WP Migration e Backup</i></button>
-                <button id="replaceImageBtn" type="submit" class="button-style-2">Instalar <i>Enable Media Replace</i></button>
+                <h1 style="color: white;">Plugins (essential)</h1>
+                <button id="redirectInstallBtn" type="submit" class="button-style-2">Install
+                    <i>Redirection</i></button>
+                <button id="backupInstallBtn" type="submit" class="button-style-2">Install <i>All-in-One WP
+                        Migration and Backup</i></button>
+                <button id="replaceImageBtn" type="submit" class="button-style-2">Install <i>Enable Media
+                        Replace</i></button>
             </div>
             <div class="default-tab-header">
                 <h1 style="color: white;">Plugins (blog)</h1>
-                <button id="loginPressInstallBtn" type="submit" class="button-style-2">Instalar <i>LoginPress | Custom Login Page Customizer</i></button>
-                <button id="#" type="submit" class="button-style-2">Instalar <i>Example</i></button>
-                <button id="#" type="submit" class="button-style-2">Instalar <i>Example</i></button>
-            </div>  
+                <button id="loginPressInstallBtn" type="submit" class="button-style-2">Install <i>LoginPress |
+                        Custom Login Page Customizer</i></button>
+                <button id="#" type="submit" class="button-style-2">Install <i>Example</i></button>
+                <button id="#" type="submit" class="button-style-2">Install <i>Example</i></button>
+            </div>
         </div>
     </div>
 
@@ -55,39 +75,81 @@
         <div class="ressources">
             <form action="#" method="get">
                 <div class="lbl-cont">
-                    <label for="" class="label-input">Domínio</label>
-                    <input type="text" class="input-url" id="url_domain">
+                    <label for="" class="label-input">Domain</label>
+                    <input type="text" class="input-default" id="url_domain">
                 </div>
                 <div class="lbl-cont">
-                    <label for="" class="label-input">Slug de origem</label>
-                    <input type="text" class="input-url" id="inputUrl">
+                    <label for="" class="label-input">Source Slug</label>
+                    <input type="text" class="input-default" id="inputUrl">
                 </div>
                 <div class="lbl-cont helpers">
-                    <label for="" class="label-input">Slug destino</label>
-                    <input type="text" class="input-url" id="outputUrl">
+                    <label for="" class="label-input">Destination Slug</label>
+                    <input type="text" class="input-default" id="outputUrl">
                 </div>
                 <div class="lbl-cont">
-                    <label for="" class="label-input">URL original</label>
-                    <input type="text" class="input-url" id="url_">
+                    <label for="" class="label-input">Original URL</label>
+                    <input type="text" class="input-default" id="url_">
                 </div>
-                <button id="redirectBtn" type="submit" class="button-style-2">Criar redirect</button>
+                <button id="redirectBtn" type="submit" class="button-style-2">Create Redirect</button>
             </form>
             <div class="options">
                 <div class="lbl-cont helpers">
                     <label for="" class="label-input">Nonce</label>
-                    <input type="text" class="input-url" id="nonceValue" readonly>
+                    <input type="text" class="input-default" id="nonceValue" readonly>
                 </div>
-                <button class="button-style-2">Parâmetros de consulta</button>
-                <button class="button-style-2">Corresponder</button>
-                <button class="button-style-2">Quando corresponder</button>
-                <button class="button-style-2">Código HTTP</button>
+                <button class="button-style-2">Query Parameters</button>
+                <button class="button-style-2">Match</button>
+                <button class="button-style-2">When Match</button>
+                <button class="button-style-2">HTTP Code</button>
             </div>
         </div>
     </div>
 
-    <script src="js/popup.js"></script>
-    <script src="js/storage.js"></script>
-    <script src="js/colorPicker.js"></script>
+    <!-- Tools tab -->
+    <div id="tools-tab" class="tab">
+        <div class="ressources">
+            <div class="lateral-bar" width="20%">
+                <button id="colorPickerLateralButton" class="button-style-1 side-tab-button active"><span
+                        class="material-symbols-outlined">palette</span>Color Picker</button>
+                <button id="test1LateralButton" class="button-style-1 side-tab-button"><span
+                        class="material-symbols-outlined">contrast</span>Color Constrast</button>
+                <button id="test2LateralButton" class="button-style-1 side-tab-button"><span
+                        class="material-symbols-outlined">gradient</span>Gradient</button>
+            </div>
+            <div class="side-tab tab active" id="tab-1" style="color: white;">
+                <div class="ressources">
+                    <div class="color-picker">
+                        <canvas id="color-picker"></canvas>
+                    </div>
+                    <div class="color-picker-ressources">
+                        <div class="color-area">
+                            <label for="" class="label-input">HEX</label>
+                            <input class="input-default input-color" id="color" value="#381f1c"></input>
+                            <button class="button-style-3" style="background: #381f1c;" onclick="copyToClipboard()"><span class="material-symbols-outlined">content_copy</span></button>
+                        </div>
+                        <div class="color-area">
+                            <label for="" class="label-input">RGB</label>
+                            <input class="input-default input-color" id="color2" value="#381f1c"></input>
+                            <button class="button-style-3" style="background: #381f1c;" onclick="copyToClipboard()"><span class="material-symbols-outlined">content_copy</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="side-tab tab" id="tab-2">
+                teste2
+            </div>
+            <div class="side-tab tab" id="tab-3">
+                teste3
+            </div>
+        </div>
+
+        <script src="js/objects.js"></script>
+        <script src="js/redirection.js"></script>
+        <script src="js/popup.js"></script>
+        <script src="js/html5kellycolorpicker.min.js"></script>
+        <script src="js/colorPicker.js"></script>
+        <script src="js/global.js"></script>
+        <script src="js/storage.js"></script>
 </body>
 
 </html>

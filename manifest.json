@@ -37,9 +37,6 @@
     "content_scripts": [
         {
             "matches": ["*://*/wp-admin/*"],
-            "js": [
-                "js/redirection.js"
-            ],
             "css": [
                 "css/pluginSearch.css"
             ]

@@ -1,0 +1,156 @@
+/* Navegation Bar */
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  max-height: auto;
+  gap: 0;
+  padding: 0.25rem;
+  background: linear-gradient(
+    180deg,
+    var(--tertiary-color),
+    var(--primary-950)
+  );
+  box-shadow: 0 0.05rem 0 0.05rem var(--primary-700);
+  border-radius: 0 0 0.65rem 0.65rem;
+  margin-left: 0.05rem;
+  margin-right: 0.05rem;
+}
+
+/* Initial Tab */
+#initial-tab .ressources {
+  gap: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+}
+#initial-tab .ressources form {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+}
+#initial-tab .ressources .input-default {
+  width: 79%;
+}
+
+/* Plugin Tab */
+#plugins-tab .ressources {
+  gap: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+}
+#plugins-tab .ressources .default-tab-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* Redirect Tab */
+#redirection-tab .ressources {
+  gap: 1rem;
+  padding: 1rem;
+  display: flex;
+}
+#redirection-tab .ressources form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+  justify-content: center;
+  align-content: space-between;
+}
+#redirection-tab .input-default {
+  width: 60%;
+}
+#redirection-tab .options {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+  justify-content: space-between;
+}
+#redirection-tab #redirectBtn {
+  width: 100%;
+}
+
+/* Tools Tab */
+#tools-tab .ressources {
+  gap: 0.5rem;
+  padding: 0.5rem;
+  display: flex;
+}
+
+#tools-tab .ressources .lateral-bar {
+  padding: 1rem;
+  border-radius: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(90deg, #4f090008 0%, #4f0900ad 90%);
+  margin: -0.4rem 0rem -0.4rem -0.9rem;
+  flex-wrap: nowrap;
+  width: 20%; 
+}
+
+#tools-tab .ressources .lateral-bar .button-style-1{
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+  justify-content: left;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+
+/* Tools Tab / Side tab */
+
+/* Tools Tab / Side tab / Color Picker */
+
+.side-tab#tab-1 {
+  width: 80%;
+}
+
+.side-tab#tab-1 .ressources {
+  width: 97%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.side-tab#tab-1 .color-picker-ressources {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.side-tab#tab-1 .color-picker{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 50%;
+}
+
+.side-tab#tab-1 .color-picker-ressources .color-area{
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* .input-color{
+
+}
+*/
+

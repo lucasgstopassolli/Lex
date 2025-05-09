@@ -1,31 +1,33 @@
-// // saving the last opened tab
-// document.querySelectorAll('#tabs a').forEach(function(tab) {
-//     tab.addEventListener('click', function(e) {
-//         chrome.storage.local.set({lastTab: tab.id});
-//     });
-// });
-// document.querySelectorAll('#tabsTools a').forEach(function(tab) {
-//     tab.addEventListener('click', function(e) {
-//         chrome.storage.local.set({lastTab: 'tabTools'});
-//         chrome.storage.local.set({lastTabTool: tab.id});
-//     });
-// });
+// saving the last opened tab
+document.querySelectorAll('#navBar button').forEach(function(tab) {
+    tab.addEventListener('click', function(e) {
+        chrome.storage.local.set({lastTab: tab.id});
+    });
+});
+document.querySelectorAll('#tools-tab .lateral-bar button').forEach(function(tab) {
+    tab.addEventListener('click', function(e) {
+        chrome.storage.local.set({lastTabTool: tab.id});
+    });
+});
 
 // getting the last opened tab
-// chrome.storage.local.get('lastTab', function(result) {
-//     if (result.lastTab) {
-//         document.querySelector('#tabs #' + result.lastTab)?.click();
-
-//         // if the last tab is tabTools, then we need to get the last opened tool
-//         if (result.lastTab == 'tabTools') {
-//             chrome.storage.local.get('lastTabTool', function(result) {
-//                 if (result.lastTabTool) {
-//                     document.querySelector('#tabsTools #' + result.lastTabTool)?.click();
-//                 }
-//             });
-//         }
-//     }
-// });
+document.addEventListener("DOMContentLoaded", function(){
+    chrome.storage.local.get('lastTab', function(result) {
+        if (result.lastTab) {
+            // extensionElements.tabOpen[result.lastTab]();
+            document.querySelector('#' + result.lastTab).click();
+    
+            // if the last tab is tabTools, then we need to get the last opened tool
+            if (result.lastTab == 'toolsButton') {
+                chrome.storage.local.get('lastTabTool', function(result) {
+                    if (result.lastTabTool) {
+                        document.querySelector('#tools-tab .lateral-bar #' + result.lastTabTool)?.click();
+                    }
+                });
+            }
+        }
+    });
+})
 
 // saving all helpers
 document.querySelectorAll('.helpers input, .helpers select').forEach(function(input) {
