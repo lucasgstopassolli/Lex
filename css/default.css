@@ -165,7 +165,7 @@ h1 {
 .label-input {
   color: var(--primary-50);
   font-weight: 600;
-  font-size: 0.9rem;
+font-size: 1rem;
   font-family: var(--font-family);
   user-select: none;
 }

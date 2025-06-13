@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/tabs.css">
     <link rel="stylesheet" href="css/symbols.css">
     <link rel="stylesheet" href="css/colorPicker.css">
+    <link rel="stylesheet" href="css/contrastChecker.css">
     <link rel="stylesheet" href="css/default.css">
 
 </head>
@@ -73,6 +74,7 @@
     <!-- Redirection tab -->
     <div id="redirection-tab" class="tab">
         <div class="ressources">
+            
             <form action="#" method="get">
                 <div class="lbl-cont">
                     <label for="" class="label-input">Domain</label>
@@ -92,15 +94,9 @@
                 </div>
                 <button id="redirectBtn" type="submit" class="button-style-2">Create Redirect</button>
             </form>
-            <div class="options">
-                <div class="lbl-cont helpers">
-                    <label for="" class="label-input">Nonce</label>
-                    <input type="text" class="input-default" id="nonceValue" readonly>
-                </div>
-                <button class="button-style-2">Query Parameters</button>
-                <button class="button-style-2">Match</button>
-                <button class="button-style-2">When Match</button>
-                <button class="button-style-2">HTTP Code</button>
+            <div class="lbl-cont helpers">
+                <label for="" class="label-input">Nonce</label>
+                <input type="text" class="input-default" id="nonceValue" readonly>
             </div>
         </div>
     </div>
@@ -123,20 +119,68 @@
                     </div>
                     <div class="color-picker-ressources">
                         <div class="color-area">
-                            <label for="" class="label-input">HEX</label>
-                            <input class="input-default input-color" id="color" value="#381f1c"></input>
-                            <button class="button-style-3" style="background: #381f1c;" onclick="copyToClipboard()"><span class="material-symbols-outlined">content_copy</span></button>
-                        </div>
-                        <div class="color-area">
-                            <label for="" class="label-input">RGB</label>
-                            <input class="input-default input-color" id="color2" value="#381f1c"></input>
-                            <button class="button-style-3" style="background: #381f1c;" onclick="copyToClipboard()"><span class="material-symbols-outlined">content_copy</span></button>
+                            <label for="color" class="label-input">RGB</label>
+                            <input class="input-default input-color" id="color"></input>
+                            <button class="button-style-3" id="butCopyRGB" style="background: #381f1c;"><span
+                                    class="material-symbols-outlined">content_copy</span></button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="side-tab tab" id="tab-2">
-                teste2
+                <!-- Test -->
+                <div class="main-container">
+                    <div class="color-sections-wrapper">
+                        <div class="color-section" id="foreground-section">
+                            <h2>Primeiro plano</h2>
+                            <label for="fgHex">Valor hexadecimal</label>
+                            <input type="text" id="fgHex" value="#0000FF" maxlength="7">
+
+                            <div class="input-group">
+                                <label for="fgColor" class="sr-only">Seletor de cores</label>
+                                <input type="color" id="fgColor" value="#0000FF">
+                                <label for="fgAlpha">Alfa</label>
+                                <input type="number" id="fgAlpha" value="1" min="0" max="1" step="0.01">
+                            </div>
+
+                            <label for="fgLightness">Leveza</label>
+                            <input type="range" id="fgLightness" min="0" max="100" value="50">
+                        </div>
+
+                        <div class="color-section" id="background-section">
+                            <h2>Fundo</h2>
+                            <label for="bgHex">Valor hexadecimal</label>
+                            <input type="text" id="bgHex" value="#FFFFFF" maxlength="7">
+
+                            <div class="input-group">
+                                <label for="bgColor" class="sr-only">Seletor de cores</label>
+                                <input type="color" id="bgColor" value="#FFFFFF">
+                                <label for="bgAlpha">Alfa</label>
+                                <input type="number" id="bgAlpha" value="1" min="0" max="1" step="0.01">
+                            </div>
+
+                            <label for="bgLightness">Leveza</label>
+                            <input type="range" id="bgLightness" min="0" max="100" value="100">
+                        </div>
+                    </div>
+
+                    <div class="contrast-result-section">
+                        <p>Taxa de contraste</p>
+                        <div id="contrastRatioDisplay" class="ratio-display">
+                            <span id="contrastRatioValue">-- : 1</span>
+                        </div>
+                    </div>
+
+                    <div id="wcag-compliance">
+                        <h3>WCAG AA:</h3>
+                        <p>Texto Normal (>= 4.5:1): <span id="wcagAA">--</span></p>
+                        <p>Texto Grande (>= 3:1): <span id="wcagAALarge">--</span></p>
+                        <h3>WCAG AAA:</h3>
+                        <p>Texto Normal (>= 7:1): <span id="wcagAAA">--</span></p>
+                        <p>Texto Grande (>= 4.5:1): <span id="wcagAAALarge">--</span></p>
+                    </div>
+                </div>
+
             </div>
             <div class="side-tab tab" id="tab-3">
                 teste3
@@ -148,6 +192,7 @@
         <script src="js/popup.js"></script>
         <script src="js/html5kellycolorpicker.min.js"></script>
         <script src="js/colorPicker.js"></script>
+        <script src="js/contrastChecker.js"></script>
         <script src="js/global.js"></script>
         <script src="js/storage.js"></script>
 </body>

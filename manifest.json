@@ -13,7 +13,8 @@
         "background",
         "alarms",
         "cookies",
-        "search"
+        "search",
+        "clipboardWrite"
     ],
     "host_permissions": [
         "<all_urls>"

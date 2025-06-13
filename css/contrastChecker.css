@@ -1,0 +1,153 @@
+.sr-only { /* Para labels que são apenas para acessibilidade */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.color-sections-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Espaço entre as seções de cor */
+}
+
+.color-section {
+    flex: 1; /* Faz com que cada seção de cor ocupe metade do espaço */
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.color-section h2 {
+    font-size: 1.1em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+}
+
+.color-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.color-section input[type="text"],
+.color-section input[type="number"] {
+    width: calc(100% - 12px); /* Ajusta para padding */
+    padding: 6px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 8px;
+}
+
+.input-group input[type="color"] {
+    width: 60px; /* Aumenta o seletor de cor */
+    height: 35px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    padding: 0; /* Remove padding interno do input color */
+    border-radius: 4px;
+}
+
+.input-group input[type="number"] {
+    width: 60px; /* Largura para o campo Alfa */
+    margin-bottom: 0; /* Remove margin-bottom pois está no grupo */
+}
+
+
+.color-section input[type="range"] {
+    width: 100%;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.contrast-result-section {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.contrast-result-section p {
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.ratio-display {
+    padding: 15px;
+    border: 3px solid #ccc; /* Borda inicial cinza */
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: inline-block; /* Para centralizar melhor */
+}
+
+#contrastRatioValue {
+    font-size: 2.5em; /* Tamanho grande para a taxa */
+    font-weight: bold;
+    color: #333;
+}
+
+/* Cores da borda e texto da taxa de contraste */
+.ratio-display.pass {
+    border-color: #28a745; /* Verde para passar */
+}
+.ratio-display.pass #contrastRatioValue {
+    color: #28a745;
+}
+.ratio-display.fail {
+    border-color: #dc3545; /* Vermelho para falhar */
+}
+.ratio-display.fail #contrastRatioValue {
+    color: #dc3545;
+}
+.ratio-display.nodata {
+    border-color: #ccc;
+}
+.ratio-display.nodata #contrastRatioValue {
+    color: #555;
+}
+#wcag-compliance {
+    font-size: 0.9em;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+#wcag-compliance h3 {
+    font-size: 1em;
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+#wcag-compliance p {
+    margin: 4px 0;
+}
+#wcag-compliance span {
+    font-weight: bold;
+}
+.pass-text { color: #28a745; }
+.fail-text { color: #dc3545; }
