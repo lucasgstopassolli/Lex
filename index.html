@@ -57,17 +57,21 @@
     <div class="tab-content" id="pills-tabContent">
 
         <!-- Home tab -->
-        <div class="tab-pane fade show" id="initial-tab" role="tabpanel" aria-labelledby="but-initial-tab" tabindex="0">
+        <div class="tab-pane fade w-100 show" id="initial-tab" role="tabpanel" aria-labelledby="but-initial-tab"
+            tabindex="0">
             <div class="gap-3 p-3 d-flex flex-row justify-content-between text-center">
                 <input type="text" class="form-control font-whitep-2">
             </div>
         </div>
 
         <!-- Wordpress tab -->
-        <div class="tab-pane fade" id="wordpress-tab" role="tabpanel" aria-labelledby="but-wordpress-tab" tabindex="0">
+        <div class="tab-pane fade w-100" id="wordpress-tab" role="tabpanel" aria-labelledby="but-wordpress-tab"
+            tabindex="0">
             <div class="d-flex flex-row">
+
                 <!-- Nav Tabs -->
-                <ul class="nav nav-tabs lateral-bar w-25 d-flex flex-column gap-3 p-2 w-25 mb-0 rounded-3 wordpressTab" id="pills-tab" role="tablist">
+                <ul class="nav nav-tabs lateral-bar w-25 d-flex flex-column gap-3 p-2 w-25 mb-0 rounded-3 wordpressTab"
+                    id="pills-tab" role="tablist">
 
                     <!-- Plugins Button -->
                     <li class="nav-item w-100" role="presentation">
@@ -87,38 +91,103 @@
                             <img src="svg/redirect.svg" alt="Redirect">Redirect</button>
                     </li>
                 </ul>
+
                 <!-- Content -->
                 <div class="tab-content gap-3 p-3 d-flex w-100">
+
                     <!-- Plugins Tab -->
-                    <div class="tab-pane fade" id="plugins-tab" role="tabpanel" aria-labelledby="but-plugins-tab"
+                    <div class="tab-pane fade w-100" id="plugins-tab" role="tabpanel" aria-labelledby="but-plugins-tab"
                         tabindex="0">
-                        <div class="gap-3 d-flex flex-row justify-content-between text-center">
-                            <div class="d-flex flex-column gap-3 w-100">
-                                <button id="redirectInstallBtn" type="submit"
-                                    class="btn btn-primary user-select-none text-center">Install
-                                    <i>Redirection</i></button>
-                                <button id="backupInstallBtn" type="submit"
-                                    class="btn btn-primary user-select-none text-center">Install <i>All-in-One WP
-                                        Migration and Backup</i></button>
-                                <button id="replaceImageBtn" type="submit"
-                                    class="btn btn-primary user-select-none text-center">Install <i>Enable Media
-                                        Replace</i></button>
+                        <div
+                            class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
+                            <label for="url_"
+                                class="text-white fw-bold fs-5 user-select-none d-flex align-items-center gap-1">
+                                <img src="svg/plugin.svg" width="20" style="margin-top: 1px;" alt="Download">Plugins
+                                para Website</label>
+                        </div>
+                        <div class="gap-3 d-flex flex-column justify-content-between text-center pe-3 w-100" style="max-height: 400px;overflow-y: auto;overflow-x: hidden;">
+
+                            <!-- Redirection Plugin Card -->
+                            <div class="card w-100 rounded-4">
+                                <div class="d-flex flex-row">
+                                    <div class="d-flex align-items-center p-2" style="width: 50%;">
+                                        <img src="https://ps.w.org/redirection/assets/icon-256x256.jpg?rev=983639" class="img-fluid rounded-3">
+                                    </div>
+                                    <div class="w-10 d-flex align-items-center">
+                                        <div class="card-body d-flex flex-column text-start p-2">
+                                            <h5 class="fw-bold">Redirection</h5>
+                                            <p class="mb-0 fs-6">Gerencie redirecionamentos 301, monitore erros 404 e melhore seu site, sem precisar entender de Apache ou Nginx.</p>
+                                        </div>
+                                        <div class="card-body d-flex flex-column text-start gap-2 p-3">
+                                            <button class="btn btn-primary"><img src="svg/download.svg" width="20" alt="Download"></button>
+                                            <button class="btn btn-outline-primary"><img src="svg/view.svg"  width="20" alt="View"></button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="d-flex flex-column gap-3 w-100">
-                                <button id="loginPressInstallBtn" type="submit"
-                                    class="btn btn-primary user-select-none text-center">Install <i>LoginPress |
-                                        Custom Login Page Customizer</i></button>
-                                <button id="#" type="submit"
-                                    class="btn btn-primary user-select-none text-center">Install
-                                    <i>Example</i></button>
-                                <button id="#" type="submit"
-                                    class="btn btn-primary user-select-none text-center">Install
-                                    <i>Example</i></button>
+                            <!-- Backup Plugin Card -->
+                            <div class="card w-100 rounded-4">
+                                <div class="d-flex flex-row">
+                                    <div class="d-flex align-items-center p-2" style="width: 50%;">
+                                        <img src="https://ps.w.org/redirection/assets/icon-256x256.jpg?rev=983639" class="img-fluid rounded-3">
+                                    </div>
+                                    <div class="w-10 d-flex align-items-center">
+                                        <div class="card-body d-flex flex-column text-start p-2">
+                                            <h5 class="fw-bold">Redirection</h5>
+                                            <p class="mb-0 fs-6">Gerencie redirecionamentos 301, monitore erros 404 e melhore seu site, sem precisar entender de Apache ou Nginx.</p>
+                                        </div>
+                                        <div class="card-body d-flex flex-column text-start gap-2 p-3">
+                                            <button class="btn btn-primary"><img src="svg/download.svg" width="20" alt="Download"></button>
+                                            <button class="btn btn-outline-primary"><img src="svg/view.svg"  width="20" alt="View"></button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="card w-100 rounded-4">
+                                <div class="d-flex flex-row">
+                                    <div class="d-flex align-items-center p-2" style="width: 50%;">
+                                        <img src="https://ps.w.org/redirection/assets/icon-256x256.jpg?rev=983639" class="img-fluid rounded-3">
+                                    </div>
+                                    <div class="w-10 d-flex align-items-center">
+                                        <div class="card-body d-flex flex-column text-start p-2">
+                                            <h5 class="fw-bold">Redirection</h5>
+                                            <p class="mb-0 fs-6">Gerencie redirecionamentos 301, monitore erros 404 e melhore seu site, sem precisar entender de Apache ou Nginx.</p>
+                                        </div>
+                                        <div class="card-body d-flex flex-column text-start gap-2 p-3">
+                                            <button class="btn btn-primary"><img src="svg/download.svg" width="20" alt="Download"></button>
+                                            <button class="btn btn-outline-primary"><img src="svg/view.svg"  width="20" alt="View"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card w-100 rounded-4">
+                                <div class="d-flex flex-row">
+                                    <div class="d-flex align-items-center p-2" style="width: 50%;">
+                                        <img src="https://ps.w.org/redirection/assets/icon-256x256.jpg?rev=983639" class="img-fluid rounded-3">
+                                    </div>
+                                    <div class="w-10 d-flex align-items-center">
+                                        <div class="card-body d-flex flex-column text-start p-2">
+                                            <h5 class="fw-bold">Redirection</h5>
+                                            <p class="mb-0 fs-6">Gerencie redirecionamentos 301, monitore erros 404 e melhore seu site, sem precisar entender de Apache ou Nginx.</p>
+                                        </div>
+                                        <div class="card-body d-flex flex-column text-start gap-2 p-3">
+                                            <button class="btn btn-primary"><img src="svg/download.svg" width="20" alt="Download"></button>
+                                            <button class="btn btn-outline-primary"><img src="svg/view.svg"  width="20" alt="View"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button id="replaceImageBtn" type="submit"
+                                class="btn btn-primary user-select-none text-center w-100">Install <i>Enable Media
+                                    Replace</i></button>
+                            <button id="loginPressInstallBtn" type="submit"
+                                class="btn btn-primary user-select-none text-center w-100">Install <i>LoginPress |
+                                    Custom Login Page Customizer</i></button>
                         </div>
                     </div>
                     <!-- Redirection Tab -->
-                    <div class="tab-pane fade" id="redirection-tab" role="tabpanel"
+                    <div class="tab-pane fade w-100" id="redirection-tab" role="tabpanel"
                         aria-labelledby="but-redirection-tab" tabindex="0">
                         <div class="d-flex flex-column gap-3">
                             <div
@@ -139,12 +208,14 @@
                                 </div>
                                 <div
                                     class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none">
-                                    <label for="inputUrl" class="text-white fw-bold fs-6 user-select-none">Slug Antigo</label>
+                                    <label for="inputUrl" class="text-white fw-bold fs-6 user-select-none">Slug
+                                        Antigo</label>
                                     <input type="text" class="form-control font-whitep-2 w-75 " id="inputUrl">
                                 </div>
                                 <div
                                     class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none helpers">
-                                    <label for="outputUrl" class="text-white fw-bold fs-6 user-select-none">Slug Destino</label>
+                                    <label for="outputUrl" class="text-white fw-bold fs-6 user-select-none">Slug
+                                        Destino</label>
                                     <input type="text" class="form-control font-whitep-2 w-75" id="outputUrl">
                                 </div>
                                 <button id="redirectBtn" type="submit"
@@ -156,7 +227,7 @@
             </div>
         </div>
         <!-- Design tab -->
-        <div class="tab-pane fade" id="design-tab" role="tabpanel" aria-labelledby="but-design-tab" tabindex="0">
+        <div class="tab-pane fade w-100" id="design-tab" role="tabpanel" aria-labelledby="but-design-tab" tabindex="0">
             <div class="gap-3 p-3 d-flex">
 
             </div>

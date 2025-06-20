@@ -88,17 +88,20 @@ h1 {
   --bs-btn-disabled-color: var(--primary-600);
   --bs-btn-disabled-bg: var(--primary-600);
   --bs-btn-disabled-border-color: initial;
+  --bs-gradient: none;
+  display: flex;
+  align-items: center;
 }
 .btn-outline-primary {
-  align-self: normal;
   border: 0.125rem solid var(--primary-600);
   --bs-btn-color: var(--primary-50);
   --bs-btn-border-color: var(--primary-600);
   --bs-btn-hover-color: var(--primary-400);
+  --bs-btn-hover-bg: transparent;
   --bs-btn-hover-border-color: var(--primary-400);
   --bs-btn-active-color: initial;
-  --bs-btn-active-bg: initial;
-  --bs-btn-active-border-color: initial;
+  --bs-btn-active-bg: var(--primary-800);
+  --bs-btn-active-border-color: var(--primary-800);
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: var(--transparency-20);
   --bs-btn-disabled-bg: transparent;
@@ -123,6 +126,16 @@ h1 {
 }
 .lateral-bar {
   background: var(--background-nav-tab);
+}
+.card {
+    color: var(--primary-50);
+    --bs-card-border-color: var(--transparency-30);
+    background: linear-gradient(90deg, var(--transparency-20) 0%, transparent 100%);
+    transition: all 0.4s ease;
+    user-select: none;
+}
+.card:hover{
+  --bs-card-border-color: var(--transparency-80);
 }
 /* Navegation Bar */
 .nav-bar {
