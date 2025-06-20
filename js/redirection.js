@@ -22,80 +22,80 @@ function getDomainAndSlug() {
         }
     });
 }
-// Pegar o nonce da página
-async function getNonce() {
-    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-    const tabId = tabs[0].id;
-    const result = await chrome.scripting.executeScript({
-        target: { tabId },
-        func: function () {
-            return Redirectioni10n.api.WP_API_nonce;
-        },
-        world: 'MAIN', // Executa no contexto principal para acessar variáveis da página
-    });
-    return result[0]?.result || '';
-}
+getDomainAndSlug();  
 
-// Atualiza o valor do campo nonceValue após o carregamento da página
-document.addEventListener('DOMContentLoaded', async function () {
-    getDomainAndSlug();  
-    const nonceInput = document.getElementById('nonceValue');
-
-    if (nonceInput && !nonceInput.value) { // Só altera se o campo estiver vazio
-        const nonce = await getNonce();
-        if (nonce) {
-            nonceInput.value = nonce;
-            nonceInput.dispatchEvent(new Event('change'));
-        }
-    }
-});
-
-// Função para criar o redirecionamento 
 async function createRedirect(inputUrl, outputUrl) {
     if (!domain) {
         alert('Domínio não disponível');
         return;
     }
 
-    let redirectionUrl = ensureSlash(domain) + "wp-admin/tools.php?page=redirection.php";
-    chrome.tabs.update({ url: redirectionUrl });
+    const redirectionUrl = ensureSlash(domain) + "wp-admin/tools.php?page=redirection.php";
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
+    chrome.tabs.update(tab.id, { url: redirectionUrl });
+
+    chrome.tabs.onUpdated.addListener(function listener(tabId, changeInfo) {
+        if (tabId === tab.id && changeInfo.status === 'complete') {
+            chrome.tabs.onUpdated.removeListener(listener);
+            injectAndCreate(tabId, inputUrl, outputUrl);
+        }
+    });
+}
+
+async function injectAndCreate(tabId, inputUrl, outputUrl) {
     try {
-        // Aguarde o nonce antes de enviar a requisição
-        const nonce = document.getElementById('nonceValue').value; // Aguarda o nonce ser recuperado
-        fetch(ensureSlash(domain) + "wp-json/redirection/v1/redirect/", {
-            headers: {
-                "accept": "application/json, */*;q=0.1",
-                "content-type": "application/json; charset=utf-8",
-                "x-wp-nonce": nonce,
-            },
-            body: JSON.stringify({
-                "id": 0,
-                "url": inputUrl,
-                "title": "",
-                "match_data": {
-                    "source": {
-                        "flag_regex": false,
-                        "flag_trailing": true,
-                        "flag_case": true,
-                        "flag_query": "exact"
+        const [{ result: nonce }] = await chrome.scripting.executeScript({
+            target: { tabId },
+            world: 'MAIN',
+            func: () => {
+                return window.Redirectioni10n?.api?.WP_API_nonce || '';
+            }
+        });
+
+        if (!nonce) return;
+
+        await chrome.scripting.executeScript({
+            target: { tabId },
+            world: 'MAIN',
+            func: (domain, inputUrl, outputUrl, nonce) => {
+                fetch(domain + "wp-json/redirection/v1/redirect/", {
+                    headers: {
+                        "accept": "application/json, */*;q=0.1",
+                        "content-type": "application/json; charset=utf-8",
+                        "x-wp-nonce": nonce,
                     },
-                    "options": {}
-                },
-                "match_type": "url",
-                "action_type": "url",
-                "position": 0,
-                "group_id": 1,
-                "action_code": 301,
-                "action_data": { "url": outputUrl }
-            }),
-            method: "POST",
-            mode: "cors",
-            credentials: "include"
-        }).then(() => window.location.reload())
-        .catch(error => console.error("Erro na requisição:", error));
+                    body: JSON.stringify({
+                        "id": 0,
+                        "url": inputUrl,
+                        "title": "",
+                        "match_data": {
+                            "source": {
+                                "flag_regex": false,
+                                "flag_trailing": true,
+                                "flag_case": true,
+                                "flag_query": "exact"
+                            },
+                            "options": {}
+                        },
+                        "match_type": "url",
+                        "action_type": "url",
+                        "position": 0,
+                        "group_id": 1,
+                        "action_code": 301,
+                        "action_data": { "url": outputUrl }
+                    }),
+                    method: "POST",
+                    mode: "cors",
+                    credentials: "include"
+                }).then(() => window.location.reload())
+                .catch(error => console.error("Erro na requisição:", error));
+            },
+            args: [ensureSlash(domain), inputUrl, outputUrl, nonce]
+        });
+
     } catch (error) {
-        console.error("Erro ao obter nonce:", error);
+        console.error("Erro ao obter nonce ou enviar redirecionamento:", error);
     }
 }
 
