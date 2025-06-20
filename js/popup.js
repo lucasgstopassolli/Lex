@@ -83,31 +83,31 @@ async function installreplaceImage() {
   });
 }
 
-//Defines the relationship betwenn the button and the field
-function setupCopyFields(elementToCopy) {
-    debugger
-  if (!elementToCopy.button || !elementToCopy.input) {
-    window.alert("Botão ou campo não encontrado!");
-    return;
-  }
+// //Defines the relationship betwenn the button and the field
+// function setupCopyFields(elementToCopy) {
+//     debugger
+//   if (!elementToCopy.button || !elementToCopy.input) {
+//     window.alert("Botão ou campo não encontrado!");
+//     return;
+//   }
 
-  elementToCopy.button.addEventListener("click", () =>
-    copyToClipboard(elementToCopy.input)
-  );
-}
+//   elementToCopy.button.addEventListener("click", () =>
+//     copyToClipboard(elementToCopy.input)
+//   );
+// }
 
-//Copy to the clipboard
-function copyToClipboard(inputElement) {
-  if (!inputElement) {
-    window.alert("Não foi possível copiar!");
-  } else {
-    navigator.clipboard.writeText(inputElement.value);
-  }
-}
+// //Copy to the clipboard
+// function copyToClipboard(inputElement) {
+//   if (!inputElement) {
+//     window.alert("Não foi possível copiar!");
+//   } else {
+//     navigator.clipboard.writeText(inputElement.value);
+//   }
+// }
 
-//Initializate the objects (objects.js)
-function initializateCopyFields() {
-  setupCopyFields(copyFieldElements.colorRGB);
-}
+// //Initializate the objects (objects.js)
+// function initializateCopyFields() {
+//   setupCopyFields(copyFieldElements.colorRGB);
+// }
 
-initializateCopyFields();
+// initializateCopyFields();

@@ -1,5 +1,5 @@
+/*--------- Default Color Palette ---------*/
 :root {
-  /* Default Color Palette */
   --primary-50: #fff2f0;
   --primary-100: #ffe1dd;
   --primary-200: #ffc9c2;
@@ -20,7 +20,6 @@
   --transparency-70: #fa361cb3;
   --transparency-80: #fa361ccc;
   --transparency-90: #fa361ce6;
-
   --font-family: "Lato", "Arial", "Helvetica", "sans-serif";
   --secondary-color: #231c1c;
   --tertiary-color: #1c0808;
@@ -29,155 +28,110 @@
     var(--transparency-10),
     var(--transparency-40)
   );
-  --default-shadow: 0 0 0.5rem 0.5rem var(--transparency-40);
+  --background-nav-tab: linear-gradient(90deg, transparent 0%, var(--transparency-30) 70%);
+  --default-shadow: 0 0 0.1rem 0.3rem var(--transparency-40);
 }
-
+/*--------- Default Classes ---------*/
 ::selection {
-  background: var(--transparency-30);
+  background: var(--transparency-10);
 }
-
 html {
   min-width: 800px;
 }
 body {
   background: var(--secondary-color);
   font-family: var(--font-family);
-  margin: 0;
-  display: flex;
-  flex-direction: column;
 }
 h1 {
   font-weight: 600;
   text-transform: uppercase;
   font-size: 1.125rem;
 }
-
-/* Default Styles */
-.tab {
-  display: none;
-}
-
-.active {
-  display: block;
-}
-
-.lbl-cont {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  user-select: none;
-}
-.button-style-1 {
-  padding: 0.5rem 1.125rem;
-  border-radius: 0.4rem;
-  border: 0.125rem solid transparent;
-  background: none;
+.nav-link {
+  border: 0.125rem solid transparent!important;
   color: var(--primary-50);
-  font-weight: 600;
-  font-size: 0.875rem;
-  font-family: var(--font-family);
   cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  align-items: normal;
-  gap: 0.25rem;
   outline: none;
-  user-select: none;
-  justify-content: center;
-  width: 100%;
   transition: all ease 0.3s;
 }
-.button-style-1.active {
+.nav-link.active {
   transition: all ease 0.3s;
-  border: 0.125rem solid var(--primary-500);
+  border: 0.125rem solid var(--primary-500)!important;
   background: radial-gradient(
     circle,
     var(--transparency-10),
     var(--transparency-40)
-  );
+  )!important;
   outline: none;
 }
-.button-style-1:hover {
-  color: var(--primary-300);
+.nav-link:hover {
+  color: var(--primary-300)!important;
 }
-.button-style-2 {
-  max-height: initial;
+.btn {
+  --bs-btn-color: var(--primary-50);
   padding: 0.625rem 0.75rem;
-  border-radius: 0.5rem;
-  border: 0.125rem solid var(--primary-600);
-  background: var(--primary-500);
-  color: var(--primary-50);
-  font-weight: 600;
-  font-size: 0.875rem;
   font-family: var(--font-family);
-  user-select: none;
   cursor: pointer;
-  transition: all ease 0.3s;
-}
-.button-style-2:hover {
-  border: 0.125rem solid var(--primary-500);
-  background: var(--primary-600);
-}
-.button-style-3 {
-  max-height: initial;
-  padding: 0.5rem 0.6rem;
-  border-radius: 0.5rem;
   border: 0.125rem solid var(--primary-600);
-  background: var(--primary-500);
-  color: var(--primary-50);
-  font-weight: 600;
-  font-size: 0.875rem;
-  font-family: var(--font-family);
-  user-select: none;
-  cursor: pointer;
-  transition: all ease 0.3s;
+}
+.btn-primary {
+  --bs-btn-color: var(--primary-50);
+  --bs-btn-bg: var(--primary-500);
+  --bs-btn-border-color: var(--primary-500);
+  --bs-btn-hover-color: var(--primary-50);
+  --bs-btn-hover-bg: var(--primary-600);
+  --bs-btn-hover-border-color: var(--primary-600);
+  --bs-btn-active-color: initial;
+  --bs-btn-active-bg: var(--primary-700);
+  --bs-btn-active-border-color: var(--primary-700);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: var(--primary-600);
+  --bs-btn-disabled-bg: var(--primary-600);
+  --bs-btn-disabled-border-color: initial;
+}
+.btn-outline-primary {
+  align-self: normal;
+  border: 0.125rem solid var(--primary-600);
+  --bs-btn-color: var(--primary-50);
+  --bs-btn-border-color: var(--primary-600);
+  --bs-btn-hover-color: var(--primary-400);
+  --bs-btn-hover-border-color: var(--primary-400);
+  --bs-btn-active-color: initial;
+  --bs-btn-active-bg: initial;
+  --bs-btn-active-border-color: initial;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: var(--transparency-20);
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: var(--transparency-20);
+  --bs-gradient: none;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  gap: 0.1rem;
-  justify-content: center;
 }
-.button-style-3:hover {
-  border: 0.125rem solid var(--primary-500);
-  background: var(--primary-600);
-}
-.input-default {
-  padding: 0.5rem 0.5rem;
-  border-radius: 0.5rem;
-  border: 0.125rem solid var(--primary-800);
-  color: var(--primary-50);
-  font-weight: 600;
-  font-size: 0.79rem;
-  font-family: var(--font-family);
+.form-control {
   text-overflow: ellipsis;
+  color: white;
   background-color: var(--transparency-10);
-  transition: all ease 0.3s;
-  width: 100%;
+  border: var(--bs-border-width) solid var(--primary-800);
 }
-.input-default:focus {
-  outline: none;
-  box-shadow: var(--default-shadow);
-  border: 0.125rem solid var(--primary-600);
-}
-.label-input {
+.form-control:focus {
   color: var(--primary-50);
-  font-weight: 600;
-font-size: 1rem;
-  font-family: var(--font-family);
-  user-select: none;
+  background-color: var(--transparency-20);
+  border-color: var(--primary-500);
+  outline: 0;
+  box-shadow: var(--default-shadow);
+  outline: none;
 }
-.pulse-animation {
-  animation: pulseAnimation ease-in 1.5s infinite;
+.lateral-bar {
+  background: var(--background-nav-tab);
 }
-
-option{
-  color: var(--primary-950);
-  font-size: 0.9rem;
+/* Navegation Bar */
+.nav-bar {
+  box-shadow: 0 0.05rem 0 0.05rem var(--transparency-30);
+  border-radius: 0 0 0.65rem 0.65rem;
+  margin-left: 0.05rem;
+  margin-right: 0.05rem;
+  background-color: var(--transparency-10);
 }
-
 /* Animations */
 @keyframes pulseAnimation {
   0% {
@@ -186,4 +140,7 @@ option{
   30% {
     box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.438);
   }
+}
+.pulse-animation {
+  animation: pulseAnimation ease-in 1.5s infinite;
 }
