@@ -2,7 +2,6 @@
 
 Object.keys(navTabs).forEach(function(tab){
     const selector = navTabs[tab].selector;
-    debugger
     document.querySelectorAll(selector).forEach(function (tabButton) {
         tabButton.addEventListener("click", function () {
             chrome.storage.local.set({ [navTabs[tab].storageKey]: tabButton.id });

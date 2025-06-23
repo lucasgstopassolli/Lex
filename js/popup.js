@@ -85,7 +85,6 @@ async function installreplaceImage() {
 
 // //Defines the relationship betwenn the button and the field
 // function setupCopyFields(elementToCopy) {
-//     debugger
 //   if (!elementToCopy.button || !elementToCopy.input) {
 //     window.alert("Botão ou campo não encontrado!");
 //     return;
@@ -111,3 +110,52 @@ async function installreplaceImage() {
 // }
 
 // initializateCopyFields();
+
+// Listing plugin cards
+const container = document.getElementById("card-container");
+
+plugins.forEach((plugin) => {
+  const card = document.createElement("div");
+  card.className = "card w-100 rounded-4";
+
+  card.innerHTML = `
+  <div class="d-flex flex-row">
+      <div class="d-flex align-items-center p-3 bg">
+          <img src="${plugin.image}" class="rounded-3" width="106px!important">
+      </div>
+      <div class="d-flex align-items-center">
+          <div class="card-body d-flex flex-column text-start p-2">
+              <h5 class="fw-bold fs-6">${plugin.name}</h5>
+              <p class="mb-0 truncate-3-lines" style="font-size: 0.8rem;">${
+                plugin.description
+              }</p>
+          </div>
+          <div class="card-body d-flex flex-column text-start gap-2 p-3">
+              <button class="btn btn-primary">
+                  <img src="svg/download.svg" style="width: 1.2rem" alt="Download">
+              </button>
+              <button class="btn btn-outline-primary btn-view" data-link="/wp-admin/plugin-install.php?s=${encodeURIComponent(
+                plugin.searchName || plugin.name
+              )}&tab=search&type=term">
+                  <img src="svg/view.svg" style="width: 1.2rem" alt="View">
+              </button>
+          </div>
+      </div>
+  </div>
+`;
+
+  container.appendChild(card);
+});
+
+// Attach event listeners to ".btn-view" buttons after all cards are created
+document.querySelectorAll(".btn-view").forEach((button) => {
+  button.addEventListener("click", () => {
+    const pluginInstallURL = domain + button.dataset.link;
+    // Abrir nova aba com o link
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      if (tabs && tabs.length > 0) {
+        chrome.tabs.update(tabs[0].id, { url: pluginInstallURL });
+      }
+    });
+  });
+});

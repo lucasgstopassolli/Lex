@@ -91,6 +91,7 @@ h1 {
   --bs-gradient: none;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .btn-outline-primary {
   border: 0.125rem solid var(--primary-600);
@@ -109,6 +110,7 @@ h1 {
   --bs-gradient: none;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .form-control {
   text-overflow: ellipsis;
@@ -125,7 +127,7 @@ h1 {
   outline: none;
 }
 .lateral-bar {
-  background: var(--background-nav-tab);
+  background: var(--transparency-10);
 }
 .card {
     color: var(--primary-50);
@@ -136,6 +138,13 @@ h1 {
 }
 .card:hover{
   --bs-card-border-color: var(--transparency-80);
+}
+.truncate-3-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 /* Navegation Bar */
 .nav-bar {
@@ -148,12 +157,15 @@ h1 {
 /* Animations */
 @keyframes pulseAnimation {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.8);
   }
-  30% {
-    box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.438);
+  50% {
+    box-shadow: 0 0 0 0.6rem rgba(255, 0, 0, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 1rem transparent;
   }
 }
 .pulse-animation {
-  animation: pulseAnimation ease-in 1.5s infinite;
+  animation: pulseAnimation 1.2s ease infinite;
 }

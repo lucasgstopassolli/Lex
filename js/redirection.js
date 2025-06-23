@@ -102,7 +102,6 @@ async function injectAndCreate(tabId, inputUrl, outputUrl) {
 
 // Adiciona evento de clique no botão "Criar redirect"
 function handleRedirectEvent(event) {
-    debugger;
     event.preventDefault();
 
     const inputUrl = document.getElementById('inputUrl').value;
@@ -127,22 +126,4 @@ document.getElementById('redirectBtn').addEventListener('click', function (event
     } else {
         alert('Preencha os campos');
     }
-});
-
-// Adiciona evento de clique no botão
-document.getElementById('redirectInstallBtn').addEventListener('click', function() {
-    installRedirection();
-});
-
-document.getElementById('backupInstallBtn').addEventListener('click', function() {
-    installBackup();
-});
-
-
-document.getElementById('replaceImageBtn').addEventListener('click', function() {
-    installreplaceImage();
-});
-
-document.getElementById('loginPressInstallBtn').addEventListener('click', function() {
-    installLoginPress();
 });
