@@ -52,66 +52,72 @@
     </ul>
 
     <!-- Tabs -->
-    <div class="tab-content" id="pills-tabContent">
+    <div class="main tab-content" id="pills-tabContent">
 
         <!-- Home tab -->
-        <div class="tab-pane fade w-100 show" id="initial-tab" role="tabpanel" aria-labelledby="but-initial-tab"
+        <div class="main tab-pane fade w-100 show" id="initial-tab" role="tabpanel" aria-labelledby="but-initial-tab"
             tabindex="0">
-            <div class="gap-3 p-3 d-flex flex-row justify-content-between text-center">
-                <input type="text" class="form-control font-whitep-2">
+            <div class="d-flex flex-column gap-3 p-3">
+                <div class="d-flex flex-row justify-content-between user-select-none">
+                    <h4 class="fw-bold">Provérbios</h4>
+                    
+                    <h6 class="d-flex gap-2 align-items-center">22: 26 <span class="badge text-bg-secondary">ARA</span></h6>
+                </div>
+
             </div>
         </div>
 
         <!-- Wordpress tab -->
-        <div class="tab-pane fade w-100" id="wordpress-tab" role="tabpanel" aria-labelledby="but-wordpress-tab"
+        <div class="main tab-pane fade w-100" id="wordpress-tab" role="tabpanel" aria-labelledby="but-wordpress-tab"
             tabindex="0">
-            <div class="d-flex flex-row">
+            <div class="d-flex flex-row gap-3">
 
-                <!-- Nav Tabs -->
-                <ul class="nav nav-tabs lateral-bar w-25 d-flex flex-column gap-3 p-2 w-25 mb-0 rounded-3 wordpressTab"
+                <!-- Lateral Nav Tabs -->
+                <ul class="wordpressTab nav nav-tabs lateral-bar d-flex flex-column gap-3 mb-0 mt-5"
                     id="pills-tab" role="tablist">
 
                     <!-- Plugins Button -->
                     <li class="nav-item w-100" role="presentation">
                         <button
-                            class="nav-link p-2 rounded-3 bg-transparent fw-bold fs-6 d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100"
+                            style="font-size: 14px; padding: 0.5rem 0.8rem" class="nav-link rounded-3 bg-transparent fw-bold d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100"
                             id="but-plugins-tab" data-bs-toggle="pill" data-bs-target="#plugins-tab" type="button"
                             role="tab" aria-controls="plugins-tab" aria-selected="false">
-                            <img src="svg/plugin.svg" alt="Plugin">Plugins</button>
+                            <img src="svg/plugin.svg" width="14" alt="Plugin">Plugins</button>
                     </li>
 
                     <!-- Redirection Button -->
                     <li class="nav-item w-100" role="presentation">
                         <button
-                            class="nav-link p-2 rounded-3 bg-transparent fw-bold fs-6 d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100"
+                            style="font-size: 14px; padding: 0.5rem 0.8rem" class="nav-link rounded-3 bg-transparent fw-bold d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100"
                             id="but-redirection-tab" data-bs-toggle="pill" data-bs-target="#redirection-tab"
                             type="button" role="tab" aria-controls="redirection-tab" aria-selected="false">
-                            <img src="svg/redirect.svg" alt="Redirect">Redirect</button>
+                            <img src="svg/redirect.svg" width="14" alt="Redirect">Redirect</button>
                     </li>
                 </ul>
 
                 <!-- Content -->
-                <div class="tab-content gap-3 p-3 d-flex w-100">
+                <div class="main tab-content gap-3 p-3 d-flex w-100">
 
                     <!-- Plugins Tab -->
-                    <div class="tab-pane fade w-100" id="plugins-tab" role="tabpanel" aria-labelledby="but-plugins-tab"
-                        tabindex="0">
+                    <div class="main tab-pane fade w-100" id="plugins-tab" role="tabpanel"
+                        aria-labelledby="but-plugins-tab" tabindex="0">
                         <div
-                            class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
+                            class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
                             <label for="url_"
                                 class="text-white fw-bold fs-5 user-select-none d-flex align-items-center gap-1">
                                 <img src="svg/plugin.svg" width="20" style="margin-top: 1px;" alt="Download">Plugins
                                 para Website</label>
                         </div>
-                        <div class="gap-3 d-flex flex-column justify-content-between text-center pe-3 w-100" style="max-height: 400px;overflow-y: auto;overflow-x: hidden;">
+                        <div class="gap-3 d-flex flex-column justify-content-between text-center pe-3 w-100"
+                            style="max-height: 400px;overflow-y: auto;overflow-x: hidden;">
 
                             <!-- Plugin Card Template -->
-                            <div id="card-container" class="d-flex flex-column gap-3"></div>                            
+                            <div id="card-container" class="d-flex flex-column gap-3"></div>
                         </div>
                     </div>
 
                     <!-- Redirection Tab -->
-                    <div class="tab-pane fade w-100" id="redirection-tab" role="tabpanel"
+                    <div class="main tab-pane fade w-100" id="redirection-tab" role="tabpanel"
                         aria-labelledby="but-redirection-tab" tabindex="0">
                         <div class="d-flex flex-column gap-3">
                             <div
@@ -152,14 +158,16 @@
         </div>
 
         <!-- Design tab -->
-        <div class="tab-pane fade w-100" id="design-tab" role="tabpanel" aria-labelledby="but-design-tab" tabindex="0">
-            <div class="gap-3 p-3 d-flex">
-
+        <div class="main tab-pane fade w-100" id="design-tab" role="tabpanel" aria-labelledby="but-design-tab"
+            tabindex="0">
+            <div class="main d-flex flex-row">
+                
             </div>
         </div>
 
         <!-- Scripts -->
         <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/bible.js"></script>
         <script src="js/objects.js"></script>
         <script src="js/redirection.js"></script>
         <script src="js/popup.js"></script>

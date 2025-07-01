@@ -39,7 +39,10 @@
         {
             "matches": ["*://*/wp-admin/*"],
             "css": [
-                "css/pluginSearch.css"
+                "css/default.css"
+            ],
+            "js": [
+                "js/popup.js"
             ]
         }
     ],

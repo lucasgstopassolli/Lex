@@ -1,36 +1,36 @@
 /*--------- Default Color Palette ---------*/
 :root {
-  --primary-50: #fff2f0;
-  --primary-100: #ffe1dd;
-  --primary-200: #ffc9c2;
-  --primary-300: #ffa397;
-  --primary-400: #ff6e5b;
-  --primary-500: #ff4128;
-  --primary-600: #fa361c;
-  --primary-700: #d31a02;
-  --primary-800: #ad1a07;
-  --primary-900: #8f1c0d;
-  --primary-950: #4f0900;
-  --transparency-10: #fa361c1a;
-  --transparency-20: #fa361c33;
-  --transparency-30: #fa361c4d;
-  --transparency-40: #fa361c66;
-  --transparency-50: #fa361c80;
-  --transparency-60: #fa361c99;
-  --transparency-70: #fa361cb3;
-  --transparency-80: #fa361ccc;
-  --transparency-90: #fa361ce6;
+   --primary-50: #f1f3ff;
+  --primary-100: #e5e9ff;
+  --primary-200: #cfd7ff;
+  --primary-300: #a9b5ff;
+  --primary-400: #7885ff;
+  --primary-500: #424aff;
+  --primary-600: #1e1bff;
+  --primary-700: #0d0af7;
+  --primary-800: #0907d0;
+  --primary-900: #09078d;
+  --primary-950: #010374;
+  --transparency-10: #09078d1a;
+  --transparency-20: #09078d33;
+  --transparency-30: #09078d4d;
+  --transparency-40: #09078d66;
+  --transparency-50: #09078d80;
+  --transparency-60: #09078d99;
+  --transparency-70: #09078db3;
+  --transparency-80: #09078dcc;
+  --transparency-90: #09078de6;
   --font-family: "Lato", "Arial", "Helvetica", "sans-serif";
-  --secondary-color: #231c1c;
-  --tertiary-color: #1c0808;
+  --secondary-color: #080a13;
   --background-bt-primary: radial-gradient(
     circle,
     var(--transparency-10),
     var(--transparency-40)
   );
   --background-nav-tab: linear-gradient(90deg, transparent 0%, var(--transparency-30) 70%);
-  --default-shadow: 0 0 0.1rem 0.3rem var(--transparency-40);
+  --default-shadow: 0 0 0.1rem 0.3rem var(--transparency-80);
 }
+
 /*--------- Default Classes ---------*/
 ::selection {
   background: var(--transparency-10);
@@ -72,7 +72,6 @@ h1 {
   padding: 0.625rem 0.75rem;
   font-family: var(--font-family);
   cursor: pointer;
-  border: 0.125rem solid var(--primary-600);
 }
 .btn-primary {
   --bs-btn-color: var(--primary-50);
@@ -116,7 +115,7 @@ h1 {
   text-overflow: ellipsis;
   color: white;
   background-color: var(--transparency-10);
-  border: var(--bs-border-width) solid var(--primary-800);
+  border: var(--bs-border-width) solid var(--primary-500);
 }
 .form-control:focus {
   color: var(--primary-50);
@@ -131,13 +130,13 @@ h1 {
 }
 .card {
     color: var(--primary-50);
-    --bs-card-border-color: var(--transparency-30);
-    background: linear-gradient(90deg, var(--transparency-20) 0%, transparent 100%);
+    --bs-card-border-color: var(--transparency-80);
+    background: linear-gradient(90deg, var(--transparency-40) 0%, transparent 100%);
     transition: all 0.4s ease;
     user-select: none;
 }
 .card:hover{
-  --bs-card-border-color: var(--transparency-80);
+  --bs-card-border-color: var(--primary-800);
 }
 .truncate-3-lines {
   display: -webkit-box;
@@ -148,11 +147,18 @@ h1 {
 }
 /* Navegation Bar */
 .nav-bar {
-  box-shadow: 0 0.05rem 0 0.05rem var(--transparency-30);
+  box-shadow: 0 0.05rem 0 0.05rem var(--transparency-70);
   border-radius: 0 0 0.65rem 0.65rem;
   margin-left: 0.05rem;
   margin-right: 0.05rem;
-  background-color: var(--transparency-10);
+  background-color: var(--transparency-30);
+}
+.nav-tabs{
+  box-shadow: 0.08rem 0 0 0.05rem var(--transparency-70);
+  border: none;
+  height: fit-content;
+  padding: 0.8rem 0.4rem;
+  border-radius: 0 0.8rem 0.8rem 0;
 }
 /* Animations */
 @keyframes pulseAnimation {
@@ -169,3 +175,4 @@ h1 {
 .pulse-animation {
   animation: pulseAnimation 1.2s ease infinite;
 }
+
