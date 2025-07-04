@@ -44,6 +44,12 @@
             "js": [
                 "js/popup.js"
             ]
+        },
+        {
+            "matches": ["*://*/*"],
+            "js": [
+                "js/design-mode.js"
+            ]
         }
     ],
     "commands": {

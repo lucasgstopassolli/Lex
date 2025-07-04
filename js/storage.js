@@ -179,3 +179,20 @@ function getHelper(helper) {
     }.bind(this)
   );
 }
+
+//Verify check inputs
+// function verifyCheckedStorage(selector) {
+//   const checkInput = document.querySelector(selector);
+//   if (!checkInput) return;
+
+//   chrome.storage.local.get([selector], (result) => {
+//     let state = result[selector] !== undefined ? result[selector] : checkInput.checked;
+//     checkInput.checked = state;
+
+//     checkInput.addEventListener("click", () => {
+//       state = checkInput.checked;
+//       chrome.storage.local.set({ [selector]: state });
+//       return
+//     });
+//   });
+// };

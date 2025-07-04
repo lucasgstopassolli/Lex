@@ -1,6 +1,6 @@
 /*--------- Default Color Palette ---------*/
 :root {
-   --primary-50: #f1f3ff;
+  --primary-50: #f1f3ff;
   --primary-100: #e5e9ff;
   --primary-200: #cfd7ff;
   --primary-300: #a9b5ff;
@@ -27,16 +27,28 @@
     var(--transparency-10),
     var(--transparency-40)
   );
-  --background-nav-tab: linear-gradient(90deg, transparent 0%, var(--transparency-30) 70%);
+  --background-nav-tab: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--transparency-30) 70%
+  );
   --default-shadow: 0 0 0.1rem 0.3rem var(--transparency-80);
 }
 
 /*--------- Default Classes ---------*/
 ::selection {
-  background: var(--transparency-10);
+  background: var(--transparency-60);
+  color: white !important;
 }
 html {
   min-width: 800px;
+}
+html,
+html * {
+  scrollbar-color: var(--primary-500) transparent;
+}
+*:focus-visible{
+  outline: none;
 }
 body {
   background: var(--secondary-color);
@@ -47,8 +59,10 @@ h1 {
   text-transform: uppercase;
   font-size: 1.125rem;
 }
+
+/* Nav buttons */
 .nav-link {
-  border: 0.125rem solid transparent!important;
+  border: 0.125rem solid transparent !important;
   color: var(--primary-50);
   cursor: pointer;
   outline: none;
@@ -56,22 +70,44 @@ h1 {
 }
 .nav-link.active {
   transition: all ease 0.3s;
-  border: 0.125rem solid var(--primary-500)!important;
+  border: 0.125rem solid var(--primary-500) !important;
   background: radial-gradient(
     circle,
     var(--transparency-10),
     var(--transparency-40)
-  )!important;
+  ) !important;
   outline: none;
 }
 .nav-link:hover {
-  color: var(--primary-300)!important;
+  color: var(--primary-300) !important;
 }
+
+/* Tooltip */
+.tooltip {
+  --bs-tooltip-bg: black;
+  --bs-tooltip-color: var(--primary-50);
+  --bs-tooltip-padding-x: 0.65rem;
+  --bs-tooltip-padding-y: 0.25rem;
+  --bs-tooltip-font-size: 0.9rem;
+  --bs-tooltip-max-width: 300px;
+  box-shadow: 0px 0px 80px #474aff38;
+}
+
+/* Default button styles */
 .btn {
   --bs-btn-color: var(--primary-50);
-  padding: 0.625rem 0.75rem;
+  padding: 0.75rem;
   font-family: var(--font-family);
   cursor: pointer;
+  transform-origin: center center;
+  transition: all ease 0.4s;
+  border-radius: 0.5rem;
+}
+.btn:hover {
+  transform: sacale(1.09);
+}
+.btn:active {
+  transform: sacale(0);
 }
 .btn-primary {
   --bs-btn-color: var(--primary-50);
@@ -93,12 +129,12 @@ h1 {
   justify-content: center;
 }
 .btn-outline-primary {
-  border: 0.125rem solid var(--primary-600);
+  border: 0.125rem solid var(--transparency-60);
   --bs-btn-color: var(--primary-50);
   --bs-btn-border-color: var(--primary-600);
   --bs-btn-hover-color: var(--primary-400);
   --bs-btn-hover-bg: transparent;
-  --bs-btn-hover-border-color: var(--primary-400);
+  --bs-btn-hover-border-color: var(--primary-500);
   --bs-btn-active-color: initial;
   --bs-btn-active-bg: var(--primary-800);
   --bs-btn-active-border-color: var(--primary-800);
@@ -108,9 +144,14 @@ h1 {
   --bs-btn-disabled-border-color: var(--transparency-20);
   --bs-gradient: none;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: center !important;
+  justify-content: center !important;
 }
+.btn-outline-primary:hover {
+  transform: scale(1.1);
+}
+
+/* Input styles */
 .form-control {
   text-overflow: ellipsis;
   color: white;
@@ -125,41 +166,7 @@ h1 {
   box-shadow: var(--default-shadow);
   outline: none;
 }
-.lateral-bar {
-  background: var(--transparency-10);
-}
-.card {
-    color: var(--primary-50);
-    --bs-card-border-color: var(--transparency-80);
-    background: linear-gradient(90deg, var(--transparency-40) 0%, transparent 100%);
-    transition: all 0.4s ease;
-    user-select: none;
-}
-.card:hover{
-  --bs-card-border-color: var(--primary-800);
-}
-.truncate-3-lines {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-/* Navegation Bar */
-.nav-bar {
-  box-shadow: 0 0.05rem 0 0.05rem var(--transparency-70);
-  border-radius: 0 0 0.65rem 0.65rem;
-  margin-left: 0.05rem;
-  margin-right: 0.05rem;
-  background-color: var(--transparency-30);
-}
-.nav-tabs{
-  box-shadow: 0.08rem 0 0 0.05rem var(--transparency-70);
-  border: none;
-  height: fit-content;
-  padding: 0.8rem 0.4rem;
-  border-radius: 0 0.8rem 0.8rem 0;
-}
+
 /* Animations */
 @keyframes pulseAnimation {
   0% {
@@ -175,4 +182,100 @@ h1 {
 .pulse-animation {
   animation: pulseAnimation 1.2s ease infinite;
 }
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.enter-animation {
+  animation: slideIn 0.4s ease-out;
+}
 
+/* Plugin cards */
+.card {
+  color: var(--primary-50);
+  --bs-card-border-color: var(--transparency-80);
+  background: linear-gradient(
+    90deg,
+    var(--transparency-40) 0%,
+    transparent 100%
+  );
+  transition: all 0.4s ease;
+  user-select: none;
+}
+.card:hover {
+  --bs-card-border-color: var(--primary-800);
+}
+
+/* Navegation Bar */
+.nav-bar {
+  box-shadow: 0 0.05rem 0 0.05rem var(--transparency-90);
+  border-radius: 0 0 0.65rem 0.65rem;
+  margin-left: 0.05rem;
+  margin-right: 0.05rem;
+  background-color: var(--transparency-30);
+}
+.nav-tabs {
+  box-shadow: 0.08rem 0 0 0.05rem var(--transparency-90);
+  border: none;
+  height: fit-content;
+  padding: 0.8rem 0.4rem;
+  border-radius: 0 0.8rem 0.8rem 0;
+}
+
+/* Swtich style */
+.form-check-input {
+  --bs-form-check-bg: var(--transparency-80);
+  border: var(--bs-border-width) solid var(--primary-500);
+  width: 2.4rem !important;
+  padding: 8px !important;
+}
+.form-check-input:checked {
+  background-color: var(--primary-500);
+  border-color: var(--primary-500);
+}
+
+/* Verse style */
+.verse-container {
+  background: linear-gradient(
+    135deg,
+    var(--transparency-20) 0%,
+    var(--transparency-10) 50%,
+    transparent 100%
+  );
+  border: 2px solid var(--transparency-80);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+.verse-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--transparency-20),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+.verse-container:hover {
+  border-color: var(--primary-500);
+  box-shadow: 0 8px 25px var(--transparency-40);
+}
+.verse-container:hover::before {
+  left: 100%;
+}
+
+.activeBut{
+  background-color: var(--primary-500);
+}

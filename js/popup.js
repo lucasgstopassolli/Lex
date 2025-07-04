@@ -1,31 +1,3 @@
-// //Defines the relationship betwenn the button and the field
-// function setupCopyFields(elementToCopy) {
-//   if (!elementToCopy.button || !elementToCopy.input) {
-//     window.alert("Botão ou campo não encontrado!");
-//     return;
-//   }
-
-//   elementToCopy.button.addEventListener("click", () =>
-//     copyToClipboard(elementToCopy.input)
-//   );
-// }
-
-// //Copy to the clipboard
-// function copyToClipboard(inputElement) {
-//   if (!inputElement) {
-//     window.alert("Não foi possível copiar!");
-//   } else {
-//     navigator.clipboard.writeText(inputElement.value);
-//   }
-// }
-
-// //Initializate the objects (objects.js)
-// function initializateCopyFields() {
-//   setupCopyFields(copyFieldElements.colorRGB);
-// }
-
-// initializateCopyFields();
-
 // Listing plugin cards
 const container = document.getElementById("card-container");
 plugins.forEach((plugin, index) => {
@@ -34,7 +6,7 @@ plugins.forEach((plugin, index) => {
 
   card.innerHTML = `
   <div class="d-flex flex-row">
-      <div class="d-flex align-items-center p-3 bg">
+      <div class="d-flex align-items-center p-3">
           <img src="${plugin.image}" class="rounded-3" width="106px!important">
       </div>
       <div class="d-flex align-items-center">
@@ -49,14 +21,14 @@ plugins.forEach((plugin, index) => {
     plugin.wordpressSelector
   } > div.plugin-card-top > div.action-links > ul > li:nth-child(1) > a" data-link="/wp-admin/plugin-install.php?s=${encodeURIComponent(
     plugin.searchName || plugin.name
-  )}&tab=search&type=term">
+  )}&tab=search&type=term" data-bs-toggle="tooltip" data-bs-placement="left" title="Baixar o plugin">
                   <img src="svg/download.svg" style="width: 1.2rem" alt="Download">
               </button>
               <button class="btn btn-outline-primary btn-view" data-selector="${
                 plugin.wordpressSelector
               }" data-link="/wp-admin/plugin-install.php?s=${encodeURIComponent(
     plugin.searchName || plugin.name
-  )}&tab=search&type=term">
+  )}&tab=search&type=term" data-bs-toggle="tooltip" data-bs-placement="left" title="Ver o plugin">
                   <img src="svg/view.svg" style="width: 1.2rem" alt="View">
               </button>
           </div>
@@ -129,7 +101,7 @@ btnInstall.forEach((button) => {
       alert("Chrome extension APIs are not available.");
       return;
     }
-    
+
     const pluginViewURL = domain + button.dataset.link;
     const selector = button.dataset.selector;
 
@@ -195,4 +167,53 @@ btnInstall.forEach((button) => {
       alert("An error occurred. Please try again.");
     }
   });
+});
+
+//Like button
+const likeBtn = document.querySelector("#likeVerse");
+const unlikePath = "svg/unlike.svg";
+const likePath = "svg/like.svg";
+chrome.storage.local.get("likedVerse", (result) => {
+  let liked = result.likedVerse || false;
+
+  if (likeBtn) {
+    likeBtn.querySelector("img").src = liked ? likePath : unlikePath;
+    likeBtn.addEventListener("click", () => {
+      liked = !liked;
+      likeBtn.querySelector("img").src = liked ? likePath : unlikePath;
+      chrome.storage.local.set({ likedVerse: liked });
+    });
+  }
+});
+
+// Design Mode input Popup
+function syncCheckedState(selector, callback) {
+  const checkInput = document.querySelector(selector);
+  if (!checkInput) return;
+
+  chrome.storage.local.get([selector], (result) => {
+    const checked = result[selector] !== undefined ? result[selector] : checkInput.checked;
+    checkInput.checked = checked;
+    if (callback) callback(checked);
+  });
+
+  checkInput.addEventListener("change", () => {
+    chrome.storage.local.set({ [selector]: checkInput.checked });
+    if (callback) callback(checkInput.checked);
+  });
+}
+
+function toggleDesignMode(enabled) {
+  document.designMode = enabled ? "on" : "off";
+}
+
+syncCheckedState("#checkDesignMode", toggleDesignMode);
+
+// sendToAllTabs({ 'ativarDesignMode' });
+
+// Design Mode input Page
+document.querySelector('#designModeTool').addEventListener('click', async function() {
+    const tab = await getCurrentTab();
+    document.querySelector('#designModeTool').classList.add('activeBut');
+    sendMessage(tab.id, {action: 'enableDesignMode'});
 });

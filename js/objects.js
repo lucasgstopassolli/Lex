@@ -1,11 +1,3 @@
-// Fields to copy
-const copyFieldElements = {
-  colorRGB: {
-    input: document.getElementById("color"),
-    button: document.getElementById("butCopyRGB"),
-  },
-};
-
 // Nav tabs
 const navTabs = {
   mainTab: {

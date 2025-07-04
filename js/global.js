@@ -1,3 +1,4 @@
+//Fallback content for empty 'main' divs
 const loadingHTML = `
     <div class="d-flex flex-column gap-3 p-5 align-items-center justify-content-center w-100">
         <svg version="1.1" id="L7" style="width: 4rem;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"><path fill="currentColor" d="M31.6,3.5C5.9,13.6-6.6,42.7,3.5,68.4c10.1,25.7,39.2,38.3,64.9,28.1l-3.1-7.9c-21.3,8.4-45.4-2-53.8-23.3
@@ -7,14 +8,64 @@ const loadingHTML = `
         <p class="fs-5 text-uppercase fw-bold">Recurso em Construção</p>
     </div>
 `;
-
 function checkAndInjectLoader() {
-  const mainDivs = document.querySelectorAll('.main');
-  mainDivs.forEach(div => {
-    if (!div.hasChildNodes() || div.innerHTML.trim() === '') {
+  const mainDivs = document.querySelectorAll(".main");
+  mainDivs.forEach((div) => {
+    if (!div.hasChildNodes() || div.innerHTML.trim() === "") {
       div.innerHTML = loadingHTML;
     }
   });
 }
-
 checkAndInjectLoader();
+
+// Initialize Bootstrap tooltips
+const tooltipTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="tooltip"]'
+);
+const tooltipList = [...tooltipTriggerList].map(
+  (el) => new bootstrap.Tooltip(el)
+);
+
+//Defines the relationship betwenn the button and the field
+function setupCopyFields() {
+  document.querySelectorAll("button[data-copy-selector]").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const content = document.querySelector(
+        e.target.dataset.copySelector
+      ).textContent;
+      navigator.clipboard.writeText(content.trim());
+    });
+  });
+}
+
+setupCopyFields();
+
+//Send a command to all tabs
+function sendToAllTabs(data) {
+  chrome.tabs.query({}, function (tabs) {
+    tabs.forEach(function (tab) {
+      try {
+        if (tab && tab.status === "complete") {
+          sendMessage(tab.id, data);
+        }
+      } catch (error) {}
+    });
+  });
+}
+
+//Send a message
+function sendMessage(tabId, data) {
+  chrome?.tabs?.sendMessage(tabId, data, function () {
+    if (chrome?.runtime?.lastError) {
+      return;
+    }
+  });
+}
+
+//Get the current tab
+async function getCurrentTab() {
+  let queryOptions = { active: true, lastFocusedWindow: true };
+  // `tab` will either be a `tabs.Tab` instance or `undefined`.
+  let [tab] = await chrome.tabs.query(queryOptions);
+  return tab;
+}
