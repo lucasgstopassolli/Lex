@@ -1,6 +1,6 @@
 {
     "name": "Nexus",
-    "description": "Uma ferramenta simples que ajuda em tarefas diárias do Wordpress",
+    "description": "Uma ferramenta simples que ajuda em tarefas diárias em Wordpress e Design",
     "version": "1.0.0",
     "manifest_version": 3,
     "permissions": [
@@ -39,7 +39,16 @@
         {
             "matches": ["*://*/wp-admin/*"],
             "css": [
-                "css/pluginSearch.css"
+                "css/default.css"
+            ],
+            "js": [
+                "js/popup.js"
+            ]
+        },
+        {
+            "matches": ["*://*/*"],
+            "js": [
+                "js/design-mode.js"
             ]
         }
     ],

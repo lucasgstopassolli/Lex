@@ -1,200 +1,346 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark" spellcheck="false">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexus</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="css/tabs.css">
-    <link rel="stylesheet" href="css/symbols.css">
-    <link rel="stylesheet" href="css/colorPicker.css">
-    <link rel="stylesheet" href="css/contrastChecker.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/default.css">
-
 </head>
 
-<body>
-    <!-- Nabegation bar -->
-    <div id="navBar" class="nav-bar">
-        <button id="initialButton" class="button-style-1 tab-button active"><span
-                class="material-symbols-outlined">home</span>Home</button>
-        <button id="pluginsButton" class="button-style-1 tab-button"><span
-                class="material-symbols-outlined">extension</span>Plugins</button>
-        <button id="redirectionButton" class="button-style-1 tab-button"><span
-                class="material-symbols-outlined">open_in_new</span>Redirection</button>
-        <button id="toolsButton" class="button-style-1 tab-button"><span
-                class="material-symbols-outlined">widgets</span>Tools</button>
-    </div>
+<body class="margin-0 d-flex flex-column">
 
-    <!-- Default tab -->
-    <div id="initial-tab" class="tab active">
-        <div class="ressources">
-            <form action="#" method="get">
-                <select class="input-default" name="" id="">
-                    <option value="">Select a tab</option>
-                    <option value="initial-tab">Home tab</option>
-                    <option value="plugins-tab">Plugins tab</option>
-                    <option value="redirection-tab">Redirection tab</option>
-                    <option value="tools-tab">Tools tab</option>
-                </select>
-                <button id="defaultTabBtn" type="submit" class="button-style-2">Set the default tab</button>
-            </form>
+    <!-- Nav Tabs -->
+    <ul class="nav nav-pills d-flex flex-row gap-0 p-1 mb-1 flex-nowrap nav-bar mainTab" id="pills-tab" role="tablist">
+
+        <!-- Home Button -->
+        <li class="nav-item w-100" role="presentation">
+            <button
+                class="nav-link p-2 rounded-3 bg-transparent fw-bold fs-6 d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100"
+                id="but-initial-tab" data-bs-toggle="pill" data-bs-target="#initial-tab" type="button" role="tab"
+                aria-controls="initial-tab" aria-selected="true">
+                <img src="svg/home.svg" alt="Início" width="18">Início
+            </button>
+        </li>
+        <!-- Wordpress Button -->
+        <li class="nav-item w-100" role="presentation">
+            <button
+                class="nav-link p-2 rounded-3 bg-transparent fw-bold fs-6 d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100"
+                id="but-wordpress-tab" data-bs-toggle="pill" data-bs-target="#wordpress-tab" type="button" role="tab"
+                aria-controls="wordpress-tab" aria-selected="false">
+                <img src="svg/wordpress.svg" alt="Wordpress" width="18">Wordpress
+            </button>
+        </li>
+        <!-- Design Button -->
+        <li class="nav-item w-100" role="presentation">
+            <button
+                class="nav-link p-2 rounded-3 bg-transparent fw-bold fs-6 d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100"
+                id="but-design-tab" data-bs-toggle="pill" data-bs-target="#design-tab" type="button" role="tab"
+                aria-controls="design-tab" aria-selected="false">
+                <img src="svg/color-pallete.svg" alt="Design" width="18">Design
+            </button>
+        </li>
+        <!-- Tools Button -->
+        <li class="nav-item w-100" role="presentation">
+            <button
+                class="nav-link p-2 rounded-3 bg-transparent fw-bold fs-6 d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100"
+                id="but-tools-tab" data-bs-toggle="pill" data-bs-target="#tools-tab" type="button" role="tab"
+                aria-controls="tools-tab" aria-selected="false">
+                <img src="svg/config.svg" alt="Ferramentas" width="18">Ferramentas
+            </button>
+        </li>
+        <!-- Design Mode -->
+        <div class="form-check form-switch d-flex gap-1 align-items-center w-auto">
+            <input class="form-check-input" type="checkbox" value="" id="checkDesignMode"
+                style="transform: rotate(270deg);" switch>
         </div>
-    </div>
+    </ul>
 
-    <!-- Plugins tab -->
-    <div id="plugins-tab" class="tab">
-        <div class="ressources">
-            <div class="default-tab-header">
-                <h1 style="color: white;">Plugins (essential)</h1>
-                <button id="redirectInstallBtn" type="submit" class="button-style-2">Install
-                    <i>Redirection</i></button>
-                <button id="backupInstallBtn" type="submit" class="button-style-2">Install <i>All-in-One WP
-                        Migration and Backup</i></button>
-                <button id="replaceImageBtn" type="submit" class="button-style-2">Install <i>Enable Media
-                        Replace</i></button>
-            </div>
-            <div class="default-tab-header">
-                <h1 style="color: white;">Plugins (blog)</h1>
-                <button id="loginPressInstallBtn" type="submit" class="button-style-2">Install <i>LoginPress |
-                        Custom Login Page Customizer</i></button>
-                <button id="#" type="submit" class="button-style-2">Install <i>Example</i></button>
-                <button id="#" type="submit" class="button-style-2">Install <i>Example</i></button>
-            </div>
-        </div>
-    </div>
+    <!-- Tabs -->
+    <div class="main tab-content" id="pills-tabContent">
 
-    <!-- Redirection tab -->
-    <div id="redirection-tab" class="tab">
-        <div class="ressources">
-            
-            <form action="#" method="get">
-                <div class="lbl-cont">
-                    <label for="" class="label-input">Domain</label>
-                    <input type="text" class="input-default" id="url_domain">
-                </div>
-                <div class="lbl-cont">
-                    <label for="" class="label-input">Source Slug</label>
-                    <input type="text" class="input-default" id="inputUrl">
-                </div>
-                <div class="lbl-cont helpers">
-                    <label for="" class="label-input">Destination Slug</label>
-                    <input type="text" class="input-default" id="outputUrl">
-                </div>
-                <div class="lbl-cont">
-                    <label for="" class="label-input">Original URL</label>
-                    <input type="text" class="input-default" id="url_">
-                </div>
-                <button id="redirectBtn" type="submit" class="button-style-2">Create Redirect</button>
-            </form>
-            <div class="lbl-cont helpers">
-                <label for="" class="label-input">Nonce</label>
-                <input type="text" class="input-default" id="nonceValue" readonly>
-            </div>
-        </div>
-    </div>
+        <!-- Home tab -->
+        <div class="main tab-pane fade w-100 show" id="initial-tab" role="tabpanel" aria-labelledby="but-initial-tab"
+            tabindex="0">
+            <div class="d-flex flex-row gap-3 p-3">
 
-    <!-- Tools tab -->
-    <div id="tools-tab" class="tab">
-        <div class="ressources">
-            <div class="lateral-bar" width="20%">
-                <button id="colorPickerLateralButton" class="button-style-1 side-tab-button active"><span
-                        class="material-symbols-outlined">palette</span>Color Picker</button>
-                <button id="test1LateralButton" class="button-style-1 side-tab-button"><span
-                        class="material-symbols-outlined">contrast</span>Color Constrast</button>
-                <button id="test2LateralButton" class="button-style-1 side-tab-button"><span
-                        class="material-symbols-outlined">gradient</span>Gradient</button>
-            </div>
-            <div class="side-tab tab active" id="tab-1" style="color: white;">
-                <div class="ressources">
-                    <div class="color-picker">
-                        <canvas id="color-picker"></canvas>
+                <!-- Verse card -->
+                <div class="verse-container rounded-4 p-4 w-100 enter-animation">
+                    <div class="d-flex flex-row justify-content-between">
+                        <div class="d-flex flex-row gap-2 align-items-center">
+                            <img src="svg/cross.svg" alt="Cross" width="24" class="cross-icon">
+                            <h4 class="fw-bold mb-0 mt-2 placeholder-glow"
+                                style="font-family: 'Pinyon Script', 'sans serif'; font-size: 2.6rem; color: var(--primary-200);"
+                                id="bookVerse">
+                                <span class="placeholder ms-2" style="width: 160px;"></span>
+                            </h4>
+                        </div>
+                        <div class="d-flex flex-row gap-2 justify-content-between">
+                            <h5 class="d-flex gap-2 align-items-center mb-0">
+                                <span class="fw-bold placeholder-glow row me-1" style="color: var(--primary-300);"
+                                    id="numberVerse">
+                                    <span class="placeholder" style="width: 6rem;"></span>
+                                </span>
+                                <span class="badge text-bg-primary"
+                                    style="background-color: var(--transparency-60)!important"
+                                    id="versionVerse">ARA</span>
+                            </h5>
+                        </div>
                     </div>
-                    <div class="color-picker-ressources">
-                        <div class="color-area">
-                            <label for="color" class="label-input">RGB</label>
-                            <input class="input-default input-color" id="color"></input>
-                            <button class="button-style-3" id="butCopyRGB" style="background: #381f1c;"><span
-                                    class="material-symbols-outlined">content_copy</span></button>
+                    <p class="d-flex flex-row ms-3 placeholder-glow gap-2 row"
+                        style="color: var(--primary-50); font-size: 1.125rem; padding: 2rem 1.8rem 1rem 0rem;"
+                        id="contentVerse">
+                        <span class="placeholder col-11"></span>
+                        <span class="placeholder col-10"></span>
+                        <span class="placeholder col-8"></span>
+                    </p>
+                    <div class="d-flex flex-row justify-content-end align-items-center">
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-primary copy-content" data-bs-toggle="tooltip"
+                                data-bs-placement="top" data-bs-trigger="hover" title="Copiar versículo"
+                                data-copy-selector="#contentVerse">
+                                <img style="pointer-events: none" src="svg/copy.svg" alt="Copy">
+                            </button>
+                            <button class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top"
+                                data-bs-trigger="hover" title="Abrir o capítulo completo">
+                                <img style="pointer-events: none" src="svg/open.svg" alt="Open">
+                            </button>
+                            <button class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top"
+                                data-bs-trigger="hover" title="Favoritar versículo" id="likeVerse">
+                                <img style="pointer-events: none" src="svg/unlike.svg" alt="Like">
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="side-tab tab" id="tab-2">
-                <!-- Test -->
-                <div class="main-container">
-                    <div class="color-sections-wrapper">
-                        <div class="color-section" id="foreground-section">
-                            <h2>Primeiro plano</h2>
-                            <label for="fgHex">Valor hexadecimal</label>
-                            <input type="text" id="fgHex" value="#0000FF" maxlength="7">
 
-                            <div class="input-group">
-                                <label for="fgColor" class="sr-only">Seletor de cores</label>
-                                <input type="color" id="fgColor" value="#0000FF">
-                                <label for="fgAlpha">Alfa</label>
-                                <input type="number" id="fgAlpha" value="1" min="0" max="1" step="0.01">
+            </div>
+        </div>
+
+        <!-- Wordpress tab -->
+        <div class="main tab-pane fade w-100" id="wordpress-tab" role="tabpanel" aria-labelledby="but-wordpress-tab"
+            tabindex="0">
+            <div class="d-flex flex-row gap-3">
+
+                <!-- Lateral Nav Tabs -->
+                <ul class="wordpressTab nav nav-tabs lateral-bar d-flex flex-column gap-3 mb-4 mt-5" id="pills-tab"
+                    role="tablist" style="background: var(--transparency-30);">
+
+                    <!-- Plugins Button -->
+                    <li class="nav-item w-100" role="presentation">
+                        <button style="font-size: 14px; padding: 0.5rem 0.8rem"
+                            class="nav-link rounded-3 bg-transparent fw-bold d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100"
+                            id="but-plugins-tab" data-bs-toggle="pill" data-bs-target="#plugins-tab" type="button"
+                            role="tab" aria-controls="plugins-tab" aria-selected="false">
+                            <img src="svg/plugin.svg" width="14" alt="Plugin">Plugins</button>
+                    </li>
+
+                    <!-- Redirection Button -->
+                    <li class="nav-item w-100" role="presentation">
+                        <button style="font-size: 14px; padding: 0.5rem 0.8rem"
+                            class="nav-link rounded-3 bg-transparent fw-bold d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100"
+                            id="but-redirection-tab" data-bs-toggle="pill" data-bs-target="#redirection-tab"
+                            type="button" role="tab" aria-controls="redirection-tab" aria-selected="false">
+                            <img src="svg/redirect.svg" width="14" alt="Redirect">Redirect</button>
+                    </li>
+                </ul>
+
+                <!-- Content -->
+                <div class="main tab-content gap-3 p-3 d-flex w-100">
+
+                    <!-- Plugins Tab -->
+                    <div class="main tab-pane fade w-100" id="plugins-tab" role="tabpanel"
+                        aria-labelledby="but-plugins-tab" tabindex="0">
+                        <div
+                            class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3 mt-2">
+                            <label for="url_"
+                                class="text-white fw-bold fs-5 user-select-none d-flex align-items-center gap-1">
+                                <img src="svg/plugin.svg" width="20" style="margin-top: 1px;" alt="Download">Plugins
+                                para Website</label>
+                        </div>
+                        <div class="gap-3 d-flex flex-column justify-content-between text-center pe-3 w-100"
+                            style="max-height: 400px;overflow-y: auto;overflow-x: hidden;">
+
+                            <!-- Plugin Card Template -->
+                            <div id="card-container" class="d-flex flex-column gap-3 enter-animation"></div>
+                        </div>
+                    </div>
+
+                    <!-- Redirection Tab -->
+                    <div class="main tab-pane fade w-100" id="redirection-tab" role="tabpanel"
+                        aria-labelledby="but-redirection-tab" tabindex="0">
+                        <div class="d-flex flex-column gap-3 enter-animation">
+                            <div
+                                class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
+                                <label for="url_"
+                                    class="text-white fw-bold fs-6 user-select-none d-flex align-items-center gap-1">
+                                    <img src="svg/link.svg" style="margin-top: 1px" alt="Link">URL Original</label>
+                                <input type="text" class="form-control font-whitep-2 w-75 bg-transparent border-0"
+                                    id="url_" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                    title="URL original da página" disabled>
                             </div>
-
-                            <label for="fgLightness">Leveza</label>
-                            <input type="range" id="fgLightness" min="0" max="100" value="50">
+                            <form action="#" method="get"
+                                class="d-flex flex-row flex-wrap gap-3 w-100 justify-content-center ali">
+                                <div
+                                    class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none">
+                                    <label for="url_domain"
+                                        class="text-white fw-bold fs-6 user-select-none">Domínio</label>
+                                    <input type="text" class="form-control font-whitep-2 w-75" id="url_domain"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="focus"
+                                        title="Ex: https://domínio.com/" autocomplete="off">
+                                </div>
+                                <div
+                                    class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none">
+                                    <label for="inputUrl" class="text-white fw-bold fs-6 user-select-none">Slug
+                                        Antigo</label>
+                                    <input type="text" class="form-control font-whitep-2 w-75 " id="inputUrl"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="focus"
+                                        title="Ex: https://domínio.com/slug-antigo/" autocomplete="off">
+                                </div>
+                                <div
+                                    class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none helpers">
+                                    <label for="outputUrl" class="text-white fw-bold fs-6 user-select-none">Slug
+                                        Destino</label>
+                                    <input type="text" class="form-control font-whitep-2 w-75" id="outputUrl"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="focus"
+                                        title="Ex https://domínio.com/slug-destino/" autocomplete="off">
+                                </div>
+                                <button id="redirectBtn" type="submit"
+                                    class="btn btn-primary user-select-none text-center w-100 fw-bold fs-6">Criar
+                                    Redirect</button>
+                            </form>
                         </div>
-
-                        <div class="color-section" id="background-section">
-                            <h2>Fundo</h2>
-                            <label for="bgHex">Valor hexadecimal</label>
-                            <input type="text" id="bgHex" value="#FFFFFF" maxlength="7">
-
-                            <div class="input-group">
-                                <label for="bgColor" class="sr-only">Seletor de cores</label>
-                                <input type="color" id="bgColor" value="#FFFFFF">
-                                <label for="bgAlpha">Alfa</label>
-                                <input type="number" id="bgAlpha" value="1" min="0" max="1" step="0.01">
-                            </div>
-
-                            <label for="bgLightness">Leveza</label>
-                            <input type="range" id="bgLightness" min="0" max="100" value="100">
-                        </div>
-                    </div>
-
-                    <div class="contrast-result-section">
-                        <p>Taxa de contraste</p>
-                        <div id="contrastRatioDisplay" class="ratio-display">
-                            <span id="contrastRatioValue">-- : 1</span>
-                        </div>
-                    </div>
-
-                    <div id="wcag-compliance">
-                        <h3>WCAG AA:</h3>
-                        <p>Texto Normal (>= 4.5:1): <span id="wcagAA">--</span></p>
-                        <p>Texto Grande (>= 3:1): <span id="wcagAALarge">--</span></p>
-                        <h3>WCAG AAA:</h3>
-                        <p>Texto Normal (>= 7:1): <span id="wcagAAA">--</span></p>
-                        <p>Texto Grande (>= 4.5:1): <span id="wcagAAALarge">--</span></p>
                     </div>
                 </div>
-
-            </div>
-            <div class="side-tab tab" id="tab-3">
-                teste3
             </div>
         </div>
 
-        <script src="js/objects.js"></script>
-        <script src="js/redirection.js"></script>
-        <script src="js/popup.js"></script>
-        <script src="js/html5kellycolorpicker.min.js"></script>
-        <script src="js/colorPicker.js"></script>
-        <script src="js/contrastChecker.js"></script>
-        <script src="js/global.js"></script>
-        <script src="js/storage.js"></script>
+        <!-- Design tab -->
+        <div class="main tab-pane fade w-100" id="design-tab" role="tabpanel" aria-labelledby="but-design-tab"
+            tabindex="0">
+            <div class="main d-flex flex-row">
+
+            </div>
+        </div>
+
+        <!-- Tools tab -->
+        <div class="main tab-pane fade w-100" id="tools-tab" role="tabpanel" aria-labelledby="but-tools-tab"
+            tabindex="0">
+            <div class="d-flex flex-row gap-3">
+                <!-- Lateral Nav Tabs -->
+                <ul class="settingsTab nav nav-tabs lateral-bar d-flex flex-column gap-3 mb-4 mt-5" id="pills-tab"
+                    role="tablist" style="background: var(--transparency-30);">
+
+                    <!-- Note Block Button -->
+                    <li class="nav-item w-100" role="presentation">
+                        <button style="font-size: 14px; padding: 0.5rem 0.8rem"
+                            class="nav-link rounded-3 bg-transparent fw-bold d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100"
+                            id="but-note-tab" data-bs-toggle="pill" data-bs-target="#note-tab" type="button" role="tab"
+                            aria-controls="note-tab" aria-selected="false">
+                            <img src="svg/note.svg" width="14" alt="Anotações">Anotações</button>
+                    </li>
+
+                    <!-- Advanced Tools Button -->
+                    <li class="nav-item w-100" role="presentation">
+                        <button style="font-size: 14px; padding: 0.5rem 0.8rem"
+                            class="nav-link rounded-3 bg-transparent fw-bold d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100"
+                            id="but-advanced-settings-tab" data-bs-toggle="pill" data-bs-target="#advanced-settings-tab"
+                            type="button" role="tab" aria-controls="advanced-settings-tab" aria-selected="false">
+                            <img src="svg/magic.svg" width="16" alt="Avançado">Avançado</button>
+                    </li>
+                </ul>
+                <div class="main tab-content gap-3 p-3 d-flex w-100">
+
+                    <!-- Note Block Tab -->
+                    <div class="main tab-pane fade w-100" id="note-tab" role="tabpanel" aria-labelledby="but-note-tab"
+                        tabindex="0">
+                        <div
+                            class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3 mt-2">
+                            <label
+                                class="text-white fw-bold fs-5 user-select-none d-flex align-items-center gap-1">
+                                <img src="svg/note.svg" width="22" alt="Anotações">Anotações</label>
+                        </div>
+                        <div class="mb-2">
+                            <button class="btn btn-primary btn-sm w-100" data-bs-toggle="modal"
+                                data-bs-target="#noteModal">
+                                + Nova Nota
+                            </button>
+                        </div>
+
+                        <input type="text" class="form-control search-input" id="searchInput" placeholder="Buscar anotação">
+
+                        <div class="notes-container" id="notesList">
+                            <div class="empty-state" id="emptyState">
+                                Nenhuma nota encontrada
+                            </div>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="noteModal" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title" id="modalTitle">Nova Nota</h6>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-2">
+                                            <input type="text" class="form-control" id="noteTitle"
+                                                placeholder="Título..." required>
+                                        </div>
+                                        <div class="mb-2">
+                                            <textarea class="form-control" id="noteContent" rows="5"
+                                                placeholder="Conteúdo..." required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary btn-sm"
+                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary btn-sm"
+                                            id="saveNote">Salvar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Tools Tab -->
+                    <div class="main tab-pane fade w-100" id="advanced-settings-tab" role="tabpanel"
+                        aria-labelledby="but-advanced-settings-tab" tabindex="0">
+                        <div
+                            class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
+                            <label for="url_"
+                                class="text-white fw-bold fs-5 user-select-none d-flex align-items-center gap-1">
+                                <img src="svg/magic.svg" width="24" alt="Download">Avançado</label>
+                        </div>
+                        <div class="d-flex gap-3 p-3 w-100 rounded-2 enter-animation"
+                            style="background: var(--transparency-10); border: 1px solid var(--primary-900);">
+                            <button class="btn btn-outline-primary p-2 rounded-2" id="designModeTool"
+                                data-bs-toggle="tooltip" data-bs-placement="right" title="Permite manipular a página">
+                                Ativar Design Mode</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="js/objects.js"></script>
+    <script src="js/utilities/global.js"></script>
+    <script src="js/popup.js"></script>
+    <script src="js/tools/bible.js"></script>
+    <script src="js/tools/design-mode.js"></script>
+    <script src="js/tools/note-block.js"></script>
+    <script src="js/tools/redirection.js"></script>
+    <script src="js/utilities/storage.js"></script>
 </body>
 
 </html>
