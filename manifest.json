@@ -48,7 +48,7 @@
         {
             "matches": ["*://*/*"],
             "js": [
-                "js/design-mode.js"
+                "js/tools/design-mode.js"
             ]
         }
     ],
