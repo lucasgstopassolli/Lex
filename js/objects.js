@@ -12,6 +12,10 @@ const navTabs = {
     selector: "#pills-tab.designTab button",
     storageKey: "lastDesignTab",
   },
+  settingsTab: {
+    selector: "#pills-tab.settingsTab button",
+    storageKey: "lastSettingsTab",
+  },
 };
 
 // Plugin cards

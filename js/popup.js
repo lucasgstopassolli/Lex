@@ -209,8 +209,6 @@ function toggleDesignMode(enabled) {
 
 syncCheckedState("#checkDesignMode", toggleDesignMode);
 
-// sendToAllTabs({ 'ativarDesignMode' });
-
 // Design Mode input Page
 document.querySelector('#designModeTool').addEventListener('click', async function() {
     const tab = await getCurrentTab();
