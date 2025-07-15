@@ -22,22 +22,41 @@ function renderNotes(notesToShow = notes) {
   const container = document.getElementById("notesList");
 
   if (notesToShow.length === 0) {
-    container.innerHTML =
-      '<div class="empty-state">Nenhuma nota encontrada</div>';
+    container.innerHTML = `
+    <div class="d-flex align-items-center justify-content-center" style="height: 300px!important;">
+      <div class="position-relative d-inline-block" style="width: 300px!important" >
+        <p class="position-absolute top-50 start-50 text-nowrap" style="transform: translate(-50%, -50%);">Nenhuma anotação encontrada</p>
+        <img src="svg/landscape.svg" class="idle-pulse d-block w-100 h-auto rounded-3" alt="Empty State" style="opacity: 0.2; width: 300px; height: auto; overflow: hidden; background: radial-gradient(circle,rgba(255, 114, 94, 0.1) 0%, rgba(255, 255, 255, 0) 50%);">
+      </div>    
+    </div>
+    `;
     return;
   }
 
   container.innerHTML = notesToShow
     .map(
       (note) => `
-        <div class="note-item" data-id="${note.id}">
-          <div class="note-title">${note.title}</div>
-          <div class="note-content">${note.content}</div>
-          <div class="note-date">${formatDate(note.date)}</div>
-          <div class="note-actions">
-            <button class="btn btn-outline-primary btn-sm edit-button">Editar</button>
-            <button class="btn btn-outline-danger btn-sm delete-button">Excluir</button>
-          </div>
+        <div class="note-item card d-flex flex-row gap-2 rounded-3 justify-content-between"
+            data-id="${note.id}">
+            <div class="d-flex flex-column gap-2">
+                <h5 class="note-title mb-1" style="color:var(--primary-400);">${
+                  note.title
+                }</h5>
+                <p class="d-inline-block note-content text-muted text-truncate" style="max-width: 25rem">${
+                  note.content
+                }</p>
+            </div>
+            <div class="d-flex flex-column gap-2">
+                <div class="note-date align-self-end me-2" style="color:var(--primary-300)">${formatDate(
+                  note.date
+                )}</div>
+                <div class="note-actions d-flex gap-2">
+                    <button class="btn btn-primary btn-sm edit-button"
+                        style="padding: 0.6rem 1.4rem!important;">Editar</button>
+                    <button class="btn btn-outline-danger btn-sm delete-button"
+                        style="padding: 0.6rem 1.4rem!important;">Excluir</button>
+                </div>
+            </div>
         </div>
       `
     )
@@ -78,7 +97,7 @@ function editNote(id) {
 
   editingId = id;
 
-  document.getElementById("modalTitle").textContent = "Editar Nota";
+  document.getElementById("modalContent").textContent = "Editar Nota";
   document.getElementById("noteTitle").value = note.title;
   document.getElementById("noteContent").value = note.content;
 
@@ -102,7 +121,6 @@ function closeModal() {
   // Reset form
   document.getElementById("noteTitle").value = "";
   document.getElementById("noteContent").value = "";
-  document.getElementById("modalTitle").textContent = "Nova Nota";
   editingId = null;
 }
 
