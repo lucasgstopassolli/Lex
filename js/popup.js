@@ -1,45 +1,49 @@
-// Listing plugin cards
+// Plugin cards listing
 const container = document.getElementById("card-container");
 plugins.forEach((plugin, index) => {
   const card = document.createElement("div");
   card.className = "card w-100 rounded-4";
 
-  card.innerHTML = `
-  <div class="d-flex flex-row">
+  const cardHTMLStructure = `
+    <div class="d-flex flex-row">
       <div class="d-flex align-items-center p-3">
-          <img src="${plugin.image}" class="rounded-3" width="106px!important">
+        <img src="${plugin.image}" class="rounded-3" width="106px!important">
       </div>
       <div class="d-flex align-items-center">
-          <div class="card-body d-flex flex-column text-start p-2">
-              <h5 class="fw-bold fs-6">${plugin.name}</h5>
-              <p class="mb-0 truncate-3-lines" style="font-size: 0.8rem;">${
-                plugin.description
-              }</p>
-          </div>
-          <div class="card-body d-flex flex-column text-start gap-2 p-3">
-              <button class="btn btn-primary btn-install" data-index="${index}" data-selector="#the-list > div.plugin-card${
-    plugin.wordpressSelector
-  } > div.plugin-card-top > div.action-links > ul > li:nth-child(1) > a" data-link="/wp-admin/plugin-install.php?s=${encodeURIComponent(
-    plugin.searchName || plugin.name
-  )}&tab=search&type=term" data-bs-toggle="tooltip" data-bs-placement="left" title="Baixar o plugin">
-                  <img src="svg/download.svg" style="width: 1.2rem" alt="Download">
-              </button>
-              <button class="btn btn-outline-primary btn-view" data-selector="${
-                plugin.wordpressSelector
-              }" data-link="/wp-admin/plugin-install.php?s=${encodeURIComponent(
-    plugin.searchName || plugin.name
-  )}&tab=search&type=term" data-bs-toggle="tooltip" data-bs-placement="left" title="Ver o plugin">
-                  <img src="svg/view.svg" style="width: 1.2rem" alt="View">
-              </button>
-          </div>
+        <div class="card-body d-flex flex-column text-start p-2">
+          <h5 class="fw-bold fs-6">${plugin.name}</h5>
+          <p class="mb-0 truncate-3-lines" style="font-size: 0.8rem;">
+            ${plugin.description}
+          </p>
+        </div>
+        <div class="card-body d-flex flex-column text-start gap-2 p-3">
+          <button class="btn btn-primary btn-install"
+            data-index="${index}"
+            data-selector="#the-list > div.plugin-card${plugin.wordpressSelector} > div.plugin-card-top > div.action-links > ul > li:nth-child(1) > a"
+            data-link="/wp-admin/plugin-install.php?s=${encodeURIComponent(plugin.searchName || plugin.name)}&tab=search&type=term"
+            data-bs-toggle="tooltip"
+            data-bs-placement="left"
+            title="Download the plugin">
+            <img src="svg/download.svg" style="width: 1.2rem" alt="Download">
+          </button>
+          <button class="btn btn-outline-primary btn-view"
+            data-selector="${plugin.wordpressSelector}"
+            data-link="/wp-admin/plugin-install.php?s=${encodeURIComponent(plugin.searchName || plugin.name)}&tab=search&type=term"
+            data-bs-toggle="tooltip"
+            data-bs-placement="left"
+            title="View the plugin">
+            <img src="svg/view.svg" style="width: 1.2rem" alt="View">
+          </button>
+        </div>
       </div>
-  </div>
-`;
+    </div>
+  `;
 
+  card.innerHTML = cardHTMLStructure;
   container.appendChild(card);
 });
 
-// View button functionality
+// Handle "View" button click
 const btnView = document.querySelectorAll(".btn-view");
 btnView.forEach((button) => {
   button.addEventListener("click", () => {
@@ -58,45 +62,41 @@ btnView.forEach((button) => {
       if (changeInfo.status === "complete") {
         chrome.tabs.onUpdated.removeListener(listener);
 
-        chrome.storage.local.get(
-          ["pluginInstallURL", "selector"],
-          function (data) {
-            if (data.pluginInstallURL && data.selector) {
-              chrome.scripting.executeScript({
-                target: { tabId },
-                func: (selector) => {
-                  const observer = new MutationObserver((_, observer) => {
-                    const pluginCard = document.querySelector(selector);
-                    if (pluginCard) {
-                      pluginCard.classList.add("pulse-animation");
-                      observer.disconnect();
-                    }
-                  });
-                  observer.observe(document.body, {
-                    childList: true,
-                    subtree: true,
-                  });
-                },
-                args: [data.selector],
-              });
-            }
+        chrome.storage.local.get(["pluginInstallURL", "selector"], function (data) {
+          if (data.pluginInstallURL && data.selector) {
+            chrome.scripting.executeScript({
+              target: { tabId },
+              func: (selector) => {
+                const observer = new MutationObserver((_, observer) => {
+                  const pluginCard = document.querySelector(selector);
+                  if (pluginCard) {
+                    pluginCard.classList.add("pulse-animation");
+                    observer.disconnect();
+                  }
+                });
+                observer.observe(document.body, {
+                  childList: true,
+                  subtree: true,
+                });
+              },
+              args: [data.selector],
+            });
           }
-        );
+        });
       }
     });
   });
 });
 
-// Install button functionality
+// Handle "Install" button click
 const btnInstall = document.querySelectorAll(".btn-install");
 btnInstall.forEach((button) => {
   button.addEventListener("click", async () => {
-    // Ensure domain is defined
     if (typeof domain === "undefined") {
       alert("Domain is not defined.");
       return;
     }
-    // Ensure Chrome APIs are available
+
     if (!chrome || !chrome.tabs || !chrome.scripting) {
       alert("Chrome extension APIs are not available.");
       return;
@@ -106,10 +106,7 @@ btnInstall.forEach((button) => {
     const selector = button.dataset.selector;
 
     try {
-      const [tab] = await chrome.tabs.query({
-        active: true,
-        currentWindow: true,
-      });
+      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
       if (!tab || !tab.id) {
         alert("No active tab found.");
@@ -118,7 +115,6 @@ btnInstall.forEach((button) => {
 
       await chrome.tabs.update(tab.id, { url: pluginViewURL });
 
-      // Wait for the tab to finish loading
       await new Promise((resolve) => {
         const listener = (tabId, changeInfo) => {
           if (tabId === tab.id && changeInfo.status === "complete") {
@@ -129,7 +125,6 @@ btnInstall.forEach((button) => {
         chrome.tabs.onUpdated.addListener(listener);
       });
 
-      // Execute script in tab
       const [result] = await chrome.scripting.executeScript({
         target: { tabId: tab.id },
         func: (sel) => {
@@ -142,7 +137,6 @@ btnInstall.forEach((button) => {
         args: [selector],
       });
 
-      // Handle result
       if (result?.result?.error) {
         console.error(result.result.error);
         alert("Failed to find the download link on the page.");
@@ -154,13 +148,11 @@ btnInstall.forEach((button) => {
         throw new Error("No valid URL returned.");
       }
 
-      // Validate URL (basic check)
       if (!pluginInstallURL.startsWith("http")) {
         alert("Invalid URL detected.");
         return;
       }
 
-      // Navigate to URL
       await chrome.tabs.update(tab.id, { url: pluginInstallURL });
     } catch (error) {
       console.error("Error installing plugin:", error);
@@ -169,7 +161,7 @@ btnInstall.forEach((button) => {
   });
 });
 
-//Like button
+// Handle "Like" button state and toggle
 const likeBtn = document.querySelector("#likeVerse");
 const unlikePath = "svg/unlike.svg";
 const likePath = "svg/like.svg";
@@ -178,6 +170,7 @@ chrome.storage.local.get("likedVerse", (result) => {
 
   if (likeBtn) {
     likeBtn.querySelector("img").src = liked ? likePath : unlikePath;
+
     likeBtn.addEventListener("click", () => {
       liked = !liked;
       likeBtn.querySelector("img").src = liked ? likePath : unlikePath;
@@ -186,7 +179,7 @@ chrome.storage.local.get("likedVerse", (result) => {
   }
 });
 
-// Design Mode input Popup
+// Sync checkbox state for design mode toggle
 function syncCheckedState(selector, callback) {
   const checkInput = document.querySelector(selector);
   if (!checkInput) return;
@@ -203,15 +196,22 @@ function syncCheckedState(selector, callback) {
   });
 }
 
+// Enable or disable design mode
 function toggleDesignMode(enabled) {
   document.designMode = enabled ? "on" : "off";
 }
 
 syncCheckedState("#checkDesignMode", toggleDesignMode);
 
-// Design Mode input Page
-document.querySelector('#designModeTool').addEventListener('click', async function() {
-    const tab = await getCurrentTab();
-    document.querySelector('#designModeTool').classList.add('activeBut');
-    sendMessage(tab.id, {action: 'enableDesignMode'});
-});
+// Enable design mode on current page
+function designModeListen(selector, data, addClass){
+  document.querySelector(selector).addEventListener("click", async function() {
+  const tab = await getCurrentTab();
+  if(addClass){
+    document.querySelector(selector).classList.add(addClass)
+  }
+  sendMessage(tab.id, { action: data });
+  })
+}
+
+designModeListen("#designModeTool", "enableDesignMode", "activeBut")

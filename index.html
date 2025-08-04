@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark" spellcheck="false">
-
 <head>
+    <!-- Setup -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexus</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=Quicksand:wght@300..700&display=swap"
         rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+    <!-- Styles and Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="css/default.css">
 </head>
-
 <body class="margin-0 d-flex flex-column">
 
     <!-- Nav Tabs -->
@@ -23,37 +23,42 @@
         <!-- Home Button -->
         <li class="nav-item w-100" role="presentation">
             <button
-                class="nav-link p-2 rounded-3 bg-transparent fw-bold fs-6 d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100"
-                id="but-initial-tab" data-bs-toggle="pill" data-bs-target="#initial-tab" type="button" role="tab"
-                aria-controls="initial-tab" aria-selected="true">
-                <img src="svg/home.svg" alt="Início" width="18">Início
+                class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
+                style="font-size: 0.9rem;" id="but-initial-tab" data-bs-toggle="pill" data-bs-target="#initial-tab"
+                type="button" role="tab" aria-controls="initial-tab" aria-selected="true">
+                <img draggable="false" src="svg/home.svg" alt="Início" width="16"
+                    style="margin-left: -0.5rem; margin-right: -0.1rem">
+                <span style="line-height: normal;">Início</span>
             </button>
         </li>
         <!-- Wordpress Button -->
         <li class="nav-item w-100" role="presentation">
             <button
-                class="nav-link p-2 rounded-3 bg-transparent fw-bold fs-6 d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100"
-                id="but-wordpress-tab" data-bs-toggle="pill" data-bs-target="#wordpress-tab" type="button" role="tab"
-                aria-controls="wordpress-tab" aria-selected="false">
-                <img src="svg/wordpress.svg" alt="Wordpress" width="18">Wordpress
+                class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
+                style="font-size: 0.9rem;" id="but-wordpress-tab" data-bs-toggle="pill" data-bs-target="#wordpress-tab"
+                type="button" role="tab" aria-controls="wordpress-tab" aria-selected="false">
+                <img draggable="false" src="svg/wordpress.svg" alt="Wordpress" width="16">
+                <span style="line-height: normal;">Wordpress</span>
             </button>
         </li>
         <!-- Design Button -->
         <li class="nav-item w-100" role="presentation">
             <button
-                class="nav-link p-2 rounded-3 bg-transparent fw-bold fs-6 d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100"
-                id="but-design-tab" data-bs-toggle="pill" data-bs-target="#design-tab" type="button" role="tab"
-                aria-controls="design-tab" aria-selected="false">
-                <img src="svg/color-pallete.svg" alt="Design" width="18">Design
+                class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
+                style="font-size: 0.9rem;" id="but-design-tab" data-bs-toggle="pill" data-bs-target="#design-tab"
+                type="button" role="tab" aria-controls="design-tab" aria-selected="false">
+                <img draggable="false" src="svg/nib.svg" alt="Design" width="16">
+                <span style="line-height: normal;">Design</span>
             </button>
         </li>
         <!-- Tools Button -->
         <li class="nav-item w-100" role="presentation">
             <button
-                class="nav-link p-2 rounded-3 bg-transparent fw-bold fs-6 d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100"
-                id="but-tools-tab" data-bs-toggle="pill" data-bs-target="#tools-tab" type="button" role="tab"
-                aria-controls="tools-tab" aria-selected="false">
-                <img src="svg/config.svg" alt="Ferramentas" width="18">Ferramentas
+                class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
+                style="font-size: 0.9rem;" id="but-tools-tab" data-bs-toggle="pill" data-bs-target="#tools-tab"
+                type="button" role="tab" aria-controls="tools-tab" aria-selected="false">
+                <img draggable="false" src="svg/config.svg" alt="Ferramentas" width="16">
+                <span style="line-height: normal;">Ferramentas</span>
             </button>
         </li>
         <!-- Design Mode -->
@@ -69,22 +74,22 @@
         <!-- Home tab -->
         <div class="main tab-pane fade w-100 show" id="initial-tab" role="tabpanel" aria-labelledby="but-initial-tab"
             tabindex="0">
-            <div class="d-flex flex-row gap-3 p-3">
+            <div class="d-flex flex-row gap-3 p-4">
 
                 <!-- Verse card -->
                 <div class="verse-container rounded-4 p-4 w-100 enter-animation">
                     <div class="d-flex flex-row justify-content-between">
                         <div class="d-flex flex-row gap-2 align-items-center">
-                            <img src="svg/cross.svg" alt="Cross" width="24" class="cross-icon">
-                            <h4 class="fw-bold mb-0 mt-2 placeholder-glow"
-                                style="font-family: 'Pinyon Script', 'sans serif'; font-size: 2.6rem; color: var(--primary-200);"
+                            <img draggable="false" src="svg/cross.svg" alt="Cross" width="24" class="cross-icon">
+                            <h4 class="fw-normal mb-0 mt-2 placeholder-glow"
+                                style="font-family: 'Lavishly Yours', 'sans serif'; font-size: 2.8rem; color: var(--primary-200);"
                                 id="bookVerse">
                                 <span class="placeholder ms-2" style="width: 160px;"></span>
                             </h4>
                         </div>
                         <div class="d-flex flex-row gap-2 justify-content-between">
                             <h5 class="d-flex gap-2 align-items-center mb-0">
-                                <span class="fw-bold placeholder-glow row me-1" style="color: var(--primary-300);"
+                                <span class="fw-semibold placeholder-glow row me-1" style="color: var(--primary-300);"
                                     id="numberVerse">
                                     <span class="placeholder" style="width: 6rem;"></span>
                                 </span>
@@ -94,6 +99,7 @@
                             </h5>
                         </div>
                     </div>
+                    <!-- Verse Content + Placeholder -->
                     <p class="d-flex flex-row ms-3 placeholder-glow gap-2 row"
                         style="color: var(--primary-50); font-size: 1.125rem; padding: 2rem 1.8rem 1rem 0rem;"
                         id="contentVerse">
@@ -101,20 +107,29 @@
                         <span class="placeholder col-10"></span>
                         <span class="placeholder col-8"></span>
                     </p>
+                    <!-- Invisible Content -->
+                    <p class="d-none" id="contentToCopy"></p>
+                    <p class="d-none" id="bibleChapterURL"></p>
+
+                    <!-- Action Buttons -->
                     <div class="d-flex flex-row justify-content-end align-items-center">
                         <div class="d-flex gap-2">
                             <button class="btn btn-outline-primary copy-content" data-bs-toggle="tooltip"
                                 data-bs-placement="top" data-bs-trigger="hover" title="Copiar versículo"
-                                data-copy-selector="#contentVerse">
-                                <img style="pointer-events: none" src="svg/copy.svg" alt="Copy">
+                                data-copy-selector="#contentToCopy">
+                                <img draggable="false" style="pointer-events: none" width="16" src="svg/copy.svg"
+                                    alt="Copy">
                             </button>
                             <button class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-trigger="hover" title="Abrir o capítulo completo">
-                                <img style="pointer-events: none" src="svg/open.svg" alt="Open">
+                                data-bs-trigger="hover" title="Abrir o capítulo completo"
+                                data-open-url="#bibleChapterURL">
+                                <img draggable="false" style="pointer-events: none" width="16" src="svg/open.svg"
+                                    alt="Open">
                             </button>
                             <button class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top"
                                 data-bs-trigger="hover" title="Favoritar versículo" id="likeVerse">
-                                <img style="pointer-events: none" src="svg/unlike.svg" alt="Like">
+                                <img draggable="false" style="pointer-events: none" width="16" src="svg/unlike.svg"
+                                    alt="Like">
                             </button>
                         </div>
                     </div>
@@ -135,24 +150,30 @@
                     <!-- Plugins Button -->
                     <li class="nav-item w-100" role="presentation">
                         <button style="font-size: 14px; padding: 0.5rem 0.8rem"
-                            class="nav-link rounded-3 bg-transparent fw-bold d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100"
-                            id="but-plugins-tab" data-bs-toggle="pill" data-bs-target="#plugins-tab" type="button"
-                            role="tab" aria-controls="plugins-tab" aria-selected="false">
-                            <img src="svg/plugin.svg" width="14" alt="Plugin">Plugins</button>
+                            class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
+                            style="font-size: 0.9rem;" id="but-plugins-tab" data-bs-toggle="pill"
+                            data-bs-target="#plugins-tab" type="button" role="tab" aria-controls="plugins-tab"
+                            aria-selected="false">
+                            <img draggable="false" src="svg/plugin.svg" width="14" alt="Plugin">
+                            <span style="line-height: normal;">Plugins</span>
+                        </button>
                     </li>
 
                     <!-- Redirection Button -->
                     <li class="nav-item w-100" role="presentation">
                         <button style="font-size: 14px; padding: 0.5rem 0.8rem"
-                            class="nav-link rounded-3 bg-transparent fw-bold d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100"
-                            id="but-redirection-tab" data-bs-toggle="pill" data-bs-target="#redirection-tab"
-                            type="button" role="tab" aria-controls="redirection-tab" aria-selected="false">
-                            <img src="svg/redirect.svg" width="14" alt="Redirect">Redirect</button>
+                            class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
+                            style="font-size: 0.9rem;" id="but-redirection-tab" data-bs-toggle="pill"
+                            data-bs-target="#redirection-tab" type="button" role="tab" aria-controls="redirection-tab"
+                            aria-selected="false">
+                            <img draggable="false" src="svg/redirect.svg" width="14" alt="Redirect">
+                            <span style="line-height: normal;">Redirect</span>
+                        </button>
                     </li>
                 </ul>
 
                 <!-- Content -->
-                <div class="main tab-content gap-3 p-3 d-flex w-100">
+                <div class="main tab-content gap-3 p-4 d-flex w-100">
 
                     <!-- Plugins Tab -->
                     <div class="main tab-pane fade w-100" id="plugins-tab" role="tabpanel"
@@ -160,8 +181,9 @@
                         <div
                             class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3 mt-2">
                             <label for="url_"
-                                class="text-white fw-bold fs-5 user-select-none d-flex align-items-center gap-1">
-                                <img src="svg/plugin.svg" width="20" style="margin-top: 1px;" alt="Download">Plugins
+                                class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1">
+                                <img draggable="false" src="svg/plugin.svg" width="20" style="margin-top: 1px;"
+                                    alt="Download">Plugins
                                 para Website</label>
                         </div>
                         <div class="gap-3 d-flex flex-column justify-content-between text-center pe-3 w-100"
@@ -179,8 +201,10 @@
                             <div
                                 class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
                                 <label for="url_"
-                                    class="text-white fw-bold fs-6 user-select-none d-flex align-items-center gap-1">
-                                    <img src="svg/link.svg" style="margin-top: 1px" alt="Link">URL Original</label>
+                                    class="text-white fw-semibold fs-6 user-select-none d-flex align-items-center gap-1">
+                                    <img draggable="false" width="24" src="svg/link.svg" style="margin-top: 1px"
+                                        alt="Link">URL
+                                    Original</label>
                                 <input type="text" class="form-control font-whitep-2 w-75 bg-transparent border-0"
                                     id="url_" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="URL original da página" disabled>
@@ -190,14 +214,14 @@
                                 <div
                                     class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none">
                                     <label for="url_domain"
-                                        class="text-white fw-bold fs-6 user-select-none">Domínio</label>
+                                        class="text-white fw-semibold fs-6 user-select-none">Domínio</label>
                                     <input type="text" class="form-control font-whitep-2 w-75" id="url_domain"
                                         data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="focus"
                                         title="Ex: https://domínio.com/" autocomplete="off">
                                 </div>
                                 <div
                                     class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none">
-                                    <label for="inputUrl" class="text-white fw-bold fs-6 user-select-none">Slug
+                                    <label for="inputUrl" class="text-white fw-semibold fs-6 user-select-none">Slug
                                         Antigo</label>
                                     <input type="text" class="form-control font-whitep-2 w-75 " id="inputUrl"
                                         data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="focus"
@@ -205,14 +229,14 @@
                                 </div>
                                 <div
                                     class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none helpers">
-                                    <label for="outputUrl" class="text-white fw-bold fs-6 user-select-none">Slug
+                                    <label for="outputUrl" class="text-white fw-semibold fs-6 user-select-none">Slug
                                         Destino</label>
                                     <input type="text" class="form-control font-whitep-2 w-75" id="outputUrl"
                                         data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="focus"
                                         title="Ex https://domínio.com/slug-destino/" autocomplete="off">
                                 </div>
                                 <button id="redirectBtn" type="submit"
-                                    class="btn btn-primary user-select-none text-center w-100 fw-bold fs-6">Criar
+                                    class="btn btn-primary user-select-none text-center w-100 fw-semibold fs-6">Criar
                                     Redirect</button>
                             </form>
                         </div>
@@ -240,52 +264,53 @@
                     <!-- Note Block Button -->
                     <li class="nav-item w-100" role="presentation">
                         <button style="font-size: 14px; padding: 0.5rem 0.8rem"
-                            class="nav-link rounded-3 bg-transparent fw-bold d-flex flex-row align-items-center gap- user-select-none justify-content-start w-100"
-                            id="but-note-tab" data-bs-toggle="pill" data-bs-target="#note-tab" type="button" role="tab"
-                            aria-controls="note-tab" aria-selected="false">
-                            <img src="svg/note.svg" width="14" style="margin-right: 2px;"
-                                alt="Anotações">Anotações</button>
+                            class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
+                            style="font-size: 0.9rem;" id="but-note-tab" data-bs-toggle="pill"
+                            data-bs-target="#note-tab" type="button" role="tab" aria-controls="note-tab"
+                            aria-selected="false">
+                            <img draggable="false" src="svg/note.svg" width="14" alt="Anotações">Anotações</button>
                     </li>
-                    
+
                     <!-- Mask and Validation Code Button -->
                     <li class="nav-item w-100" role="presentation">
                         <button style="font-size: 14px; padding: 0.5rem 0.8rem"
-                        class="nav-link rounded-3 bg-transparent fw-bold d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100"
-                        id="but-form-mask-validation-tab" data-bs-toggle="pill" data-bs-target="#form-mask-validation-tab"
-                        type="button" role="tab" aria-controls="form-mask-validation-tab" aria-selected="false">
-                        <img src="svg/form.svg" width="16" alt="E-mail">Formulário</button>
+                            class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
+                            style="font-size: 0.9rem;" id="but-form-mask-validation-tab" data-bs-toggle="pill"
+                            data-bs-target="#form-mask-validation-tab" type="button" role="tab"
+                            aria-controls="form-mask-validation-tab" aria-selected="false">
+                            <img draggable="false" src="svg/form.svg" width="16" alt="E-mail">Formulário</button>
                     </li>
-                    
+
                     <!-- Advanced Tools Button -->
                     <li class="nav-item w-100" role="presentation">
                         <button style="font-size: 14px; padding: 0.5rem 0.8rem"
-                            class="nav-link rounded-3 bg-transparent fw-bold d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100"
-                            id="but-advanced-settings-tab" data-bs-toggle="pill" data-bs-target="#advanced-settings-tab"
-                            type="button" role="tab" aria-controls="advanced-settings-tab" aria-selected="false">
-                            <img src="svg/magic.svg" width="16" alt="Avançado">Avançado</button>
+                            class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
+                            style="font-size: 0.9rem;" id="but-advanced-settings-tab" data-bs-toggle="pill"
+                            data-bs-target="#advanced-settings-tab" type="button" role="tab"
+                            aria-controls="advanced-settings-tab" aria-selected="false">
+                            <img draggable="false" src="svg/magic.svg" width="16" alt="Avançado">Avançado</button>
                     </li>
                 </ul>
-                
-                <div class="main tab-content gap-3 p-3 d-flex w-100">
+
+                <div class="main tab-content gap-3 p-4 d-flex w-100">
 
                     <!-- Note Block Tab -->
                     <div class="main tab-pane fade w-100 enter-animation" id="note-tab" role="tabpanel"
                         aria-labelledby="but-note-tab" tabindex="0" style="min-height: 350px;">
 
-                        <div class="d-flex flex-row gap-3 justify-content-between align-items-center mb-3">
-                            <div class="d-flex flex-row gap-3 align-items-center user-select-none mt-2">
-                                <label class="text-white fw-bold fs-5 d-flex align-items-center gap-1">
-                                    <img src="svg/note.svg" width="22" alt="Anotações">Anotações
-                                </label>
+                        <div
+                            class="d-flex flex-row gap-3 justify-content-between align-items-center user-select-none mb-3">
+                            <label class="text-white fw-semibold fs-5 d-flex align-items-center gap-1">
+                                <img draggable="false" src="svg/note.svg" width="22" alt="Anotações">Anotações
+                            </label>
+                            <div class="d-flex flex-row gap-2 w-100">
+                                <input type="text" class="form-control search-input w-100" style="height: 2.4rem;"
+                                    id="searchInput" placeholder="Buscar anotação">
+                                <button class="btn btn-primary" style="height: 2.4rem;" data-bs-toggle="modal"
+                                    data-bs-target="#noteModal">
+                                    <img src="svg/new-note.svg" width="16" alt="New Note">
+                                </button>
                             </div>
-
-                            <input type="text" class="form-control search-input w-100" style="height: 2.4rem;"
-                                id="searchInput" placeholder="Buscar anotação">
-
-                            <span data-bs-toggle="tooltip" data-bs-placement="left" title="Adicionar uma anotação">
-                                <button class="btn btn-primary fs-5" style="height: 2.4rem;" data-bs-toggle="modal"
-                                    data-bs-target="#noteModal">+</button>
-                            </span>
                         </div>
 
                         <div class="mb-2 d-flex gap-3 flex-column enter-animation">
@@ -300,7 +325,7 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header d-flex flex-row align-items-center">
-                                        <h5 class="modal-title me-2" id="modalContent">Nova Nota</h5>
+                                        <h5 class="modal-title me-2" id="modalContent">Anotações</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                     <div class="modal-body">
@@ -308,7 +333,7 @@
                                             <input type="text" class="form-control mb-2" id="noteTitle"
                                                 placeholder="Título" required autocomplete="off">
                                             <textarea class="form-control" id="noteContent" rows="5"
-                                                style="max-height: 162px; overflow-y: auto; overflow-x: hidden;"
+                                                style="height: 162px; min-height: 162px; max-height: 162px; overflow-y: auto; overflow-x: hidden;"
                                                 placeholder="Conteúdo" required autocomplete="off"></textarea>
                                         </div>
                                     </div>
@@ -322,21 +347,57 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Mask and Validation Code Tab -->
                     <div class="main tab-pane fade w-100" id="form-mask-validation-tab" role="tabpanel"
                         aria-labelledby="but-form-mask-validation-tab" tabindex="0">
                         <div
                             class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
                             <label for="url_"
-                                class="text-white fw-bold fs-5 user-select-none d-flex align-items-center gap-1">
-                                <img src="svg/form.svg" width="24" alt="E-mail">Máscara e Validação de Campo</label>
+                                class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1">
+                                <img draggable="false" src="svg/form.svg" width="24" alt="E-mail">Máscara e Validação de
+                                Campo</label>
                         </div>
-                        <div class="d-flex gap-3 p-3 w-100 rounded-2 enter-animation"
-                            style="background: var(--transparency-10); border: 1px solid var(--primary-900);">
-                            <button class="btn btn-outline-primary p-2 rounded-2" id="fsdfsdfsdf"
-                                data-bs-toggle="tooltip" data-bs-placement="right" title="Permite manipular a página">
-                                teste</button>
+                        <div class="d-flex flex-column justify-content-between w-100 p-3 gap-3 rounded-3"
+                            style="max-height: 260px;overflow-y: auto;overflow-x: hidden; background-color: var(--transparency-10); border: 1px solid var(--primary-950);">
+                            <!-- E-mail validation -->
+                            <div class="d-flex gap-3 w-100 rounded-2 enter-animation flex-column">
+                                <label class="text-white fw-normal fs-6 user-select-none">
+                                    Validação de e-mail corporativo <span style="opacity: 0.4; font-size: 0.8rem;">Ex:
+                                        @gmail.com, @hotmail.com...</span>
+                                </label>
+                                <div class="d-flex flex-row w-100">
+                                    <span
+                                        class="d-flex flex-column align-items-center justify-content-center px-3 py-1 text-nowrap text-white"
+                                        style="background: linear-gradient(90deg, var(--transparency-70) 0%, var(--transparency-90) 50%); border-radius: 0.4rem 0rem 0 0.4rem;">
+                                        Nome do campo
+                                    </span>
+                                    <input class="form-control" type="text" id="emailField" placeholder="email"
+                                        style="border-radius: 0 0.4rem 0.4rem 0; box-shadow: initial;" />
+                                    <button class="btn btn-primary ms-2" id="copyEmailValidation">
+                                        <img src="svg/copy.svg" width="18">
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Phone mask -->
+                            <div class="d-flex gap-3 w-100 rounded-2 enter-animation flex-column">
+                                <label class="text-white fw-normal fs-6 user-select-none">
+                                    Máscara para telefone <span style="opacity: 0.4; font-size: 0.8rem;">Ex: (00)
+                                        00000-0000</span>
+                                </label>
+                                <div class="d-flex flex-row w-100">
+                                    <span
+                                        class="d-flex flex-column align-items-center justify-content-center px-3 py-1 text-nowrap text-white"
+                                        style="background: linear-gradient(90deg, var(--transparency-70) 0%, var(--transparency-90) 50%); border-radius: 0.4rem 0rem 0 0.4rem;">
+                                        Nome do campo
+                                    </span>
+                                    <input class="form-control" type="text" id="phoneField" placeholder="phone"
+                                        style="border-radius: 0 0.4rem 0.4rem 0; box-shadow: initial;" />
+                                    <button class="btn btn-primary ms-2" id="copyPhoneMask">
+                                        <img src="svg/copy.svg" width="18">
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -344,33 +405,65 @@
                     <div class="main tab-pane fade w-100" id="advanced-settings-tab" role="tabpanel"
                         aria-labelledby="but-advanced-settings-tab" tabindex="0">
                         <div
-                            class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
+                            class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
                             <label for="url_"
-                                class="text-white fw-bold fs-5 user-select-none d-flex align-items-center gap-1">
-                                <img src="svg/magic.svg" width="24" alt="Download">Avançado</label>
+                                class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1">
+                                <img draggable="false" src="svg/magic.svg" width="24" alt="Download">Avançado</label>
                         </div>
-                        <div class="d-flex gap-3 p-3 w-100 rounded-2 enter-animation"
+                        <div class="d-flex gap-3 p-4 w-100 rounded-2 enter-animation flex-column"
                             style="background: var(--transparency-10); border: 1px solid var(--primary-900);">
-                            <button class="btn btn-outline-primary p-2 rounded-2" id="designModeTool"
-                                data-bs-toggle="tooltip" data-bs-placement="right" title="Permite manipular a página">
-                                Ativar Design Mode</button>
+                            <div class="d-flex gap-3 w-100 rounded-2 enter-animation flex-row p-4"
+                                style="background-color: var(--transparency-10); border: 1px solid var(--transparency-20);">
+                                <label
+                                    class="text-white fw-normal fs-6 user-select-none d-flex flex-column text-nowrap">
+                                    Ativar modo designer na página
+                                    <span style="opacity: 0.4; font-size: 0.8rem;">
+                                        Desfazer alterações: <i>Ctrl + Z</i> ou <i>F5</i>
+                                    </span>
+                                </label>
+                                <div class="d-flex flex-row gap-2 w-100">
+                                    <button
+                                        class="btn btn-outline-primary rounded-3 fw-normal d-flex flex-row align-items-center gap-1 p-2 user-select-none justify-content-center w-100"
+                                        id="designModeTool"
+                                        style="background-color: var(--transparency-30); transform: none;">
+                                        <img src="svg/nib.svg" alt="Nib" width="16" style="margin-top: 2px;">
+                                        Design Mode
+                                    </button>
+                                    <button class="btn btn-primary" id="designModeToolOff">
+                                        <img src="svg/block.svg" alt="Nib" width="16">
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Scripts -->
-    <script src="js/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="js/objects.js"></script>
-    <script src="js/utilities/global.js"></script>
+    
+    <!-- Footer -->
+    <script src="js/utils/objects.js"></script>
+    <script src="js/utils/template.js"></script>
+    <script src="js/utils/global.js"></script>
+    <script src="js/utils/storage.js"></script>
     <script src="js/popup.js"></script>
     <script src="js/tools/bible.js"></script>
     <script src="js/tools/design-mode.js"></script>
     <script src="js/tools/note-block.js"></script>
     <script src="js/tools/redirection.js"></script>
-    <script src="js/utilities/storage.js"></script>
-</body>
+    <script src="js/tools/validation-fields.js"></script>
 
+    <!-- <div aria-live="polite" aria-atomic="true" class="position-fixed user-select-none" style="bottom: 10px; right: 10px;">
+        <div class="toast align-items-center text-bg-danger fade show" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body message">
+                    Falta preencher meu querido :/
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div> -->
+</body>
 </html>

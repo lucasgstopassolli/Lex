@@ -1,32 +1,33 @@
 let domain, slug, url, nonce;
 
-// Verificação se tem barra final
+// Ensure the URL ends with a slash
 function ensureSlash(termUrl) {
     return termUrl.endsWith('/') ? termUrl : termUrl + '/';
 }
 
-// Função para pegar o domínio, slug e url
+// Get the domain, slug, and full URL from the active browser tab
 function getDomainAndSlug() {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        const urlObj = new URL(tabs[0].url); // Obtemos a URL da aba ativa
-        domain = urlObj.origin;  // Atribui o domínio globalmente
-        slug = urlObj.pathname;  // Atribui o slug globalmente
-        url = urlObj.href;  // Atribui a URL completa globalmente
-        
-        // Atualiza os campos no popup com as variáveis globais
+        const urlObj = new URL(tabs[0].url);
+        domain = urlObj.origin;
+        slug = urlObj.pathname;
+        url = urlObj.href;
+
+        // Populate form fields in the popup with retrieved values
         document.getElementById('url_domain').value = domain;
         document.getElementById('inputUrl').value = slug;
         document.getElementById('url_').value = ensureSlash(url);
-        if (document.getElementById('outputUrl').value == ''){
+        if (document.getElementById('outputUrl').value === '') {
             document.getElementById('outputUrl').value = '/';
         }
     });
 }
-getDomainAndSlug();  
+getDomainAndSlug();
 
+// Open the Redirection plugin admin page and inject code to create the redirect
 async function createRedirect(inputUrl, outputUrl) {
     if (!domain) {
-        alert('Domínio não disponível');
+        alert('Domain not available');
         return;
     }
 
@@ -35,6 +36,7 @@ async function createRedirect(inputUrl, outputUrl) {
 
     chrome.tabs.update(tab.id, { url: redirectionUrl });
 
+    // Wait for the page to finish loading before injecting
     chrome.tabs.onUpdated.addListener(function listener(tabId, changeInfo) {
         if (tabId === tab.id && changeInfo.status === 'complete') {
             chrome.tabs.onUpdated.removeListener(listener);
@@ -43,6 +45,7 @@ async function createRedirect(inputUrl, outputUrl) {
     });
 }
 
+// Inject script to retrieve nonce and send POST request to create redirect
 async function injectAndCreate(tabId, inputUrl, outputUrl) {
     try {
         const [{ result: nonce }] = await chrome.scripting.executeScript({
@@ -89,18 +92,17 @@ async function injectAndCreate(tabId, inputUrl, outputUrl) {
                     mode: "cors",
                     credentials: "include"
                 }).then(() => window.location.reload())
-                .catch(error => console.error("Erro na requisição:", error));
+                .catch(error => console.error("Request error:", error));
             },
             args: [ensureSlash(domain), inputUrl, outputUrl, nonce]
         });
 
     } catch (error) {
-        console.error("Erro ao obter nonce ou enviar redirecionamento:", error);
+        console.error("Error retrieving nonce or sending redirect:", error);
     }
 }
 
-
-// Adiciona evento de clique no botão "Criar redirect"
+// Handle form submission and call the redirect creation function
 function handleRedirectEvent(event) {
     event.preventDefault();
 
@@ -110,11 +112,11 @@ function handleRedirectEvent(event) {
     if (inputUrl && outputUrl) {
         createRedirect(inputUrl, outputUrl);
     } else {
-        alert('Preencha os campos');
+        alert('Please fill in both fields');
     }
 }
 
-// Adiciona evento de clique no botão "Criar redirect"
+// Attach click listener to the "Create redirect" button
 document.getElementById('redirectBtn').addEventListener('click', function (event) {
     event.preventDefault();
 
@@ -124,6 +126,6 @@ document.getElementById('redirectBtn').addEventListener('click', function (event
     if (inputUrl && outputUrl) {
         createRedirect(inputUrl, outputUrl);
     } else {
-        alert('Preencha os campos');
+        alert('Please fill in both fields');
     }
 });

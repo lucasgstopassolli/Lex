@@ -1,14 +1,18 @@
+// Load notes from localStorage or start with an empty array
 let notes = JSON.parse(localStorage.getItem("simple-notes") || "[]");
-let editingId = null;
+let editingId = null; // ID of the note being edited (null if not editing)
 
+// Save the current notes array to localStorage
 function saveToStorage() {
   localStorage.setItem("simple-notes", JSON.stringify(notes));
 }
 
+// Generate a unique ID based on the current timestamp
 function generateId() {
   return Date.now().toString();
 }
 
+// Format a date in "pt-BR" locale with day, month, hour, and minute
 function formatDate(date) {
   return new Date(date).toLocaleDateString("pt-BR", {
     day: "2-digit",
@@ -18,21 +22,17 @@ function formatDate(date) {
   });
 }
 
+// Render the notes on the page
 function renderNotes(notesToShow = notes) {
   const container = document.getElementById("notesList");
 
+  // Show empty state if there are no notes
   if (notesToShow.length === 0) {
-    container.innerHTML = `
-    <div class="d-flex align-items-center justify-content-center" style="height: 300px!important;">
-      <div class="position-relative d-inline-block" style="width: 300px!important" >
-        <p class="position-absolute top-50 start-50 text-nowrap" style="transform: translate(-50%, -50%);">Nenhuma anotação encontrada</p>
-        <img src="svg/landscape.svg" class="idle-pulse d-block w-100 h-auto rounded-3" alt="Empty State" style="opacity: 0.2; width: 300px; height: auto; overflow: hidden; background: radial-gradient(circle,rgba(255, 114, 94, 0.1) 0%, rgba(255, 255, 255, 0) 50%);">
-      </div>    
-    </div>
-    `;
+    container.innerHTML = emptyHTML;
     return;
   }
 
+  // Build the HTML for each note
   container.innerHTML = notesToShow
     .map(
       (note) => `
@@ -51,10 +51,12 @@ function renderNotes(notesToShow = notes) {
                   note.date
                 )}</div>
                 <div class="note-actions d-flex gap-2">
-                    <button class="btn btn-primary btn-sm edit-button"
-                        style="padding: 0.6rem 1.4rem!important;">Editar</button>
-                    <button class="btn btn-outline-danger btn-sm delete-button"
-                        style="padding: 0.6rem 1.4rem!important;">Excluir</button>
+                    <button class="btn btn-primary btn-sm fw-semibold edit-button lh-normal"
+                        style="padding: 0.6rem 1.4em!important;">Editar</button>
+                    <button class="btn btn-outline-danger delete-button lh-1"
+                        style="padding: 0.6rem 0.8rem!important;">
+                          <img src="svg/trash.svg" alt="Delete" width="18">
+                        </button>
                 </div>
             </div>
         </div>
@@ -63,21 +65,23 @@ function renderNotes(notesToShow = notes) {
     .join("");
 }
 
+// Save a new note or update an existing one
 function saveNote() {
   const title = document.getElementById("noteTitle").value.trim();
   const content = document.getElementById("noteContent").value.trim();
 
+  // Validate fields
   if (!title || !content) {
-    alert("Preencha título e conteúdo!");
+    alert("Please fill in both title and content!");
     return;
   }
 
+  // If editing an existing note
   if (editingId) {
-    // Editar nota existente
     const index = notes.findIndex((n) => n.id === editingId);
     notes[index] = { ...notes[index], title, content, date: new Date() };
   } else {
-    // Nova nota
+    // Add new note at the beginning of the array
     notes.unshift({
       id: generateId(),
       title,
@@ -88,42 +92,46 @@ function saveNote() {
 
   saveToStorage();
   renderNotes();
-  closeModal();
+  closeModal(); // Close modal after saving
 }
 
+// Load a note into the modal for editing
 function editNote(id) {
   const note = notes.find((n) => n.id === id);
   if (!note) return;
 
   editingId = id;
 
-  document.getElementById("modalContent").textContent = "Editar Nota";
+  document.getElementById("modalContent").textContent = "Edit Note";
   document.getElementById("noteTitle").value = note.title;
   document.getElementById("noteContent").value = note.content;
 
+  // Show the Bootstrap modal
   new bootstrap.Modal(document.getElementById("noteModal")).show();
 }
 
+// Delete a note with confirmation
 function deleteNote(id) {
-  if (confirm("Excluir esta nota?")) {
+  if (confirm("Delete this note?")) {
     notes = notes.filter((n) => n.id !== id);
     saveToStorage();
     renderNotes();
   }
 }
 
+// Close the modal and reset form fields
 function closeModal() {
   const modal = bootstrap.Modal.getInstance(
     document.getElementById("noteModal")
   );
   modal.hide();
 
-  // Reset form
   document.getElementById("noteTitle").value = "";
   document.getElementById("noteContent").value = "";
   editingId = null;
 }
 
+// Filter notes based on the search input
 function searchNotes() {
   const query = document.getElementById("searchInput").value.toLowerCase();
   const filtered = notes.filter(
@@ -134,7 +142,7 @@ function searchNotes() {
   renderNotes(filtered);
 }
 
-// Event delegation para botões de editar/excluir
+// Handle clicks for edit and delete buttons
 document.getElementById("notesList").addEventListener("click", function (e) {
   const parent = e.target.closest(".note-item");
   if (!parent) return;
@@ -150,12 +158,16 @@ document.getElementById("notesList").addEventListener("click", function (e) {
   }
 });
 
-// Event listeners
+// Save note when clicking the save button
 document.getElementById("saveNote").addEventListener("click", saveNote);
+
+// Filter notes while typing in the search input
 document.getElementById("searchInput").addEventListener("input", searchNotes);
+
+// Clear the form and state when modal is hidden
 document
   .getElementById("noteModal")
   .addEventListener("hidden.bs.modal", closeModal);
 
-// Inicialização
+// Initial render of the notes on page load
 renderNotes();

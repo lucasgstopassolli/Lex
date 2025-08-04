@@ -20,7 +20,7 @@
   --transparency-70: #09078db3;
   --transparency-80: #09078dcc;
   --transparency-90: #09078de6;
-  --font-family: "Lato", "Arial", "Helvetica", "sans-serif";
+  --font-family: "Quicksand", "Arial", "Helvetica", "sans-serif";
   --secondary-color: #080a13;
   --background-bt-primary: radial-gradient(
     circle,
@@ -32,7 +32,7 @@
     transparent 0%,
     var(--transparency-30) 70%
   );
-  --default-shadow: 0 0 0.1rem 0.3rem var(--transparency-80);
+  --default-shadow: 0 0 0.6rem 0.3rem var(--transparency-90);
 }
 
 /*--------- Default Classes ---------*/
@@ -156,7 +156,8 @@ h1 {
   text-overflow: ellipsis;
   color: white;
   background-color: var(--transparency-10);
-  border: var(--bs-border-width) solid var(--primary-500);
+  border: var(--bs-border-width) solid var(--primary-800);
+  transition: all ease 0.4s;
 }
 .form-control:focus {
   color: var(--primary-50);
@@ -166,14 +167,19 @@ h1 {
   box-shadow: var(--default-shadow);
   outline: none;
 }
+.text-bg-danger {
+  color: #fff !important;
+  background: linear-gradient(90deg, rgb(90, 0, 0), rgba(135, 0, 0, 0.9))!important;
+  border-color: rgba(133, 0, 0);
+}
 
 /* Animations */
 @keyframes pulseAnimation {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.8);
+    box-shadow: 0 0 0 0 var(--transparency-80);
   }
   50% {
-    box-shadow: 0 0 0 0.6rem rgba(255, 0, 0, 0.4);
+    box-shadow: 0 0 0 0.6rem var(--transparency-40);
   }
   100% {
     box-shadow: 0 0 0 1rem transparent;
@@ -201,7 +207,7 @@ h1 {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(-4px);
   }
 }
 
@@ -291,7 +297,8 @@ h1 {
 }
 
 .activeBut{
-  background-color: var(--primary-500);
+  background-color: var(--primary-500)!important;
+  border-color: var(--primary-500)!important;
 }
 
 #noteModal .form-control:focus{
