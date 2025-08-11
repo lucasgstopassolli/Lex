@@ -1,4 +1,4 @@
-function validationField({ idInput, btnSelector, scriptCDN, fieldSelectorToCopy, codeToCopy }) {
+function validationField({ idInput, btnSelector, infoComment, scriptCDN, fieldSelectorToCopy, codeToCopy }) {
   const originalCode = codeToCopy;
 
   document.getElementById(btnSelector).addEventListener("click", function () {
@@ -12,12 +12,13 @@ function validationField({ idInput, btnSelector, scriptCDN, fieldSelectorToCopy,
 
     const selector = fieldSelectorToCopy.replace("${fieldSelectorToReplace}", fieldSelectorToReplace);
     
-    let finalCode = `<script>\n` + selector + originalCode + `\n</script>`;
-
+    let finalCode = `<script>` + selector + originalCode + `</script>\n`
+    
     if (scriptCDN){
       finalCode = scriptCDN + finalCode;
     }
-
+    
+    finalCode = `<!-- ` + infoComment + ` -->\n` + finalCode + `<!-- END ` + infoComment + ` -->`
 
     navigator.clipboard
       .writeText(finalCode)
@@ -36,6 +37,7 @@ validation.forEach(item => {
   validationField({
     idInput: item.idInput,
     btnSelector: item.btnSelector,
+    infoComment: item.infoComment,
     scriptCDN: item.scriptCDN,
     fieldSelectorToCopy: item.selector,
     codeToCopy: item.originalCode

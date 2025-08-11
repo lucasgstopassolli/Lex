@@ -111,15 +111,17 @@ const validation = [
   {
     idInput: "emailField",
     btnSelector: "copyEmailValidation",
-    selector: `const EMAIL_FIELD_SELECTOR = 'input[name="\${fieldSelectorToReplace}"]';\n`,
-    originalCode: `//Corporate E-mail Validatio\ndocument.addEventListener("DOMContentLoaded",()=>{const PERSONAL_EMAIL_DOMAINS=new Set(["gmail.com","yahoo.com","hotmail.com","outlook.com","icloud.com","live.com","bol.com.br","uol.com.br","terra.com.br","aol.com","protonmail.com"]);const isValidEmailFormat=(email)=>{const emailRegex=/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;return emailRegex.test(email)};const isCorporateEmail=(email)=>{const normalizedEmail=email.trim().toLowerCase();const domain=normalizedEmail.split('@')[1];return domain?!PERSONAL_EMAIL_DOMAINS.has(domain):false};const handleValidation=(field)=>{const emailValue=field.value.trim();field.setCustomValidity("");if(emailValue.length>0){if(!isValidEmailFormat(emailValue)){field.setCustomValidity("Insira um e-mail válido.")}else if(!isCorporateEmail(emailValue)){field.setCustomValidity("Insira um e-mail corporativo.")}}field.reportValidity()};const formatInputValue=(field)=>{field.value=field.value.trim()};const initializeEmailField=(emailField)=>{emailField.setAttribute("pattern","[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}");emailField.setAttribute("title","Please enter a valid corporate email.");emailField.setAttribute("autocomplete","email");emailField.addEventListener("input",()=>formatInputValue(emailField));emailField.addEventListener("blur",()=>handleValidation(emailField))};const emailFields=document.querySelectorAll(EMAIL_FIELD_SELECTOR);emailFields.forEach(initializeEmailField)});\n//END Corporate E-mail Validatio`,
+    infoComment: `Email Validation`,
+    selector: `const EMAIL_FIELD_SELECTOR = 'input[name="\${fieldSelectorToReplace}"]';`,
+    originalCode: `document.addEventListener("DOMContentLoaded",()=>{const PERSONAL_EMAIL_DOMAINS=new Set(["gmail.com","yahoo.com","hotmail.com","outlook.com","icloud.com","live.com","bol.com.br","uol.com.br","terra.com.br","aol.com","protonmail.com"]);const isValidEmailFormat=(email)=>{const emailRegex=/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;return emailRegex.test(email)};const isCorporateEmail=(email)=>{const normalizedEmail=email.trim().toLowerCase();const domain=normalizedEmail.split('@')[1];return domain?!PERSONAL_EMAIL_DOMAINS.has(domain):false};const handleValidation=(field)=>{const emailValue=field.value.trim();field.setCustomValidity("");if(emailValue.length>0){if(!isValidEmailFormat(emailValue)){field.setCustomValidity("Insira um e-mail válido.")}else if(!isCorporateEmail(emailValue)){field.setCustomValidity("Insira um e-mail corporativo.")}}field.reportValidity()};const formatInputValue=(field)=>{field.value=field.value.trim()};const initializeEmailField=(emailField)=>{emailField.setAttribute("pattern","[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}");emailField.setAttribute("title","Please enter a valid corporate email.");emailField.setAttribute("autocomplete","email");emailField.addEventListener("input",()=>formatInputValue(emailField));emailField.addEventListener("blur",()=>handleValidation(emailField))};const emailFields=document.querySelectorAll(EMAIL_FIELD_SELECTOR);emailFields.forEach(initializeEmailField)});`,
   },
   {
     idInput: "phoneField",
     btnSelector: "copyPhoneMask",
-    scriptCDN: `<script src="https://unpkg.com/imask"></t>`,
+    infoComment: `Phone Field Mask`,
+    scriptCDN: `<script src="https://unpkg.com/imask"></script>`,
     selector: `const PHONE_FIELD_SELECTOR = 'input[name="\${fieldSelectorToReplace}"]';`,
-    originalCode: `//Phone mask\ndocument.addEventListener("DOMContentLoaded", ()=>{IMask(document.querySelectorAll(PHONE_FIELD_SELECTOR),{mask:'(00)00000-0000'})})\n//END Phone mask`,
+    originalCode: `document.addEventListener("DOMContentLoaded", ()=>{IMask(document.querySelectorAll(PHONE_FIELD_SELECTOR),{mask:'(00)00000-0000'})})`,
   },
 ];
 
