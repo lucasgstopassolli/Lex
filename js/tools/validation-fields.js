@@ -20,9 +20,7 @@ function validationField({ idInput, btnSelector, infoComment, scriptCDN, fieldSe
     
     finalCode = `<!-- ` + infoComment + ` -->\n` + finalCode + `<!-- END ` + infoComment + ` -->`
 
-    navigator.clipboard
-      .writeText(finalCode)
-      .then(() => {
+    navigator.clipboard.writeText(finalCode).then(() => {
         document.getElementById("mensagem").textContent =
           "Código copiado com sucesso!";
       })

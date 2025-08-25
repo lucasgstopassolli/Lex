@@ -165,9 +165,7 @@ document.getElementById("saveNote").addEventListener("click", saveNote);
 document.getElementById("searchInput").addEventListener("input", searchNotes);
 
 // Clear the form and state when modal is hidden
-document
-  .getElementById("noteModal")
-  .addEventListener("hidden.bs.modal", closeModal);
+document.getElementById("noteModal").addEventListener("hidden.bs.modal", closeModal);
 
 // Initial render of the notes on page load
 renderNotes();
