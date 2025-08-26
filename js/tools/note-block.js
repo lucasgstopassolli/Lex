@@ -55,7 +55,7 @@ function renderNotes(notesToShow = notes) {
                         style="padding: 0.6rem 1.4em!important;">Editar</button>
                     <button class="btn btn-outline-danger delete-button lh-1"
                         style="padding: 0.6rem 0.8rem!important;">
-                          <img src="svg/trash.svg" alt="Delete" width="18">
+                          <img src="img/svg/trash.svg" alt="Delete" width="18">
                         </button>
                 </div>
             </div>
@@ -66,49 +66,49 @@ function renderNotes(notesToShow = notes) {
 }
 
 // Save a new note or update an existing one
-function saveNote() {
-  const title = document.getElementById("noteTitle").value.trim();
-  const content = document.getElementById("noteContent").value.trim();
+// function saveNote() {
+//   const title = document.getElementById("noteTitle").value.trim();
+//   const content = document.getElementById("noteContent").value.trim();
 
-  // Validate fields
-  if (!title || !content) {
-    alert("Please fill in both title and content!");
-    return;
-  }
+//   // Validate fields
+//   if (!title || !content) {
+//     alert("Please fill in both title and content!");
+//     return;
+//   }
 
-  // If editing an existing note
-  if (editingId) {
-    const index = notes.findIndex((n) => n.id === editingId);
-    notes[index] = { ...notes[index], title, content, date: new Date() };
-  } else {
-    // Add new note at the beginning of the array
-    notes.unshift({
-      id: generateId(),
-      title,
-      content,
-      date: new Date(),
-    });
-  }
+//   // If editing an existing note
+//   if (editingId) {
+//     const index = notes.findIndex((n) => n.id === editingId);
+//     notes[index] = { ...notes[index], title, content, date: new Date() };
+//   } else {
+//     // Add new note at the beginning of the array
+//     notes.unshift({
+//       id: generateId(),
+//       title,
+//       content,
+//       date: new Date(),
+//     });
+//   }
 
-  saveToStorage();
-  renderNotes();
-  closeModal(); // Close modal after saving
-}
+//   saveToStorage();
+//   renderNotes();
+//   closeModal(); // Close modal after saving
+// }
 
 // Load a note into the modal for editing
-function editNote(id) {
-  const note = notes.find((n) => n.id === id);
-  if (!note) return;
+// function editNote(id) {
+//   const note = notes.find((n) => n.id === id);
+//   if (!note) return;
 
-  editingId = id;
+//   editingId = id;
 
-  document.getElementById("modalContent").textContent = "Edit Note";
-  document.getElementById("noteTitle").value = note.title;
-  document.getElementById("noteContent").value = note.content;
+//   document.getElementById("modalContent").textContent = "Edit Note";
+//   document.getElementById("noteTitle").value = note.title;
+//   document.getElementById("noteContent").value = note.content;
 
-  // Show the Bootstrap modal
-  new bootstrap.Modal(document.getElementById("noteModal")).show();
-}
+//   // Show the Bootstrap modal
+//   new bootstrap.Modal(document.getElementById("noteModal")).show();
+// }
 
 // Delete a note with confirmation
 function deleteNote(id) {
@@ -120,14 +120,76 @@ function deleteNote(id) {
 }
 
 // Close the modal and reset form fields
+// function closeModal() {
+//   const modal = bootstrap.Modal.getInstance(
+//     document.getElementById("noteModal")
+//   );
+//   modal.hide();
+
+//   document.getElementById("noteTitle").value = "";
+//   document.getElementById("noteContent").value = "";
+//   editingId = null;
+// }
+
+// Salva uma nova nota ou atualiza uma existente
+function saveNote() {
+  const title = document.getElementById("noteTitle").value.trim();
+  // CORREÇÃO: Usamos .innerHTML para pegar o conteúdo formatado do editor
+  const content = document.getElementById("noteContent").innerHTML;
+
+  // Validação (o título ainda é obrigatório, o conteúdo pode começar vazio)
+  if (!title) {
+    alert("Por favor, preencha o título!");
+    return;
+  }
+
+  // Se estiver editando uma nota existente
+  if (editingId) {
+    const index = notes.findIndex((n) => n.id === editingId);
+    notes[index] = { ...notes[index], title, content, date: new Date() };
+  } else {
+    // Adiciona uma nova nota no início do array
+    notes.unshift({
+      id: generateId(),
+      title,
+      content,
+      date: new Date(),
+    });
+  }
+
+  saveToStorage();
+  renderNotes();
+  closeModal(); // Fecha o modal após salvar
+}
+
+// Carrega uma nota no modal para edição
+function editNote(id) {
+  const note = notes.find((n) => n.id === id);
+  if (!note) return;
+
+  editingId = id;
+
+  document.getElementById("modalContent").textContent = "Editar Nota";
+  document.getElementById("noteTitle").value = note.title;
+  // CORREÇÃO: Usamos .innerHTML para inserir o conteúdo formatado no editor
+  document.getElementById("noteContent").innerHTML = note.content;
+
+  // Mostra o modal do Bootstrap
+  new bootstrap.Modal(document.getElementById("noteModal")).show();
+}
+
+// Fecha o modal e reseta os campos do formulário
 function closeModal() {
   const modal = bootstrap.Modal.getInstance(
     document.getElementById("noteModal")
   );
-  modal.hide();
+  if (modal) {
+    modal.hide();
+  }
 
   document.getElementById("noteTitle").value = "";
-  document.getElementById("noteContent").value = "";
+  // CORREÇÃO: Limpamos o editor usando .innerHTML
+  document.getElementById("noteContent").innerHTML = "";
   editingId = null;
 }
 
@@ -165,7 +227,70 @@ document.getElementById("saveNote").addEventListener("click", saveNote);
 document.getElementById("searchInput").addEventListener("input", searchNotes);
 
 // Clear the form and state when modal is hidden
-document.getElementById("noteModal").addEventListener("hidden.bs.modal", closeModal);
+document
+  .getElementById("noteModal")
+  .addEventListener("hidden.bs.modal", closeModal);
 
 // Initial render of the notes on page load
 renderNotes();
+
+// Aponta o editor para o seu campo de conteúdo
+const editor = document.getElementById("noteContent");
+
+// Função genérica para aplicar comandos de formatação
+const applyStyle = (command, value = null) => {
+  document.execCommand(command, false, value);
+  editor.focus();
+};
+
+// Lógica específica para criar um Link
+const createLink = () => {
+  const url = prompt("Entre com a URL para o link:");
+  if (url) {
+    applyStyle("createLink", url);
+  }
+};
+
+// Event Listeners para os botões da barra de ferramentas
+
+document
+  .getElementById("formatBlock")
+  .addEventListener("change", (e) => applyStyle("formatBlock", e.target.value));
+
+document
+  .getElementById("boldBtn")
+  .addEventListener("click", () => applyStyle("bold"));
+document
+  .getElementById("italicBtn")
+  .addEventListener("click", () => applyStyle("italic"));
+document
+  .getElementById("underlineBtn")
+  .addEventListener("click", () => applyStyle("underline"));
+
+document
+  .getElementById("unorderedListBtn")
+  .addEventListener("click", () => applyStyle("insertUnorderedList"));
+document
+  .getElementById("orderedListBtn")
+  .addEventListener("click", () => applyStyle("insertOrderedList"));
+
+document
+  .getElementById("blockquoteBtn")
+  .addEventListener("click", () => applyStyle("formatBlock", "blockquote"));
+document
+  .getElementById("alignLeftBtn")
+  .addEventListener("click", () => applyStyle("justifyLeft"));
+document
+  .getElementById("alignCenterBtn")
+  .addEventListener("click", () => applyStyle("justifyCenter"));
+document
+  .getElementById("alignRightBtn")
+  .addEventListener("click", () => applyStyle("justifyRight"));
+document
+  .getElementById("alignJustifyBtn")
+  .addEventListener("click", () => applyStyle("justifyFull"));
+
+document.getElementById("linkBtn").addEventListener("click", createLink);
+document
+  .getElementById("removeFormatBtn")
+  .addEventListener("click", () => applyStyle("removeFormat"));

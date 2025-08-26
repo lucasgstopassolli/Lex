@@ -117,7 +117,7 @@ const plugins = [
     name: "Safe SVG",
     description:
       "Permita o envio de arquivos SVG e sanitize-os para impedir vulnerabilidades XML/SVG no seu site WordPress.",
-      image: "https://ps.w.org/safe-svg/assets/icon.svg",
+      image: "https://ps.w.org/safe-img/svg/assets/icon.svg",
       wordpressSelector: ".plugin-card-safe-svg",
   },
   {
@@ -135,15 +135,15 @@ const validation = [
     btnSelector: "copyEmailValidation",
     infoComment: `Email Validation`,
     selector: `const EMAIL_FIELD_SELECTOR = 'input[name="\${fieldSelectorToReplace}"]';`,
-    originalCode: `document.addEventListener("DOMContentLoaded",()=>{const PERSONAL_EMAIL_DOMAINS=new Set(["gmail.com","yahoo.com","hotmail.com","outlook.com","icloud.com","live.com","bol.com.br","uol.com.br","terra.com.br","aol.com","protonmail.com"]);const isValidEmailFormat=(email)=>{const emailRegex=/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;return emailRegex.test(email)};const isCorporateEmail=(email)=>{const normalizedEmail=email.trim().toLowerCase();const domain=normalizedEmail.split('@')[1];return domain?!PERSONAL_EMAIL_DOMAINS.has(domain):false};const handleValidation=(field)=>{const emailValue=field.value.trim();field.setCustomValidity("");if(emailValue.length>0){if(!isValidEmailFormat(emailValue)){field.setCustomValidity("Insira um e-mail válido.")}else if(!isCorporateEmail(emailValue)){field.setCustomValidity("Insira um e-mail corporativo.")}}field.reportValidity()};const formatInputValue=(field)=>{field.value=field.value.trim()};const initializeEmailField=(emailField)=>{emailField.setAttribute("pattern","[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}");emailField.setAttribute("title","Please enter a valid corporate email.");emailField.setAttribute("autocomplete","email");emailField.addEventListener("input",()=>formatInputValue(emailField));emailField.addEventListener("blur",()=>handleValidation(emailField))};const emailFields=document.querySelectorAll(EMAIL_FIELD_SELECTOR);emailFields.forEach(initializeEmailField)});`,
+    originalCode: `document.addEventListener("DOMContentLoaded",()=>{const e=new Set(["gmail.com","yahoo.com","hotmail.com","outlook.com","icloud.com","live.com","bol.com.br","uol.com.br","terra.com.br","aol.com","protonmail.com"]),t=t=>/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(t),o=o=>{const l=o.trim().toLowerCase().split("@")[1];return!!l&&!e.has(l)},l=e=>{const l=e.value.trim();if(e.setCustomValidity(""),l.length>0){t(l)?o(l)||e.setCustomValidity("Insira um e-mail corporativo."):e.setCustomValidity("Insira um e-mail válido.")}},n=e=>{e.value=e.value.trim()},r=e=>{e.setAttribute("pattern","[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}"),e.setAttribute("title","Please enter a valid corporate email."),e.setAttribute("autocomplete","email"),e.addEventListener("input",()=>n(e)),e.addEventListener("blur",()=>l(e))};document.querySelectorAll(EMAIL_FIELD_SELECTOR).forEach(r)});`,
   },
   {
     idInput: "phoneField",
     btnSelector: "copyPhoneMask",
     infoComment: `Phone Field Mask`,
-    scriptCDN: `<script src="https://unpkg.com/imask"></script>`,
+    scriptCDN: `<script src="https://unpkg.com/imask@7/dist/imask.min.js"></script>`,
     selector: `const PHONE_FIELD_SELECTOR = 'input[name="\${fieldSelectorToReplace}"]';`,
-    originalCode: `document.addEventListener("DOMContentLoaded", ()=>{IMask(document.querySelectorAll(PHONE_FIELD_SELECTOR),{mask:'(00)00000-0000'})})`,
+    originalCode: `document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll(PHONE_FIELD_SELECTOR).forEach(e=>{IMask(e,{mask:[{mask:"(00) 0000-0000"},{mask:"(00) 00000-0000"}],dispatch:(e,a)=>{const t=(a.value+e).replace(/\D/g,"");return a.compiledMasks[t.length>10?1:0]}})})});`,
   },
 ];
 

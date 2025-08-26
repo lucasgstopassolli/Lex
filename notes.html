@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark" spellcheck="false">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloco de Anotações - Nexus</title>
+    <!-- Google Fonts & Icons-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=Quicksand:wght@300..700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- Styles and Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/note-block.css">
+    <link rel="icon" type="image/svg" href="img/svg/note-block.svg">
+</head>
+
+<body style="padding: 5vw 0;">
+    <div class="container">
+
+        <div class="row mb-5 d-flex flex-row align-items-center justify-content-center gap-1">
+            <div class="w-auto">
+                <img draggable="false" style="cursor: pointer;" src="img/svg/new-note.svg" width="48" alt="New Note">
+            </div>
+            <p class="text-white fw-semibold fs-1 w-auto mb-0">Anotações</p>
+        </div>
+
+        <div class="row">
+            <div class="d-flex flex-row gap-3 justify-content-between align-items-center user-select-none mb-3">
+                <div class="d-flex flex-row gap-2 w-100">
+                    <input type="text" class="form-control search-input w-100" style="height: 3.2rem;" id="searchInput"
+                        placeholder="Buscar anotação">
+                    <button class="btn btn-primary" style="height: 3.2rem; width: 3.2rem;" data-bs-toggle="modal"
+                        data-bs-target="#noteModal">
+                        <img src="img/svg/new-note.svg" width="22" alt="New Note">
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="mb-2 d-flex gap-3 flex-column enter-animation">
+                <div class="notes-container d-flex flex-column gap-2 h-100"
+                    style="max-height: 300px; overflow-y: auto; overflow-x: hidden;" id="notesList">
+                    <div class="empty-state" id="emptyState"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="noteModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header d-flex flex-row align-items-center">
+                        <h5 class="modal-title" id="modalContent">Anotações</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-2">
+                            <input type="text" class="form-control mb-3" id="noteTitle" placeholder="Título" required
+                                autocomplete="off" style="height: 2.8rem;">
+                            <div class="toolbar">
+                                <select id="formatBlock" title="Estilo do Bloco">
+                                    <option value="p">Parágrafo</option>
+                                    <option value="h1">Título 1</option>
+                                    <option value="h2">Título 2</option>
+                                    <option value="h3">Título 3</option>
+                                    <option value="h4">Título 4</option>
+                                    <option value="h5">Título 5</option>
+                                    <option value="h6">Título 6</option>
+                                </select>
+
+                                <span class="separator"></span>
+
+                                <button id="boldBtn" title="Negrito"><span
+                                        class="material-symbols-outlined">format_bold</span></button>
+                                <button id="italicBtn" title="Itálico"><span
+                                        class="material-symbols-outlined">format_italic</span></button>
+                                <button id="underlineBtn" title="Sublinhado"><span
+                                        class="material-symbols-outlined">format_underlined</span></button>
+
+                                <span class="separator"></span>
+
+                                <button id="unorderedListBtn" title="Lista Não Ordenada"><span
+                                        class="material-symbols-outlined">format_list_bulleted</span></button>
+                                <button id="orderedListBtn" title="Lista Ordenada"><span
+                                        class="material-symbols-outlined">format_list_numbered</span></button>
+
+                                <span class="separator"></span>
+
+                                <button id="blockquoteBtn" title="Citação"><span
+                                        class="material-symbols-outlined">format_quote</span></button>
+                                <button id="alignLeftBtn" title="Alinhar à Esquerda"><span
+                                        class="material-symbols-outlined">format_align_left</span></button>
+                                <button id="alignCenterBtn" title="Alinhar ao Centro"><span
+                                        class="material-symbols-outlined">format_align_center</span></button>
+                                <button id="alignRightBtn" title="Alinhar à Direita"><span
+                                        class="material-symbols-outlined">format_align_right</span></button>
+                                <button id="alignJustifyBtn" title="Justificar"><span
+                                        class="material-symbols-outlined">format_align_justify</span></button>
+
+                                <span class="separator"></span>
+
+                                <button id="linkBtn" title="Inserir Link"><span
+                                        class="material-symbols-outlined">link</span></button>
+                                <button id="removeFormatBtn" title="Remover Formatação"><span
+                                        class="material-symbols-outlined">format_clear</span></button>
+                            </div>
+
+                            <div id="noteContent" contenteditable="true" spellcheck="false"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"
+                            style="padding: 0.6rem 1.4rem!important;">Cancelar</button>
+                        <button type="button" class="btn btn-primary btn-sm" id="saveNote"
+                            style="padding: 0.6rem 1.4rem!important;">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils/template.js"></script>
+    <script src="js/tools/note-block.js"></script>
+</body>
+
+</html>

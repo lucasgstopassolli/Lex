@@ -53,6 +53,7 @@ html * {
 body {
   background: var(--secondary-color);
   font-family: var(--font-family);
+  overflow: hidden;
 }
 h1 {
   font-weight: 600;

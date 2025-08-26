@@ -28,7 +28,7 @@
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem;" id="but-initial-tab" data-bs-toggle="pill" data-bs-target="#initial-tab"
                 type="button" role="tab" aria-controls="initial-tab" aria-selected="true">
-                <img draggable="false" src="svg/home.svg" alt="Início" width="16"
+                <img draggable="false" src="img/svg/home.svg" alt="Início" width="16"
                     style="margin-left: -0.5rem; margin-right: -0.1rem">
                 <span style="line-height: normal;">Início</span>
             </button>
@@ -39,7 +39,7 @@
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem;" id="but-wordpress-tab" data-bs-toggle="pill" data-bs-target="#wordpress-tab"
                 type="button" role="tab" aria-controls="wordpress-tab" aria-selected="false">
-                <img draggable="false" src="svg/wordpress.svg" alt="Wordpress" width="16">
+                <img draggable="false" src="img/svg/wordpress.svg" alt="Wordpress" width="16">
                 <span style="line-height: normal;">Wordpress</span>
             </button>
         </li>
@@ -49,7 +49,7 @@
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem;" id="but-design-tab" data-bs-toggle="pill" data-bs-target="#design-tab"
                 type="button" role="tab" aria-controls="design-tab" aria-selected="false">
-                <img draggable="false" src="svg/nib.svg" alt="Design" width="16">
+                <img draggable="false" src="img/svg/nib.svg" alt="Design" width="16">
                 <span style="line-height: normal;">Design</span>
             </button>
         </li>
@@ -59,7 +59,7 @@
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem;" id="but-tools-tab" data-bs-toggle="pill" data-bs-target="#tools-tab"
                 type="button" role="tab" aria-controls="tools-tab" aria-selected="false">
-                <img draggable="false" src="svg/config.svg" alt="Ferramentas" width="16">
+                <img draggable="false" src="img/svg/config.svg" alt="Ferramentas" width="16">
                 <span style="line-height: normal;">Ferramentas</span>
             </button>
         </li>
@@ -82,7 +82,7 @@
                 <div class="verse-container rounded-4 p-4 w-100 enter-animation">
                     <div class="d-flex flex-row justify-content-between">
                         <div class="d-flex flex-row gap-2 align-items-center">
-                            <img draggable="false" src="svg/cross.svg" alt="Cross" width="24" class="cross-icon">
+                            <img draggable="false" src="img/svg/cross.svg" alt="Cross" width="24" class="cross-icon">
                             <h4 class="fw-normal mb-0 mt-2 placeholder-glow"
                                 style="font-family: 'Lavishly Yours', 'sans serif'; font-size: 2.8rem; color: var(--primary-200);"
                                 id="bookVerse">
@@ -119,18 +119,18 @@
                             <button class="btn btn-outline-primary copy-content" data-bs-toggle="tooltip"
                                 data-bs-placement="top" data-bs-trigger="hover" title="Copiar versículo"
                                 data-copy-selector="#contentToCopy">
-                                <img draggable="false" style="pointer-events: none" width="16" src="svg/copy.svg"
+                                <img draggable="false" style="pointer-events: none" width="16" src="img/svg/copy.svg"
                                     alt="Copy">
                             </button>
                             <button class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top"
                                 data-bs-trigger="hover" title="Abrir o capítulo completo"
                                 data-open-url="#bibleChapterURL">
-                                <img draggable="false" style="pointer-events: none" width="16" src="svg/open.svg"
+                                <img draggable="false" style="pointer-events: none" width="16" src="img/svg/open.svg"
                                     alt="Open">
                             </button>
                             <button class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top"
                                 data-bs-trigger="hover" title="Favoritar versículo" id="likeVerse">
-                                <img draggable="false" style="pointer-events: none" width="16" src="svg/unlike.svg"
+                                <img draggable="false" style="pointer-events: none" width="16" src="img/svg/unlike.svg"
                                     alt="Like">
                             </button>
                         </div>
@@ -149,6 +149,18 @@
                 <ul class="wordpressTab nav nav-tabs lateral-bar d-flex flex-column gap-1 mb-4 mt-5" id="pills-tab"
                     role="tablist" style="background: var(--transparency-30);">
 
+                    <!-- Main WP Button -->
+                    <li class="nav-item w-100" role="presentation">
+                        <button style="font-size: 14px; padding: 0.5rem 0.8rem"
+                            class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
+                            style="font-size: 0.9rem;" id="but-main-wp-tab" data-bs-toggle="pill"
+                            data-bs-target="#main-wp-tab" type="button" role="tab" aria-controls="main-wp-tab"
+                            aria-selected="false">
+                            <img draggable="false" src="img/svg/wordpress.svg" width="14" alt="Plugin">
+                            <span style="line-height: normal;">Recursos</span>
+                        </button>
+                    </li>
+
                     <!-- Plugins Button -->
                     <li class="nav-item w-100" role="presentation">
                         <button style="font-size: 14px; padding: 0.5rem 0.8rem"
@@ -156,7 +168,7 @@
                             style="font-size: 0.9rem;" id="but-plugins-tab" data-bs-toggle="pill"
                             data-bs-target="#plugins-tab" type="button" role="tab" aria-controls="plugins-tab"
                             aria-selected="false">
-                            <img draggable="false" src="svg/plugin.svg" width="14" alt="Plugin">
+                            <img draggable="false" src="img/svg/plugin.svg" width="14" alt="Plugin">
                             <span style="line-height: normal;">Plugins</span>
                         </button>
                     </li>
@@ -168,7 +180,7 @@
                             style="font-size: 0.9rem;" id="but-redirection-tab" data-bs-toggle="pill"
                             data-bs-target="#redirection-tab" type="button" role="tab" aria-controls="redirection-tab"
                             aria-selected="false">
-                            <img draggable="false" src="svg/redirect.svg" width="14" alt="Redirect">
+                            <img draggable="false" src="img/svg/redirect.svg" width="14" alt="Redirect">
                             <span style="line-height: normal;">Redirect</span>
                         </button>
                     </li>
@@ -177,14 +189,49 @@
                 <!-- Content -->
                 <div class="main tab-content gap-3 p-4 d-flex w-100">
 
+                    <!-- Main WP Tab -->
+                    <div class="main tab-pane fade w-100" id="main-wp-tab" role="tabpanel"
+                        aria-labelledby="but-main-wp-tab" tabindex="0">
+                        <div
+                            class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
+                            <label for="url_"
+                                class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1">
+                                <img draggable="false" src="img/svg/wordpress.svg" width="24" alt="Wordpress">Recursos do
+                                Wordpress</label>
+                        </div>
+                        <div class="d-flex gap-3 p-4 w-100 rounded-2 enter-animation flex-column"
+                            style="background: var(--transparency-10); border: 1px solid var(--primary-900);">
+                            <div class="d-flex gap-3 w-100 rounded-2 enter-animation flex-row justify-content-around align-items-center p-4"
+                                style="background-color: var(--transparency-10); border: 1px solid var(--transparency-20);">
+                                <label
+                                    class="text-white fw-normal fs-6 user-select-none d-flex flex-column text-nowrap">
+                                    Realizar o download do Wordpress
+                                    <span style="opacity: 0.4; font-size: 0.8rem;">
+                                        Ferramenta de criação de <i>websites</i>
+                                    </span>
+                                </label>
+                                <div class="d-flex flex-row gap-2 w-auto justify-content-center">
+                                    <button
+                                        class="btn btn-primary rounded-3 fw-normal d-flex flex-row align-items-center gap-1 py-2 px-5 user-select-none justify-content-center"
+                                        data-open-url="#downloadWordpress">
+                                        <img src="img/svg/download.svg" alt="Download" width="16"
+                                            style="margin: 2px 0 0 -2px;">
+                                        Download
+                                    </button>
+                                    <p class="d-none" id="downloadWordpress">https://wordpress.org/latest.zip</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Plugins Tab -->
                     <div class="main tab-pane fade w-100" id="plugins-tab" role="tabpanel"
                         aria-labelledby="but-plugins-tab" tabindex="0">
                         <div
-                            class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3 mt-2">
+                            class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
                             <label for="url_"
                                 class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1">
-                                <img draggable="false" src="svg/plugin.svg" width="20" style="margin-top: 1px;"
+                                <img draggable="false" src="img/svg/plugin.svg" width="20" style="margin-top: 1px;"
                                     alt="Download">Plugins
                                 para Website</label>
                         </div>
@@ -199,12 +246,19 @@
                     <!-- Redirection Tab -->
                     <div class="main tab-pane fade w-100" id="redirection-tab" role="tabpanel"
                         aria-labelledby="but-redirection-tab" tabindex="0">
+                        <div
+                            class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
+                            <label for="url_"
+                                class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1">
+                                <img draggable="false" src="img/svg/redirect.svg" width="20" style="margin-top: 1px;"
+                                    alt="Download">Redirect de Páginas</label>
+                        </div>
                         <div class="d-flex flex-column gap-3 enter-animation">
                             <div
                                 class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
                                 <label for="url_"
                                     class="text-white fw-semibold fs-6 user-select-none d-flex align-items-center gap-1">
-                                    <img draggable="false" width="24" src="svg/link.svg" style="margin-top: 1px"
+                                    <img draggable="false" width="24" src="img/svg/link.svg" style="margin-top: 1px"
                                         alt="Link">URL
                                     Original</label>
                                 <input type="text" class="form-control font-whitep-2 w-75 bg-transparent border-0"
@@ -270,7 +324,7 @@
                             style="font-size: 0.9rem;" id="but-note-tab" data-bs-toggle="pill"
                             data-bs-target="#note-tab" type="button" role="tab" aria-controls="note-tab"
                             aria-selected="false">
-                            <img draggable="false" src="svg/note.svg" width="14" alt="Anotações">Anotações</button>
+                            <img draggable="false" src="img/svg/note.svg" width="14" alt="Anotações">Anotações</button>
                     </li>
 
                     <!-- Mask and Validation Code Button -->
@@ -280,7 +334,7 @@
                             style="font-size: 0.9rem;" id="but-form-mask-validation-tab" data-bs-toggle="pill"
                             data-bs-target="#form-mask-validation-tab" type="button" role="tab"
                             aria-controls="form-mask-validation-tab" aria-selected="false">
-                            <img draggable="false" src="svg/form.svg" width="16" alt="E-mail">Formulário</button>
+                            <img draggable="false" src="img/svg/form.svg" width="16" alt="E-mail">Formulário</button>
                     </li>
 
                     <!-- Advanced Tools Button -->
@@ -290,7 +344,7 @@
                             style="font-size: 0.9rem;" id="but-advanced-settings-tab" data-bs-toggle="pill"
                             data-bs-target="#advanced-settings-tab" type="button" role="tab"
                             aria-controls="advanced-settings-tab" aria-selected="false">
-                            <img draggable="false" src="svg/magic.svg" width="16" alt="Avançado">Avançado</button>
+                            <img draggable="false" src="img/svg/magic.svg" width="16" alt="Avançado">Avançado</button>
                     </li>
                 </ul>
 
@@ -303,15 +357,19 @@
                         <div
                             class="d-flex flex-row gap-3 justify-content-between align-items-center user-select-none mb-3">
                             <label class="text-white fw-semibold fs-5 d-flex align-items-center gap-1">
-                                <img draggable="false" src="svg/note.svg" width="22" alt="Anotações">Anotações
+                                <img draggable="false" src="img/svg/note.svg" width="22" alt="Anotações">Anotações
                             </label>
                             <div class="d-flex flex-row gap-2 w-100">
                                 <input type="text" class="form-control search-input w-100" style="height: 2.4rem;"
                                     id="searchInput" placeholder="Buscar anotação">
                                 <button class="btn btn-primary" style="height: 2.4rem;" data-bs-toggle="modal"
                                     data-bs-target="#noteModal">
-                                    <img src="svg/new-note.svg" width="16" alt="New Note">
+                                    <img src="img/svg/new-note.svg" width="16" alt="New Note">
                                 </button>
+                                <button class="btn btn-primary" style="height: 2.4rem;" data-open-url="#noteBlockPage" data-bs-toggle="modal">
+                                    <img src="img/svg/open.svg" width="16" alt="New Note">
+                                </button>
+                                <p class="d-none" id="noteBlockPage">/notes.html</p>
                             </div>
                         </div>
 
@@ -357,7 +415,7 @@
                             class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
                             <label for="url_"
                                 class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1">
-                                <img draggable="false" src="svg/form.svg" width="24" alt="E-mail">Máscara e Validação de
+                                <img draggable="false" src="img/svg/form.svg" width="24" alt="E-mail">Máscara e Validação de
                                 Campo</label>
                         </div>
                         <div class="d-flex flex-column justify-content-between w-100 p-3 gap-3 rounded-3"
@@ -377,7 +435,7 @@
                                     <input class="form-control" type="text" id="emailField" placeholder="email"
                                         style="border-radius: 0 0.4rem 0.4rem 0; box-shadow: initial;" />
                                     <button class="btn btn-primary ms-2" id="copyEmailValidation">
-                                        <img src="svg/copy.svg" width="18">
+                                        <img src="img/svg/copy.svg" width="18">
                                     </button>
                                 </div>
                             </div>
@@ -396,7 +454,7 @@
                                     <input class="form-control" type="text" id="phoneField" placeholder="phone"
                                         style="border-radius: 0 0.4rem 0.4rem 0; box-shadow: initial;" />
                                     <button class="btn btn-primary ms-2" id="copyPhoneMask">
-                                        <img src="svg/copy.svg" width="18">
+                                        <img src="img/svg/copy.svg" width="18">
                                     </button>
                                 </div>
                             </div>
@@ -410,7 +468,7 @@
                             class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
                             <label for="url_"
                                 class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1">
-                                <img draggable="false" src="svg/magic.svg" width="24" alt="Download">Avançado</label>
+                                <img draggable="false" src="img/svg/magic.svg" width="24" alt="Download">Avançado</label>
                         </div>
                         <div class="d-flex gap-3 p-4 w-100 rounded-2 enter-animation flex-column"
                             style="background: var(--transparency-10); border: 1px solid var(--primary-900);">
@@ -430,7 +488,7 @@
                                         class="btn btn-outline-primary rounded-3 fw-normal d-flex flex-row align-items-center gap-1 py-2 px-5 user-select-none justify-content-center"
                                         id="designModeTool"
                                         style="background-color: var(--transparency-30); transform: none;">
-                                        <img src="svg/nib.svg" alt="Nib" width="16" style="margin-top: 2px;">
+                                        <img src="img/svg/nib.svg" alt="Nib" width="16" style="margin-top: 2px;">
                                         Design Mode
                                     </button>
                                 </div>
@@ -455,9 +513,9 @@
     <script src="js/tools/redirection.js"></script>
     <script src="js/tools/validation-fields.js"></script>
 
-    <div aria-live="polite" aria-atomic="true" class="position-fixed user-select-none"
+    <!-- <div aria-live="polite" aria-atomic="true" class="position-fixed user-select-none"
         style="bottom: 10px; right: 10px;">
-        <div class="toast align-items-center text-bg-success fade show" role="alert" aria-live="assertive"
+        <div class="toast align-items-center text-bg-warning fade show" role="alert" aria-live="assertive"
             aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body message">
@@ -468,7 +526,7 @@
                     aria-label="Close"></button>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </body>
 

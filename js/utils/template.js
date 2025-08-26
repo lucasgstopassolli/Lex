@@ -13,7 +13,7 @@ const loadingHTML = `
 const emptyHTML = `
     <div class="d-flex align-items-center justify-content-center flex-column gap-4 p-4" style="height: 300px!important;">
       <div class="idle-pulse user-select-none">
-        <img draggable="false" src="svg/white-hole.svg" class="d-block h-auto" alt="Empty State"
+        <img draggable="false" src="img/svg/white-hole.svg" class="d-block h-auto" alt="Empty State"
         style="opacity: 0.6; width: 250px; height: auto; transform: rotate(16deg)!important;">
       </div>
       <div class="d-flex flex-column justify-content-center gap-2 user-select-none">

@@ -19,20 +19,26 @@ plugins.forEach((plugin, index) => {
         <div class="card-body d-flex flex-column text-start gap-2 p-3">
           <button class="btn btn-primary btn-install"
             data-index="${index}"
-            data-selector="#the-list > div.plugin-card${plugin.wordpressSelector} > div.plugin-card-top > div.action-links > ul > li:nth-child(1) > a"
-            data-link="/wp-admin/plugin-install.php?s=${encodeURIComponent(plugin.searchName || plugin.name)}&tab=search&type=term"
+            data-selector="#the-list > div.plugin-card${
+              plugin.wordpressSelector
+            } > div.plugin-card-top > div.action-links > ul > li:nth-child(1) > a"
+            data-link="/wp-admin/plugin-install.php?s=${encodeURIComponent(
+              plugin.searchName || plugin.name
+            )}&tab=search&type=term"
             data-bs-toggle="tooltip"
             data-bs-placement="left"
             title="Download the plugin">
-            <img src="svg/download.svg" style="width: 1.2rem" alt="Download">
+            <img src="img/svg/download.svg" style="width: 1.2rem" alt="Download">
           </button>
           <button class="btn btn-outline-primary btn-view"
             data-selector="${plugin.wordpressSelector}"
-            data-link="/wp-admin/plugin-install.php?s=${encodeURIComponent(plugin.searchName || plugin.name)}&tab=search&type=term"
+            data-link="/wp-admin/plugin-install.php?s=${encodeURIComponent(
+              plugin.searchName || plugin.name
+            )}&tab=search&type=term"
             data-bs-toggle="tooltip"
             data-bs-placement="left"
             title="View the plugin">
-            <img src="svg/view.svg" style="width: 1.2rem" alt="View">
+            <img src="img/svg/view.svg" style="width: 1.2rem" alt="View">
           </button>
         </div>
       </div>
@@ -62,27 +68,30 @@ btnView.forEach((button) => {
       if (changeInfo.status === "complete") {
         chrome.tabs.onUpdated.removeListener(listener);
 
-        chrome.storage.local.get(["pluginInstallURL", "selector"], function (data) {
-          if (data.pluginInstallURL && data.selector) {
-            chrome.scripting.executeScript({
-              target: { tabId },
-              func: (selector) => {
-                const observer = new MutationObserver((_, observer) => {
-                  const pluginCard = document.querySelector(selector);
-                  if (pluginCard) {
-                    pluginCard.classList.add("pulse-animation");
-                    observer.disconnect();
-                  }
-                });
-                observer.observe(document.body, {
-                  childList: true,
-                  subtree: true,
-                });
-              },
-              args: [data.selector],
-            });
+        chrome.storage.local.get(
+          ["pluginInstallURL", "selector"],
+          function (data) {
+            if (data.pluginInstallURL && data.selector) {
+              chrome.scripting.executeScript({
+                target: { tabId },
+                func: (selector) => {
+                  const observer = new MutationObserver((_, observer) => {
+                    const pluginCard = document.querySelector(selector);
+                    if (pluginCard) {
+                      pluginCard.classList.add("pulse-animation");
+                      observer.disconnect();
+                    }
+                  });
+                  observer.observe(document.body, {
+                    childList: true,
+                    subtree: true,
+                  });
+                },
+                args: [data.selector],
+              });
+            }
           }
-        });
+        );
       }
     });
   });
@@ -106,7 +115,10 @@ btnInstall.forEach((button) => {
     const selector = button.dataset.selector;
 
     try {
-      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+      const [tab] = await chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
 
       if (!tab || !tab.id) {
         alert("No active tab found.");
@@ -163,8 +175,8 @@ btnInstall.forEach((button) => {
 
 // Handle "Like" button state and toggle
 const likeBtn = document.querySelector("#likeVerse");
-const unlikePath = "svg/unlike.svg";
-const likePath = "svg/like.svg";
+const unlikePath = "img/svg/unlike.svg";
+const likePath = "img/svg/like.svg";
 chrome.storage.local.get("likedVerse", (result) => {
   let liked = result.likedVerse || false;
 
@@ -185,7 +197,8 @@ function syncCheckedState(selector, callback) {
   if (!checkInput) return;
 
   chrome.storage.local.get([selector], (result) => {
-    const checked = result[selector] !== undefined ? result[selector] : checkInput.checked;
+    const checked =
+      result[selector] !== undefined ? result[selector] : checkInput.checked;
     checkInput.checked = checked;
     if (callback) callback(checked);
   });
@@ -204,14 +217,14 @@ function toggleDesignMode(enabled) {
 syncCheckedState("#checkDesignMode", toggleDesignMode);
 
 // Enable design mode on current page
-function designModeListen(selector, data, addClass){
-  document.querySelector(selector).addEventListener("click", async function() {
-  const tab = await getCurrentTab();
-  if(addClass){
-    document.querySelector(selector).classList.add(addClass)
-  }
-  sendMessage(tab.id, { action: data });
-  })
+function designModeListen(selector, data, addClass) {
+  document.querySelector(selector).addEventListener("click", async function () {
+    const tab = await getCurrentTab();
+    if (addClass) {
+      document.querySelector(selector).classList.add(addClass);
+    }
+    sendMessage(tab.id, { action: data });
+  });
 }
 
-designModeListen("#designModeTool", "enableDesignMode", "activeBut")
+designModeListen("#designModeTool", "enableDesignMode", "activeBut");
