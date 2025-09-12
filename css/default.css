@@ -47,18 +47,13 @@ html,
 html * {
   scrollbar-color: var(--primary-500) transparent;
 }
-*:focus-visible{
+*:focus-visible {
   outline: none;
 }
 body {
   background: var(--secondary-color);
   font-family: var(--font-family);
-  overflow: hidden;
-}
-h1 {
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 1.125rem;
+  /* overflow: hidden; */
 }
 
 /* Nav buttons */
@@ -171,17 +166,29 @@ h1 {
 /* Text + Background Styles */
 .text-bg-success {
   color: #fff !important;
-  background: linear-gradient(90deg, rgb(0, 80, 0), rgba(0,110,0, 0.9))!important;
-  border-color: rgba(0,110,0);
+  background: linear-gradient(
+    90deg,
+    rgb(0, 80, 0),
+    rgba(0, 110, 0, 0.9)
+  ) !important;
+  border-color: rgba(0, 110, 0);
 }
 .text-bg-warning {
   color: #fff !important;
-  background: linear-gradient(90deg, rgb(117, 109, 0), rgba(165, 171, 0, 0.8))!important;
+  background: linear-gradient(
+    90deg,
+    rgb(117, 109, 0),
+    rgba(165, 171, 0, 0.8)
+  ) !important;
   border-color: rgba(166, 171, 0);
 }
 .text-bg-danger {
   color: #fff !important;
-  background: linear-gradient(90deg, rgb(90, 0, 0), rgba(135, 0, 0, 0.9))!important;
+  background: linear-gradient(
+    90deg,
+    rgb(90, 0, 0),
+    rgba(135, 0, 0, 0.9)
+  ) !important;
   border-color: rgba(135, 0, 0);
 }
 
@@ -215,7 +222,8 @@ h1 {
 }
 
 @keyframes idle-pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -226,7 +234,6 @@ h1 {
 .idle-pulse {
   animation: idle-pulse 3s ease-in-out infinite;
 }
-
 
 /* Plugin cards */
 .card {
@@ -308,12 +315,12 @@ h1 {
   left: 100%;
 }
 
-.activeBut{
-  background-color: var(--primary-500)!important;
-  border-color: var(--primary-500)!important;
+.activeBut {
+  background-color: var(--primary-500) !important;
+  border-color: var(--primary-500) !important;
 }
 
-#noteModal .form-control:focus{
+#noteModal .form-control:focus {
   box-shadow: none;
 }
 .note-item {

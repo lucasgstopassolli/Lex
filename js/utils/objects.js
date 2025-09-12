@@ -118,6 +118,7 @@ const plugins = [
     description:
       "Permita o envio de arquivos SVG e sanitize-os para impedir vulnerabilidades XML/SVG no seu site WordPress.",
       image: "https://ps.w.org/safe-img/svg/assets/icon.svg",
+      image: "https://ps.w.org/safe-svg/assets/icon.svg?rev=2779013",
       wordpressSelector: ".plugin-card-safe-svg",
   },
   {

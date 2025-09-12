@@ -23,7 +23,7 @@
     <ul class="nav nav-pills d-flex flex-row gap-0 p-1 mb-1 flex-nowrap nav-bar mainTab" id="pills-tab" role="tablist">
 
         <!-- Home Button -->
-        <li class="nav-item w-100" role="presentation">
+        <li style="width: -webkit-fill-available;" class="nav-item" role="presentation">
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem;" id="but-initial-tab" data-bs-toggle="pill" data-bs-target="#initial-tab"
@@ -34,7 +34,7 @@
             </button>
         </li>
         <!-- Wordpress Button -->
-        <li class="nav-item w-100" role="presentation">
+        <li style="width: -webkit-fill-available;" class="nav-item" role="presentation">
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem;" id="but-wordpress-tab" data-bs-toggle="pill" data-bs-target="#wordpress-tab"
@@ -44,7 +44,7 @@
             </button>
         </li>
         <!-- Design Button -->
-        <li class="nav-item w-100" role="presentation">
+        <li style="width: -webkit-fill-available;" class="nav-item" role="presentation">
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem;" id="but-design-tab" data-bs-toggle="pill" data-bs-target="#design-tab"
@@ -54,7 +54,7 @@
             </button>
         </li>
         <!-- Tools Button -->
-        <li class="nav-item w-100" role="presentation">
+        <li style="width: -webkit-fill-available;" class="nav-item" role="presentation">
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem;" id="but-tools-tab" data-bs-toggle="pill" data-bs-target="#tools-tab"
@@ -63,11 +63,6 @@
                 <span style="line-height: normal;">Ferramentas</span>
             </button>
         </li>
-        <!-- Design Mode -->
-        <div class="form-check form-switch d-flex gap-1 align-items-center w-auto">
-            <input class="form-check-input" type="checkbox" value="" id="checkDesignMode"
-                style="transform: rotate(270deg);" switch>
-        </div>
     </ul>
 
     <!-- Tabs -->
@@ -362,11 +357,11 @@
                             <div class="d-flex flex-row gap-2 w-100">
                                 <input type="text" class="form-control search-input w-100" style="height: 2.4rem;"
                                     id="searchInput" placeholder="Buscar anotação">
-                                <button class="btn btn-primary" style="height: 2.4rem;" data-bs-toggle="modal"
+                                <button class="btn btn-primary" style="height: 2.4rem; width: 2.4rem;" data-bs-toggle="modal"
                                     data-bs-target="#noteModal">
                                     <img src="img/svg/new-note.svg" width="16" alt="New Note">
                                 </button>
-                                <button class="btn btn-primary" style="height: 2.4rem;" data-open-url="#noteBlockPage" data-bs-toggle="modal">
+                                <button class="btn btn-primary" style="height: 2.4rem; width: 2.4rem" data-open-url="#noteBlockPage" data-bs-toggle="modal">
                                     <img src="img/svg/open.svg" width="16" alt="New Note">
                                 </button>
                                 <p class="d-none" id="noteBlockPage">/notes.html</p>
