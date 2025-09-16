@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tetris Funcional - Corrigido</title>
+  <style>
+    :root {
+      --background-color: #f0f0f0;
+      --text-color: #333;
+      --primary-color: #6a0dad;
+      --board-bg: #fff;
+      --grid-color: #ebebeb;
+      --button-bg: #6a0dad;
+      --button-text: #fff;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .container { text-align: center; }
+    .game-area {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    canvas {
+      background-color: var(--board-bg);
+      border: 2px solid var(--primary-color);
+      border-radius: 5px;
+    }
+    .side-panel { text-align: left; }
+    h2 { color: var(--primary-color); margin-bottom: 5px; }
+    p { font-size: 1.5em; margin-top: 0; }
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    button {
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+    button:hover { background-color: #8a2be2; }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    #gameOverMessage {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Tetris Funcional</h1>
+    <div class="game-area">
+      <canvas id="tetris" width="240" height="480"></canvas>
+      <div class="side-panel">
+        <h2>Próximo</h2>
+        <canvas id="next" width="120" height="120"></canvas>
+        <h2>Pontuação</h2>
+        <p id="score">0</p>
+        <h2>Nível</h2>
+        <p id="level">1</p>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="playBtn">Jogar</button>
+      <button id="pauseBtn" disabled>Pausar</button>
+      <button id="restartBtn" disabled>Reiniciar</button>
+    </div>
+    <div id="gameOverMessage">
+      <h2>Fim de Jogo!</h2>
+      <p>Pontuação Final: <span id="finalScore">0</span></p>
+    </div>
+  </div>
+  <script>
+    // --- Constantes ---
+    const COLS = 10, ROWS = 20, BLOCK_SIZE = 24;
+
+    const COLORS = [
+      null,
+      '#FF0D72', '#0DC2FF', '#0DFF72',
+      '#F538FF', '#FF8E0D', '#FFE138', '#3877FF'
+    ];
+
+    const SHAPES = [
+      [],
+      [[0,0,0,0],[1,1,1,1],[0,0,0,0],[0,0,0,0]], // I
+      [[2,0,0],[2,2,2],[0,0,0]], // J
+      [[0,0,3],[3,3,3],[0,0,0]], // L
+      [[4,4],[4,4]], // O
+      [[0,5,5],[5,5,0],[0,0,0]], // S
+      [[0,6,0],[6,6,6],[0,0,0]], // T
+      [[7,7,0],[0,7,7],[0,0,0]]  // Z
+    ];
+
+    const LINE_POINTS = [0, 40, 100, 300, 1200];
+
+    // --- Funções Puras (Lógica do Jogo) ---
+
+    function createEmptyBoard() {
+      return Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+    }
+
+    function generateNewPiece() {
+      const typeId = Math.floor(Math.random() * (SHAPES.length - 1)) + 1;
+      const shape = SHAPES[typeId];
+      return {
+        x: Math.floor(COLS / 2) - Math.floor(shape[0].length / 2),
+        y: 0,
+        shape: shape,
+        color: COLORS[typeId],
+        typeId: typeId
+      };
+    }
+
+    function movePiece(piece, dx, dy) {
+      return { ...piece, x: piece.x + dx, y: piece.y + dy };
+    }
+
+    function rotatePiece(piece) {
+      const newShape = piece.shape[0].map((_, colIndex) =>
+        piece.shape.map(row => row[colIndex]).reverse()
+      );
+      return { ...piece, shape: newShape };
+    }
+
+    function isValidMove(piece, board) {
+      for (let y = 0; y < piece.shape.length; y++) {
+        for (let x = 0; x < piece.shape[y].length; x++) {
+          if (piece.shape[y][x]) {
+            const newX = piece.x + x;
+            const newY = piece.y + y;
+            if (newX < 0 || newX >= COLS || newY >= ROWS ||
+                (newY >= 0 && board[newY][newX])) {
+              return false;
+            }
+          }
+        }
+      }
+      return true;
+    }
+
+    function placePiece(piece, board) {
+      const newBoard = board.map(row => row.slice());
+      piece.shape.forEach((row, y) => {
+        row.forEach((value, x) => {
+          if (value) {
+            newBoard[piece.y + y][piece.x + x] = piece.typeId;
+          }
+        });
+      });
+      return newBoard;
+    }
+
+    function clearLines(board) {
+      const newBoard = board.filter(row => !row.every(cell => cell !== 0));
+      const linesCleared = ROWS - newBoard.length;
+      while (newBoard.length < ROWS) {
+        newBoard.unshift(Array(COLS).fill(0));
+      }
+      return { board: newBoard, linesCleared };
+    }
+
+    // --- Elementos do DOM e Estado do Jogo ---
+
+    const canvas = document.getElementById('tetris');
+    const context = canvas.getContext('2d');
+    const nextCanvas = document.getElementById('next');
+    const nextContext = nextCanvas.getContext('2d');
+    const scoreElement = document.getElementById('score');
+    const levelElement = document.getElementById('level');
+    const playBtn = document.getElementById('playBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const gameOverMessage = document.getElementById('gameOverMessage');
+    const finalScoreElement = document.getElementById('finalScore');
+    
+    // CORREÇÃO: Pega o valor da variável CSS para usar no JavaScript
+    const gridColor = getComputedStyle(document.documentElement).getPropertyValue('--grid-color').trim();
+
+    let gameState = {
+      board: createEmptyBoard(),
+      piece: null,
+      nextPiece: generateNewPiece(),
+      score: 0,
+      lines: 0,
+      level: 1,
+      gameOver: false,
+      isPaused: true,
+      animationFrameId: null
+    };
+
+    // --- Funções de Desenho (Efeitos Colaterais) ---
+
+    function draw() {
+      // Limpa e desenha o tabuleiro principal
+      context.fillStyle = '#fff';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+
+      // CORREÇÃO: Usa a cor da grade obtida do CSS
+      context.strokeStyle = gridColor;
+      context.lineWidth = 1;
+      for (let y = 1; y < ROWS; y++) {
+        context.beginPath();
+        context.moveTo(0, y * BLOCK_SIZE);
+        context.lineTo(canvas.width, y * BLOCK_SIZE);
+        context.stroke();
+      }
+      for (let x = 1; x < COLS; x++) {
+        context.beginPath();
+        context.moveTo(x * BLOCK_SIZE, 0);
+        context.lineTo(x * BLOCK_SIZE, canvas.height);
+        context.stroke();
+      }
+
+      // Desenha as peças que já caíram
+      gameState.board.forEach((row, y) => {
+        row.forEach((value, x) => {
+          if (value) {
+            context.fillStyle = COLORS[value];
+            context.fillRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+            context.strokeStyle = '#000';
+            context.strokeRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+          }
+        });
+      });
+
+      // Desenha a peça atual
+      if (gameState.piece) {
+        const piece = gameState.piece;
+        context.fillStyle = piece.color;
+        piece.shape.forEach((row, y) => {
+          row.forEach((value, x) => {
+            if (value) {
+              const drawY = piece.y + y;
+              if (drawY >= 0) {
+                context.fillRect((piece.x + x) * BLOCK_SIZE, drawY * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+                context.strokeStyle = '#000';
+                context.strokeRect((piece.x + x) * BLOCK_SIZE, drawY * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+              }
+            }
+          });
+        });
+      }
+
+      // Atualiza a interface
+      scoreElement.textContent = gameState.score;
+      levelElement.textContent = gameState.level;
+      drawNextPiece();
+    }
+
+    function drawNextPiece() {
+      nextContext.fillStyle = '#fff';
+      nextContext.fillRect(0, 0, nextCanvas.width, nextCanvas.height);
+      const { shape, color } = gameState.nextPiece;
+      nextContext.fillStyle = color;
+      shape.forEach((row, y) => {
+        row.forEach((value, x) => {
+          if (value) {
+            // Centraliza a peça no canvas de preview
+            const offsetX = (nextCanvas.width - shape[0].length * BLOCK_SIZE) / 2;
+            const offsetY = (nextCanvas.height - shape.length * BLOCK_SIZE) / 2;
+            nextContext.fillRect(offsetX + x * BLOCK_SIZE, offsetY + y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+            nextContext.strokeStyle = '#000';
+            nextContext.strokeRect(offsetX + x * BLOCK_SIZE, offsetY + y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+          }
+        });
+      });
+    }
+
+    // --- Funções de Lógica e Controle do Jogo ---
+
+    function landPiece() {
+      let newBoard = placePiece(gameState.piece, gameState.board);
+      const { board: clearedBoard, linesCleared } = clearLines(newBoard);
+      
+      const newScore = gameState.score + LINE_POINTS[linesCleared] * gameState.level;
+      const newTotalLines = gameState.lines + linesCleared;
+      const newLevel = Math.floor(newTotalLines / 10) + 1;
+
+      const nextPiece = gameState.nextPiece;
+      
+      // Checa game over com o tabuleiro atualizado
+      if (!isValidMove(nextPiece, clearedBoard)) {
+        gameState.gameOver = true;
+        gameState.isPaused = true;
+        gameState.board = clearedBoard; // Mostra a última peça travada
+        gameState.score = newScore; // CORREÇÃO: Atualiza a pontuação antes de mostrar
+        
+        // CORREÇÃO: Mostra a pontuação final correta
+        finalScoreElement.textContent = gameState.score;
+        gameOverMessage.style.display = 'block';
+        
+        playBtn.disabled = true;
+        pauseBtn.disabled = true;
+        restartBtn.disabled = false;
+        draw(); // Redesenha uma última vez para mostrar o estado final
+      } else {
+        gameState.board = clearedBoard;
+        gameState.piece = nextPiece;
+        gameState.nextPiece = generateNewPiece();
+        gameState.score = newScore;
+        gameState.lines = newTotalLines;
+        gameState.level = newLevel;
+      }
+    }
+
+    function dropPiece() {
+      const newPiece = movePiece(gameState.piece, 0, 1);
+      if (isValidMove(newPiece, gameState.board)) {
+        gameState.piece = newPiece;
+      } else {
+        landPiece();
+      }
+    }
+    
+    function hardDrop() {
+      let p = gameState.piece;
+      while (isValidMove(p, gameState.board)) {
+        gameState.piece = p;
+        p = movePiece(p, 0, 1);
+      }
+      landPiece();
+    }
+    
+    // --- Loop Principal do Jogo ---
+
+    let lastTime = 0;
+    let dropCounter = 0;
+    const dropInterval = 1000;
+
+    function update(time = 0) {
+      if (gameState.isPaused || gameState.gameOver) return;
+
+      const deltaTime = time - lastTime;
+      lastTime = time;
+      dropCounter += deltaTime;
+
+      const currentInterval = Math.max(dropInterval - (gameState.level - 1) * 100, 100);
+      
+      if (dropCounter > currentInterval) {
+        dropPiece();
+        dropCounter = 0;
+      }
+
+      draw();
+      gameState.animationFrameId = requestAnimationFrame(update);
+    }
+
+    // --- Funções de Controle (Botões) ---
+
+    function startGame() {
+      if (gameState.gameOver) return;
+      
+      if (gameState.isPaused) {
+        gameState.isPaused = false;
+        if (!gameState.piece) {
+          gameState.piece = generateNewPiece();
+        }
+        playBtn.disabled = true;
+        pauseBtn.disabled = false;
+        restartBtn.disabled = false;
+        lastTime = performance.now();
+        update();
+      }
+    }
+
+    function pauseGame() {
+      if (gameState.gameOver) return;
+      gameState.isPaused = true;
+      cancelAnimationFrame(gameState.animationFrameId);
+      playBtn.textContent = 'Continuar';
+      playBtn.disabled = false;
+      pauseBtn.disabled = true;
+    }
+
+    function restartGame() {
+      // MELHORIA: Cancela o loop de animação antigo antes de começar um novo
+      if (gameState.animationFrameId) {
+        cancelAnimationFrame(gameState.animationFrameId);
+      }
+      
+      gameState = {
+        board: createEmptyBoard(),
+        piece: generateNewPiece(),
+        nextPiece: generateNewPiece(),
+        score: 0,
+        lines: 0,
+        level: 1,
+        gameOver: false,
+        isPaused: false,
+        animationFrameId: null
+      };
+      
+      gameOverMessage.style.display = 'none';
+      playBtn.textContent = 'Jogar';
+      playBtn.disabled = true;
+      pauseBtn.disabled = false;
+      restartBtn.disabled = false;
+      
+      lastTime = performance.now();
+      dropCounter = 0;
+      update();
+    }
+
+    // --- Event Listeners ---
+
+    document.addEventListener('keydown', event => {
+      if (gameState.isPaused || gameState.gameOver) return;
+      
+      let newPiece = { ...gameState.piece }; // Começa com a peça atual
+      
+      if (event.key === 'ArrowLeft') {
+        newPiece = movePiece(newPiece, -1, 0);
+      } else if (event.key === 'ArrowRight') {
+        newPiece = movePiece(newPiece, 1, 0);
+      } else if (event.key === 'ArrowUp') {
+        const rotated = rotatePiece(newPiece);
+        if (isValidMove(rotated, gameState.board)) {
+          newPiece = rotated;
+        } else {
+          // MELHORIA: Lógica de "Wall Kick" simples
+          let kicked = movePiece(rotated, 1, 0); // Tenta chutar para a direita
+          if (isValidMove(kicked, gameState.board)) {
+            newPiece = kicked;
+          } else {
+            kicked = movePiece(rotated, -1, 0); // Tenta chutar para a esquerda
+            if (isValidMove(kicked, gameState.board)) {
+              newPiece = kicked;
+            }
+          }
+        }
+      } else if (event.key === 'ArrowDown') {
+        dropPiece();
+        // MELHORIA: Zera o contador para o jogador ter mais controle
+        dropCounter = 0; 
+        return; // Retorna para não redesenhar duas vezes
+      } else if (event.code === 'Space') {
+        // MELHORIA: Previne a página de rolar ao apertar espaço
+        event.preventDefault(); 
+        hardDrop();
+        return;
+      }
+
+      if (isValidMove(newPiece, gameState.board)) {
+        gameState.piece = newPiece;
+      }
+      
+      draw(); // Redesenha a tela imediatamente após o movimento do jogador
+    });
+
+    playBtn.addEventListener('click', startGame);
+    pauseBtn.addEventListener('click', pauseGame);
+    restartBtn.addEventListener('click', restartGame);
+
+    // Inicia o jogo em um estado "pronto para jogar"
+    draw();
+
+  </script>
+</body>
+</html>

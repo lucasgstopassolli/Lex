@@ -32,83 +32,45 @@ function renderNotes(notesToShow = notes) {
     return;
   }
 
-  // Build the HTML for each note
+  function stripHtml(html) {
+    let div = document.createElement("div");
+    div.innerHTML = html;
+    return div.textContent || div.innerText || "";
+  }
+
   container.innerHTML = notesToShow
     .map(
       (note) => `
+      <div class="col-lg-4">
         <div class="note-item card d-flex flex-row gap-2 rounded-3 justify-content-between"
             data-id="${note.id}">
             <div class="d-flex flex-column gap-2">
-                <h5 class="note-title mb-1" style="color:var(--primary-400);">${
-                  note.title
-                }</h5>
-                <p class="d-inline-block note-content text-muted text-truncate" style="max-width: 25rem">${
-                  note.content
-                }</p>
+                <h5 class="note-title mb-1" style="color:var(--primary-400);">
+                  ${note.title}
+                </h5>
+                <p class="d-inline-block note-content text-muted text-truncate" style="max-width: 14rem">
+                  ${escapeHtml(stripHtml(note.content))}
+                </p>
             </div>
             <div class="d-flex flex-column gap-2">
-                <div class="note-date align-self-end me-2" style="color:var(--primary-300)">${formatDate(
-                  note.date
-                )}</div>
+                <div class="note-date align-self-end me-2" style="color:var(--primary-300)">
+                  ${formatDate(note.date)}
+                </div>
                 <div class="note-actions d-flex gap-2">
-                    <button class="btn btn-primary btn-sm fw-semibold edit-button lh-normal"
+                    <button class="btn btn-primary btn-sm fw-normal edit-button lh-normal"
                         style="padding: 0.6rem 1.4em!important;">Editar</button>
                     <button class="btn btn-outline-danger delete-button lh-1"
-                        style="padding: 0.6rem 0.8rem!important;">
-                          <img src="img/svg/trash.svg" alt="Delete" width="18">
-                        </button>
+                        style="padding: 0.6rem 0.7rem!important;">
+                          <img src="img/svg/trash.svg" alt="Delete" width="18" style="pointer-events: none;">
+                    </button>
                 </div>
             </div>
         </div>
-      `
+      </div>
+    `
     )
     .join("");
 }
-
-// Save a new note or update an existing one
-// function saveNote() {
-//   const title = document.getElementById("noteTitle").value.trim();
-//   const content = document.getElementById("noteContent").value.trim();
-
-//   // Validate fields
-//   if (!title || !content) {
-//     alert("Please fill in both title and content!");
-//     return;
-//   }
-
-//   // If editing an existing note
-//   if (editingId) {
-//     const index = notes.findIndex((n) => n.id === editingId);
-//     notes[index] = { ...notes[index], title, content, date: new Date() };
-//   } else {
-//     // Add new note at the beginning of the array
-//     notes.unshift({
-//       id: generateId(),
-//       title,
-//       content,
-//       date: new Date(),
-//     });
-//   }
-
-//   saveToStorage();
-//   renderNotes();
-//   closeModal(); // Close modal after saving
-// }
-
-// Load a note into the modal for editing
-// function editNote(id) {
-//   const note = notes.find((n) => n.id === id);
-//   if (!note) return;
-
-//   editingId = id;
-
-//   document.getElementById("modalContent").textContent = "Edit Note";
-//   document.getElementById("noteTitle").value = note.title;
-//   document.getElementById("noteContent").value = note.content;
-
-//   // Show the Bootstrap modal
-//   new bootstrap.Modal(document.getElementById("noteModal")).show();
-// }
 
 // Delete a note with confirmation
 function deleteNote(id) {
@@ -118,18 +80,6 @@ function deleteNote(id) {
     renderNotes();
   }
 }
-
-// Close the modal and reset form fields
-// function closeModal() {
-//   const modal = bootstrap.Modal.getInstance(
-//     document.getElementById("noteModal")
-//   );
-//   modal.hide();
-
-//   document.getElementById("noteTitle").value = "";
-//   document.getElementById("noteContent").value = "";
-//   editingId = null;
-// }
 
 // Salva uma nova nota ou atualiza uma existente
 function saveNote() {

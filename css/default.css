@@ -154,6 +154,8 @@ body {
   background-color: var(--transparency-10);
   border: var(--bs-border-width) solid var(--primary-800);
   transition: all ease 0.4s;
+  font-size: 1.125rem;
+  padding: 0.6rem 0.8rem;
 }
 .form-control:focus {
   color: var(--primary-50);
@@ -190,6 +192,12 @@ body {
     rgba(135, 0, 0, 0.9)
   ) !important;
   border-color: rgba(135, 0, 0);
+}
+.user-select-none {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* Animations */
@@ -325,4 +333,8 @@ body {
 }
 .note-item {
   padding: 1rem 1.2rem;
+}
+
+#tools-tab .row {
+  margin: 0!important;
 }

@@ -1,6 +1,5 @@
 /*--------- Default Color Palette ---------*/
 :root {
-  --bs-modal-width: 1000px !important;
   --primary-50: #f1f3ff;
   --primary-100: #e5e9ff;
   --primary-200: #cfd7ff;
@@ -21,7 +20,7 @@
   --transparency-70: #09078db3;
   --transparency-80: #09078dcc;
   --transparency-90: #09078de6;
-  --font-family: "Quicksand", "Arial", "Helvetica", "sans-serif";
+  --font-family: "Sansation", "Quicksand", "Arial", "Helvetica", "sans-serif";
   --secondary-color: #080a13;
   --background-bt-primary: radial-gradient(
     circle,
@@ -35,15 +34,30 @@
   );
   --default-shadow: 0 0 0.6rem 0.3rem var(--transparency-90);
 }
-#notePage body {
-  background-size: contain;
-  background-attachment: fixed;
-  background-position: center;
-  background-color: var(--secondary-color);
+
+/*--------- Default Classes ---------*/
+::selection {
+  background: var(--transparency-60);
+  color: white !important;
+}
+html {
+  min-width: 800px;
+}
+html,
+html * {
+  scrollbar-color: var(--primary-500) transparent;
+}
+*:focus-visible {
+  outline: none;
+}
+body {
+  background: var(--secondary-color);
+  font-family: var(--font-family);
+  /* overflow: hidden; */
 }
 
 /* Barra de Ferramentas */
-#notePage .toolbar {
+.toolbar {
   display: flex;
   flex-wrap: wrap;
   padding: 0.8rem;
@@ -56,7 +70,7 @@
   border-radius: 0.4rem 0.4rem 0 0;
 }
 
-#notePage .toolbar button {
+.toolbar button {
   font-family: inherit;
   font-size: 1rem;
   border: 1px solid transparent;
@@ -71,7 +85,7 @@
   padding: 0.4rem;
 }
 
-#notePage .toolbar select {
+.toolbar select {
   min-width: 120px;
   padding: 0.4rem 0.5rem;
   font-size: 0.8rem;
@@ -83,19 +97,19 @@
   font-weight: 600;
 }
 
-#notePage .toolbar button:hover {
+.toolbar button:hover {
   background-color: #464646;
   color: initial;
 }
 
-#notePage .toolbar .separator {
+.toolbar .separator {
   width: 1px;
   height: 20px;
   background-color: #ddd;
   margin: 0 6px;
 }
 
-#notePage #noteContent {
+#noteContent {
   text-overflow: ellipsis;
   color: white;
   background-color: var(--transparency-10);
@@ -118,13 +132,13 @@
 }
 
 /* Adicionado: Estilo para os ícones do Google */
-#notePage .material-symbols-outlined {
+.material-symbols-outlined {
   font-size: 20px; /* Tamanho do ícone */
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 /* Editor (sem alterações) */
-#notePage #editor {
+#editor {
   flex-grow: 1;
   padding: 12px;
   font-size: 15px;
@@ -132,44 +146,57 @@
   outline: none;
   overflow-y: auto;
 }
-#notePage #editor:empty:before {
+#editor:empty:before {
   content: "Comece a escrever...";
   color: #aaa;
   cursor: text;
 }
 #editor h1,
-#notePage #editor h2,
-#notePage #editor h3,
-#notePage #editor h4,
-#notePage #editor h5,
-#notePage #editor h6 {
+#editor h2,
+#editor h3,
+#editor h4,
+#editor h5,
+#editor h6 {
   margin-top: 1em;
   margin-bottom: 0.4em;
   line-height: 1.2;
   font-weight: 600;
 }
-#notePage #editor h1 {
+#editor h1 {
   font-size: 2.2em;
 }
-#notePage #editor h2 {
+#editor h2 {
   font-size: 1.8em;
 }
-#notePage #editor h3 {
+#editor h3 {
   font-size: 1.4em;
 }
-#notePage #editor h4 {
+#editor h4 {
   font-size: 1.2em;
 }
-#notePage #editor h5 {
+#editor h5 {
   font-size: 1em;
 }
-#notePage #editor h6 {
+#editor h6 {
   font-size: 0.8em;
 }
-#notePage #editor blockquote {
+#editor blockquote {
   border-left: 4px solid #ccc;
   margin: 1.5em 10px;
   padding: 0.5em 10px;
   color: #6a737d;
   font-style: italic;
+}
+
+.notes-container .row {
+  margin: 0 !important;
+}
+
+.title {
+  font-size: 4.2rem !important;
+  color: white;
+  background: -webkit-linear-gradient(180deg, #eee 60%, var(--primary-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

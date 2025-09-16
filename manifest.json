@@ -1,5 +1,5 @@
 {
-    "name": "Nexus",
+    "name": "Lex",
     "description": "Uma ferramenta simples que ajuda em tarefas diárias em Wordpress e Design",
     "version": "1.0.0",
     "manifest_version": 3,
@@ -33,7 +33,7 @@
             "128": "img/128.png"
         },
         "default_popup": "index.html",
-        "default_title": "Nexus"
+        "default_title": "Lex"
     },
     "content_scripts": [
         {
@@ -57,7 +57,7 @@
             "suggested_key": {
                 "default": "Ctrl+Shift+2"
             },
-            "description": "Open Nexus popup"
+            "description": "Open Lex popup"
         }
     },
     "background": {
