@@ -1,13 +1,32 @@
 // main.js
 
 import * as noteManager from './manager.js';
-import { initEditor } from './editor.js';
 
 let editingId = null;
+let quill = null; // Instância do Quill
 const container = document.getElementById("notesList");
+const noteModal = document.getElementById("noteModal");
 const emptyHTML = `<div class="col-12 text-center text-muted"><p>Nenhuma nota ainda. Crie a sua primeira!</p></div>`;
 
-// --- Funções Auxiliares de UI ---
+// --- Funções de Inicialização e UI ---
+
+function initQuillEditor() {
+    if (quill) return; // Evita reinicializar
+
+    quill = new Quill('#editor', {
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'align': [] }],
+                ['link', 'clean']
+            ]
+        }
+    });
+}
 
 function formatDate(date) {
   return new Date(date).toLocaleString("pt-BR", {
@@ -21,13 +40,10 @@ function stripHtml(html) {
   return div.textContent || div.innerText || "";
 }
 
-// Função de segurança para evitar injeção de HTML
 function escapeHtml(text) {
     const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
     return text.replace(/[&<>"']/g, m => map[m]);
 }
-
-// --- Funções Principais de UI ---
 
 function renderNotes(notesToShow) {
   if (notesToShow.length === 0) {
@@ -65,36 +81,26 @@ function openEditModal(id) {
     editingId = id;
     document.getElementById("modalContent").textContent = "Editar Nota";
     document.getElementById("noteTitle").value = note.title;
-    document.getElementById("noteContent").innerHTML = note.content;
-    new bootstrap.Modal(document.getElementById("noteModal")).show();
-}
-
-function closeModal() {
-    const modal = bootstrap.Modal.getInstance(document.getElementById("noteModal"));
-    if (modal) modal.hide();
     
-    document.getElementById("noteTitle").value = "";
-    document.getElementById("noteContent").innerHTML = "";
-    editingId = null;
+    // Garante que o editor Quill esteja pronto e define o conteúdo
+    initQuillEditor();
+    quill.root.innerHTML = note.content;
+
+    new bootstrap.Modal(noteModal).show();
 }
 
-// function handleSave() {
-//     const title = document.getElementById("noteTitle").value.trim();
-//     const content = document.getElementById("noteContent").innerHTML;
-
-//     if (!title) {
-//         alert("Por favor, preencha o título!");
-//         return;
-//     }
-
-//     noteManager.saveNote({ title, content }, editingId);
-//     renderNotes(noteManager.getNotes());
-//     closeModal();
-// }
+function resetModal() {
+    document.getElementById("noteTitle").value = "";
+    if (quill) {
+        quill.root.innerHTML = "";
+    }
+    editingId = null;
+    document.getElementById("modalContent").textContent = "Nova Anotação";
+}
 
 function handleSave() {
-    const title = document.getElementById("noteTitle").value.trim();   
-    const dirtyContent = document.getElementById("noteContent").innerHTML;
+    const title = document.getElementById("noteTitle").value.trim();
+    const dirtyContent = quill.root.innerHTML;
     const cleanContent = DOMPurify.sanitize(dirtyContent);
 
     if (!title) {
@@ -104,7 +110,9 @@ function handleSave() {
     
     noteManager.saveNote({ title, content: cleanContent }, editingId);
     renderNotes(noteManager.getNotes());
-    closeModal();
+    
+    const modal = bootstrap.Modal.getInstance(noteModal);
+    if (modal) modal.hide();
 }
 
 function handleSearch() {
@@ -116,7 +124,11 @@ function handleSearch() {
 // --- Event Listeners ---
 document.getElementById("saveNote").addEventListener("click", handleSave);
 document.getElementById("searchInput").addEventListener("input", handleSearch);
-document.getElementById("noteModal").addEventListener("hidden.bs.modal", closeModal);
+
+// Inicializa o editor Quill quando o modal é aberto
+noteModal.addEventListener("shown.bs.modal", initQuillEditor);
+// Limpa o modal quando ele é fechado
+noteModal.addEventListener("hidden.bs.modal", resetModal);
 
 container.addEventListener("click", (e) => {
     const noteItem = e.target.closest(".note-item");
@@ -135,5 +147,4 @@ container.addEventListener("click", (e) => {
 });
 
 // --- Inicialização ---
-initEditor();
 renderNotes(noteManager.getNotes());

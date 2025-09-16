@@ -24,6 +24,7 @@
     <script src="js/librarys/bootstrap/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="css/default.css" />
     <link rel="stylesheet" href="css/note-block.css" />
+    <link rel="stylesheet" href="css/quill.snow.css" />
     <link rel="icon" type="image" href="img/512.png" />
     <!-- Another librarys -->
     <script src="js/librarys/purify/purify.min.js"></script>
@@ -96,85 +97,7 @@
                   autocomplete="off"
                   style="height: 2.8rem"
                 />
-                <div class="toolbar">
-                  <select id="formatBlock" title="Estilo do Bloco">
-                    <option value="p">Parágrafo</option>
-                    <option value="h1">Título 1</option>
-                    <option value="h2">Título 2</option>
-                    <option value="h3">Título 3</option>
-                    <option value="h4">Título 4</option>
-                    <option value="h5">Título 5</option>
-                    <option value="h6">Título 6</option>
-                  </select>
-
-                  <span class="separator"></span>
-
-                  <button id="boldBtn" title="Negrito">
-                    <span class="material-symbols-outlined">format_bold</span>
-                  </button>
-                  <button id="italicBtn" title="Itálico">
-                    <span class="material-symbols-outlined">format_italic</span>
-                  </button>
-                  <button id="underlineBtn" title="Sublinhado">
-                    <span class="material-symbols-outlined"
-                      >format_underlined</span
-                    >
-                  </button>
-
-                  <span class="separator"></span>
-
-                  <button id="unorderedListBtn" title="Lista Não Ordenada">
-                    <span class="material-symbols-outlined"
-                      >format_list_bulleted</span
-                    >
-                  </button>
-                  <button id="orderedListBtn" title="Lista Ordenada">
-                    <span class="material-symbols-outlined"
-                      >format_list_numbered</span
-                    >
-                  </button>
-
-                  <span class="separator"></span>
-
-                  <button id="blockquoteBtn" title="Citação">
-                    <span class="material-symbols-outlined">format_quote</span>
-                  </button>
-                  <button id="alignLeftBtn" title="Alinhar à Esquerda">
-                    <span class="material-symbols-outlined"
-                      >format_align_left</span
-                    >
-                  </button>
-                  <button id="alignCenterBtn" title="Alinhar ao Centro">
-                    <span class="material-symbols-outlined"
-                      >format_align_center</span
-                    >
-                  </button>
-                  <button id="alignRightBtn" title="Alinhar à Direita">
-                    <span class="material-symbols-outlined"
-                      >format_align_right</span
-                    >
-                  </button>
-                  <button id="alignJustifyBtn" title="Justificar">
-                    <span class="material-symbols-outlined"
-                      >format_align_justify</span
-                    >
-                  </button>
-
-                  <span class="separator"></span>
-
-                  <button id="linkBtn" title="Inserir Link">
-                    <span class="material-symbols-outlined">link</span>
-                  </button>
-                  <button id="removeFormatBtn" title="Remover Formatação">
-                    <span class="material-symbols-outlined">format_clear</span>
-                  </button>
-                </div>
-
-                <div
-                  id="noteContent"
-                  contenteditable="true"
-                  spellcheck="false"
-                ></div>
+                <div id="editor"></div>
               </div>
             </div>
             <div class="modal-footer">
@@ -200,6 +123,7 @@
       </div>
     </div>
 
+    <script src="js/librarys/quill/quill.min.js"></script>
     <script src="js/utils/template.js"></script>
     <script src="js/utils/global.js"></script>
     <script type="module" src="js/tools/note-block/main.js"></script>

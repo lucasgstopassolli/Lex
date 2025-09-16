@@ -149,21 +149,21 @@ body {
 
 /* Input styles */
 .form-control {
-  text-overflow: ellipsis;
-  color: white;
-  background-color: var(--transparency-10);
-  border: var(--bs-border-width) solid var(--primary-800);
-  transition: all ease 0.4s;
-  font-size: 1.125rem;
-  padding: 0.6rem 0.8rem;
+  text-overflow: ellipsis!important;
+  color: white!important;
+  background-color: var(--transparency-10)!important;
+  border: var(--bs-border-width) solid var(--primary-800)!important;
+  transition: all ease 0.4s!important;
+  font-size: 1.125rem!important;
+  padding: 0.6rem 0.8rem!important;
 }
 .form-control:focus {
-  color: var(--primary-50);
-  background-color: var(--transparency-20);
-  border-color: var(--primary-500);
-  outline: 0;
-  box-shadow: var(--default-shadow);
-  outline: none;
+  color: var(--primary-50)!important;
+  background-color: var(--transparency-20)!important;
+  border-color: var(--primary-500)!important;
+  outline: 0!important;
+  box-shadow: var(--default-shadow)!important;
+  outline: none!important;
 }
 /* Text + Background Styles */
 .text-bg-success {
