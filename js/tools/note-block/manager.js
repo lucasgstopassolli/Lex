@@ -1,62 +1,65 @@
-// noteManager.js
+/**
+ * @module noteManager
+ * @description Manages notes using browser local storage.
+ * @responsibilities
+ * - Get, save, delete, and find notes.
+ * - Search notes by title or content.
+ * - Generate unique IDs for new notes.
+ */
 
-// Carrega as notas do localStorage ou começa com um array vazio
-let notes = JSON.parse(localStorage.getItem("simple-notes") || "[]");
+// --- Constants and Initializations ---
 
-// Salva o array de notas atual no localStorage
-function saveToStorage() {
-  localStorage.setItem("simple-notes", JSON.stringify(notes));
-}
+const NOTES_KEY = "notes";
+let notes = JSON.parse(localStorage.getItem(NOTES_KEY)) || [];
 
-// Gera um ID único baseado no tempo
+// --- Helper Functions ---
+
 function generateId() {
-  return Date.now().toString();
+  return `note_${new Date().getTime()}`;
 }
 
-// Remove tags HTML para a busca no conteúdo
-function stripHtml(html) {
-  const div = document.createElement("div");
-  div.innerHTML = html;
-  return div.textContent || div.innerText || "";
+function saveToStorage() {
+  localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
 }
 
-// --- Funções Exportadas ---
+// --- Core Note Management Functions ---
 
 export function getNotes() {
   return notes;
 }
 
-export function findNoteById(id) {
-    return notes.find(n => n.id === id);
-}
-
-export function saveNote(noteData, editingId) {
-  if (editingId) {
-    const index = notes.findIndex((n) => n.id === editingId);
-    if (index > -1) {
-      notes[index] = { ...notes[index], ...noteData, date: new Date() };
+export function saveNote(noteData, id = null) {
+  if (id) {
+    const note = findNoteById(id);
+    if (note) {
+      Object.assign(note, { ...noteData, date: new Date() });
     }
   } else {
-    notes.unshift({
+    const newNote = {
       id: generateId(),
       ...noteData,
       date: new Date(),
-    });
+    };
+    // Add new notes to the beginning of the array
+    notes.unshift(newNote);
   }
   saveToStorage();
 }
 
 export function deleteNote(id) {
-  notes = notes.filter((n) => n.id !== id);
+  notes = notes.filter((note) => note.id !== id);
   saveToStorage();
 }
 
-// Lógica de busca que retorna um array filtrado
+export function findNoteById(id) {
+  return notes.find((note) => note.id === id);
+}
+
 export function searchNotes(query) {
-    const lowerCaseQuery = query.toLowerCase();
-    return notes.filter(
-        (note) =>
-            note.title.toLowerCase().includes(lowerCaseQuery) ||
-            stripHtml(note.content).toLowerCase().includes(lowerCaseQuery)
-    );
+  const lowerCaseQuery = query.toLowerCase();
+  return notes.filter(
+    (note) =>
+      note.title.toLowerCase().includes(lowerCaseQuery) ||
+      stripHtml(note.content).toLowerCase().includes(lowerCaseQuery)
+  );
 }

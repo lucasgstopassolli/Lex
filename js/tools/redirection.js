@@ -1,31 +1,30 @@
-let domain, slug, url, nonce;
+async function initializeRedirectionTool() {
+    const tab = await getCurrentTab();
+    if (tab && tab.url) {
+        const urlObj = new URL(tab.url);
+        const domain = urlObj.origin;
+        const slug = urlObj.pathname;
+        const url = urlObj.href;
 
-// Ensure the URL ends with a slash
-function ensureSlash(termUrl) {
-    return termUrl.endsWith('/') ? termUrl : termUrl + '/';
-}
-
-// Get the domain, slug, and full URL from the active browser tab
-function getDomainAndSlug() {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        const urlObj = new URL(tabs[0].url);
-        domain = urlObj.origin;
-        slug = urlObj.pathname;
-        url = urlObj.href;
-
-        // Populate form fields in the popup with retrieved values
         document.getElementById('url_domain').value = domain;
         document.getElementById('inputUrl').value = slug;
         document.getElementById('url_').value = ensureSlash(url);
         if (document.getElementById('outputUrl').value === '') {
             document.getElementById('outputUrl').value = '/';
         }
-    });
+    }
 }
-getDomainAndSlug();
+
+// Ensure the URL ends with a slash
+function ensureSlash(termUrl) {
+    return termUrl.endsWith('/') ? termUrl : termUrl + '/';
+}
+
+initializeRedirectionTool();
 
 // Open the Redirection plugin admin page and inject code to create the redirect
 async function createRedirect(inputUrl, outputUrl) {
+    const domain = await getCurrentTabDomain();
     if (!domain) {
         alert('Domain not available');
         return;
@@ -47,6 +46,7 @@ async function createRedirect(inputUrl, outputUrl) {
 
 // Inject script to retrieve nonce and send POST request to create redirect
 async function injectAndCreate(tabId, inputUrl, outputUrl) {
+    const domain = await getCurrentTabDomain();
     try {
         const [{ result: nonce }] = await chrome.scripting.executeScript({
             target: { tabId },

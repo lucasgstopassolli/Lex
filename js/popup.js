@@ -52,48 +52,56 @@ plugins.forEach((plugin, index) => {
 // Handle "View" button click
 const btnView = document.querySelectorAll(".btn-view");
 btnView.forEach((button) => {
-  button.addEventListener("click", () => {
-    const pluginViewURL = domain + button.dataset.link;
-    const selector = button.dataset.selector;
-
-    chrome.storage.local.set({ pluginViewURL, selector });
-
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      if (tabs && tabs.length > 0) {
-        chrome.tabs.update(tabs[0].id, { url: pluginViewURL });
+  button.addEventListener("click", async () => {
+    try {
+      const domain = await getCurrentTabDomain();
+      if (!domain) {
+        alert("Could not get the domain from the current tab.");
+        return;
       }
-    });
 
-    chrome.tabs.onUpdated.addListener(function listener(tabId, changeInfo) {
-      if (changeInfo.status === "complete") {
-        chrome.tabs.onUpdated.removeListener(listener);
+      const pluginViewURL = domain + button.dataset.link;
+      const selector = button.dataset.selector;
 
-        chrome.storage.local.get(
-          ["pluginInstallURL", "selector"],
-          function (data) {
-            if (data.pluginInstallURL && data.selector) {
-              chrome.scripting.executeScript({
-                target: { tabId },
-                func: (selector) => {
-                  const observer = new MutationObserver((_, observer) => {
-                    const pluginCard = document.querySelector(selector);
-                    if (pluginCard) {
-                      pluginCard.classList.add("pulse-animation");
-                      observer.disconnect();
-                    }
-                  });
-                  observer.observe(document.body, {
-                    childList: true,
-                    subtree: true,
-                  });
-                },
-                args: [data.selector],
-              });
-            }
+      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+      if (!tab || !tab.id) {
+        alert("No active tab found.");
+        return;
+      }
+
+      await chrome.tabs.update(tab.id, { url: pluginViewURL });
+
+      await new Promise((resolve) => {
+        const listener = (tabId, changeInfo) => {
+          if (tabId === tab.id && changeInfo.status === "complete") {
+            chrome.tabs.onUpdated.removeListener(listener);
+            resolve();
           }
-        );
-      }
-    });
+        };
+        chrome.tabs.onUpdated.addListener(listener);
+      });
+
+      await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: (selector) => {
+          const observer = new MutationObserver((_, observer) => {
+            const pluginCard = document.querySelector(selector);
+            if (pluginCard) {
+              pluginCard.classList.add("pulse-animation");
+              observer.disconnect();
+            }
+          });
+          observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+          });
+        },
+        args: [selector],
+      });
+    } catch (error) {
+      console.error("Error viewing plugin:", error);
+      alert("An error occurred. Please try again.");
+    }
   });
 });
 
@@ -101,20 +109,21 @@ btnView.forEach((button) => {
 const btnInstall = document.querySelectorAll(".btn-install");
 btnInstall.forEach((button) => {
   button.addEventListener("click", async () => {
-    if (typeof domain === "undefined") {
-      alert("Domain is not defined.");
-      return;
-    }
-
-    if (!chrome || !chrome.tabs || !chrome.scripting) {
-      alert("Chrome extension APIs are not available.");
-      return;
-    }
-
-    const pluginViewURL = domain + button.dataset.link;
-    const selector = button.dataset.selector;
-
     try {
+      const domain = await getCurrentTabDomain();
+      if (!domain) {
+        alert("Could not get the domain from the current tab.");
+        return;
+      }
+
+      if (!chrome || !chrome.tabs || !chrome.scripting) {
+        alert("Chrome extension APIs are not available.");
+        return;
+      }
+
+      const pluginViewURL = domain + button.dataset.link;
+      const selector = button.dataset.selector;
+
       const [tab] = await chrome.tabs.query({
         active: true,
         currentWindow: true,

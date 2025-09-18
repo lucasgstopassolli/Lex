@@ -33,17 +33,6 @@ function formatDate(date) {
   });
 }
 
-function stripHtml(html) {
-  const div = document.createElement("div");
-  div.innerHTML = html;
-  return div.textContent || div.innerText || "";
-}
-
-function escapeHtml(text) {
-    const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
-    return text.replace(/[&<>"']/g, m => map[m]);
-}
-
 function renderNotes(notesToShow) {
   if (notesToShow.length === 0) {
     container.innerHTML = emptyHTML;
