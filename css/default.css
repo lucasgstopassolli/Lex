@@ -193,12 +193,6 @@ body {
   ) !important;
   border-color: rgba(135, 0, 0);
 }
-.user-select-none {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
 
 /* Animations */
 @keyframes pulseAnimation {

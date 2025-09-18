@@ -6,7 +6,6 @@ let editingId = null;
 let quill = null; // Instância do Quill
 const container = document.getElementById("notesList");
 const noteModal = document.getElementById("noteModal");
-const emptyHTML = `<div class="col-12 text-center text-muted"><p>Nenhuma nota ainda. Crie a sua primeira!</p></div>`;
 
 // --- Funções de Inicialização e UI ---
 
@@ -52,7 +51,7 @@ function renderNotes(notesToShow) {
   }
 
   container.innerHTML = notesToShow.map((note) => `
-    <div class="col-lg-4">
+    <div class="col-lg-6">
       <div class="note-item card d-flex flex-row gap-2 rounded-3 justify-content-between" data-id="${note.id}">
         <div class="d-flex flex-column gap-2">
           <h5 class="note-title mb-1" style="color:var(--primary-400);">${note.title}</h5>
