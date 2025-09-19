@@ -56,6 +56,11 @@ body {
   /* overflow: hidden; */
 }
 
+/* Custom classes */
+.lh-normal {
+  line-height: normal !important;
+}
+
 /* Nav buttons */
 .nav-link {
   border: 0.125rem solid transparent !important;
@@ -154,7 +159,7 @@ body {
   background-color: var(--transparency-10)!important;
   border: var(--bs-border-width) solid var(--primary-800)!important;
   transition: all ease 0.4s!important;
-  font-size: 1.125rem!important;
+  font-size: 1rem!important;
   padding: 0.6rem 0.8rem!important;
 }
 .form-control:focus {

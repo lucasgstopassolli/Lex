@@ -28,7 +28,7 @@ plugins.forEach((plugin, index) => {
             data-bs-toggle="tooltip"
             data-bs-placement="left"
             title="Download the plugin">
-            <img src="img/svg/download.svg" style="width: 1.2rem" alt="Download">
+            <img src="https://api.iconify.design/pajamas:download.svg?color=%23ffffff" style="width: 1.1rem" alt="Download">
           </button>
           <button class="btn btn-outline-primary btn-view"
             data-selector="${plugin.wordpressSelector}"
@@ -38,7 +38,7 @@ plugins.forEach((plugin, index) => {
             data-bs-toggle="tooltip"
             data-bs-placement="left"
             title="View the plugin">
-            <img src="img/svg/view.svg" style="width: 1.2rem" alt="View">
+            <img src="https://api.iconify.design/mdi:eye.svg?color=%23a9b5ff" style="width: 1.2rem" alt="View">
           </button>
         </div>
       </div>

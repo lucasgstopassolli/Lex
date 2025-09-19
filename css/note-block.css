@@ -72,3 +72,7 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.form-control {
+  font-size: 1.125rem!important;
+}
