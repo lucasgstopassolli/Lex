@@ -1,9 +1,10 @@
 // saving the last opened tab
-
 Object.keys(navTabs).forEach(function(tab){
+  debugger
     const selector = navTabs[tab].selector;
     document.querySelectorAll(selector).forEach(function (tabButton) {
         tabButton.addEventListener("click", function () {
+          
             chrome.storage.local.set({ [navTabs[tab].storageKey]: tabButton.id });
       });
     });
@@ -14,7 +15,7 @@ Object.keys(navTabs).forEach(function(tab){
     chrome.storage.local.get(navTabs[tab].storageKey, function (result) {
       if (result[navTabs[tab].storageKey]) {
         document.querySelector('#' + result[navTabs[tab].storageKey])?.click();
-      }
+      } 
     });
 });
 

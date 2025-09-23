@@ -1,11 +1,3 @@
-/**
- * @module noteManager
- * @description Manages notes using browser local storage.
- * @responsibilities
- * - Get, save, delete, and find notes.
- * - Search notes by title or content.
- * - Generate unique IDs for new notes.
- */
 
 // --- Constants and Initializations ---
 

@@ -21,20 +21,21 @@
 
 <body class="margin-0 d-flex flex-column">
     <!-- Nav Tabs -->
-    <ul class="nav nav-pills d-flex flex-row gap-0 p-1 mb-1 flex-nowrap nav-bar mainTab" id="pills-tab" role="tablist">
+    <ul class="nav nav-pills d-flex flex-row gap-0 p-1 mb-1 flex-nowrap nav-bar" id="pills-tab" role="tablist">
         <!-- Home Button -->
-        <li style="width: -webkit-fill-available" class="nav-item" role="presentation">
+        <li style="width: -webkit-fill-available" class="mainTab nav-item" role="presentation">
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100 lh-normal"
                 style="font-size: 0.9rem" id="but-initial-tab" data-bs-toggle="pill" data-bs-target="#initial-tab"
                 type="button" role="tab" aria-controls="initial-tab" aria-selected="true">
-                <img draggable="false" src="https://api.iconify.design/material-symbols-light:home-rounded.svg?color=%23ffffff" alt="Início" width="18"
-                    style="margin-left: -0.5rem; margin-right: -0.1rem" />
+                <img draggable="false"
+                    src="https://api.iconify.design/material-symbols-light:home-rounded.svg?color=%23ffffff"
+                    alt="Início" width="18" style="margin-left: -0.5rem; margin-right: -0.1rem" />
                 Início
             </button>
         </li>
         <!-- Wordpress Button -->
-        <li style="width: -webkit-fill-available" class="nav-item" role="presentation">
+        <li style="width: -webkit-fill-available" class="wordpressTab nav-item" role="presentation">
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem" id="but-wordpress-tab" data-bs-toggle="pill" data-bs-target="#wordpress-tab"
@@ -45,7 +46,7 @@
             </button>
         </li>
         <!-- Design Button -->
-        <li style="width: -webkit-fill-available" class="nav-item" role="presentation">
+        <li style="width: -webkit-fill-available" class="designTab nav-item" role="presentation">
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem" id="but-design-tab" data-bs-toggle="pill" data-bs-target="#design-tab"
@@ -56,7 +57,7 @@
             </button>
         </li>
         <!-- Tools Button -->
-        <li style="width: -webkit-fill-available" class="nav-item" role="presentation">
+        <li style="width: -webkit-fill-available" class="settingsTab nav-item" role="presentation">
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem" id="but-tools-tab" data-bs-toggle="pill" data-bs-target="#tools-tab"
@@ -64,6 +65,17 @@
                 <img draggable="false" src="https://api.iconify.design/line-md:cog-filled-loop.svg?color=%23ffffff"
                     alt="Ferramentas" width="16" />
                 <span style="line-height: normal">Ferramentas</span>
+            </button>
+        </li>
+        <!-- Lex Note Button -->
+        <li style="width: -webkit-fill-available" class="nav-item">
+            <button
+                class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
+                style="font-size: 0.9rem" id="but-lex-note" type="button" aria-selected="false" data-not-tab="true">
+                <img draggable="false"
+                    src="https://api.iconify.design/material-symbols:note-stack-rounded.svg?color=%23ffffff"
+                    alt="Lex Note" width="16" />
+                <span style="line-height: normal">Lex Note</span>
             </button>
         </li>
     </ul>
@@ -78,7 +90,8 @@
                 <div class="verse-container rounded-4 p-4 w-100 enter-animation">
                     <div class="d-flex flex-row justify-content-between">
                         <div class="d-flex flex-row gap-2 align-items-center">
-                            <img draggable="false" src="https://api.iconify.design/ri:cross-fill.svg?color=%23ffffff" alt="Cross" width="24" class="cross-icon" />
+                            <img draggable="false" src="https://api.iconify.design/ri:cross-fill.svg?color=%23ffffff"
+                                alt="Cross" width="24" class="cross-icon" />
                             <h4 class="fw-normal mb-0 mt-2 placeholder-glow" style="
                     font-family: 'Lavishly Yours', 'sans serif';
                     font-size: 2.8rem;
@@ -119,7 +132,8 @@
                             <button class="btn btn-outline-primary copy-content" data-bs-toggle="tooltip"
                                 data-bs-placement="top" data-bs-trigger="hover" title="Copiar versículo"
                                 data-copy-selector="#contentToCopy">
-                                <img draggable="false" style="pointer-events: none" width="16" src="https://api.iconify.design/material-symbols:content-copy-rounded.svg?color=%23a9b5ff"
+                                <img draggable="false" style="pointer-events: none" width="16"
+                                    src="https://api.iconify.design/material-symbols:content-copy-rounded.svg?color=%23a9b5ff"
                                     alt="Copy" />
                             </button>
                             <button class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -402,43 +416,6 @@
                                 <div class="empty-state" id="emptyState"></div>
                             </div>
                         </div>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="noteModal" tabindex="-1">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header d-flex flex-row align-items-center">
-                                        <h5 class="modal-title me-2" id="modalContent">
-                                            Anotações
-                                        </h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="mb-2">
-                                            <input type="text" class="form-control mb-2" id="noteTitle"
-                                                placeholder="Título" required autocomplete="off" />
-                                            <textarea class="form-control" id="noteContent" rows="5" style="
-                            height: 162px;
-                            min-height: 162px;
-                            max-height: 162px;
-                            overflow-y: auto;
-                            overflow-x: hidden;
-                          " placeholder="Conteúdo" required autocomplete="off"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"
-                                            style="padding: 0.6rem 1.4rem !important">
-                                            Cancelar
-                                        </button>
-                                        <button type="button" class="btn btn-primary btn-sm" id="saveNote"
-                                            style="padding: 0.6rem 1.4rem !important">
-                                            Salvar
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <!-- Mask and Validation Code Tab -->
@@ -582,7 +559,7 @@
     <script src="js/popup.js"></script>
     <script src="js/tools/bible.js"></script>
     <script src="js/tools/design-mode.js"></script>
-    <script src="js/tools/note-block/main.js"></script>
+    <script type="module" src="js/tools/note-block/main.js"></script>
     <script src="js/tools/redirection.js"></script>
     <script src="js/tools/validation-fields.js"></script>
 

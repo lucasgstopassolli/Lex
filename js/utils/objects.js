@@ -1,20 +1,20 @@
 // Nav tabs
 const navTabs = {
   mainTab: {
-    selector: "#pills-tab.mainTab button",
-    storageKey: "lastMainTab",
+    selector: "#but-initial-tab",
+    storageKey: "#initial-tab",
   },
   wordpressTab: {
-    selector: "#pills-tab.wordpressTab button",
-    storageKey: "lastWordpressTab",
+    selector: "#but-wordpress-tab",
+    storageKey: "#wordpress-tab",
   },
   designTab: {
-    selector: "#pills-tab.designTab button",
-    storageKey: "lastDesignTab",
+    selector: "#but-design-tab",
+    storageKey: "#design-tab",
   },
   settingsTab: {
-    selector: "#pills-tab.settingsTab button",
-    storageKey: "lastSettingsTab",
+    selector: "#but-tools-tab",
+    storageKey: "#tools-tab",
   },
 };
 

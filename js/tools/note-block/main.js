@@ -52,8 +52,8 @@ function renderNotes(notesToShow) {
           <div class="note-date align-self-end me-2" style="color:var(--primary-300)">${formatDate(note.date)}</div>
           <div class="note-actions d-flex gap-2">
             <button class="btn btn-primary btn-sm fw-normal edit-button lh-normal" style="padding: 0.6rem 1.4em!important;">Editar</button>
-            <button class="btn btn-outline-danger delete-button lh-1" style="padding: 0.6rem 0.7rem!important;">
-              <img src="img/svg/trash.svg" alt="Delete" width="18" style="pointer-events: none;">
+            <button class="btn btn-outline-danger delete-button lh-1" style="padding: 0.6rem!important;">
+              <img src="https://api.iconify.design/material-symbols:delete-rounded.svg?color=%23ffffff" alt="Delete" width="18" style="pointer-events: none;">
             </button>
           </div>
         </div>
