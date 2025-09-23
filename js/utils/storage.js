@@ -1,23 +1,34 @@
 // saving the last opened tab
-Object.keys(navTabs).forEach(function(tab){
-  debugger
-    const selector = navTabs[tab].selector;
-    document.querySelectorAll(selector).forEach(function (tabButton) {
-        tabButton.addEventListener("click", function () {
-          
-            chrome.storage.local.set({ [navTabs[tab].storageKey]: tabButton.id });
-      });
-    });
-})
+function setupTabMemory() {
+  const tabGroups = document.querySelectorAll('[data-tab-group]');
 
-// getting the last opened tab
-Object.keys(navTabs).forEach(function(tab){
-    chrome.storage.local.get(navTabs[tab].storageKey, function (result) {
-      if (result[navTabs[tab].storageKey]) {
-        document.querySelector('#' + result[navTabs[tab].storageKey])?.click();
-      } 
-    });
-});
+  tabGroups.forEach(group => {
+    const tabButtons = group.querySelectorAll('.nav-link[data-storage-key]');
+    const storageKey = tabButtons.length > 0 ? tabButtons[0].getAttribute('data-storage-key') : null;
+
+    if (storageKey) {
+      // Save the last clicked tab in the group
+      tabButtons.forEach(tabButton => {
+        tabButton.addEventListener('click', () => {
+          chrome.storage.local.set({ [storageKey]: tabButton.id });
+        });
+      });
+
+      // Get and click the last saved tab in the group
+      chrome.storage.local.get(storageKey, (result) => {
+        const lastTabId = result[storageKey];
+        if (lastTabId) {
+          const lastTabButton = document.getElementById(lastTabId);
+          if (lastTabButton) {
+            lastTabButton.click();
+          }
+        }
+      });
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', setupTabMemory);
 
 // saving all helpers
 document

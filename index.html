@@ -21,13 +21,13 @@
 
 <body class="margin-0 d-flex flex-column">
     <!-- Nav Tabs -->
-    <ul class="nav nav-pills d-flex flex-row gap-0 p-1 mb-1 flex-nowrap nav-bar" id="pills-tab" role="tablist">
+    <ul class="nav nav-pills d-flex flex-row gap-0 p-1 mb-1 flex-nowrap nav-bar" id="pills-tab" role="tablist" data-tab-group="main">
         <!-- Home Button -->
         <li style="width: -webkit-fill-available" class="mainTab nav-item" role="presentation">
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100 lh-normal"
                 style="font-size: 0.9rem" id="but-initial-tab" data-bs-toggle="pill" data-bs-target="#initial-tab"
-                type="button" role="tab" aria-controls="initial-tab" aria-selected="true">
+                type="button" role="tab" aria-controls="initial-tab" aria-selected="true" data-storage-key="lastMainTab">
                 <img draggable="false"
                     src="https://api.iconify.design/material-symbols-light:home-rounded.svg?color=%23ffffff"
                     alt="Início" width="18" style="margin-left: -0.5rem; margin-right: -0.1rem" />
@@ -39,7 +39,7 @@
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem" id="but-wordpress-tab" data-bs-toggle="pill" data-bs-target="#wordpress-tab"
-                type="button" role="tab" aria-controls="wordpress-tab" aria-selected="false">
+                type="button" role="tab" aria-controls="wordpress-tab" aria-selected="false" data-storage-key="lastMainTab">
                 <img draggable="false" src="https://api.iconify.design/fe:wordpress-alt.svg?color=%23ffffff"
                     alt="Wordpress" width="16" />
                 <span style="line-height: normal">Wordpress</span>
@@ -50,7 +50,7 @@
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem" id="but-design-tab" data-bs-toggle="pill" data-bs-target="#design-tab"
-                type="button" role="tab" aria-controls="design-tab" aria-selected="false">
+                type="button" role="tab" aria-controls="design-tab" aria-selected="false" data-storage-key="lastMainTab">
                 <img draggable="false" src="https://api.iconify.design/fa7-solid:pen-nib.svg?color=%23ffffff"
                     alt="Design" width="14" />
                 <span style="line-height: normal">Design</span>
@@ -61,7 +61,7 @@
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem" id="but-tools-tab" data-bs-toggle="pill" data-bs-target="#tools-tab"
-                type="button" role="tab" aria-controls="tools-tab" aria-selected="false">
+                type="button" role="tab" aria-controls="tools-tab" aria-selected="false" data-storage-key="lastMainTab">
                 <img draggable="false" src="https://api.iconify.design/line-md:cog-filled-loop.svg?color=%23ffffff"
                     alt="Ferramentas" width="16" />
                 <span style="line-height: normal">Ferramentas</span>
@@ -71,7 +71,7 @@
         <li style="width: -webkit-fill-available" class="nav-item">
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
-                style="font-size: 0.9rem" id="but-lex-note" type="button" aria-selected="false" data-not-tab="true">
+                style="font-size: 0.9rem" id="but-lex-note" type="button" aria-selected="false" data-not-tab="true" data-open-url="#noteBlockPage">
                 <img draggable="false"
                     src="https://api.iconify.design/material-symbols:note-stack-rounded.svg?color=%23ffffff"
                     alt="Lex Note" width="16" />
@@ -160,14 +160,14 @@
             <div class="d-flex flex-row gap-3">
                 <!-- Lateral Nav Tabs -->
                 <ul class="wordpressTab nav nav-tabs lateral-bar d-flex flex-column gap-1 mb-4 mt-5" id="pills-tab"
-                    role="tablist" style="background: var(--transparency-30)">
+                    role="tablist" style="background: var(--transparency-30)" data-tab-group="wordpress">
                     <!-- Main WP Button -->
                     <li class="nav-item w-100" role="presentation">
                         <button style="font-size: 14px; padding: 0.6rem 0.8rem"
                             class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
                             style="font-size: 0.9rem" id="but-main-wp-tab" data-bs-toggle="pill"
                             data-bs-target="#main-wp-tab" type="button" role="tab" aria-controls="main-wp-tab"
-                            aria-selected="false">
+                            aria-selected="false" data-storage-key="lastWordpressTab">
                             <img draggable="false" src="https://api.iconify.design/fe:wordpress-alt.svg?color=%23ffffff"
                                 width="14" alt="Plugin" />
                             <span style="line-height: normal">Recursos</span>
@@ -180,7 +180,7 @@
                             class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
                             style="font-size: 0.9rem" id="but-plugins-tab" data-bs-toggle="pill"
                             data-bs-target="#plugins-tab" type="button" role="tab" aria-controls="plugins-tab"
-                            aria-selected="false">
+                            aria-selected="false" data-storage-key="lastWordpressTab">
                             <img draggable="false" src="https://api.iconify.design/mdi:puzzle.svg?color=%23ffffff"
                                 width="14" alt="Plugin" />
                             <span style="line-height: normal">Plugins</span>
@@ -193,7 +193,7 @@
                             class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
                             style="font-size: 0.9rem" id="but-redirection-tab" data-bs-toggle="pill"
                             data-bs-target="#redirection-tab" type="button" role="tab" aria-controls="redirection-tab"
-                            aria-selected="false">
+                            aria-selected="false" data-storage-key="lastWordpressTab">
                             <img draggable="false"
                                 src="https://api.iconify.design/material-symbols:arrow-split-rounded.svg?color=%23ffffff"
                                 width="14" alt="Redirect" />
@@ -337,18 +337,7 @@
             <div class="d-flex flex-row gap-3">
                 <!-- Lateral Nav Tabs -->
                 <ul class="settingsTab nav nav-tabs lateral-bar d-flex flex-column gap-1 mb-4 mt-5" id="pills-tab"
-                    role="tablist" style="background: var(--transparency-30)">
-                    <!-- Note Block Button -->
-                    <li class="nav-item w-100" role="presentation">
-                        <button style="font-size: 14px; padding: 0.6rem 0.8rem"
-                            class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100 lh-normal"
-                            style="font-size: 0.9rem" id="but-note-tab" data-bs-toggle="pill" data-bs-target="#note-tab"
-                            type="button" role="tab" aria-controls="note-tab" aria-selected="false">
-                            <img draggable="false"
-                                src="https://api.iconify.design/material-symbols:note-stack-rounded.svg?color=%23ffffff"
-                                width="14" alt="Anotações" />Anotações
-                        </button>
-                    </li>
+                    role="tablist" style="background: var(--transparency-30)" data-tab-group="tools">
 
                     <!-- Mask and Validation Code Button -->
                     <li class="nav-item w-100" role="presentation">
@@ -356,7 +345,7 @@
                             class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100 lh-normal"
                             style="font-size: 0.9rem" id="but-form-mask-validation-tab" data-bs-toggle="pill"
                             data-bs-target="#form-mask-validation-tab" type="button" role="tab"
-                            aria-controls="form-mask-validation-tab" aria-selected="false">
+                            aria-controls="form-mask-validation-tab" aria-selected="false" data-storage-key="lastToolsTab">
                             <img draggable="false"
                                 src="https://api.iconify.design/solar:text-field-focus-bold.svg?color=%23ffffff"
                                 width="16" alt="Text input" />Formulário
@@ -369,54 +358,15 @@
                             class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
                             style="font-size: 0.9rem" id="but-advanced-settings-tab" data-bs-toggle="pill"
                             data-bs-target="#advanced-settings-tab" type="button" role="tab"
-                            aria-controls="advanced-settings-tab" aria-selected="false">
+                            aria-controls="advanced-settings-tab" aria-selected="false" data-storage-key="lastToolsTab">
                             <img draggable="false" src="https://api.iconify.design/bxs:magic-wand.svg?color=%23ffffff"
                                 width="16" alt="Avançado" />Avançado
                         </button>
                     </li>
                 </ul>
 
+                <!-- Tools Tab Content -->
                 <div class="main tab-content gap-3 p-4 pb-0 d-flex w-100">
-                    <!-- Note Block Tab -->
-                    <div class="main tab-pane fade w-100 enter-animation" id="note-tab" role="tabpanel"
-                        aria-labelledby="but-note-tab" tabindex="0" style="min-height: 350px">
-                        <div
-                            class="d-flex flex-row gap-3 justify-content-between align-items-center user-select-none mb-3 lh-normal">
-                            <label class="text-white fw-semibold fs-5 d-flex align-items-center gap-1">
-                                <img draggable="false"
-                                    src="https://api.iconify.design/material-symbols:note-stack-rounded.svg?color=%23ffffff"
-                                    width="22" alt="Anotações" />Anotações
-                            </label>
-                            <div class="d-flex flex-row gap-2 w-100">
-                                <input type="text" class="form-control search-input w-100" id="searchInput"
-                                    placeholder="Buscar anotação" />
-                                <button class="btn btn-primary" style="padding: 0.8rem 0.9rem !important"
-                                    data-bs-toggle="modal" data-bs-target="#noteModal">
-                                    <img style="pointer-events: none" width="18"
-                                        src="https://api.iconify.design/ri:sticky-note-add-fill.svg?color=%23ffffff"
-                                        alt="Add note" />
-                                </button>
-                                <button class="btn btn-primary" style="padding: 0.8rem!important"
-                                    data-open-url="#noteBlockPage" data-bs-toggle="modal">
-                                    <img style="pointer-events: none" width="18"
-                                        src="https://api.iconify.design/material-symbols:open-in-new.svg?color=%23ffffff"
-                                        alt="Open" />
-
-                                </button>
-                                <p class="d-none" id="noteBlockPage">/notes.html</p>
-                            </div>
-                        </div>
-
-                        <div class="mb-2 d-flex gap-3 flex-column enter-animation">
-                            <div class="notes-container d-flex flex-column gap-2 h-100" style="
-                    max-height: 300px;
-                    overflow-y: auto;
-                    overflow-x: hidden;
-                  " id="notesList">
-                                <div class="empty-state" id="emptyState"></div>
-                            </div>
-                        </div>
-                    </div>
 
                     <!-- Mask and Validation Code Tab -->
                     <div class="main tab-pane fade w-100 pb-4" id="form-mask-validation-tab" role="tabpanel"

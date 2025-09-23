@@ -1,23 +1,3 @@
-// Nav tabs
-const navTabs = {
-  mainTab: {
-    selector: "#but-initial-tab",
-    storageKey: "#initial-tab",
-  },
-  wordpressTab: {
-    selector: "#but-wordpress-tab",
-    storageKey: "#wordpress-tab",
-  },
-  designTab: {
-    selector: "#but-design-tab",
-    storageKey: "#design-tab",
-  },
-  settingsTab: {
-    selector: "#but-tools-tab",
-    storageKey: "#tools-tab",
-  },
-};
-
 // Plugin cards
 const plugins = [
   {
