@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lex</title>
     <!-- Google Fonts and Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=Quicksand:wght@300..700&display=swap"
-        rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Quicksand:wght@300..700&display=swap"
+        rel="stylesheet">
     <!-- Styles and Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <script src="js/librarys/bootstrap/bootstrap.bundle.min.js"></script>
@@ -21,13 +21,15 @@
 
 <body class="margin-0 d-flex flex-column">
     <!-- Nav Tabs -->
-    <ul class="nav nav-pills d-flex flex-row gap-0 p-1 mb-1 flex-nowrap nav-bar" id="pills-tab" role="tablist" data-tab-group="main">
+    <ul class="nav nav-pills d-flex flex-row gap-0 p-1 mb-1 flex-nowrap nav-bar" id="pills-tab" role="tablist"
+        data-tab-group="main">
         <!-- Home Button -->
         <li style="width: -webkit-fill-available" class="mainTab nav-item" role="presentation">
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100 lh-normal"
                 style="font-size: 0.9rem" id="but-initial-tab" data-bs-toggle="pill" data-bs-target="#initial-tab"
-                type="button" role="tab" aria-controls="initial-tab" aria-selected="true" data-storage-key="lastMainTab">
+                type="button" role="tab" aria-controls="initial-tab" aria-selected="true"
+                data-storage-key="lastMainTab">
                 <img draggable="false"
                     src="https://api.iconify.design/material-symbols-light:home-rounded.svg?color=%23ffffff"
                     alt="Início" width="18" style="margin-left: -0.5rem; margin-right: -0.1rem" />
@@ -39,7 +41,8 @@
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem" id="but-wordpress-tab" data-bs-toggle="pill" data-bs-target="#wordpress-tab"
-                type="button" role="tab" aria-controls="wordpress-tab" aria-selected="false" data-storage-key="lastMainTab">
+                type="button" role="tab" aria-controls="wordpress-tab" aria-selected="false"
+                data-storage-key="lastMainTab">
                 <img draggable="false" src="https://api.iconify.design/fe:wordpress-alt.svg?color=%23ffffff"
                     alt="Wordpress" width="16" />
                 <span style="line-height: normal">Wordpress</span>
@@ -50,7 +53,8 @@
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem" id="but-design-tab" data-bs-toggle="pill" data-bs-target="#design-tab"
-                type="button" role="tab" aria-controls="design-tab" aria-selected="false" data-storage-key="lastMainTab">
+                type="button" role="tab" aria-controls="design-tab" aria-selected="false"
+                data-storage-key="lastMainTab">
                 <img draggable="false" src="https://api.iconify.design/fa7-solid:pen-nib.svg?color=%23ffffff"
                     alt="Design" width="14" />
                 <span style="line-height: normal">Design</span>
@@ -71,11 +75,15 @@
         <li style="width: -webkit-fill-available" class="nav-item">
             <button
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
-                style="font-size: 0.9rem" id="but-lex-note" type="button" aria-selected="false" data-not-tab="true" data-open-url="#noteBlockPage">
+                style="font-size: 0.9rem" id="but-lex-note" type="button" aria-selected="false" data-not-tab="true"
+                data-open-url="#noteBlockPage">
                 <img draggable="false"
                     src="https://api.iconify.design/material-symbols:note-stack-rounded.svg?color=%23ffffff"
                     alt="Lex Note" width="16" />
                 <span style="line-height: normal">Lex Note</span>
+                <p class="d-none" id="noteBlockPage">
+                    /notes.html
+                </p>
             </button>
         </li>
     </ul>
@@ -92,11 +100,7 @@
                         <div class="d-flex flex-row gap-2 align-items-center">
                             <img draggable="false" src="https://api.iconify.design/ri:cross-fill.svg?color=%23ffffff"
                                 alt="Cross" width="24" class="cross-icon" />
-                            <h4 class="fw-normal mb-0 mt-2 placeholder-glow" style="
-                    font-family: 'Lavishly Yours', 'sans serif';
-                    font-size: 2.8rem;
-                    color: var(--primary-200);
-                  " id="bookVerse">
+                            <h4 class="font-title mb-0 mt-2 placeholder-glow" id="bookVerse">
                                 <span class="placeholder ms-2" style="width: 160px"></span>
                             </h4>
                         </div>
@@ -345,7 +349,8 @@
                             class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100 lh-normal"
                             style="font-size: 0.9rem" id="but-form-mask-validation-tab" data-bs-toggle="pill"
                             data-bs-target="#form-mask-validation-tab" type="button" role="tab"
-                            aria-controls="form-mask-validation-tab" aria-selected="false" data-storage-key="lastToolsTab">
+                            aria-controls="form-mask-validation-tab" aria-selected="false"
+                            data-storage-key="lastToolsTab">
                             <img draggable="false"
                                 src="https://api.iconify.design/solar:text-field-focus-bold.svg?color=%23ffffff"
                                 width="16" alt="Text input" />Formulário
@@ -499,34 +504,9 @@
             </div>
         </div>
     </div>
-
+    <div id="alertContent"></div>
     <!-- Footer -->
-    <script src="js/utils/objects.js"></script>
-    <script src="js/utils/template.js"></script>
-    <script src="js/utils/global.js"></script>
-    <script src="js/utils/storage.js"></script>
-    <script src="js/utils/listeners.js"></script>
-    <script src="js/popup.js"></script>
-    <script src="js/tools/bible.js"></script>
-    <script src="js/tools/design-mode.js"></script>
-    <script type="module" src="js/tools/note-block/main.js"></script>
-    <script src="js/tools/redirection.js"></script>
-    <script src="js/tools/validation-fields.js"></script>
-
-    <!-- <div aria-live="polite" aria-atomic="true" class="position-fixed user-select-none"
-        style="bottom: 10px; right: 10px;">
-        <div class="toast align-items-center text-bg-warning fade show" role="alert" aria-live="assertive"
-            aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body message">
-                    <b>Validador copiado!</b><br>
-                    Cole em: Javascript antes do &lt;/body&gt;.
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                    aria-label="Close"></button>
-            </div>
-        </div>
-    </div> -->
+    <script type="module" src="js/main.js"></script>
 </body>
 
 </html>

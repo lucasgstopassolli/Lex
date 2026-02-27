@@ -1,7 +1,7 @@
 {
     "name": "Lex",
     "description": "Uma ferramenta simples que ajuda em tarefas diárias em Wordpress e Design",
-    "version": "1.0.0",
+    "version": "0.9.0",
     "manifest_version": 3,
     "permissions": [
         "storage",
@@ -20,12 +20,12 @@
         "<all_urls>"
     ],
     "icons": {
-    "16": "img/16.png",
-    "32": "img/32.png",
-    "48": "img/48.png",
-    "128": "img/128.png"
+        "16": "img/16.png",
+        "32": "img/32.png",
+        "48": "img/48.png",
+        "128": "img/128.png"
     },
-    "action":{
+    "action": {
         "default_icon": {
             "16": "img/16.png",
             "32": "img/32.png",
@@ -37,18 +37,28 @@
     },
     "content_scripts": [
         {
-            "matches": ["*://*/wp-admin/*"],
-            "css": [
-                "css/default.css"
+            "matches": [
+                "*://*/wp-admin/*"
             ],
-            "js": [
-                "js/popup.js"
+            "css": [
+                "css/export.css"
             ]
         },
         {
-            "matches": ["*://*/*"],
+            "matches": [
+                "*://*/wp-admin/edit.php*"
+            ],
             "js": [
-                "js/tools/design-mode.js"
+                "js/utils/create-element.js",
+                "js/content-scripts/wp-admin.js"
+            ]
+        },
+        {
+            "matches": [
+                "*://*/*"
+            ],
+            "js": [
+                "js/content-scripts/design-mode.js"
             ]
         }
     ],
@@ -64,13 +74,7 @@
         "service_worker": "/js/background.js",
         "type": "module"
     },
-    "web_accessible_resources": [{
-        "matches": ["<all_urls>"],
-        "resources": [
-            "img/*"
-        ]
-    }],
     "content_security_policy": {
         "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline';"
     }
-  }
+}

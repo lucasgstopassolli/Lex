@@ -1,43 +1,42 @@
-function validationField({ idInput, btnSelector, infoComment, scriptCDN, fieldSelectorToCopy, codeToCopy }) {
-  const originalCode = codeToCopy;
+import { validation } from '../utils/objects.js';
 
-  document.getElementById(btnSelector).addEventListener("click", function () {
+function handleValidationFieldCopy(item) {
+    const { idInput, infoComment, scriptCDN, selector, originalCode } = item;
+
     const fieldSelectorToReplace = document.getElementById(idInput).value.trim();
 
     if (!fieldSelectorToReplace) {
-      console.log("Não está chegando")
-      alert("Preenche o campo =/.");
-      return;
+        alert("Por favor, preencha o campo do seletor.");
+        return;
     }
 
-    const selector = fieldSelectorToCopy.replace("${fieldSelectorToReplace}", fieldSelectorToReplace);
-    
-    let finalCode = `<script>` + selector + originalCode + `</script>\n`
-    
-    if (scriptCDN){
-      finalCode = scriptCDN + finalCode;
+    const finalSelector = selector.replace("${fieldSelectorToReplace}", fieldSelectorToReplace);
+
+    let finalCode = `<script>${finalSelector}${originalCode}</script>
+`;
+
+    if (scriptCDN) {
+        finalCode = scriptCDN + "\n" + finalCode;
     }
-    
-    finalCode = `<!-- ` + infoComment + ` -->\n` + finalCode + `<!-- END ` + infoComment + ` -->`
+
+    finalCode = `<!-- ${infoComment} -->
+${finalCode}<!-- END ${infoComment} -->`;
 
     navigator.clipboard.writeText(finalCode).then(() => {
-        document.getElementById("mensagem").textContent =
-          "Código copiado com sucesso!";
-      })
-      .catch(() => {
-        document.getElementById("mensagem").textContent =
-          "Erro ao copiar código.";
-      });
-  });
+        // Assuming a general message element exists in the popup
+        const messageEl = document.getElementById("global-message") || document.getElementById("mensagem");
+        if (messageEl) messageEl.textContent = "Código copiado com sucesso!";
+    }).catch(() => {
+        const messageEl = document.getElementById("global-message") || document.getElementById("mensagem");
+        if (messageEl) messageEl.textContent = "Erro ao copiar código.";
+    });
 }
 
-validation.forEach(item => {
-  validationField({
-    idInput: item.idInput,
-    btnSelector: item.btnSelector,
-    infoComment: item.infoComment,
-    scriptCDN: item.scriptCDN,
-    fieldSelectorToCopy: item.selector,
-    codeToCopy: item.originalCode
-  });
-});
+export function initializeValidationFields() {
+    validation.forEach(item => {
+        const button = document.getElementById(item.btnSelector);
+        if (button) {
+            button.addEventListener("click", () => handleValidationFieldCopy(item));
+        }
+    });
+}

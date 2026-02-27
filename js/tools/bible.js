@@ -1,26 +1,52 @@
-// Fetch and update the bible verse
-fetch("https://bible-api.com/data/almeida/random/PRO,PSA,ECC")
-  .then(res => res.json())
-  .then(data => {
-    const verseNumber = data.random_verse.chapter + ': ' + data.random_verse.verse;
-    const verseBook = data.random_verse.book;
-    const verseContent = (data.random_verse.text).trim();
+export function fetchAndDisplayVerse() {
+    fetch("https://bible-api.com/data/almeida/random/PRO,PSA,ECC")
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then(data => {
+        if (!data || !data.random_verse) {
+            console.error("Invalid data structure from Bible API");
+            return;
+        }
+        const { chapter, verse, book, text, book_id } = data.random_verse;
+        const verseNumber = `${chapter}:${verse}`;
+        const verseContent = text.trim();
+        
+        const bookVerseEl = document.getElementById('bookVerse');
+        const numberVerseEl = document.getElementById('numberVerse');
+        const contentVerseEl = document.getElementById('contentVerse');
+        const contentToCopyEl = document.getElementById('contentToCopy');
+        const bibleChapterURLEl = document.getElementById('bibleChapterURL');
 
-    const bookVerse = document.getElementById('bookVerse');
-    const numberVerse = document.getElementById('numberVerse');
-    const contentVerse = document.getElementById('contentVerse');
-
-    const contentToCopy = document.getElementById('contentToCopy');
-    const bibleChapterURL = document.getElementById('bibleChapterURL');
-
-    bookVerse.classList.remove('placeholder-glow');
-    numberVerse.classList.remove('placeholder-glow');
-    contentVerse.classList.remove('placeholder-glow');
-
-    bookVerse.innerHTML = verseBook;
-    numberVerse.innerHTML = verseNumber;
-    contentVerse.innerHTML = verseContent;
-    bibleChapterURL.innerHTML = 'https://www.bibliaonline.com.br/ara/' + data.random_verse.book_id + '/' + data.random_verse.chapter + '/';
-    contentToCopy.innerHTML = verseContent + ' (' + verseBook + ' ' + verseNumber + ')';
-  })
-  .catch(console.error);
+        if (bookVerseEl) {
+            bookVerseEl.classList.remove('placeholder-glow');
+            bookVerseEl.innerHTML = book;
+        }
+        if (numberVerseEl) {
+            numberVerseEl.classList.remove('placeholder-glow');
+            numberVerseEl.innerHTML = verseNumber;
+        }
+        if (contentVerseEl) {
+            contentVerseEl.classList.remove('placeholder-glow');
+            contentVerseEl.innerHTML = verseContent;
+        }
+        if (bibleChapterURLEl) {
+            bibleChapterURLEl.textContent = `https://www.bibliaonline.com.br/ara/${book_id}/${chapter}/`;
+        }
+        if (contentToCopyEl) {
+            contentToCopyEl.textContent = `${verseContent} (${book} ${verseNumber})`;
+        }
+      })
+      .catch(error => {
+          console.error("Error fetching Bible verse:", error);
+          // Optionally update the UI to show an error message
+          const contentVerseEl = document.getElementById('contentVerse');
+          if(contentVerseEl) {
+            contentVerseEl.classList.remove('placeholder-glow');
+            contentVerseEl.innerHTML = "Não foi possível carregar o versículo. Tente novamente mais tarde.";
+          }
+      });
+}

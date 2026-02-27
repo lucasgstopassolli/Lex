@@ -1,0 +1,145 @@
+/*--------- Default Color Palette ---------*/
+:root {
+  --primary-50: #f1f3ff;
+  --primary-100: #e5e9ff;
+  --primary-200: #cfd7ff;
+  --primary-300: #a9b5ff;
+  --primary-400: #7885ff;
+  --primary-500: #424aff;
+  --primary-600: #1e1bff;
+  --primary-700: #0d0af7;
+  --primary-800: #0907d0;
+  --primary-900: #09078d;
+  --primary-950: #010374;
+  --transparency-10: #09078d1a;
+  --transparency-20: #09078d33;
+  --transparency-30: #09078d4d;
+  --transparency-40: #09078d66;
+  --transparency-50: #09078d80;
+  --transparency-60: #09078d99;
+  --transparency-70: #09078db3;
+  --transparency-80: #09078dcc;
+  --transparency-90: #09078de6;
+  --font-family: "Quicksand", "Arial", "Helvetica", "sans-serif";
+  --secondary-color: #080a13;
+  --background-bt-primary: radial-gradient(
+    circle,
+    var(--transparency-10),
+    var(--transparency-40)
+  );
+  --background-nav-tab: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--transparency-30) 70%
+  );
+  --default-shadow: 0 0 0.6rem 0.3rem var(--transparency-90);
+}
+
+.btn-tools {
+  color: white;
+  background: var(--transparency-80);
+  border: none;
+  padding: 0.35rem 0.68rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  flex-wrap: nowrap;
+}
+
+.icon-btn{
+  width: 20px;
+  height: 20px;
+}
+
+
+/* Animations */
+
+@keyframes pulseAnimation {
+  0% {
+    box-shadow: 0 0 0 0 rgba(9, 7, 141, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 0.8rem rgb(9, 7, 141, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(9, 7, 141, 0);
+  }
+}
+
+.pulse-animation {
+  box-shadow: 0 0 0 0 rgba(9, 7, 141, 1);
+  animation: pulseAnimation 2s infinite;
+}
+
+#wordpress-auxiliary-menu {
+  z-index: 9999;
+}
+
+#toolElementBar{
+  opacity: 0;
+  transition: all ease-out 0.4s;
+  pointer-events: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.2rem;
+}
+
+#toolElementBar.visible{
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 250ms;
+}
+
+#toolIsland {
+  width: 100px;
+  height: 36px;
+  border: 1px solid;
+  border-color: var(--transparency-50);
+  border-radius: 0.8rem;
+  box-shadow: 0 0 6px #00000060;
+  backdrop-filter: blur(4px);
+  position: fixed;
+  bottom: -1rem;
+  right: 8rem;
+  transition: all ease 0.3s;
+  pointer-events: auto;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-direction: column;
+}
+
+#toolIsland.active-bar {
+  width: 420px;
+  bottom: 1.2rem;
+  background: #0d0af710;
+  padding: 0.4rem;
+  border-color: var(--transparency-30);
+  cursor: default;
+}
+
+#titleBar{
+  background-color: var(--transparency-60);
+}
+#titleBar p{
+  line-height: normal;
+  margin: 0!important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.visible {
+  display: flex !important;
+}
+

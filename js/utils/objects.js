@@ -1,5 +1,5 @@
 // Plugin cards
-const plugins = [
+export const plugins = [
   {
     name: "Elementor Website Builder – Mais do que apenas um construtor de páginas",
     searchName: "Elementor Website Builder",
@@ -97,7 +97,6 @@ const plugins = [
     name: "Safe SVG",
     description:
       "Permita o envio de arquivos SVG e sanitize-os para impedir vulnerabilidades XML/SVG no seu site WordPress.",
-      image: "https://ps.w.org/safe-img/svg/assets/icon.svg",
       image: "https://ps.w.org/safe-svg/assets/icon.svg?rev=2779013",
       wordpressSelector: ".plugin-card-safe-svg",
   },
@@ -110,7 +109,7 @@ const plugins = [
   },
 ];
 
-const validation = [
+export const validation = [
   {
     idInput: "emailField",
     btnSelector: "copyEmailValidation",
@@ -124,7 +123,51 @@ const validation = [
     infoComment: `Phone Field Mask`,
     scriptCDN: `<script src="https://unpkg.com/imask@7/dist/imask.min.js"></script>`,
     selector: `const PHONE_FIELD_SELECTOR = 'input[name="\${fieldSelectorToReplace}"]';`,
-    originalCode: `document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll(PHONE_FIELD_SELECTOR).forEach(e=>{IMask(e,{mask:[{mask:"(00) 0000-0000"},{mask:"(00) 00000-0000"}],dispatch:(e,a)=>{const t=(a.value+e).replace(/\D/g,"");return a.compiledMasks[t.length>10?1:0]}})})});`,
+    originalCode: `document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll(PHONE_FIELD_SELECTOR).forEach(e=>{IMask(e,{mask:[{mask:"(00) 0000-0000"},{mask:"(00) 00000-0000"}],dispatch:(a,t)=>t.compiledMasks[(t.value+a).replace(/\D/g,"").length>10?1:0]})})});`,
   },
 ];
 
+export const alertContent = [
+  {
+    copyContent: {
+      class: "success",
+      messageHTML: "<b>Conteúdo copiado!</b><br>Acesse na área de transferência.",
+      timeOut: 2,
+    },
+    copyContentMask: {
+      class: "success",
+      messageHTML: "<b>Validador copiado!</b><br>Cole em: Javascript antes do &lt;/body&gt;.",
+      timeOut: 2,
+    },
+    waitRedirect: {
+      class: "warning",
+      messageHTML: "<b>Aguarde!</b><br>Redirect sendo realizado...",
+      timeOut: 5,
+    },
+    searchPlugin: {
+      class: "warning",
+      messageHTML: "<b>Aguarde!</b><br>Plugin sendo encontrado...",
+      timeOut: 5,
+    },
+    downloadPlugin: {
+      class: "warning",
+      messageHTML: "<b>Aguarde!</b><br>Plugin sendo instalado...",
+      timeOut: 5,
+    },
+    downloadWordpress: {
+      class: "warning",
+      messageHTML: "Download sendo realizado...",
+      timeOut: 3,
+    },
+    designModeActive: {
+      class: "success",
+      messageHTML: "<b>Design mode ativado!</b><br>Edite a página como quiser.",
+      timeOut: 2,
+    },
+    emptyContent: {
+      class: "danger",
+      messageHTML: "Não está esquecendo nada?",
+      timeOut: 3,
+    },
+  },
+]

@@ -1,30 +1,12 @@
-async function initializeRedirectionTool() {
-    const tab = await getCurrentTab();
-    if (tab && tab.url) {
-        const urlObj = new URL(tab.url);
-        const domain = urlObj.origin;
-        const slug = urlObj.pathname;
-        const url = urlObj.href;
+import { getCurrentTab, getTabObject } from '../utils/chrome-api.js';
 
-        document.getElementById('url_domain').value = domain;
-        document.getElementById('inputUrl').value = slug;
-        document.getElementById('url_').value = ensureSlash(url);
-        if (document.getElementById('outputUrl').value === '') {
-            document.getElementById('outputUrl').value = '/';
-        }
-    }
-}
-
-// Ensure the URL ends with a slash
 function ensureSlash(termUrl) {
     return termUrl.endsWith('/') ? termUrl : termUrl + '/';
 }
 
-initializeRedirectionTool();
-
-// Open the Redirection plugin admin page and inject code to create the redirect
 async function createRedirect(inputUrl, outputUrl) {
-    const domain = await getCurrentTabDomain();
+    const tabInfo = await getTabObject();
+    const domain = tabInfo.origin;
     if (!domain) {
         alert('Domain not available');
         return;
@@ -33,27 +15,24 @@ async function createRedirect(inputUrl, outputUrl) {
     const redirectionUrl = ensureSlash(domain) + "wp-admin/tools.php?page=redirection.php";
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
-    chrome.tabs.update(tab.id, { url: redirectionUrl });
+    await chrome.tabs.update(tab.id, { url: redirectionUrl });
 
-    // Wait for the page to finish loading before injecting
     chrome.tabs.onUpdated.addListener(function listener(tabId, changeInfo) {
         if (tabId === tab.id && changeInfo.status === 'complete') {
             chrome.tabs.onUpdated.removeListener(listener);
-            injectAndCreate(tabId, inputUrl, outputUrl);
+            injectAndCreate(tab.id, inputUrl, outputUrl);
         }
     });
 }
 
-// Inject script to retrieve nonce and send POST request to create redirect
 async function injectAndCreate(tabId, inputUrl, outputUrl) {
-    const domain = await getCurrentTabDomain();
+    const tabInfo = await getTabObject();
+    const domain = tabInfo.origin;
     try {
         const [{ result: nonce }] = await chrome.scripting.executeScript({
             target: { tabId },
             world: 'MAIN',
-            func: () => {
-                return window.Redirectioni10n?.api?.WP_API_nonce || '';
-            }
+            func: () => window.Redirectioni10n?.api?.WP_API_nonce || '',
         });
 
         if (!nonce) return;
@@ -69,24 +48,24 @@ async function injectAndCreate(tabId, inputUrl, outputUrl) {
                         "x-wp-nonce": nonce,
                     },
                     body: JSON.stringify({
-                        "id": 0,
-                        "url": inputUrl,
-                        "title": "",
-                        "match_data": {
-                            "source": {
-                                "flag_regex": false,
-                                "flag_trailing": true,
-                                "flag_case": true,
-                                "flag_query": "exact"
+                        id: 0,
+                        url: inputUrl,
+                        title: "",
+                        match_data: {
+                            source: {
+                                flag_regex: false,
+                                flag_trailing: true,
+                                flag_case: true,
+                                flag_query: "exact"
                             },
-                            "options": {}
+                            options: {}
                         },
-                        "match_type": "url",
-                        "action_type": "url",
-                        "position": 0,
-                        "group_id": 1,
-                        "action_code": 301,
-                        "action_data": { "url": outputUrl }
+                        match_type: "url",
+                        action_type: "url",
+                        position: 0,
+                        group_id: 1,
+                        action_code: 301,
+                        action_data: { url: outputUrl }
                     }),
                     method: "POST",
                     mode: "cors",
@@ -96,16 +75,13 @@ async function injectAndCreate(tabId, inputUrl, outputUrl) {
             },
             args: [ensureSlash(domain), inputUrl, outputUrl, nonce]
         });
-
     } catch (error) {
         console.error("Error retrieving nonce or sending redirect:", error);
     }
 }
 
-// Handle form submission and call the redirect creation function
-function handleRedirectEvent(event) {
+export function handleRedirectEvent(event) {
     event.preventDefault();
-
     const inputUrl = document.getElementById('inputUrl').value;
     const outputUrl = document.getElementById('outputUrl').value;
 
@@ -116,16 +92,21 @@ function handleRedirectEvent(event) {
     }
 }
 
-// Attach click listener to the "Create redirect" button
-document.getElementById('redirectBtn').addEventListener('click', function (event) {
-    event.preventDefault();
+export async function initializeRedirectionTool() {
+    const tabUrl = await getTabObject();
+    if (tabUrl && tabUrl.hostname) {
+        try {
+            const domain = tabUrl.hostname;
+            const slug = tabUrl.pathname;
+            const url = tabUrl.href;
 
-    const inputUrl = document.getElementById('inputUrl').value;
-    const outputUrl = document.getElementById('outputUrl').value;
-
-    if (inputUrl && outputUrl) {
-        createRedirect(inputUrl, outputUrl);
-    } else {
-        alert('Please fill in both fields');
+            document.getElementById('url_domain').value = domain;
+            document.getElementById('inputUrl').value = slug;
+            document.getElementById('url_').value = ensureSlash(url);
+            if (document.getElementById('outputUrl').value === '') {
+                document.getElementById('outputUrl').value = '/';
+            }
+        } catch (e) {
+        }
     }
-});
+}
