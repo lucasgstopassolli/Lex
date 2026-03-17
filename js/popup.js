@@ -1,5 +1,6 @@
 import { getTabObject, sendMessage, getCurrentTab } from "./utils/chrome-api.js";
 import { plugins } from "./utils/objects.js";
+import { alertTrigger, getAlertConfig } from "./utils/dom.js";
 
 // --- UI Rendering ---
 
@@ -54,18 +55,17 @@ export async function handleViewPluginClick(event) {
     const button = event.currentTarget;
     try {
         const tabInfo = await getTabObject();
-        const domain = tabInfo.hostname;
-        if (!domain) {
-            alert("Could not get the domain from the current tab.");
+        if (!tabInfo?.origin) {
+            alertTrigger(getAlertConfig("domainNotAvailable"));
             return;
         }
 
-        const pluginViewURL = domain + button.dataset.link;
+        const pluginViewURL = new URL(button.dataset.link, tabInfo.origin).href;
         const selector = button.dataset.selector;
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
         if (!tab || !tab.id) {
-            alert("No active tab found.");
+            alertTrigger(getAlertConfig("noActiveTab"));
             return;
         }
 
@@ -97,7 +97,7 @@ export async function handleViewPluginClick(event) {
         });
     } catch (error) {
         console.error("Error viewing plugin:", error);
-        alert("An error occurred. Please try again.");
+        alertTrigger(getAlertConfig("unexpectedError"));
     }
 }
 
@@ -105,18 +105,17 @@ export async function handleInstallPluginClick(event) {
     const button = event.currentTarget;
     try {
         const tabInfo = await getTabObject();
-        const domain = tabInfo.hostname;
-        if (!domain) {
-            alert("Could not get the domain from the current tab.");
+        if (!tabInfo?.origin) {
+            alertTrigger(getAlertConfig("domainNotAvailable"));
             return;
         }
 
-        const pluginViewURL = domain + button.dataset.link;
+        const pluginViewURL = new URL(button.dataset.link, tabInfo.origin).href;
         const selector = button.dataset.selector;
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
         if (!tab || !tab.id) {
-            alert("No active tab found.");
+            alertTrigger(getAlertConfig("noActiveTab"));
             return;
         }
 
@@ -143,20 +142,20 @@ export async function handleInstallPluginClick(event) {
 
         if (result?.result?.error) {
             console.error(result.result.error);
-            alert("Failed to find the download link on the page.");
+            alertTrigger(getAlertConfig("downloadLinkNotFound"));
             return;
         }
 
         const pluginInstallURL = result?.result?.href;
         if (!pluginInstallURL || !pluginInstallURL.startsWith("http")) {
-            alert("Invalid URL detected.");
+            alertTrigger(getAlertConfig("invalidUrl"));
             return;
         }
 
         await chrome.tabs.update(tab.id, { url: pluginInstallURL });
     } catch (error) {
         console.error("Error installing plugin:", error);
-        alert("An error occurred. Please try again.");
+        alertTrigger(getAlertConfig("unexpectedError"));
     }
 }
 

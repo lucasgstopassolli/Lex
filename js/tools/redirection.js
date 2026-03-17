@@ -1,4 +1,5 @@
 import { getCurrentTab, getTabObject } from '../utils/chrome-api.js';
+import { alertTrigger, getAlertConfig } from '../utils/dom.js';
 
 function ensureSlash(termUrl) {
     return termUrl.endsWith('/') ? termUrl : termUrl + '/';
@@ -6,9 +7,9 @@ function ensureSlash(termUrl) {
 
 async function createRedirect(inputUrl, outputUrl) {
     const tabInfo = await getTabObject();
-    const domain = tabInfo.origin;
+    const domain = tabInfo?.origin;
     if (!domain) {
-        alert('Domain not available');
+        alertTrigger(getAlertConfig("domainNotAvailable"));
         return;
     }
 
@@ -27,7 +28,7 @@ async function createRedirect(inputUrl, outputUrl) {
 
 async function injectAndCreate(tabId, inputUrl, outputUrl) {
     const tabInfo = await getTabObject();
-    const domain = tabInfo.origin;
+    const domain = tabInfo?.origin;
     try {
         const [{ result: nonce }] = await chrome.scripting.executeScript({
             target: { tabId },
@@ -86,9 +87,10 @@ export function handleRedirectEvent(event) {
     const outputUrl = document.getElementById('outputUrl').value;
 
     if (inputUrl && outputUrl) {
+        alertTrigger(getAlertConfig("waitRedirect"));
         createRedirect(inputUrl, outputUrl);
     } else {
-        alert('Please fill in both fields');
+        alertTrigger(getAlertConfig("fillBothRedirectFields"));
     }
 }
 

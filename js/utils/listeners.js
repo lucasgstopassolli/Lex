@@ -3,6 +3,7 @@ import * as storage from "./storage.js";
 import * as popup from "../popup.js";
 import * as redirection from "../tools/redirection.js";
 import { initializeValidationFields } from "../tools/validation-fields.js";
+import { alertTrigger, getAlertConfig } from "./dom.js";
 
 // --- Generic Listeners ---
 
@@ -26,7 +27,7 @@ export function setupCopyButtons() {
         const content = contentElement.textContent;
         navigator.clipboard.writeText(content.trim());
       } else {
-        console.warn(`Selector not found for copy button: ${selector}`);
+        alertTrigger(getAlertConfig("selectorNotFound"));
       }
     });
   });
@@ -39,10 +40,15 @@ export function setupOpenUrlButtons() {
       const selector = button.getAttribute("data-open-url");
       const targetElement = document.querySelector(selector);
       if (!targetElement) {
-        console.warn(`Element with selector '${selector}' not found.`);
+        alertTrigger(getAlertConfig("targetElementNotFound"));
         return;
       }
-      const url = targetElement.textContent.trim();
+      const rawUrl = targetElement.textContent.trim();
+      const isAbsoluteUrl = /^[a-z][a-z0-9+.-]*:/i.test(rawUrl);
+      const url = isAbsoluteUrl
+        ? rawUrl
+        : chrome.runtime.getURL(rawUrl.replace(/^\/+/, ""));
+
       if (url) {
         chrome.tabs.create({ url });
       }

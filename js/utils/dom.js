@@ -71,3 +71,44 @@ export function alertTrigger(content) {
     console.error(error);
   }
 }
+
+export function getAlertConfig(key, fallback = {}) {
+  const presets = alertContent?.[0] || {};
+  return {
+    class: "warning",
+    messageHTML: "Algo aconteceu.",
+    timeOut: 3,
+    ...(presets[key] || {}),
+    ...fallback,
+  };
+}
+
+export function copyToClipboard(text) {
+  const value = typeof text === "string" ? text : String(text ?? "");
+
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(value);
+  }
+
+  return new Promise((resolve, reject) => {
+    try {
+      const textarea = document.createElement("textarea");
+      textarea.value = value;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.top = "-1000px";
+      textarea.style.opacity = "0";
+
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      textarea.setSelectionRange(0, textarea.value.length);
+
+      const ok = document.execCommand("copy");
+      document.body.removeChild(textarea);
+      ok ? resolve() : reject(new Error("copy-failed"));
+    } catch (err) {
+      reject(err);
+    }
+  });
+}

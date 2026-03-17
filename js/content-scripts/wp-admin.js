@@ -1,9 +1,10 @@
-
 // Tool Island
+const logoUrl = chrome.runtime.getURL('../../img/svg/white-hole.svg');
+
 const tool = `
 <div id="toolIsland">
     <div id="titleBar">
-        <p>LEX</p>
+        <img src="${logoUrl}" alt="White Hole">
     </div>
     <div id="toolElementBar">
         <button class="btn-tools edit-all" id="editAllBtn">

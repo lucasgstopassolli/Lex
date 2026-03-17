@@ -17,6 +17,14 @@ export const plugins = [
     wordpressSelector: ".plugin-card-wp-seopress",
   },
   {
+    name: "Rank Math SEO – Ferramentas de SEO com IA para dominar as classificações de SEO",
+    searchName: "Rank Math SEO",
+    description:
+      "O Rank Math SEO é o melhor plugin de SEO para WordPress, com os recursos de muitas ferramentas de SEO e SEO com IA em um único pacote, para ajudar a multiplicar seu tráfego de SEO.",
+    image: "https://ps.w.org/seo-by-rank-math/assets/icon.svg",
+    wordpressSelector: ".plugin-card-seo-by-rank-math",
+  },
+  {
     name: "Editor clássico",
     description:
       "Ativar o editor 'clássico' anterior e o estilo antigo da tela Editar Post com TinyMCE, Meta Boxes, etc. Suporta todos os plugins que estendem esta tela.",
@@ -167,6 +175,66 @@ export const alertContent = [
     emptyContent: {
       class: "danger",
       messageHTML: "Não está esquecendo nada?",
+      timeOut: 3,
+    },
+    fillTitle: {
+      class: "danger",
+      messageHTML: "<b>Campo obrigatório!</b><br>Preencha o título da nota.",
+      timeOut: 3,
+    },
+    fillSelectorField: {
+      class: "danger",
+      messageHTML: "<b>Campo obrigatório!</b><br>Preencha o nome do campo.",
+      timeOut: 3,
+    },
+    domainNotAvailable: {
+      class: "danger",
+      messageHTML: "<b>Domínio indisponível.</b><br>Não foi possível identificar a URL da aba.",
+      timeOut: 4,
+    },
+    noActiveTab: {
+      class: "danger",
+      messageHTML: "<b>Aba ativa não encontrada.</b><br>Tente novamente.",
+      timeOut: 3,
+    },
+    unexpectedError: {
+      class: "danger",
+      messageHTML: "<b>Algo deu errado.</b><br>Tente novamente em instantes.",
+      timeOut: 4,
+    },
+    downloadLinkNotFound: {
+      class: "danger",
+      messageHTML: "<b>Link não encontrado.</b><br>Não foi possível localizar o botão de download.",
+      timeOut: 4,
+    },
+    invalidUrl: {
+      class: "danger",
+      messageHTML: "<b>URL inválida.</b><br>Verifique o link retornado e tente novamente.",
+      timeOut: 4,
+    },
+    fillBothRedirectFields: {
+      class: "danger",
+      messageHTML: "<b>Campos obrigatórios.</b><br>Preencha URL de origem e destino.",
+      timeOut: 3,
+    },
+    codeCopied: {
+      class: "success",
+      messageHTML: "<b>Código copiado com sucesso!</b>",
+      timeOut: 2,
+    },
+    codeCopyError: {
+      class: "danger",
+      messageHTML: "<b>Erro ao copiar código.</b><br>Tente novamente.",
+      timeOut: 3,
+    },
+    selectorNotFound: {
+      class: "warning",
+      messageHTML: "<b>Seletor não encontrado.</b><br>Confira o elemento informado.",
+      timeOut: 3,
+    },
+    targetElementNotFound: {
+      class: "warning",
+      messageHTML: "<b>Elemento não encontrado.</b><br>Verifique o seletor configurado.",
       timeOut: 3,
     },
   },

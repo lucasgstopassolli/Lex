@@ -1,3 +1,8 @@
+const whiteHoleSvgUrl =
+  typeof chrome !== "undefined" && chrome.runtime?.getURL
+    ? chrome.runtime.getURL("img/svg/white-hole.svg")
+    : "img/svg/white-hole.svg";
+
 // Fallback loading content for empty elements
 export const loadingHTML = `
     <div class="d-flex flex-column gap-3 p-5 align-items-center justify-content-center w-100">
@@ -13,7 +18,7 @@ export const loadingHTML = `
 export const emptyHTML = `
     <div class="enter-animation d-flex align-items-center justify-content-center flex-column gap-4 p-4" style="height: 400px!important;">
       <div class="idle-pulse user-select-none">
-        <img draggable="false" src="img/svg/white-hole.svg" class="d-block h-auto" alt="Empty State"
+        <img draggable="false" src="${whiteHoleSvgUrl}" class="d-block h-auto" alt="Empty State"
         style="opacity: 0.6; width: 250px; height: auto; transform: rotate(16deg)!important;">
       </div>
       <div class="d-flex flex-column justify-content-center gap-2 user-select-none">

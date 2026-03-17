@@ -50,11 +50,10 @@
   flex-wrap: nowrap;
 }
 
-.icon-btn{
+.icon-btn {
   width: 20px;
   height: 20px;
 }
-
 
 /* Animations */
 
@@ -81,7 +80,7 @@
   z-index: 9999;
 }
 
-#toolElementBar{
+#toolElementBar {
   opacity: 0;
   transition: all ease-out 0.4s;
   pointer-events: none;
@@ -91,23 +90,18 @@
   gap: 0.2rem;
 }
 
-#toolElementBar.visible{
+#toolElementBar.visible {
   opacity: 1;
   pointer-events: auto;
   transition-delay: 250ms;
 }
 
 #toolIsland {
-  width: 100px;
-  height: 36px;
-  border: 1px solid;
-  border-color: var(--transparency-50);
-  border-radius: 0.8rem;
-  box-shadow: 0 0 6px #00000060;
-  backdrop-filter: blur(4px);
   position: fixed;
-  bottom: -1rem;
-  right: 8rem;
+  width: 4rem;
+  height: 0.8rem;
+  bottom: 1.2rem;
+  right: 1.8rem;
   transition: all ease 0.3s;
   pointer-events: auto;
   z-index: 1000;
@@ -120,26 +114,41 @@
 
 #toolIsland.active-bar {
   width: 420px;
+  height: 36px;
+  right: 8rem;
   bottom: 1.2rem;
   background: #0d0af710;
   padding: 0.4rem;
-  border-color: var(--transparency-30);
   cursor: default;
+  border: 1px solid var(--transparency-30);
+  border-radius: 0.8rem;
+  box-shadow: 0 0 6px #00000060;
+  backdrop-filter: blur(4px);
 }
 
-#titleBar{
-  background-color: var(--transparency-60);
+#titleBar {
+  --but-size: 3.6rem;
+  background-color: var(--transparency-40);
+  margin-top: 0.8rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--but-size);
+  height: var(--but-size);
+  transition: all ease-out 0.3s;
 }
-#titleBar p{
-  line-height: normal;
-  margin: 0!important;
+
+#titleBar:hover{
+  background-color: var(--transparency-80);
+}
+
+#titleBar img {
+  width: 3.2rem;
+  transform: rotate(-20deg);
 }
 
 .hidden {
   display: none !important;
 }
-
-.visible {
-  display: flex !important;
-}
-

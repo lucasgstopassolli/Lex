@@ -35,6 +35,16 @@
         "default_popup": "index.html",
         "default_title": "Lex"
     },
+    "web_accessible_resources": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "resources": [
+                "/img/*"
+            ]
+        }
+    ],
     "content_scripts": [
         {
             "matches": [

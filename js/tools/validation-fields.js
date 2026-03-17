@@ -1,4 +1,5 @@
 import { validation } from '../utils/objects.js';
+import { alertTrigger, getAlertConfig, copyToClipboard } from '../utils/dom.js';
 
 function handleValidationFieldCopy(item) {
     const { idInput, infoComment, scriptCDN, selector, originalCode } = item;
@@ -6,7 +7,7 @@ function handleValidationFieldCopy(item) {
     const fieldSelectorToReplace = document.getElementById(idInput).value.trim();
 
     if (!fieldSelectorToReplace) {
-        alert("Por favor, preencha o campo do seletor.");
+        alertTrigger(getAlertConfig("fillSelectorField"));
         return;
     }
 
@@ -22,13 +23,10 @@ function handleValidationFieldCopy(item) {
     finalCode = `<!-- ${infoComment} -->
 ${finalCode}<!-- END ${infoComment} -->`;
 
-    navigator.clipboard.writeText(finalCode).then(() => {
-        // Assuming a general message element exists in the popup
-        const messageEl = document.getElementById("global-message") || document.getElementById("mensagem");
-        if (messageEl) messageEl.textContent = "Código copiado com sucesso!";
+    copyToClipboard(finalCode).then(() => {
+        alertTrigger(getAlertConfig("codeCopied"));
     }).catch(() => {
-        const messageEl = document.getElementById("global-message") || document.getElementById("mensagem");
-        if (messageEl) messageEl.textContent = "Erro ao copiar código.";
+        alertTrigger(getAlertConfig("codeCopyError"));
     });
 }
 

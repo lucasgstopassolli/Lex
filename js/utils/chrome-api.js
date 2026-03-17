@@ -32,15 +32,17 @@ export async function getTabObject() {
   const tab = await getCurrentTab();
   if (tab && tab.url) {
     const url = new URL(tab.url);
-    return url
-  } else {console.log('Ocorreu um erro inesperado...')}
+    if (!["http:", "https:"].includes(url.protocol)) {
+      return null;
+    }
+    return url;
+  }
+  return null;
 }
 
 
 export function createNewTab(url) {
   if (url) {
     chrome.tabs.create({ url: url, active: false });
-  } else {console.log('Algo deu errado...')}
+  }
 }
-
-

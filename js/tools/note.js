@@ -1,6 +1,11 @@
-import { escapeHtml, stripHtml } from '../utils/dom.js';
+import { escapeHtml, stripHtml, alertTrigger, getAlertConfig } from '../utils/dom.js';
 
 // --- Note Management (formerly manager.js) ---
+
+const whiteHoleSvgUrl =
+  typeof chrome !== "undefined" && chrome.runtime?.getURL
+    ? chrome.runtime.getURL("img/svg/white-hole.svg")
+    : "img/svg/white-hole.svg";
 
 const NOTES_KEY = "notes";
 let notes = JSON.parse(localStorage.getItem(NOTES_KEY)) || [];
@@ -58,7 +63,7 @@ function searchNotes(query) {
 const emptyHTML = `
     <div class="enter-animation d-flex align-items-center justify-content-center flex-column gap-4 p-4" style="height: 400px!important;">
       <div class="idle-pulse user-select-none">
-        <img draggable="false" src="img/svg/white-hole.svg" class="d-block h-auto" alt="Empty State"
+        <img draggable="false" src="${whiteHoleSvgUrl}" class="d-block h-auto" alt="Empty State"
         style="opacity: 0.6; width: 250px; height: auto; transform: rotate(16deg)!important;">
       </div>
       <div class="d-flex flex-column justify-content-center gap-2 user-select-none">
@@ -153,7 +158,7 @@ function handleSave() {
     const cleanContent = DOMPurify.sanitize(dirtyContent);
 
     if (!title) {
-        alert("Por favor, preencha o título!");
+        alertTrigger(getAlertConfig("fillTitle"));
         return;
     }
     
