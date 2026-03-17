@@ -111,7 +111,15 @@ function renderNotes(notesToShow) {
   }
 
   emptyState.innerHTML = "";
-  notesList.innerHTML = notesToShow.map((note) => `
+  notesList.innerHTML = notesToShow.map((note) => {
+    const isAsteroidsNote = note.title.toLowerCase() === 'asteroids' && stripHtml(note.content).trim() === '';
+    const asteroidsBtn = isAsteroidsNote ? `
+      <button class="btn asteroids-button lh-normal" style="padding: 0.6rem 0.75rem!important;">
+        <img src="https://api.iconify.design/hugeicons:asteroid-01.svg?color=%23ffffff" alt="Asteroids" width="18" style="pointer-events: none;">
+      </button>
+    ` : '';
+
+    return `
       <div class="note-item card d-flex flex-row gap-2 rounded-3 justify-content-between" data-id="${note.id}">
         <div class="d-flex flex-column gap-2">
           <h5 class="note-title mb-1" style="color:var(--primary-400);">${note.title}</h5>
@@ -122,6 +130,7 @@ function renderNotes(notesToShow) {
         <div class="d-flex flex-column gap-2">
           <div class="note-date align-self-end me-2" style="color:var(--primary-300)">${formatDate(note.date)}</div>
           <div class="note-actions d-flex gap-2">
+            ${asteroidsBtn}
             <button class="btn btn-primary btn-sm fw-normal edit-button lh-normal" style="padding: 0.6rem 1.4em!important;">Editar</button>
             <button class="btn btn-outline-danger delete-button lh-1" style="padding: 0.6rem!important;">
               <img src="https://api.iconify.design/material-symbols:delete-rounded.svg?color=%23ffffff" alt="Delete" width="18" style="pointer-events: none;">
@@ -129,7 +138,8 @@ function renderNotes(notesToShow) {
           </div>
         </div>
       </div>
-  `).join("");
+    `;
+  }).join("");
 }
 
 function openEditModal(id) {
@@ -193,6 +203,9 @@ function setupNoteEventListeners() {
         const noteId = noteItem.dataset.id;
         if (e.target.classList.contains("edit-button")) {
             openEditModal(noteId);
+        }
+        if (e.target.classList.contains("asteroids-button")) {
+            window.open('asteroids.html', '_blank');
         }
         if (e.target.classList.contains("delete-button")) {
             if (confirm("Deletar esta nota?")) {
