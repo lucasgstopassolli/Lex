@@ -75,7 +75,8 @@ const emptyHTML = `
 
 let editingId = null;
 let quill = null; // Quill instance
-const container = document.getElementById("notesList");
+const notesList = document.getElementById("notesList");
+const emptyState = document.getElementById("emptyState");
 const noteModal = document.getElementById("noteModal");
 
 function initQuillEditor() {
@@ -104,11 +105,13 @@ function formatDate(date) {
 
 function renderNotes(notesToShow) {
   if (notesToShow.length === 0) {
-    container.innerHTML = emptyHTML;
+    notesList.innerHTML = "";
+    emptyState.innerHTML = emptyHTML;
     return;
   }
 
-  container.innerHTML = notesToShow.map((note) => `
+  emptyState.innerHTML = "";
+  notesList.innerHTML = notesToShow.map((note) => `
       <div class="note-item card d-flex flex-row gap-2 rounded-3 justify-content-between" data-id="${note.id}">
         <div class="d-flex flex-column gap-2">
           <h5 class="note-title mb-1" style="color:var(--primary-400);">${note.title}</h5>
@@ -183,7 +186,7 @@ function setupNoteEventListeners() {
     noteModal.addEventListener("shown.bs.modal", initQuillEditor);
     noteModal.addEventListener("hidden.bs.modal", resetModal);
 
-    container.addEventListener("click", (e) => {
+    notesList.addEventListener("click", (e) => {
         const noteItem = e.target.closest(".note-item");
         if (!noteItem) return;
 

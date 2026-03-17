@@ -70,6 +70,7 @@ body {
 }
 
 #notesList,
+#emptyState,
 #inputArea {
   width: 75%;
 }
@@ -165,6 +166,7 @@ body {
     grid-template-columns: 1fr;
   }
   #notesList,
+  #emptyState,
   #inputArea {
     width: 90%;
   }
