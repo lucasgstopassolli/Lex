@@ -112,7 +112,7 @@ export function setupPopupListeners() {
     });
 
     // Design mode button
-    addListener("#designModeTool", "click", popup.handleDesignModeClick);
+    addListener("#designModeTool", "change", popup.handleDesignModeClick);
 }
 
 // --- Storage-related Listeners and UI Restoration ---

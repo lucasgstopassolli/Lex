@@ -199,12 +199,44 @@ export function handleLikeVerseClick() {
 
 export async function handleDesignModeClick() {
     const tab = await getCurrentTab();
-    const selector = "#designModeTool";
-    const element = document.querySelector(selector);
-    if (element) {
-        element.classList.add("activeBut");
+    const switchEl = document.querySelector("#designModeTool");
+    const statusText = document.querySelector("#designModeStatus");
+    const container = document.querySelector("#designModeContainer");
+    
+    if (!switchEl) return;
+
+    const isEnabled = switchEl.checked;
+    chrome.storage.local.set({ designModeEnabled: isEnabled });
+
+    // Update Visual UI
+    if (statusText) {
+        statusText.textContent = isEnabled ? "Edição de página ATIVADA" : "Edição de página desativada";
+        statusText.style.opacity = isEnabled ? "1" : "0.4";
+        statusText.style.color = isEnabled ? "var(--primary-300)" : "white";
     }
-    sendMessage(tab.id, { action: "enableDesignMode" });
+
+    if (container) {
+        container.style.borderColor = isEnabled ? "var(--primary-500)" : "var(--transparency-20)";
+        container.style.backgroundColor = isEnabled ? "var(--transparency-20)" : "var(--transparency-10)";
+    }
+    
+    if (tab?.id) {
+        const action = isEnabled ? "enableDesignMode" : "disableDesignMode";
+        chrome.tabs.sendMessage(tab.id, { action: action });
+    }
+}
+
+export function initializeDesignModeState() {
+    const switchEl = document.querySelector("#designModeTool");
+    if (!switchEl) return;
+
+    chrome.storage.local.get("designModeEnabled", async (result) => {
+        const isEnabled = result.designModeEnabled || false;
+        switchEl.checked = isEnabled;
+        
+        // Sync initial visual state
+        handleDesignModeClick();
+    });
 }
 
 export function renderFavoriteVerses() {
@@ -285,4 +317,5 @@ export function initializeLikeButtonState() {
 
     checkState();
     renderFavoriteVerses();
+    initializeDesignModeState();
 }

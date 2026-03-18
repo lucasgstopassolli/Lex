@@ -473,40 +473,37 @@
                                     src="https://api.iconify.design/bxs:magic-wand.svg?color=%23ffffff" width="24"
                                     alt="Download" />Avançado</label>
                         </div>
-                        <div class="d-flex gap-3 p-4 w-100 rounded-2 enter-animation flex-column" style="
-                  background: var(--transparency-10);
-                  border: 1px solid var(--primary-900);
-                ">
-                            <div class="d-flex gap-3 w-100 rounded-2 enter-animation flex-row justify-content-around align-items-center p-4"
-                                style="
-                    background-color: var(--transparency-10);
-                    border: 1px solid var(--transparency-20);
-                  ">
-                                <label
-                                    class="text-white fw-normal fs-6 user-select-none d-flex flex-column text-nowrap">
-                                    Ativar modo designer na página
-                                    <span style="opacity: 0.4; font-size: 0.8rem">
-                                        Desfazer alterações: <i>Ctrl + Z</i> ou <i>F5</i>
-                                    </span>
-                                </label>
-                                <div class="d-flex flex-row gap-2 w-auto justify-content-center"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
-                                    title="Permite vizualizar alterações no conteúdo da página.">
-                                    <button
-                                        class="btn btn-outline-primary rounded-3 fw-normal d-flex flex-row align-items-center gap-2 user-select-none justify-content-center lh-normal"
-                                        id="designModeTool" style="
-                        background-color: var(--transparency-30);
-                        transform: none;
-                        padding: 0.6rem 2rem !important;
-                      ">
-                                        <img src="https://api.iconify.design/fa7-solid:pen-nib.svg?color=%23ffffff"
-                                            alt="Nib" width="14" />
-                                        Design Mode
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                                    <div class="d-flex flex-row gap-3 p-4 w-100 rounded-2 enter-animation flex-column" style="
+                                          background: var(--transparency-10);
+                                          border: 1px solid var(--primary-900);
+                                        ">
+                                                                                    <div id="designModeContainer" class="d-flex gap-3 w-100 rounded-3 enter-animation flex-row justify-content-between align-items-center p-3"
+                                                                                        style="
+                                                                                            background-color: var(--transparency-10);
+                                                                                            border: 1px solid var(--transparency-20);
+                                                                                            transition: all 0.3s ease;
+                                                                                            cursor: pointer;
+                                                                                        "
+                                                                                        onclick="document.getElementById('designModeTool').click();">
+                                                                                        <div class="d-flex flex-column pointer-events-none">
+                                                                                            <label class="text-white fw-semibold fs-6 mb-0 d-flex align-items-center gap-1" style="cursor: pointer;">
+                                                                                                <img src="https://api.iconify.design/fa7-solid:pen-nib.svg?color=%23ffffff" width="18" alt="Nib">
+                                                                                                Design Mode
+                                                                                            </label>
+                                                                                            <span id="designModeStatus" style="opacity: 0.4; font-size: 0.8rem">
+                                                                                                Edição de página desativada
+                                                                                            </span>
+                                                                                        </div>
+                                                                                        <div class="form-check form-switch p-0 m-0">
+                                                                                            <input class="form-check-input ms-0" type="checkbox" id="designModeTool" style="
+                                                                                                width: 2.8rem !important;
+                                                                                                height: 1.4rem !important;
+                                                                                                cursor: pointer;
+                                                                                                background-color: var(--transparency-60);
+                                                                                                border-color: var(--primary-800);
+                                                                                            ">
+                                                                                        </div>
+                                                                                    </div>                                                </div>                    </div>
                 </div>
             </div>
         </div>
