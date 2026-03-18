@@ -14,6 +14,8 @@ import { loadingHTML } from './utils/template.js';
 import { fetchAndDisplayVerse } from './tools/bible.js';
 import { initializeRedirectionTool } from './tools/redirection.js';
 import { initializeColorPicker } from './tools/color-picker.js';
+import { initializeContrastChecker } from './tools/contrast-checker.js';
+
 // This is the main entry point for the popup functionality.
 function initializePopup() {
     // 1. Render initial UI elements
@@ -38,6 +40,7 @@ function initializePopup() {
     fetchAndDisplayVerse();
     initializeRedirectionTool();
     initializeColorPicker();
+    initializeContrastChecker();
 }
 
 document.addEventListener('DOMContentLoaded', initializePopup);

@@ -1,0 +1,45 @@
+/**
+ * Contrast Checker Styles
+ */
+
+.contrast-status-badge {
+    border-radius: 50rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-align: center;
+    min-width: 45px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.contrast-status-badge.pass-aaa {
+    background-color: rgba(25, 135, 84, 0.2);
+    color: #198754;
+    border: 1px solid #198754;
+}
+
+.contrast-status-badge.pass-aa {
+    background-color: rgba(13, 110, 253, 0.2);
+    color: #0d6efd;
+    border: 1px solid #0d6efd;
+}
+
+.contrast-status-badge.fail {
+    background-color: rgba(220, 53, 69, 0.2);
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.contrast-preview-box {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contrast-input-group .form-control {
+    border-color: var(--primary-800);
+}
+
+.contrast-input-group .form-control:focus {
+    border-color: var(--primary-400);
+    box-shadow: none;
+}

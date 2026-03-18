@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="css/bootstrap.min.css" />
   <script src="js/librarys/bootstrap/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="css/default.css" />
+  <link rel="stylesheet" href="css/contrast-checker.css" />
+
   <!-- Another librarys -->
   <script src="js/librarys/purify/purify.min.js"></script>
 </head>
@@ -323,10 +325,20 @@
                 width="16" alt="Color Picker" />Color Picker
             </button>
           </li>
+          <li class="nav-item w-100" role="presentation">
+            <button style="font-size: 14px; padding: 0.6rem 0.8rem"
+              class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100 lh-normal text-nowrap"
+              id="but-contrast-checker-tab" data-bs-toggle="pill" data-bs-target="#contrast-checker-tab" type="button"
+              role="tab" aria-controls="contrast-checker-tab" aria-selected="false" data-storage-key="lastDesignTab">
+              <img draggable="false" src="https://api.iconify.design/material-symbols:invert-colors-outline.svg?color=%23ffffff"
+                width="16" alt="Contrast" />Contrast Checker
+            </button>
+          </li>
         </ul>
 
         <!-- Content -->
         <div class="main tab-content gap-3 p-4 d-flex w-100">
+          <!-- Color Picker Tab -->
           <div class="main tab-pane fade show active w-100" id="color-picker-tab" role="tabpanel"
             aria-labelledby="but-color-picker-tab" tabindex="0">
             <div class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
@@ -511,6 +523,65 @@
                   </button>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <!-- Contrast Checker Tab -->
+          <div class="main tab-pane fade w-100" id="contrast-checker-tab" role="tabpanel"
+            aria-labelledby="but-contrast-checker-tab" tabindex="0">
+            <div class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-2">
+              <label class="text-white fw-semibold fs-5 d-flex align-items-center gap-1">
+                <img draggable="false" src="https://api.iconify.design/material-symbols:invert-colors-outline.svg?color=%23ffffff"
+                  width="20" alt="Contrast" />Contrast Checker</label>
+            </div>
+            
+            <div class="d-flex flex-column gap-2 p-3 rounded-3 enter-animation" style="background: var(--transparency-10); border: 1px solid var(--primary-900);">
+                <!-- Inputs Row -->
+                <div class="row g-2 contrast-input-group">
+                    <div class="col-6">
+                        <label class="small opacity-50 mb-1" style="font-size: 0.8rem;">Background</label>
+                        <div class="input-group input-group-sm">
+                            <input type="color" class="form-control form-control-color bg-transparent" id="bgColorInput" value="#1A1A1A" style="width: 4.2rem; flex: none; height: 2.8rem; border-radius: 0.4rem 0 0 0.4rem; background: var(--transparency-70) !important;">
+                            <input type="text" class="form-control bg-transparent text-white font-monospace fs-6" id="bgHexText" value="#1A1A1A" style="border-radius: 0 0.4rem 0.4rem 0;">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label class="small opacity-50 mb-1" style="font-size: 0.8rem;">Foreground</label>
+                        <div class="input-group input-group-sm">
+                            <input type="color" class="form-control form-control-color bg-transparent" id="fgColorInput" value="#A9B5FF" style="width: 4.2rem; flex: none; height: 2.8rem; border-radius: 0.4rem 0 0 0.4rem; background: var(--transparency-70) !important;">
+                            <input type="text" class="form-control bg-transparent text-white font-monospace fs-6" id="fgHexText" value="#A9B5FF" style="border-radius: 0 0.4rem 0.4rem 0;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preview Box -->
+                 <div class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center p-2 rounded-2" style="background: var(--transparency-20);">
+                  <div class="d-flex flex-column px-4 justify-content-center align-items-center">
+                      <h4 id="ratioValue" class="mb-2 fw-bold fs-2" style="color: var(--primary-300)">0.00:1</h4>
+                      <div class="d-flex gap-2">
+                          <div class="d-flex flex-column align-items-center">
+                              <span id="statusNormal" class="contrast-status-badge fail">FAIL</span>
+                              <span style="font-size: 0.6rem;" class="opacity-50 mt-1">NORMAL</span>
+                          </div>
+                          <div class="d-flex flex-column align-items-center">
+                              <span id="statusLarge" class="contrast-status-badge fail">FAIL</span>
+                              <span style="font-size: 0.6rem;" class="opacity-50 mt-1">LARGE</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div id="contrastPreview" class="contrast-preview-box rounded-3 py-4 text-center mt-1 w-100" style="background-color: #1A1A1A; color: #A9B5FF; border: 1px solid var(--transparency-20);">
+                      <p class="mb-0 fw-bold fs-5">Exemplo de Texto</p>
+                      <span class="small opacity-75 fs-6">A leitura deve ser confortável.</span>
+                  </div>
+                 </div>
+
+                <!-- Results Row -->
+                <div class="d-flex flex-row justify-content-between align-items-center mt-1 p-2 rounded-2" style="background: var(--transparency-20);">
+                    <div class="d-flex flex-column p-2 user-select-none opacity-50" style="font-size: 0.9rem;">
+                        <p class="mb-0"><b>AA:</b> Contraste mínimo de 4,5:1 (texto normal) e 3:1 (texto grande/negrito).</p>
+                        <p class="mb-0"><b>AAA:</b> Contraste alto de 7:1 (texto normal) e 4,5:1 (texto grande/negrito).</p>
+                    </div>
+                </div>
             </div>
           </div>
         </div>
