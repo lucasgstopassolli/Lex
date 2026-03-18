@@ -84,6 +84,33 @@ export function setupPopupListeners() {
     // Like button
     addListener("#likeVerse", "click", popup.handleLikeVerseClick);
 
+    // Favorites sidebar
+    addListener("#openFavorites", "click", () => {
+        const sidebar = document.getElementById("favoritesSidebar");
+        if (sidebar) {
+            sidebar.style.right = "0";
+            popup.renderFavoriteVerses();
+        }
+    });
+    addListener("#closeFavorites", "click", () => {
+        const sidebar = document.getElementById("favoritesSidebar");
+        if (sidebar) {
+            sidebar.style.right = "-320px";
+        }
+    });
+
+    // Close favorites sidebar when clicking outside
+    document.addEventListener("mousedown", (e) => {
+        const sidebar = document.getElementById("favoritesSidebar");
+        const openBtn = document.getElementById("openFavorites");
+        
+        if (sidebar && sidebar.style.right === "0px") {
+            if (!sidebar.contains(e.target) && !openBtn.contains(e.target)) {
+                sidebar.style.right = "-320px";
+            }
+        }
+    });
+
     // Design mode button
     addListener("#designModeTool", "click", popup.handleDesignModeClick);
 }

@@ -15,6 +15,15 @@ export function fetchAndDisplayVerse() {
         const verseNumber = `${chapter}:${verse}`;
         const verseContent = text.trim();
         
+        const verseContainer = document.querySelector('.verse-container');
+        if (verseContainer) {
+            verseContainer.dataset.book = book;
+            verseContainer.dataset.verse = verseNumber;
+            verseContainer.dataset.content = verseContent;
+            verseContainer.dataset.bookId = book_id;
+            verseContainer.dataset.chapter = chapter;
+        }
+
         const bookVerseEl = document.getElementById('bookVerse');
         const numberVerseEl = document.getElementById('numberVerse');
         const contentVerseEl = document.getElementById('contentVerse');

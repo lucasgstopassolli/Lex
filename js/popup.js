@@ -161,16 +161,39 @@ export async function handleInstallPluginClick(event) {
 
 export function handleLikeVerseClick() {
     const likeBtn = document.querySelector("#likeVerse");
-    if (!likeBtn) return;
+    const verseContainer = document.querySelector('.verse-container');
+    if (!likeBtn || !verseContainer || !verseContainer.dataset.bookId) return;
 
     const unlikePath = "img/svg/unlike.svg";
     const likePath = "img/svg/like.svg";
 
-    let liked = likeBtn.querySelector("img").src.endsWith(likePath);
-    liked = !liked;
+    const verseData = {
+        book: verseContainer.dataset.book,
+        verse: verseContainer.dataset.verse,
+        content: verseContainer.dataset.content,
+        bookId: verseContainer.dataset.bookId,
+        chapter: verseContainer.dataset.chapter,
+        id: `${verseContainer.dataset.bookId}-${verseContainer.dataset.chapter}-${verseContainer.dataset.verse}`
+    };
 
-    likeBtn.querySelector("img").src = liked ? likePath : unlikePath;
-    chrome.storage.local.set({ likedVerse: liked });
+    chrome.storage.local.get("favoriteVerses", (result) => {
+        let favorites = result.favoriteVerses || [];
+        const index = favorites.findIndex(v => v.id === verseData.id);
+        let liked;
+
+        if (index === -1) {
+            favorites.push(verseData);
+            liked = true;
+        } else {
+            favorites.splice(index, 1);
+            liked = false;
+        }
+
+        chrome.storage.local.set({ favoriteVerses: favorites }, () => {
+            likeBtn.querySelector("img").src = liked ? likePath : unlikePath;
+            renderFavoriteVerses();
+        });
+    });
 }
 
 
@@ -184,18 +207,82 @@ export async function handleDesignModeClick() {
     sendMessage(tab.id, { action: "enableDesignMode" });
 }
 
+export function renderFavoriteVerses() {
+    const container = document.getElementById("favorites-container");
+    if (!container) return;
+
+    chrome.storage.local.get("favoriteVerses", (result) => {
+        const favorites = result.favoriteVerses || [];
+        if (favorites.length === 0) {
+            container.innerHTML = '<p class="text-center opacity-50 mt-4">Nenhum versículo favorito ainda.</p>';
+            return;
+        }
+
+        container.innerHTML = favorites.map((verse) => `
+            <div class="favorite-item p-3 mb-2 rounded-3 border border-primary-900" style="background: var(--transparency-10)">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h6 class="mb-0 text-primary-300">${verse.book} ${verse.verse}</h6>
+                    <button class="btn btn-sm p-0 remove-favorite" data-id="${verse.id}" style="border:none; background:transparent">
+                        <img src="https://api.iconify.design/material-symbols:close-rounded.svg?color=%23ff4d4d" width="16">
+                    </button>
+                </div>
+                <p class="mb-0 small opacity-75" style="font-size: 0.85rem">${verse.content}</p>
+            </div>
+        `).join('');
+
+        container.querySelectorAll('.remove-favorite').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = btn.dataset.id;
+                removeFavoriteVerse(id);
+            });
+        });
+    });
+}
+
+function removeFavoriteVerse(id) {
+    chrome.storage.local.get("favoriteVerses", (result) => {
+        let favorites = result.favoriteVerses || [];
+        favorites = favorites.filter(v => v.id !== id);
+        chrome.storage.local.set({ favoriteVerses: favorites }, () => {
+            renderFavoriteVerses();
+            const verseContainer = document.querySelector('.verse-container');
+            if (verseContainer) {
+                const currentId = `${verseContainer.dataset.bookId}-${verseContainer.dataset.chapter}-${verseContainer.dataset.verse}`;
+                if (currentId === id) {
+                    const likeBtn = document.querySelector("#likeVerse");
+                    if (likeBtn) {
+                        likeBtn.querySelector("img").src = "img/svg/unlike.svg";
+                    }
+                }
+            }
+        });
+    });
+}
 
 // --- Initialization ---
 
 export function initializeLikeButtonState() {
     const likeBtn = document.querySelector("#likeVerse");
+    const verseContainer = document.querySelector('.verse-container');
     if (!likeBtn) return;
 
-    const unlikePath = "img/svg/unlike.svg";
-    const likePath = "img/svg/like.svg";
+    const checkState = () => {
+        if (!verseContainer || !verseContainer.dataset.bookId) {
+            setTimeout(checkState, 100);
+            return;
+        }
 
-    chrome.storage.local.get("likedVerse", (result) => {
-        let liked = result.likedVerse || false;
-        likeBtn.querySelector("img").src = liked ? likePath : unlikePath;
-    });
+        const verseId = `${verseContainer.dataset.bookId}-${verseContainer.dataset.chapter}-${verseContainer.dataset.verse}`;
+        const unlikePath = "img/svg/unlike.svg";
+        const likePath = "img/svg/like.svg";
+
+        chrome.storage.local.get("favoriteVerses", (result) => {
+            const favorites = result.favoriteVerses || [];
+            const liked = favorites.some(v => v.id === verseId);
+            likeBtn.querySelector("img").src = liked ? likePath : unlikePath;
+        });
+    };
+
+    checkState();
+    renderFavoriteVerses();
 }

@@ -66,7 +66,7 @@
                 class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
                 style="font-size: 0.9rem" id="but-tools-tab" data-bs-toggle="pill" data-bs-target="#tools-tab"
                 type="button" role="tab" aria-controls="tools-tab" aria-selected="false" data-storage-key="lastMainTab">
-                <img draggable="false" src="https://api.iconify.design/line-md:cog-filled-loop.svg?color=%23ffffff"
+                <img draggable="false" src="https://api.iconify.design/material-symbols:settings-rounded.svg?color=%23ffffff"
                     alt="Ferramentas" width="16" />
                 <span style="line-height: normal">Ferramentas</span>
             </button>
@@ -131,8 +131,20 @@
                     <p class="d-none" id="bibleChapterURL"></p>
 
                     <!-- Action Buttons -->
-                    <div class="d-flex flex-row justify-content-end align-items-center">
+                    <div class="d-flex flex-row justify-content-between align-items-center w-100">
+                        <div>
+                            <button class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                data-bs-trigger="hover" title="Ver favoritos" id="openFavorites">
+                                <img draggable="false" style="pointer-events: none" width="24" src="https://api.iconify.design/mdi:notebook-heart.svg?color=%23a9b5ff"
+                                    alt="Favorites" />
+                            </button>
+                        </div>
                         <div class="d-flex gap-2">
+                            <button class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top"
+                                data-bs-trigger="hover" title="Favoritar versículo" id="likeVerse">
+                                <img draggable="false" style="pointer-events: none" width="16" src="img/svg/unlike.svg"
+                                    alt="Like" />
+                            </button>
                             <button class="btn btn-outline-primary copy-content" data-bs-toggle="tooltip"
                                 data-bs-placement="top" data-bs-trigger="hover" title="Copiar versículo"
                                 data-copy-selector="#contentToCopy">
@@ -146,11 +158,6 @@
                                 <img style="pointer-events: none" width="16"
                                     src="https://api.iconify.design/material-symbols:open-in-new.svg?color=%23a9b5ff"
                                     alt="Open" />
-                            </button>
-                            <button class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-trigger="hover" title="Favoritar versículo" id="likeVerse">
-                                <img draggable="false" style="pointer-events: none" width="16" src="img/svg/unlike.svg"
-                                    alt="Like" />
                             </button>
                         </div>
                     </div>
@@ -504,6 +511,30 @@
             </div>
         </div>
     </div>
+    
+    <!-- Favorites Sidebar -->
+    <div id="favoritesSidebar" class="favorites-sidebar border-start border-primary-900" style="
+        position: fixed;
+        top: 0;
+        right: -320px;
+        width: 320px;
+        height: 100%;
+        background: var(--secondary-color);
+        z-index: 1050;
+        transition: right 0.3s ease-out;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+    ">
+        <div class="p-3 d-flex justify-content-between align-items-center border-bottom border-primary-900" style="background: var(--transparency-10)">
+            <h5 class="mb-0 text-primary-200">Versículos Favoritos</h5>
+            <button id="closeFavorites" class="btn btn-sm p-0" style="border:none; background:transparent">
+                <img src="https://api.iconify.design/material-symbols:close-rounded.svg?color=%23ffffff" width="24">
+            </button>
+        </div>
+        <div id="favorites-container" class="p-3" style="overflow-y: auto; height: calc(100% - 60px);">
+            <!-- Favorites will be rendered here -->
+        </div>
+    </div>
+
     <div id="alertContent"></div>
     <!-- Footer -->
     <script type="module" src="js/main.js"></script>

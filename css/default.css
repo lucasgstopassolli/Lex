@@ -347,6 +347,27 @@ body {
   padding: 1rem 1.2rem;
 }
 
+.favorite-item {
+  transition: all 0.3s ease;
+  border: 1px solid var(--transparency-20) !important;
+}
+.favorite-item:hover {
+  border-color: var(--primary-500) !important;
+  transform: translateX(-5px);
+  background: var(--transparency-20) !important;
+}
+
+#favorites-container::-webkit-scrollbar {
+  width: 5px;
+}
+#favorites-container::-webkit-scrollbar-thumb {
+  background: var(--primary-800);
+  border-radius: 10px;
+}
+#favorites-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 #tools-tab .row {
   margin: 0 !important;
 }
