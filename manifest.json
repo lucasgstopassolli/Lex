@@ -9,11 +9,7 @@
         "scripting",
         "tabs",
         "downloads",
-        "browsingData",
-        "background",
-        "alarms",
         "cookies",
-        "search",
         "clipboardWrite"
     ],
     "host_permissions": [
@@ -87,6 +83,6 @@
         "type": "module"
     },
     "content_security_policy": {
-        "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline';"
+        "extension_pages": "script-src 'self'; object-src 'self';"
     }
 }

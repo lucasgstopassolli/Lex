@@ -118,6 +118,16 @@ export function setupPopupListeners() {
 
     // Design mode button
     addListener("#designModeTool", "change", popup.handleDesignModeClick);
+    
+    // Design mode container click (triggers the checkbox)
+    addListener("#designModeContainer", "click", () => {
+        const checkbox = document.getElementById("designModeTool");
+        if (checkbox) {
+            checkbox.checked = !checkbox.checked;
+            // Trigger change event manually since setting .checked doesn't fire it
+            checkbox.dispatchEvent(new Event('change'));
+        }
+    });
 
     // Initial WordPress detection when opening the popup if the tab is already active
     const wpTabBtn = document.getElementById('but-wordpress-tab');
