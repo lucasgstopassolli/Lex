@@ -237,5 +237,15 @@ export const alertContent = [
       messageHTML: "<b>Elemento não encontrado.</b><br>Verifique o seletor configurado.",
       timeOut: 3,
     },
+    colorCopied: {
+      class: "success",
+      messageHTML: "<b>Cor copiada!</b><br>Acesse na área de transferência.",
+      timeOut: 2,
+    },
+    colorCopyError: {
+      class: "danger",
+      messageHTML: "<b>Erro ao copiar cor.</b><br>Tente novamente.",
+      timeOut: 3,
+    },
   },
 ]

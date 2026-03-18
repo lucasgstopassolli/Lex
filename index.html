@@ -1,516 +1,997 @@
-<!DOCTYPE html>
-<html lang="pt-BR" data-bs-theme="dark" spellcheck="false" style="overflow: hidden">
-
-<head>
+<!doctype html>
+<html
+  lang="pt-BR"
+  data-bs-theme="dark"
+  spellcheck="false"
+  style="overflow: hidden"
+>
+  <head>
     <!-- Setup -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lex</title>
     <!-- Google Fonts and Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Quicksand:wght@300..700&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
     <!-- Styles and Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <script src="js/librarys/bootstrap/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="css/default.css" />
     <!-- Another librarys -->
     <script src="js/librarys/purify/purify.min.js"></script>
-</head>
+  </head>
 
-<body class="margin-0 d-flex flex-column">
+  <body class="margin-0 d-flex flex-column">
     <!-- Nav Tabs -->
-    <ul class="nav nav-pills d-flex flex-row gap-0 p-1 mb-1 flex-nowrap nav-bar" id="pills-tab" role="tablist"
-        data-tab-group="main">
-        <!-- Home Button -->
-        <li style="width: -webkit-fill-available" class="mainTab nav-item" role="presentation">
-            <button
-                class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100 lh-normal"
-                style="font-size: 0.9rem" id="but-initial-tab" data-bs-toggle="pill" data-bs-target="#initial-tab"
-                type="button" role="tab" aria-controls="initial-tab" aria-selected="true"
-                data-storage-key="lastMainTab">
-                <img draggable="false"
-                    src="https://api.iconify.design/material-symbols-light:home-rounded.svg?color=%23ffffff"
-                    alt="Início" width="18" style="margin-left: -0.5rem; margin-right: -0.1rem" />
-                Início
-            </button>
-        </li>
-        <!-- Wordpress Button -->
-        <li style="width: -webkit-fill-available" class="wordpressTab nav-item" role="presentation">
-            <button
-                class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
-                style="font-size: 0.9rem" id="but-wordpress-tab" data-bs-toggle="pill" data-bs-target="#wordpress-tab"
-                type="button" role="tab" aria-controls="wordpress-tab" aria-selected="false"
-                data-storage-key="lastMainTab">
-                <img draggable="false" src="https://api.iconify.design/fe:wordpress-alt.svg?color=%23ffffff"
-                    alt="Wordpress" width="16" />
-                <span style="line-height: normal">Wordpress</span>
-            </button>
-        </li>
-        <!-- Design Button -->
-        <li style="width: -webkit-fill-available" class="designTab nav-item" role="presentation">
-            <button
-                class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
-                style="font-size: 0.9rem" id="but-design-tab" data-bs-toggle="pill" data-bs-target="#design-tab"
-                type="button" role="tab" aria-controls="design-tab" aria-selected="false"
-                data-storage-key="lastMainTab">
-                <img draggable="false" src="https://api.iconify.design/fa7-solid:pen-nib.svg?color=%23ffffff"
-                    alt="Design" width="14" />
-                <span style="line-height: normal">Design</span>
-            </button>
-        </li>
-        <!-- Tools Button -->
-        <li style="width: -webkit-fill-available" class="settingsTab nav-item" role="presentation">
-            <button
-                class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
-                style="font-size: 0.9rem" id="but-tools-tab" data-bs-toggle="pill" data-bs-target="#tools-tab"
-                type="button" role="tab" aria-controls="tools-tab" aria-selected="false" data-storage-key="lastMainTab">
-                <img draggable="false" src="https://api.iconify.design/material-symbols:settings-rounded.svg?color=%23ffffff"
-                    alt="Ferramentas" width="16" />
-                <span style="line-height: normal">Ferramentas</span>
-            </button>
-        </li>
-        <!-- Lex Note Button -->
-        <li style="width: -webkit-fill-available" class="nav-item">
-            <button
-                class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
-                style="font-size: 0.9rem" id="but-lex-note" type="button" aria-selected="false" data-not-tab="true"
-                data-open-url="#noteBlockPage">
-                <img draggable="false"
-                    src="https://api.iconify.design/material-symbols:note-stack-rounded.svg?color=%23ffffff"
-                    alt="Lex Note" width="16" />
-                <span style="line-height: normal">Lex Note</span>
-                <p class="d-none" id="noteBlockPage">
-                    /notes.html
-                </p>
-            </button>
-        </li>
+    <ul
+      class="nav nav-pills d-flex flex-row gap-0 p-1 mb-1 flex-nowrap nav-bar"
+      id="pills-tab"
+      role="tablist"
+      data-tab-group="main"
+    >
+      <!-- Home Button -->
+      <li
+        style="width: -webkit-fill-available"
+        class="mainTab nav-item"
+        role="presentation"
+      >
+        <button
+          class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100 lh-normal"
+          style="font-size: 0.9rem"
+          id="but-initial-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#initial-tab"
+          type="button"
+          role="tab"
+          aria-controls="initial-tab"
+          aria-selected="true"
+          data-storage-key="lastMainTab"
+        >
+          <img
+            draggable="false"
+            src="https://api.iconify.design/material-symbols-light:home-rounded.svg?color=%23ffffff"
+            alt="Início"
+            width="18"
+            style="margin-left: -0.5rem; margin-right: -0.1rem"
+          />
+          Início
+        </button>
+      </li>
+      <!-- Wordpress Button -->
+      <li
+        style="width: -webkit-fill-available"
+        class="wordpressTab nav-item"
+        role="presentation"
+      >
+        <button
+          class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
+          style="font-size: 0.9rem"
+          id="but-wordpress-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#wordpress-tab"
+          type="button"
+          role="tab"
+          aria-controls="wordpress-tab"
+          aria-selected="false"
+          data-storage-key="lastMainTab"
+        >
+          <img
+            draggable="false"
+            src="https://api.iconify.design/fe:wordpress-alt.svg?color=%23ffffff"
+            alt="Wordpress"
+            width="16"
+          />
+          <span style="line-height: normal">Wordpress</span>
+        </button>
+      </li>
+      <!-- Design Button -->
+      <li
+        style="width: -webkit-fill-available"
+        class="designTab nav-item"
+        role="presentation"
+      >
+        <button
+          class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
+          style="font-size: 0.9rem"
+          id="but-design-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#design-tab"
+          type="button"
+          role="tab"
+          aria-controls="design-tab"
+          aria-selected="false"
+          data-storage-key="lastMainTab"
+        >
+          <img
+            draggable="false"
+            src="https://api.iconify.design/fa7-solid:pen-nib.svg?color=%23ffffff"
+            alt="Design"
+            width="14"
+          />
+          <span style="line-height: normal">Design</span>
+        </button>
+      </li>
+      <!-- Tools Button -->
+      <li
+        style="width: -webkit-fill-available"
+        class="settingsTab nav-item"
+        role="presentation"
+      >
+        <button
+          class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
+          style="font-size: 0.9rem"
+          id="but-tools-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#tools-tab"
+          type="button"
+          role="tab"
+          aria-controls="tools-tab"
+          aria-selected="false"
+          data-storage-key="lastMainTab"
+        >
+          <img
+            draggable="false"
+            src="https://api.iconify.design/material-symbols:settings-rounded.svg?color=%23ffffff"
+            alt="Ferramentas"
+            width="16"
+          />
+          <span style="line-height: normal">Ferramentas</span>
+        </button>
+      </li>
+      <!-- Lex Note Button -->
+      <li style="width: -webkit-fill-available" class="nav-item">
+        <button
+          class="nav-link p-2 rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-center w-100 h-100"
+          style="font-size: 0.9rem"
+          id="but-lex-note"
+          type="button"
+          aria-selected="false"
+          data-not-tab="true"
+          data-open-url="#noteBlockPage"
+        >
+          <img
+            draggable="false"
+            src="https://api.iconify.design/material-symbols:note-stack-rounded.svg?color=%23ffffff"
+            alt="Lex Note"
+            width="16"
+          />
+          <span style="line-height: normal">Lex Note</span>
+          <p class="d-none" id="noteBlockPage">/notes.html</p>
+        </button>
+      </li>
     </ul>
 
     <!-- Tabs -->
     <div class="main tab-content" id="pills-tabContent">
-        <!-- Home tab -->
-        <div class="main tab-pane fade w-100 show" id="initial-tab" role="tabpanel" aria-labelledby="but-initial-tab"
-            tabindex="0">
-            <div class="d-flex flex-row gap-3 p-4">
-                <!-- Verse card -->
-                <div class="verse-container rounded-4 p-4 w-100 enter-animation">
-                    <div class="d-flex flex-row justify-content-between">
-                        <div class="d-flex flex-row gap-2 align-items-center">
-                            <img draggable="false" src="https://api.iconify.design/ri:cross-fill.svg?color=%23ffffff"
-                                alt="Cross" width="24" class="cross-icon" />
-                            <h4 class="font-title mb-0 mt-2 placeholder-glow" id="bookVerse">
-                                <span class="placeholder ms-2" style="width: 160px"></span>
-                            </h4>
-                        </div>
-                        <div class="d-flex flex-row gap-2 justify-content-between">
-                            <h5 class="d-flex gap-2 align-items-center mb-0">
-                                <span class="fw-semibold placeholder-glow row me-1" style="color: var(--primary-300)"
-                                    id="numberVerse">
-                                    <span class="placeholder" style="width: 6rem"></span>
-                                </span>
-                                <span class="badge text-bg-primary"
-                                    style="background-color: var(--transparency-60) !important"
-                                    id="versionVerse">ARA</span>
-                            </h5>
-                        </div>
-                    </div>
-                    <!-- Verse Content + Placeholder -->
-                    <p class="d-flex flex-row ms-3 placeholder-glow gap-2 row" style="
+      <!-- Home tab -->
+      <div
+        class="main tab-pane fade w-100 show"
+        id="initial-tab"
+        role="tabpanel"
+        aria-labelledby="but-initial-tab"
+        tabindex="0"
+      >
+        <div class="d-flex flex-row gap-3 p-4">
+          <!-- Verse card -->
+          <div class="verse-container rounded-4 p-4 w-100 enter-animation">
+            <div class="d-flex flex-row justify-content-between">
+              <div class="d-flex flex-row gap-2 align-items-center">
+                <img
+                  draggable="false"
+                  src="https://api.iconify.design/ri:cross-fill.svg?color=%23ffffff"
+                  alt="Cross"
+                  width="24"
+                  class="cross-icon"
+                />
+                <h4
+                  class="font-title mb-0 mt-2 placeholder-glow"
+                  id="bookVerse"
+                >
+                  <span class="placeholder ms-2" style="width: 160px"></span>
+                </h4>
+              </div>
+              <div class="d-flex flex-row gap-2 justify-content-between">
+                <h5 class="d-flex gap-2 align-items-center mb-0">
+                  <span
+                    class="fw-semibold placeholder-glow row me-1"
+                    style="color: var(--primary-300)"
+                    id="numberVerse"
+                  >
+                    <span class="placeholder" style="width: 6rem"></span>
+                  </span>
+                  <span
+                    class="badge text-bg-primary"
+                    style="background-color: var(--transparency-60) !important"
+                    id="versionVerse"
+                    >ARA</span
+                  >
+                </h5>
+              </div>
+            </div>
+            <!-- Verse Content + Placeholder -->
+            <p
+              class="d-flex flex-row ms-3 placeholder-glow gap-2 row"
+              style="
                 color: var(--primary-50);
                 font-size: 1.125rem;
                 padding: 2rem 1.8rem 1rem 0rem;
-              " id="contentVerse">
-                        <span class="placeholder col-11"></span>
-                        <span class="placeholder col-10"></span>
-                        <span class="placeholder col-8"></span>
-                    </p>
-                    <!-- Invisible Content -->
-                    <p class="d-none" id="contentToCopy"></p>
-                    <p class="d-none" id="bibleChapterURL"></p>
+              "
+              id="contentVerse"
+            >
+              <span class="placeholder col-11"></span>
+              <span class="placeholder col-10"></span>
+              <span class="placeholder col-8"></span>
+            </p>
+            <!-- Invisible Content -->
+            <p class="d-none" id="contentToCopy"></p>
+            <p class="d-none" id="bibleChapterURL"></p>
 
-                    <!-- Action Buttons -->
-                    <div class="d-flex flex-row justify-content-between align-items-center w-100">
-                        <div>
-                            <button class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-trigger="hover" title="Ver favoritos" id="openFavorites">
-                                <img draggable="false" style="pointer-events: none" width="24" src="https://api.iconify.design/mdi:notebook-heart.svg?color=%23a9b5ff"
-                                    alt="Favorites" />
-                            </button>
-                        </div>
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-trigger="hover" title="Favoritar versículo" id="likeVerse">
-                                <img draggable="false" style="pointer-events: none" width="16" src="img/svg/unlike.svg"
-                                    alt="Like" />
-                            </button>
-                            <button class="btn btn-outline-primary copy-content" data-bs-toggle="tooltip"
-                                data-bs-placement="top" data-bs-trigger="hover" title="Copiar versículo"
-                                data-copy-selector="#contentToCopy">
-                                <img draggable="false" style="pointer-events: none" width="16"
-                                    src="https://api.iconify.design/material-symbols:content-copy-rounded.svg?color=%23a9b5ff"
-                                    alt="Copy" />
-                            </button>
-                            <button class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-trigger="hover" title="Abrir o capítulo completo"
-                                data-open-url="#bibleChapterURL">
-                                <img style="pointer-events: none" width="16"
-                                    src="https://api.iconify.design/material-symbols:open-in-new.svg?color=%23a9b5ff"
-                                    alt="Open" />
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <!-- Action Buttons -->
+            <div
+              class="d-flex flex-row justify-content-between align-items-center w-100"
+            >
+              <div>
+                <button
+                  class="btn"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-trigger="hover"
+                  title="Ver favoritos"
+                  id="openFavorites"
+                >
+                  <img
+                    draggable="false"
+                    style="pointer-events: none"
+                    width="24"
+                    src="https://api.iconify.design/mdi:notebook-heart.svg?color=%23a9b5ff"
+                    alt="Favorites"
+                  />
+                </button>
+              </div>
+              <div class="d-flex gap-2">
+                <button
+                  class="btn btn-outline-primary"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-trigger="hover"
+                  title="Favoritar versículo"
+                  id="likeVerse"
+                >
+                  <img
+                    draggable="false"
+                    style="pointer-events: none"
+                    width="16"
+                    src="img/svg/unlike.svg"
+                    alt="Like"
+                  />
+                </button>
+                <button
+                  class="btn btn-outline-primary copy-content"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-trigger="hover"
+                  title="Copiar versículo"
+                  data-copy-selector="#contentToCopy"
+                >
+                  <img
+                    draggable="false"
+                    style="pointer-events: none"
+                    width="16"
+                    src="https://api.iconify.design/material-symbols:content-copy-rounded.svg?color=%23a9b5ff"
+                    alt="Copy"
+                  />
+                </button>
+                <button
+                  class="btn btn-outline-primary"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-trigger="hover"
+                  title="Abrir o capítulo completo"
+                  data-open-url="#bibleChapterURL"
+                >
+                  <img
+                    style="pointer-events: none"
+                    width="16"
+                    src="https://api.iconify.design/material-symbols:open-in-new.svg?color=%23a9b5ff"
+                    alt="Open"
+                  />
+                </button>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Wordpress tab -->
-        <div class="main tab-pane fade w-100" id="wordpress-tab" role="tabpanel" aria-labelledby="but-wordpress-tab"
-            tabindex="0">
-            <div class="d-flex flex-row gap-3">
-                <!-- Lateral Nav Tabs -->
-                <ul class="wordpressTab nav nav-tabs lateral-bar d-flex flex-column gap-1 mb-4 mt-5" id="pills-tab"
-                    role="tablist" style="background: var(--transparency-30)" data-tab-group="wordpress">
-                    <!-- Main WP Button -->
-                    <li class="nav-item w-100" role="presentation">
-                        <button style="font-size: 14px; padding: 0.6rem 0.8rem"
-                            class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
-                            style="font-size: 0.9rem" id="but-main-wp-tab" data-bs-toggle="pill"
-                            data-bs-target="#main-wp-tab" type="button" role="tab" aria-controls="main-wp-tab"
-                            aria-selected="false" data-storage-key="lastWordpressTab">
-                            <img draggable="false" src="https://api.iconify.design/fe:wordpress-alt.svg?color=%23ffffff"
-                                width="14" alt="Plugin" />
-                            <span style="line-height: normal">Recursos</span>
-                        </button>
-                    </li>
+      <!-- Wordpress tab -->
+      <div
+        class="main tab-pane fade w-100"
+        id="wordpress-tab"
+        role="tabpanel"
+        aria-labelledby="but-wordpress-tab"
+        tabindex="0"
+      >
+        <div class="d-flex flex-row gap-3">
+          <!-- Lateral Nav Tabs -->
+          <ul
+            class="wordpressTab nav nav-tabs lateral-bar d-flex flex-column gap-1 mb-4 mt-5"
+            id="pills-tab"
+            role="tablist"
+            style="background: var(--transparency-30)"
+            data-tab-group="wordpress"
+          >
+            <!-- Main WP Button -->
+            <li class="nav-item w-100" role="presentation">
+              <button
+                style="font-size: 14px; padding: 0.6rem 0.8rem"
+                class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
+                style="font-size: 0.9rem"
+                id="but-main-wp-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#main-wp-tab"
+                type="button"
+                role="tab"
+                aria-controls="main-wp-tab"
+                aria-selected="false"
+                data-storage-key="lastWordpressTab"
+              >
+                <img
+                  draggable="false"
+                  src="https://api.iconify.design/fe:wordpress-alt.svg?color=%23ffffff"
+                  width="14"
+                  alt="Plugin"
+                />
+                <span style="line-height: normal">Recursos</span>
+              </button>
+            </li>
 
-                    <!-- Plugins Button -->
-                    <li class="nav-item w-100" role="presentation">
-                        <button style="font-size: 14px; padding: 0.6rem 0.8rem"
-                            class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
-                            style="font-size: 0.9rem" id="but-plugins-tab" data-bs-toggle="pill"
-                            data-bs-target="#plugins-tab" type="button" role="tab" aria-controls="plugins-tab"
-                            aria-selected="false" data-storage-key="lastWordpressTab">
-                            <img draggable="false" src="https://api.iconify.design/mdi:puzzle.svg?color=%23ffffff"
-                                width="14" alt="Plugin" />
-                            <span style="line-height: normal">Plugins</span>
-                        </button>
-                    </li>
+            <!-- Plugins Button -->
+            <li class="nav-item w-100" role="presentation">
+              <button
+                style="font-size: 14px; padding: 0.6rem 0.8rem"
+                class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
+                style="font-size: 0.9rem"
+                id="but-plugins-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#plugins-tab"
+                type="button"
+                role="tab"
+                aria-controls="plugins-tab"
+                aria-selected="false"
+                data-storage-key="lastWordpressTab"
+              >
+                <img
+                  draggable="false"
+                  src="https://api.iconify.design/mdi:puzzle.svg?color=%23ffffff"
+                  width="14"
+                  alt="Plugin"
+                />
+                <span style="line-height: normal">Plugins</span>
+              </button>
+            </li>
 
-                    <!-- Redirection Button -->
-                    <li class="nav-item w-100" role="presentation">
-                        <button style="font-size: 14px; padding: 0.6rem 0.8rem"
-                            class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
-                            style="font-size: 0.9rem" id="but-redirection-tab" data-bs-toggle="pill"
-                            data-bs-target="#redirection-tab" type="button" role="tab" aria-controls="redirection-tab"
-                            aria-selected="false" data-storage-key="lastWordpressTab">
-                            <img draggable="false"
-                                src="https://api.iconify.design/material-symbols:arrow-split-rounded.svg?color=%23ffffff"
-                                width="14" alt="Redirect" />
-                            Redirect
-                        </button>
-                    </li>
-                </ul>
+            <!-- Redirection Button -->
+            <li class="nav-item w-100" role="presentation">
+              <button
+                style="font-size: 14px; padding: 0.6rem 0.8rem"
+                class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
+                style="font-size: 0.9rem"
+                id="but-redirection-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#redirection-tab"
+                type="button"
+                role="tab"
+                aria-controls="redirection-tab"
+                aria-selected="false"
+                data-storage-key="lastWordpressTab"
+              >
+                <img
+                  draggable="false"
+                  src="https://api.iconify.design/material-symbols:arrow-split-rounded.svg?color=%23ffffff"
+                  width="14"
+                  alt="Redirect"
+                />
+                Redirect
+              </button>
+            </li>
+          </ul>
 
-                <!-- Content -->
-                <div class="main tab-content gap-3 p-4 d-flex w-100">
-                    <!-- Main WP Tab -->
-                    <div class="main tab-pane fade w-100" id="main-wp-tab" role="tabpanel"
-                        aria-labelledby="but-main-wp-tab" tabindex="0">
-                        <div
-                            class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
-                            <label for="url_"
-                                class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1">
-                                <img draggable="false"
-                                    src="https://api.iconify.design/fe:wordpress-alt.svg?color=%23ffffff" width="24"
-                                    alt="Wordpress" />Recursos
-                                do Wordpress</label>
-                        </div>
-                        <div class="d-flex gap-3 p-4 w-100 rounded-2 enter-animation flex-column" style="
+          <!-- Content -->
+          <div class="main tab-content gap-3 p-4 d-flex w-100">
+            <!-- Main WP Tab -->
+            <div
+              class="main tab-pane fade w-100"
+              id="main-wp-tab"
+              role="tabpanel"
+              aria-labelledby="but-main-wp-tab"
+              tabindex="0"
+            >
+              <div
+                class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3"
+              >
+                <label
+                  for="url_"
+                  class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1"
+                >
+                  <img
+                    draggable="false"
+                    src="https://api.iconify.design/fe:wordpress-alt.svg?color=%23ffffff"
+                    width="24"
+                    alt="Wordpress"
+                  />Recursos do Wordpress</label
+                >
+              </div>
+              <div
+                class="d-flex gap-3 p-4 w-100 rounded-2 enter-animation flex-column"
+                style="
                   background: var(--transparency-10);
                   border: 1px solid var(--primary-900);
-                ">
-                            <div class="d-flex gap-3 w-100 rounded-2 enter-animation flex-row justify-content-around align-items-center p-4"
-                                style="
+                "
+              >
+                <div
+                  class="d-flex gap-3 w-100 rounded-2 enter-animation flex-row justify-content-around align-items-center p-4"
+                  style="
                     background-color: var(--transparency-10);
                     border: 1px solid var(--transparency-20);
-                  ">
-                                <label
-                                    class="text-white fw-normal fs-6 user-select-none d-flex flex-column text-nowrap">
-                                    Realizar o download do Wordpress
-                                    <span style="opacity: 0.4; font-size: 0.8rem">
-                                        Ferramenta de criação de <i>websites</i>
-                                    </span>
-                                </label>
-                                <div class="d-flex flex-row gap-2 w-auto justify-content-center">
-                                    <button
-                                        class="btn btn-primary rounded-3 fw-normal d-flex flex-row align-items-center gap-2 py-2 px-5 user-select-none justify-content-center"
-                                        data-open-url="#downloadWordpress">
-                                        <img src="https://api.iconify.design/pajamas:download.svg?color=%23ffffff"
-                                            alt="Download" width="16" />
-                                        Download
-                                    </button>
-                                    <p class="d-none" id="downloadWordpress">
-                                        https://wordpress.org/latest.zip
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Plugins Tab -->
-                    <div class="main tab-pane fade w-100" id="plugins-tab" role="tabpanel"
-                        aria-labelledby="but-plugins-tab" tabindex="0">
-                        <div
-                            class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3 lh-normal">
-                            <label for="url_"
-                                class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1">
-                                <img draggable="false" src="https://api.iconify.design/mdi:puzzle.svg?color=%23ffffff"
-                                    width="20" alt="Download" />Plugins para Website</label>
-                        </div>
-                        <div class="gap-3 d-flex flex-column justify-content-between text-center pe-3 w-100"
-                            style="max-height: 400px; overflow-y: auto; overflow-x: hidden">
-                            <!-- Plugin Card Template -->
-                            <div id="card-container" class="d-flex flex-column gap-3 enter-animation"></div>
-                        </div>
-                    </div>
-
-                    <!-- Redirection Tab -->
-                    <div class="main tab-pane fade w-100" id="redirection-tab" role="tabpanel"
-                        aria-labelledby="but-redirection-tab" tabindex="0">
-                        <div
-                            class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
-                            <label for="url_"
-                                class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1">
-                                <img draggable="false"
-                                    src="https://api.iconify.design/material-symbols:arrow-split-rounded.svg?color=%23ffffff"
-                                    width="20" style="margin-top: 1px" alt="Download" />Redirect de Páginas</label>
-                        </div>
-                        <div class="d-flex flex-column gap-3 enter-animation">
-                            <div
-                                class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
-                                <label for="url_"
-                                    class="text-white fw-semibold fs-6 user-select-none d-flex align-items-center gap-1">
-                                    <img draggable="false" width="24"
-                                        src="https://api.iconify.design/material-symbols:link.svg?color=%23ffffff"
-                                        style="margin-top: 1px" alt="Link" />URL Original</label>
-                                <input type="text" class="form-control font-whitep-2 w-75 bg-transparent border-0"
-                                    id="url_" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="URL original da página" disabled />
-                            </div>
-                            <form action="#" method="get"
-                                class="d-flex flex-row flex-wrap gap-3 w-100 justify-content-center ali">
-                                <div
-                                    class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none">
-                                    <label for="url_domain"
-                                        class="text-white fw-semibold fs-6 user-select-none">Domínio</label>
-                                    <input type="text" class="form-control font-whitep-2 w-75" id="url_domain"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="focus"
-                                        title="Ex: https://domínio.com/" autocomplete="off" />
-                                </div>
-                                <div
-                                    class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none">
-                                    <label for="inputUrl" class="text-white fw-semibold fs-6 user-select-none">Slug
-                                        Antigo</label>
-                                    <input type="text" class="form-control font-whitep-2 w-75" id="inputUrl"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="focus"
-                                        title="Ex: https://domínio.com/slug-antigo/" autocomplete="off" />
-                                </div>
-                                <div
-                                    class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none helpers">
-                                    <label for="outputUrl" class="text-white fw-semibold fs-6 user-select-none">Slug
-                                        Destino</label>
-                                    <input type="text" class="form-control font-whitep-2 w-75" id="outputUrl"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="focus"
-                                        title="Ex https://domínio.com/slug-destino/" autocomplete="off" />
-                                </div>
-                                <button id="redirectBtn" type="submit"
-                                    class="btn btn-primary user-select-none text-center w-100 fw-semibold fs-6">
-                                    Criar Redirect
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+                  "
+                >
+                  <label
+                    class="text-white fw-normal fs-6 user-select-none d-flex flex-column text-nowrap"
+                  >
+                    Realizar o download do Wordpress
+                    <span style="opacity: 0.4; font-size: 0.8rem">
+                      Ferramenta de criação de <i>websites</i>
+                    </span>
+                  </label>
+                  <div
+                    class="d-flex flex-row gap-2 w-auto justify-content-center"
+                  >
+                    <button
+                      class="btn btn-primary rounded-3 fw-normal d-flex flex-row align-items-center gap-2 py-2 px-5 user-select-none justify-content-center"
+                      data-open-url="#downloadWordpress"
+                    >
+                      <img
+                        src="https://api.iconify.design/pajamas:download.svg?color=%23ffffff"
+                        alt="Download"
+                        width="16"
+                      />
+                      Download
+                    </button>
+                    <p class="d-none" id="downloadWordpress">
+                      https://wordpress.org/latest.zip
+                    </p>
+                  </div>
                 </div>
+              </div>
             </div>
+
+            <!-- Plugins Tab -->
+            <div
+              class="main tab-pane fade w-100"
+              id="plugins-tab"
+              role="tabpanel"
+              aria-labelledby="but-plugins-tab"
+              tabindex="0"
+            >
+              <div
+                class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3 lh-normal"
+              >
+                <label
+                  for="url_"
+                  class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1"
+                >
+                  <img
+                    draggable="false"
+                    src="https://api.iconify.design/mdi:puzzle.svg?color=%23ffffff"
+                    width="20"
+                    alt="Download"
+                  />Plugins para Website</label
+                >
+              </div>
+              <div
+                class="gap-3 d-flex flex-column justify-content-between text-center pe-3 w-100"
+                style="max-height: 400px; overflow-y: auto; overflow-x: hidden"
+              >
+                <!-- Plugin Card Template -->
+                <div
+                  id="card-container"
+                  class="d-flex flex-column gap-3 enter-animation"
+                ></div>
+              </div>
+            </div>
+
+            <!-- Redirection Tab -->
+            <div
+              class="main tab-pane fade w-100"
+              id="redirection-tab"
+              role="tabpanel"
+              aria-labelledby="but-redirection-tab"
+              tabindex="0"
+            >
+              <div
+                class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3"
+              >
+                <label
+                  for="url_"
+                  class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1"
+                >
+                  <img
+                    draggable="false"
+                    src="https://api.iconify.design/material-symbols:arrow-split-rounded.svg?color=%23ffffff"
+                    width="20"
+                    style="margin-top: 1px"
+                    alt="Download"
+                  />Redirect de Páginas</label
+                >
+              </div>
+              <div class="d-flex flex-column gap-3 enter-animation">
+                <div
+                  class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3"
+                >
+                  <label
+                    for="url_"
+                    class="text-white fw-semibold fs-6 user-select-none d-flex align-items-center gap-1"
+                  >
+                    <img
+                      draggable="false"
+                      width="24"
+                      src="https://api.iconify.design/material-symbols:link.svg?color=%23ffffff"
+                      style="margin-top: 1px"
+                      alt="Link"
+                    />URL Original</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control font-whitep-2 w-75 bg-transparent border-0"
+                    id="url_"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="bottom"
+                    title="URL original da página"
+                    disabled
+                  />
+                </div>
+                <form
+                  action="#"
+                  method="get"
+                  class="d-flex flex-row flex-wrap gap-3 w-100 justify-content-center ali"
+                >
+                  <div
+                    class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none"
+                  >
+                    <label
+                      for="url_domain"
+                      class="text-white fw-semibold fs-6 user-select-none"
+                      >Domínio</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control font-whitep-2 w-75"
+                      id="url_domain"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      data-bs-trigger="focus"
+                      title="Ex: https://domínio.com/"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div
+                    class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none"
+                  >
+                    <label
+                      for="inputUrl"
+                      class="text-white fw-semibold fs-6 user-select-none"
+                      >Slug Antigo</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control font-whitep-2 w-75"
+                      id="inputUrl"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      data-bs-trigger="focus"
+                      title="Ex: https://domínio.com/slug-antigo/"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div
+                    class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none helpers"
+                  >
+                    <label
+                      for="outputUrl"
+                      class="text-white fw-semibold fs-6 user-select-none"
+                      >Slug Destino</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control font-whitep-2 w-75"
+                      id="outputUrl"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      data-bs-trigger="focus"
+                      title="Ex https://domínio.com/slug-destino/"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <button
+                    id="redirectBtn"
+                    type="submit"
+                    class="btn btn-primary user-select-none text-center w-100 fw-semibold fs-6"
+                  >
+                    Criar Redirect
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Design tab -->
-        <div class="main tab-pane fade w-100" id="design-tab" role="tabpanel" aria-labelledby="but-design-tab"
-            tabindex="0">
-            <div class="main d-flex flex-row"></div>
-        </div>
+              <!-- Design tab -->
+              <div class="main tab-pane fade w-100" id="design-tab" role="tabpanel" aria-labelledby="but-design-tab"
+                  tabindex="0">
+                  <div class="d-flex flex-row gap-3">
+                      <!-- Lateral Nav Tabs -->
+                      <ul class="designTab nav nav-tabs lateral-bar d-flex flex-column gap-1 mb-4 mt-5" id="pills-tab"
+                          role="tablist" style="background: var(--transparency-30)" data-tab-group="design">
+                          <li class="nav-item w-100" role="presentation">
+                              <button style="font-size: 14px; padding: 0.6rem 0.8rem"
+                                  class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100 lh-normal active text-nowrap"
+                                  id="but-color-picker-tab" data-bs-toggle="pill" data-bs-target="#color-picker-tab"
+                                  type="button" role="tab" aria-controls="color-picker-tab" aria-selected="true"
+                                  data-storage-key="lastDesignTab">
+                                  <img draggable="false" src="https://api.iconify.design/fluent:eyedropper-16-filled.svg?color=%23ffffff"
+                                      width="16" alt="Color Picker" />Color Picker
+                              </button>
+                          </li>
+                      </ul>
+      
+                      <!-- Content -->
+                      <div class="main tab-content gap-3 p-4 d-flex w-100">
+                          <div class="main tab-pane fade show active w-100" id="color-picker-tab" role="tabpanel"
+                              aria-labelledby="but-color-picker-tab" tabindex="0">
+                              <div class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
+                                  <label class="text-white fw-semibold fs-5 d-flex align-items-center gap-1">
+                                      <img draggable="false" src="https://api.iconify.design/ion:color-palette.svg?color=%23ffffff"
+                                          width="24" alt="Palette" />Seletor de Cores</label>
+                              </div>
+      
+                                                      <div class="d-flex flex-row gap-4 p-4 rounded-3 enter-animation" style="background: var(--transparency-10); border: 1px solid var(--primary-900);">
+                                                          <!-- Professional Interactive Picker -->
+                                                          <div class="d-flex flex-column gap-3">
+                                                                                              <div id="pickerContainer" class="position-relative user-select-none shadow-sm" style="width: 200px; height: 200px; cursor: crosshair; border-radius: 8px; overflow: hidden; border: 1px solid var(--primary-900);">
+                                                                                                  <div id="colorBlock" style="width: 100%; height: 100%; background-color: rgb(255, 0, 0);">
+                                                                                                      <div style="width: 100%; height: 100%; background: linear-gradient(to right, #fff, transparent);">
+                                                                                                          <div style="width: 100%; height: 100%; background: linear-gradient(to top, #000, transparent);"></div>
+                                                                                                      </div>
+                                                                                                  </div>
+                                                                                                  <div id="pickerMarker" style="position: absolute; width: 14px; height: 14px; border: 2px solid white; border-radius: 50%; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; box-shadow: 0 0 4px rgba(0,0,0,0.8); z-index: 10;"></div>
+                                                                                              </div>
+                                                                                              
+                                                                                              <div id="hueContainer" class="position-relative shadow-sm" style="width: 200px; height: 18px; cursor: pointer; border-radius: 10px; border: 1px solid var(--primary-900); overflow: visible;">
+                                                                                                  <div id="hueStrip" style="width: 100%; height: 100%; border-radius: 10px; background: linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);"></div>
+                                                                                                  <div id="hueMarker" style="position: absolute; width: 10px; height: 24px; border: 2px solid white; border-radius: 4px; top: 50%; left: 0; transform: translate(-50%, -50%); pointer-events: none; box-shadow: 0 0 4px rgba(0,0,0,0.6); background: transparent; z-index: 10;"></div>
+                                                                                              </div>                              
+                                                              <div id="colorPreview" class="rounded-3 shadow" style="width: 100%; height: 40px; background-color: #424aff; border: 2px solid var(--transparency-20);"></div>
+                                                          </div>
+                              
+                                                          <!-- Values and Inputs -->                                  <div class="d-flex flex-column gap-3 w-100">
+                                      <!-- HEX -->
+                                      <div class="input-group">
+                                          <span class="input-group-text bg-transparent border-primary-800 text-white-50" style="width: 60px;">HEX</span>
+                                          <input type="text" id="hexInput" class="form-control" value="#424aff" placeholder="#000000">
+                                          <button class="btn btn-primary btn-sm copy-color" data-target="hexInput">
+                                              <img src="https://api.iconify.design/material-symbols:content-copy-rounded.svg?color=%23ffffff" width="16">
+                                          </button>
+                                      </div>
+                                      <!-- RGB -->
+                                      <div class="input-group">
+                                          <span class="input-group-text bg-transparent border-primary-800 text-white-50" style="width: 60px;">RGB</span>
+                                          <input type="text" id="rgbInput" class="form-control" value="rgb(66, 74, 255)" placeholder="rgb(0, 0, 0)">
+                                          <button class="btn btn-primary btn-sm copy-color" data-target="rgbInput">
+                                              <img src="https://api.iconify.design/material-symbols:content-copy-rounded.svg?color=%23ffffff" width="16">
+                                          </button>
+                                      </div>
+                                      <!-- HSL -->
+                                      <div class="input-group">
+                                          <span class="input-group-text bg-transparent border-primary-800 text-white-50" style="width: 60px;">HSL</span>
+                                          <input type="text" id="hslInput" class="form-control" value="hsl(237, 100%, 63%)" placeholder="hsl(0, 0%, 0%)">
+                                          <button class="btn btn-primary btn-sm copy-color" data-target="hslInput">
+                                              <img src="https://api.iconify.design/material-symbols:content-copy-rounded.svg?color=%23ffffff" width="16">
+                                          </button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
-        <!-- Tools tab -->
-        <div class="main tab-pane fade w-100" id="tools-tab" role="tabpanel" aria-labelledby="but-tools-tab"
-            tabindex="0">
-            <div class="d-flex flex-row gap-3">
-                <!-- Lateral Nav Tabs -->
-                <ul class="settingsTab nav nav-tabs lateral-bar d-flex flex-column gap-1 mb-4 mt-5" id="pills-tab"
-                    role="tablist" style="background: var(--transparency-30)" data-tab-group="tools">
+      <!-- Tools tab -->
+      <div
+        class="main tab-pane fade w-100"
+        id="tools-tab"
+        role="tabpanel"
+        aria-labelledby="but-tools-tab"
+        tabindex="0"
+      >
+        <div class="d-flex flex-row gap-3">
+          <!-- Lateral Nav Tabs -->
+          <ul
+            class="settingsTab nav nav-tabs lateral-bar d-flex flex-column gap-1 mb-4 mt-5"
+            id="pills-tab"
+            role="tablist"
+            style="background: var(--transparency-30)"
+            data-tab-group="tools"
+          >
+            <!-- Mask and Validation Code Button -->
+            <li class="nav-item w-100" role="presentation">
+              <button
+                style="font-size: 14px; padding: 0.6rem 0.8rem"
+                class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100 lh-normal"
+                style="font-size: 0.9rem"
+                id="but-form-mask-validation-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#form-mask-validation-tab"
+                type="button"
+                role="tab"
+                aria-controls="form-mask-validation-tab"
+                aria-selected="false"
+                data-storage-key="lastToolsTab"
+              >
+                <img
+                  draggable="false"
+                  src="https://api.iconify.design/solar:text-field-focus-bold.svg?color=%23ffffff"
+                  width="16"
+                  alt="Text input"
+                />Formulário
+              </button>
+            </li>
 
-                    <!-- Mask and Validation Code Button -->
-                    <li class="nav-item w-100" role="presentation">
-                        <button style="font-size: 14px; padding: 0.6rem 0.8rem"
-                            class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100 lh-normal"
-                            style="font-size: 0.9rem" id="but-form-mask-validation-tab" data-bs-toggle="pill"
-                            data-bs-target="#form-mask-validation-tab" type="button" role="tab"
-                            aria-controls="form-mask-validation-tab" aria-selected="false"
-                            data-storage-key="lastToolsTab">
-                            <img draggable="false"
-                                src="https://api.iconify.design/solar:text-field-focus-bold.svg?color=%23ffffff"
-                                width="16" alt="Text input" />Formulário
-                        </button>
-                    </li>
+            <!-- Advanced Tools Button -->
+            <li class="nav-item w-100" role="presentation">
+              <button
+                style="font-size: 14px; padding: 0.6rem 0.8rem"
+                class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
+                style="font-size: 0.9rem"
+                id="but-advanced-settings-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#advanced-settings-tab"
+                type="button"
+                role="tab"
+                aria-controls="advanced-settings-tab"
+                aria-selected="false"
+                data-storage-key="lastToolsTab"
+              >
+                <img
+                  draggable="false"
+                  src="https://api.iconify.design/bxs:magic-wand.svg?color=%23ffffff"
+                  width="16"
+                  alt="Avançado"
+                />Avançado
+              </button>
+            </li>
+          </ul>
 
-                    <!-- Advanced Tools Button -->
-                    <li class="nav-item w-100" role="presentation">
-                        <button style="font-size: 14px; padding: 0.6rem 0.8rem"
-                            class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100"
-                            style="font-size: 0.9rem" id="but-advanced-settings-tab" data-bs-toggle="pill"
-                            data-bs-target="#advanced-settings-tab" type="button" role="tab"
-                            aria-controls="advanced-settings-tab" aria-selected="false" data-storage-key="lastToolsTab">
-                            <img draggable="false" src="https://api.iconify.design/bxs:magic-wand.svg?color=%23ffffff"
-                                width="16" alt="Avançado" />Avançado
-                        </button>
-                    </li>
-                </ul>
-
-                <!-- Tools Tab Content -->
-                <div class="main tab-content gap-3 p-4 pb-0 d-flex w-100">
-
-                    <!-- Mask and Validation Code Tab -->
-                    <div class="main tab-pane fade w-100 pb-4" id="form-mask-validation-tab" role="tabpanel"
-                        aria-labelledby="but-form-mask-validation-tab" tabindex="0">
-                        <div
-                            class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
-                            <label for="url_"
-                                class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1">
-                                <img draggable="false"
-                                    src="https://api.iconify.design/solar:text-field-focus-bold.svg?color=%23ffffff"
-                                    width="24" alt="Text input" />Máscara e
-                                Validação de Campo</label>
-                        </div>
-                        <div class="d-flex flex-column justify-content-between w-100 p-3 gap-3 rounded-3" style="
+          <!-- Tools Tab Content -->
+          <div class="main tab-content gap-3 p-4 pb-0 d-flex w-100">
+            <!-- Mask and Validation Code Tab -->
+            <div
+              class="main tab-pane fade w-100 pb-4"
+              id="form-mask-validation-tab"
+              role="tabpanel"
+              aria-labelledby="but-form-mask-validation-tab"
+              tabindex="0"
+            >
+              <div
+                class="main d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3"
+              >
+                <label
+                  for="url_"
+                  class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1"
+                >
+                  <img
+                    draggable="false"
+                    src="https://api.iconify.design/solar:text-field-focus-bold.svg?color=%23ffffff"
+                    width="24"
+                    alt="Text input"
+                  />Máscara e Validação de Campo</label
+                >
+              </div>
+              <div
+                class="d-flex flex-column justify-content-between w-100 p-3 gap-3 rounded-3"
+                style="
                   max-height: 260px;
                   overflow-y: auto;
                   overflow-x: hidden;
                   background-color: var(--transparency-10);
                   border: 1px solid var(--primary-950);
-                ">
-                            <!-- E-mail validation -->
-                            <div class="d-flex gap-3 w-100 rounded-2 enter-animation flex-column">
-                                <label class="text-white fw-normal fs-6 user-select-none">
-                                    Validação de e-mail corporativo
-                                    <span style="opacity: 0.4; font-size: 0.8rem">Ex: @gmail.com, @hotmail.com...</span>
-                                </label>
-                                <div class="d-flex flex-row w-100">
-                                    <span
-                                        class="d-flex flex-column align-items-center justify-content-center px-3 py-1 text-nowrap text-white"
-                                        style="
+                "
+              >
+                <!-- E-mail validation -->
+                <div
+                  class="d-flex gap-3 w-100 rounded-2 enter-animation flex-column"
+                >
+                  <label class="text-white fw-normal fs-6 user-select-none">
+                    Validação de e-mail corporativo
+                    <span style="opacity: 0.4; font-size: 0.8rem"
+                      >Ex: @gmail.com, @hotmail.com...</span
+                    >
+                  </label>
+                  <div class="d-flex flex-row w-100">
+                    <span
+                      class="d-flex flex-column align-items-center justify-content-center px-3 py-1 text-nowrap text-white"
+                      style="
                         background: linear-gradient(
                           90deg,
                           var(--transparency-70) 0%,
                           var(--transparency-90) 50%
                         );
                         border-radius: 0.4rem 0rem 0 0.4rem;
-                      ">
-                                        Nome do campo
-                                    </span>
-                                    <input class="form-control" type="text" id="emailField" placeholder="email" style="
+                      "
+                    >
+                      Nome do campo
+                    </span>
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="emailField"
+                      placeholder="email"
+                      style="
                         border-radius: 0 0.4rem 0.4rem 0;
                         box-shadow: initial;
-                      " />
-                                    <button class="btn btn-primary ms-2" style="padding: 0.4rem 0.8rem"
-                                        id="copyEmailValidation">
-                                        <img src="https://api.iconify.design/material-symbols:content-copy-rounded.svg?color=%23ffffff"
-                                            width="18" />
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Phone mask -->
-                            <div class="d-flex gap-3 w-100 rounded-2 enter-animation flex-column">
-                                <label class="text-white fw-normal fs-6 user-select-none">
-                                    Máscara para telefone
-                                    <span style="opacity: 0.4; font-size: 0.8rem">Ex: (00) 00000-0000</span>
-                                </label>
-                                <div class="d-flex flex-row w-100">
-                                    <span
-                                        class="d-flex flex-column align-items-center justify-content-center px-3 py-1 text-nowrap text-white"
-                                        style="
-                        background: linear-gradient(
-                          90deg,
-                          var(--transparency-70) 0%,
-                          var(--transparency-90) 50%
-                        );
-                        border-radius: 0.4rem 0rem 0 0.4rem;
-                      ">
-                                        Nome do campo
-                                    </span>
-                                    <input class="form-control" type="text" id="phoneField" placeholder="phone" style="
-                        border-radius: 0 0.4rem 0.4rem 0;
-                        box-shadow: initial;
-                      " />
-                                    <button class="btn btn-primary ms-2" style="padding: 0.4rem 0.8rem"
-                                        id="copyPhoneMask">
-                                        <img src="https://api.iconify.design/material-symbols:content-copy-rounded.svg?color=%23ffffff"
-                                            width="18" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Advanced Tools Tab -->
-                    <div class="main tab-pane fade w-100 pb-4" id="advanced-settings-tab" role="tabpanel"
-                        aria-labelledby="but-advanced-settings-tab" tabindex="0">
-                        <div
-                            class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
-                            <label for="url_"
-                                class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1">
-                                <img draggable="false"
-                                    src="https://api.iconify.design/bxs:magic-wand.svg?color=%23ffffff" width="24"
-                                    alt="Download" />Avançado</label>
-                        </div>
-                                                    <div class="d-flex flex-row gap-3 p-4 w-100 rounded-2 enter-animation flex-column" style="
-                                          background: var(--transparency-10);
-                                          border: 1px solid var(--primary-900);
-                                        ">
-                                                                                    <div id="designModeContainer" class="d-flex gap-3 w-100 rounded-3 enter-animation flex-row justify-content-between align-items-center p-3"
-                                                                                        style="
-                                                                                            background-color: var(--transparency-10);
-                                                                                            border: 1px solid var(--transparency-20);
-                                                                                            transition: all 0.3s ease;
-                                                                                            cursor: pointer;
-                                                                                        "
-                                                                                        onclick="document.getElementById('designModeTool').click();">
-                                                                                        <div class="d-flex flex-column pointer-events-none">
-                                                                                            <label class="text-white fw-semibold fs-6 mb-0 d-flex align-items-center gap-1" style="cursor: pointer;">
-                                                                                                <img src="https://api.iconify.design/fa7-solid:pen-nib.svg?color=%23ffffff" width="18" alt="Nib">
-                                                                                                Design Mode
-                                                                                            </label>
-                                                                                            <span id="designModeStatus" style="opacity: 0.4; font-size: 0.8rem">
-                                                                                                Edição de página desativada
-                                                                                            </span>
-                                                                                        </div>
-                                                                                        <div class="form-check form-switch p-0 m-0">
-                                                                                            <input class="form-check-input ms-0" type="checkbox" id="designModeTool" style="
-                                                                                                width: 2.8rem !important;
-                                                                                                height: 1.4rem !important;
-                                                                                                cursor: pointer;
-                                                                                                background-color: var(--transparency-60);
-                                                                                                border-color: var(--primary-800);
-                                                                                            ">
-                                                                                        </div>
-                                                                                    </div>                                                </div>                    </div>
+                      "
+                    />
+                    <button
+                      class="btn btn-primary ms-2"
+                      style="padding: 0.4rem 0.8rem"
+                      id="copyEmailValidation"
+                    >
+                      <img
+                        src="https://api.iconify.design/material-symbols:content-copy-rounded.svg?color=%23ffffff"
+                        width="18"
+                      />
+                    </button>
+                  </div>
                 </div>
+                <!-- Phone mask -->
+                <div
+                  class="d-flex gap-3 w-100 rounded-2 enter-animation flex-column"
+                >
+                  <label class="text-white fw-normal fs-6 user-select-none">
+                    Máscara para telefone
+                    <span style="opacity: 0.4; font-size: 0.8rem"
+                      >Ex: (00) 00000-0000</span
+                    >
+                  </label>
+                  <div class="d-flex flex-row w-100">
+                    <span
+                      class="d-flex flex-column align-items-center justify-content-center px-3 py-1 text-nowrap text-white"
+                      style="
+                        background: linear-gradient(
+                          90deg,
+                          var(--transparency-70) 0%,
+                          var(--transparency-90) 50%
+                        );
+                        border-radius: 0.4rem 0rem 0 0.4rem;
+                      "
+                    >
+                      Nome do campo
+                    </span>
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="phoneField"
+                      placeholder="phone"
+                      style="
+                        border-radius: 0 0.4rem 0.4rem 0;
+                        box-shadow: initial;
+                      "
+                    />
+                    <button
+                      class="btn btn-primary ms-2"
+                      style="padding: 0.4rem 0.8rem"
+                      id="copyPhoneMask"
+                    >
+                      <img
+                        src="https://api.iconify.design/material-symbols:content-copy-rounded.svg?color=%23ffffff"
+                        width="18"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <!-- Advanced Tools Tab -->
+            <div
+              class="main tab-pane fade w-100 pb-4"
+              id="advanced-settings-tab"
+              role="tabpanel"
+              aria-labelledby="but-advanced-settings-tab"
+              tabindex="0"
+            >
+              <div
+                class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3"
+              >
+                <label
+                  for="url_"
+                  class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1"
+                >
+                  <img
+                    draggable="false"
+                    src="https://api.iconify.design/bxs:magic-wand.svg?color=%23ffffff"
+                    width="24"
+                    alt="Download"
+                  />Avançado</label
+                >
+              </div>
+              <div
+                class="d-flex flex-row gap-3 p-4 w-100 rounded-2 enter-animation flex-column"
+                style="
+                  background: var(--transparency-10);
+                  border: 1px solid var(--primary-900);
+                "
+              >
+                <div
+                  id="designModeContainer"
+                  class="d-flex gap-3 w-100 rounded-3 enter-animation flex-row justify-content-between align-items-center p-3"
+                  style="
+                    background-color: var(--transparency-10);
+                    border: 1px solid var(--transparency-20);
+                    transition: all 0.3s ease;
+                    cursor: pointer;
+                  "
+                  onclick="document.getElementById('designModeTool').click()"
+                >
+                  <div class="d-flex flex-column pointer-events-none">
+                    <label
+                      class="text-white fw-semibold fs-6 mb-0 d-flex align-items-center gap-1"
+                      style="cursor: pointer"
+                    >
+                      <img
+                        src="https://api.iconify.design/fa7-solid:pen-nib.svg?color=%23ffffff"
+                        width="18"
+                        alt="Nib"
+                      />
+                      Design Mode
+                    </label>
+                    <span
+                      id="designModeStatus"
+                      style="opacity: 0.4; font-size: 0.8rem"
+                    >
+                      Edição de página desativada
+                    </span>
+                  </div>
+                  <div class="form-check form-switch p-0 m-0">
+                    <input
+                      class="form-check-input ms-0"
+                      type="checkbox"
+                      id="designModeTool"
+                      style="
+                        width: 2.8rem !important;
+                        height: 1.4rem !important;
+                        cursor: pointer;
+                        background-color: var(--transparency-60);
+                        border-color: var(--primary-800);
+                      "
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-    
+
     <!-- Favorites Sidebar -->
-    <div id="favoritesSidebar" class="favorites-sidebar border-start border-primary-900" style="
+    <div
+      id="favoritesSidebar"
+      class="favorites-sidebar border-start border-primary-900"
+      style="
         position: fixed;
         top: 0;
         right: -320px;
@@ -519,22 +1000,36 @@
         background: var(--secondary-color);
         z-index: 1050;
         transition: right 0.3s ease-out;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
-    ">
-        <div class="p-3 d-flex justify-content-between align-items-center border-bottom border-primary-900" style="background: var(--transparency-10)">
-            <h5 class="mb-0 text-primary-200">Versículos Favoritos</h5>
-            <button id="closeFavorites" class="btn btn-sm p-0" style="border:none; background:transparent">
-                <img src="https://api.iconify.design/material-symbols:close-rounded.svg?color=%23ffffff" width="24">
-            </button>
-        </div>
-        <div id="favorites-container" class="p-3" style="overflow-y: auto; height: calc(100% - 60px);">
-            <!-- Favorites will be rendered here -->
-        </div>
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+      "
+    >
+      <div
+        class="p-3 d-flex justify-content-between align-items-center border-bottom border-primary-900"
+        style="background: var(--transparency-10)"
+      >
+        <h5 class="mb-0 text-primary-200">Versículos Favoritos</h5>
+        <button
+          id="closeFavorites"
+          class="btn btn-sm p-0"
+          style="border: none; background: transparent"
+        >
+          <img
+            src="https://api.iconify.design/material-symbols:close-rounded.svg?color=%23ffffff"
+            width="24"
+          />
+        </button>
+      </div>
+      <div
+        id="favorites-container"
+        class="p-3"
+        style="overflow-y: auto; height: calc(100% - 60px)"
+      >
+        <!-- Favorites will be rendered here -->
+      </div>
     </div>
 
     <div id="alertContent"></div>
     <!-- Footer -->
     <script type="module" src="js/main.js"></script>
-</body>
-
+  </body>
 </html>

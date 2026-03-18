@@ -13,6 +13,7 @@ import { checkAndInjectLoader } from './utils/dom.js';
 import { loadingHTML } from './utils/template.js';
 import { fetchAndDisplayVerse } from './tools/bible.js';
 import { initializeRedirectionTool } from './tools/redirection.js';
+import { initializeColorPicker } from './tools/color-picker.js';
 // This is the main entry point for the popup functionality.
 function initializePopup() {
     // 1. Render initial UI elements
@@ -36,7 +37,7 @@ function initializePopup() {
     // 4. Initialize tools and dynamic content
     fetchAndDisplayVerse();
     initializeRedirectionTool();
-
+    initializeColorPicker();
 }
 
 document.addEventListener('DOMContentLoaded', initializePopup);
