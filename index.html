@@ -330,8 +330,20 @@
               class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100 lh-normal text-nowrap"
               id="but-contrast-checker-tab" data-bs-toggle="pill" data-bs-target="#contrast-checker-tab" type="button"
               role="tab" aria-controls="contrast-checker-tab" aria-selected="false" data-storage-key="lastDesignTab">
-              <img draggable="false" src="https://api.iconify.design/material-symbols:invert-colors-outline.svg?color=%23ffffff"
-                width="16" alt="Contrast" />Contrast Checker
+              <img draggable="false"
+                src="https://api.iconify.design/material-symbols:invert-colors-outline.svg?color=%23ffffff" width="16"
+                alt="Contrast" />Contrast Checker
+            </button>
+          </li>
+          <li class="nav-item w-100" role="presentation">
+            <button style="font-size: 14px; padding: 0.6rem 0.8rem"
+              class="nav-link rounded-3 bg-transparent fw-normal d-flex flex-row align-items-center gap-1 user-select-none justify-content-start w-100 h-100 lh-normal text-nowrap"
+              id="but-gradient-generator-tab" data-bs-toggle="pill" data-bs-target="#gradient-generator-tab"
+              type="button" role="tab" aria-controls="gradient-generator-tab" aria-selected="false"
+              data-storage-key="lastDesignTab">
+              <img draggable="false"
+                src="https://api.iconify.design/ic:baseline-gradient.svg?color=%23ffffff" width="16"
+                alt="Gradient" />Gradient Generator
             </button>
           </li>
         </ul>
@@ -343,7 +355,8 @@
             aria-labelledby="but-color-picker-tab" tabindex="0">
             <div class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
               <label class="text-white fw-semibold fs-5 d-flex align-items-center gap-1">
-                <img draggable="false" src="https://api.iconify.design/ant-design:bg-colors-outlined.svg?color=%23ffffff" width="24"
+                <img draggable="false"
+                  src="https://api.iconify.design/ant-design:bg-colors-outlined.svg?color=%23ffffff" width="24"
                   alt="Palette" />Seletor de Cores</label>
             </div>
 
@@ -441,7 +454,7 @@
                       "></div>
                 </div>
               </div>
-              
+
               <!-- Values and Inputs -->
               <div class="d-flex flex-column gap-3 w-100">
                 <div id="colorPreview" class="rounded-3 shadow" style="
@@ -531,57 +544,138 @@
             aria-labelledby="but-contrast-checker-tab" tabindex="0">
             <div class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-2">
               <label class="text-white fw-semibold fs-5 d-flex align-items-center gap-1">
-                <img draggable="false" src="https://api.iconify.design/material-symbols:invert-colors-outline.svg?color=%23ffffff"
-                  width="20" alt="Contrast" />Contrast Checker</label>
+                <img draggable="false"
+                  src="https://api.iconify.design/material-symbols:invert-colors-outline.svg?color=%23ffffff" width="20"
+                  alt="Contrast" />Contrast Checker</label>
             </div>
-            
-            <div class="d-flex flex-column gap-2 p-3 rounded-3 enter-animation" style="background: var(--transparency-10); border: 1px solid var(--primary-900);">
-                <!-- Inputs Row -->
-                <div class="row g-2 contrast-input-group">
-                    <div class="col-6">
-                        <label class="small opacity-50 mb-1" style="font-size: 0.8rem;">Background</label>
-                        <div class="input-group input-group-sm">
-                            <input type="color" class="form-control form-control-color bg-transparent" id="bgColorInput" value="#1A1A1A" style="width: 4.2rem; flex: none; height: 2.8rem; border-radius: 0.4rem 0 0 0.4rem; background: var(--transparency-70) !important;">
-                            <input type="text" class="form-control bg-transparent text-white font-monospace fs-6" id="bgHexText" value="#1A1A1A" style="border-radius: 0 0.4rem 0.4rem 0;">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <label class="small opacity-50 mb-1" style="font-size: 0.8rem;">Foreground</label>
-                        <div class="input-group input-group-sm">
-                            <input type="color" class="form-control form-control-color bg-transparent" id="fgColorInput" value="#A9B5FF" style="width: 4.2rem; flex: none; height: 2.8rem; border-radius: 0.4rem 0 0 0.4rem; background: var(--transparency-70) !important;">
-                            <input type="text" class="form-control bg-transparent text-white font-monospace fs-6" id="fgHexText" value="#A9B5FF" style="border-radius: 0 0.4rem 0.4rem 0;">
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Preview Box -->
-                 <div class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center p-2 rounded-2" style="background: var(--transparency-20);">
-                  <div class="d-flex flex-column px-4 justify-content-center align-items-center">
-                      <h4 id="ratioValue" class="mb-2 fw-bold fs-2" style="color: var(--primary-300)">0.00:1</h4>
-                      <div class="d-flex gap-2">
-                          <div class="d-flex flex-column align-items-center">
-                              <span id="statusNormal" class="contrast-status-badge fail">FAIL</span>
-                              <span style="font-size: 0.6rem;" class="opacity-50 mt-1">NORMAL</span>
-                          </div>
-                          <div class="d-flex flex-column align-items-center">
-                              <span id="statusLarge" class="contrast-status-badge fail">FAIL</span>
-                              <span style="font-size: 0.6rem;" class="opacity-50 mt-1">LARGE</span>
-                          </div>
-                      </div>
+            <div class="d-flex flex-column gap-2 p-3 rounded-3 enter-animation"
+              style="background: var(--transparency-10); border: 1px solid var(--primary-900);">
+              <!-- Inputs Row -->
+              <div class="row g-2 contrast-input-group">
+                <div class="col-6">
+                  <label class="small opacity-50 mb-1" style="font-size: 0.8rem;">Background</label>
+                  <div class="input-group input-group-sm">
+                    <input type="color" class="form-control form-control-color bg-transparent" id="bgColorInput"
+                      value="#1A1A1A"
+                      style="width: 4.2rem; flex: none; height: 2.8rem; border-radius: 0.4rem 0 0 0.4rem; background: var(--transparency-70) !important;">
+                    <input type="text" class="form-control bg-transparent text-white font-monospace fs-6" id="bgHexText"
+                      value="#1A1A1A" style="border-radius: 0 0.4rem 0.4rem 0;">
                   </div>
-                  <div id="contrastPreview" class="contrast-preview-box rounded-3 py-4 text-center mt-1 w-100" style="background-color: #1A1A1A; color: #A9B5FF; border: 1px solid var(--transparency-20);">
-                      <p class="mb-0 fw-bold fs-5">Exemplo de Texto</p>
-                      <span class="small opacity-75 fs-6">A leitura deve ser confortável.</span>
-                  </div>
-                 </div>
-
-                <!-- Results Row -->
-                <div class="d-flex flex-row justify-content-between align-items-center mt-1 p-2 rounded-2" style="background: var(--transparency-20);">
-                    <div class="d-flex flex-column p-2 user-select-none opacity-50" style="font-size: 0.9rem;">
-                        <p class="mb-0"><b>AA:</b> Contraste mínimo de 4,5:1 (texto normal) e 3:1 (texto grande/negrito).</p>
-                        <p class="mb-0"><b>AAA:</b> Contraste alto de 7:1 (texto normal) e 4,5:1 (texto grande/negrito).</p>
-                    </div>
                 </div>
+                <div class="col-6">
+                  <label class="small opacity-50 mb-1" style="font-size: 0.8rem;">Foreground</label>
+                  <div class="input-group input-group-sm">
+                    <input type="color" class="form-control form-control-color bg-transparent" id="fgColorInput"
+                      value="#A9B5FF"
+                      style="width: 4.2rem; flex: none; height: 2.8rem; border-radius: 0.4rem 0 0 0.4rem; background: var(--transparency-70) !important;">
+                    <input type="text" class="form-control bg-transparent text-white font-monospace fs-6" id="fgHexText"
+                      value="#A9B5FF" style="border-radius: 0 0.4rem 0.4rem 0;">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Preview Box -->
+              <div class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center p-2 rounded-2"
+                style="background: var(--transparency-20);">
+                <div class="d-flex flex-column px-4 justify-content-center align-items-center">
+                  <h4 id="ratioValue" class="mb-2 fw-bold fs-2" style="color: var(--primary-300)">0.00:1</h4>
+                  <div class="d-flex gap-2">
+                    <div class="d-flex flex-column align-items-center">
+                      <span id="statusNormal" class="contrast-status-badge fail">FAIL</span>
+                      <span style="font-size: 0.6rem;" class="opacity-50 mt-1">NORMAL</span>
+                    </div>
+                    <div class="d-flex flex-column align-items-center">
+                      <span id="statusLarge" class="contrast-status-badge fail">FAIL</span>
+                      <span style="font-size: 0.6rem;" class="opacity-50 mt-1">LARGE</span>
+                    </div>
+                  </div>
+                </div>
+                <div id="contrastPreview" class="contrast-preview-box rounded-3 py-4 text-center mt-1 w-100"
+                  style="background-color: #1A1A1A; color: #A9B5FF; border: 1px solid var(--transparency-20);">
+                  <p class="mb-0 fw-bold fs-5">Exemplo de Texto</p>
+                  <span class="small opacity-75 fs-6">A leitura deve ser confortável.</span>
+                </div>
+              </div>
+
+              <!-- Results Row -->
+              <div class="d-flex flex-row justify-content-between align-items-center mt-1 p-2 rounded-2"
+                style="background: var(--transparency-20);">
+                <div class="d-flex flex-column p-2 user-select-none opacity-50" style="font-size: 0.84rem;">
+                  <p class="mb-0"><b>AA:</b> Contraste mínimo de 4,5:1 (texto normal) e 3:1 (texto grande/negrito).</p>
+                  <p class="mb-0"><b>AAA:</b> Contraste alto de 7:1 (texto normal) e 4,5:1 (texto grande/negrito).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gradient Generator Tab -->
+          <div class="main tab-pane fade w-100" id="gradient-generator-tab" role="tabpanel"
+            aria-labelledby="but-gradient-generator-tab" tabindex="0">
+            <div class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-2">
+              <label class="text-white fw-semibold fs-5 d-flex align-items-center gap-1">
+                <img draggable="false"
+                  src="https://api.iconify.design/ic:baseline-gradient.svg?color=%23ffffff" width="20"
+                  alt="Gradient" />Gradient Generator</label>
+            </div>
+
+            <div class="d-flex flex-column gap-3 p-3 rounded-3 enter-animation"
+              style="background: var(--transparency-10); border: 1px solid var(--primary-900);">
+              <!-- Preview Box -->
+              <div id="gradientPreview" class="rounded-3 shadow-sm"
+                style="width: 100%; height: 100px; background: linear-gradient(90deg, #424aff, #a9b5ff);">
+              </div>
+
+              <!-- Controls Grid -->
+              <div class="row g-2">
+                <div class="col-6">
+                  <label class="small opacity-50 mb-1" style="font-size: 0.8rem;">Cor 1</label>
+                  <div class="input-group input-group-sm">
+                    <input type="color" class="form-control form-control-color bg-transparent" id="gradColor1"
+                      value="#424aff"
+                      style="width: 4.2rem; flex: none; height: 2.8rem; border-radius: 0.4rem 0 0 0.4rem; background: var(--transparency-70) !important;">
+                    <input type="text" class="form-control bg-transparent text-white font-monospace fs-6" id="gradHex1"
+                      value="#424AFF" style="border-radius: 0 0.4rem 0.4rem 0;">
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label class="small opacity-50 mb-1" style="font-size: 0.8rem;">Cor 2</label>
+                  <div class="input-group input-group-sm">
+                    <input type="color" class="form-control form-control-color bg-transparent" id="gradColor2"
+                      value="#a9b5ff"
+                      style="width: 4.2rem; flex: none; height: 2.8rem; border-radius: 0.4rem 0 0 0.4rem; background: var(--transparency-70) !important;">
+                    <input type="text" class="form-control bg-transparent text-white font-monospace fs-6" id="gradHex2"
+                      value="#A9B5FF" style="border-radius: 0 0.4rem 0.4rem 0;">
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label class="small opacity-50 mb-1" style="font-size: 0.8rem;">Ângulo (deg)</label>
+                  <input type="number" class="form-control bg-transparent text-white fs-6" id="gradAngle" value="90"
+                    min="0" max="360" style="height: 2.8rem;">
+                </div>
+                <div class="col-6">
+                  <label class="small opacity-50 mb-1" style="font-size: 0.8rem;">Tipo</label>
+                  <select class="form-select bg-transparent border-primary-800 text-white" id="gradType">
+                    <option value="linear">Linear</option>
+                    <option value="radial">Radial</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Output -->
+              <div class="mt-1">
+                <label class="small opacity-50 mb-1" style="font-size: 0.8rem;">CSS</label>
+                <div class="d-flex flex-row w-100">
+                  <input class="form-control" type="text" id="gradCssOutput" readonly placeholder="linear-gradient(90deg, #000000, #ffffff)" style="
+                        border-radius: 0.4rem;
+                        box-shadow: initial;
+                      " />
+                  <button class="btn btn-primary ms-2 copy-color" style="padding: 0.4rem 0.8rem" data-target="gradCssOutput">
+                    <img src="https://api.iconify.design/material-symbols:content-copy-rounded.svg?color=%23ffffff"
+                      width="18" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

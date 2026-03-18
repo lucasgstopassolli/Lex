@@ -15,6 +15,7 @@ import { fetchAndDisplayVerse } from './tools/bible.js';
 import { initializeRedirectionTool } from './tools/redirection.js';
 import { initializeColorPicker } from './tools/color-picker.js';
 import { initializeContrastChecker } from './tools/contrast-checker.js';
+import { initializeGradientGenerator } from './tools/gradient-generator.js';
 
 // This is the main entry point for the popup functionality.
 function initializePopup() {
@@ -41,6 +42,7 @@ function initializePopup() {
     initializeRedirectionTool();
     initializeColorPicker();
     initializeContrastChecker();
+    initializeGradientGenerator();
 }
 
 document.addEventListener('DOMContentLoaded', initializePopup);
