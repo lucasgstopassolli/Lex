@@ -27,6 +27,15 @@ export function stripHtml(html) {
   return div.textContent || div.innerText || "";
 }
 
+export function initializeTooltips() {
+  const tooltipTriggerList = document.querySelectorAll(
+    '[data-bs-toggle="tooltip"]'
+  );
+  [...tooltipTriggerList].map(
+    (el) => new bootstrap.Tooltip(el)
+  );
+}
+
 // Global function to listen and execute functions
 export function listenAndExecute(trigger, functionToExecute, eventToListen) {
   let t = document.querySelector(trigger);

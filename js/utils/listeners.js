@@ -3,19 +3,12 @@ import * as storage from "./storage.js";
 import * as popup from "../popup.js";
 import * as redirection from "../tools/redirection.js";
 import { initializeValidationFields } from "../tools/validation-fields.js";
-import { alertTrigger, getAlertConfig } from "./dom.js";
+import { alertTrigger, getAlertConfig, initializeTooltips } from "./dom.js";
+
+// Re-export for main.js
+export { initializeTooltips };
 
 // --- Generic Listeners ---
-
-// Initialize all Bootstrap tooltips
-export function initializeTooltips() {
-    const tooltipTriggerList = document.querySelectorAll(
-      '[data-bs-toggle="tooltip"]'
-    );
-    [...tooltipTriggerList].map(
-      (el) => new bootstrap.Tooltip(el)
-    );
-}
 
 // Setup copy buttons to copy content from specific selectors
 export function setupCopyButtons() {
@@ -183,7 +176,9 @@ export function setupTabMemory() {
 
   tabGroups.forEach(group => {
     const tabButtons = group.querySelectorAll('.nav-link[data-storage-key]');
-    const storageKey = tabButtons.length > 0 ? tabButtons[0].getAttribute('data-storage-key') : null;
+    if (tabButtons.length === 0) return;
+
+    const storageKey = tabButtons[0].getAttribute('data-storage-key');
 
     if (storageKey) {
       // Save the last clicked tab in the group
@@ -199,8 +194,18 @@ export function setupTabMemory() {
         if (lastTabId) {
           const lastTabButton = document.getElementById(lastTabId);
           if (lastTabButton) {
-            lastTabButton.click();
+            // Use bootstrap.Tab.getOrCreateInstance to avoid conflicts
+            const tabTrigger = new bootstrap.Tab(lastTabButton);
+            tabTrigger.show();
+          } else {
+            // If the stored ID no longer exists, click the first one
+            const tabTrigger = new bootstrap.Tab(tabButtons[0]);
+            tabTrigger.show();
           }
+        } else {
+          // If no tab was ever saved (first time), click the first one
+          const tabTrigger = new bootstrap.Tab(tabButtons[0]);
+          tabTrigger.show();
         }
       });
     }

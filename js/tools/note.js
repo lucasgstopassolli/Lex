@@ -1,4 +1,4 @@
-import { escapeHtml, stripHtml, alertTrigger, getAlertConfig } from '../utils/dom.js';
+import { escapeHtml, stripHtml, alertTrigger, getAlertConfig, initializeTooltips } from '../utils/dom.js';
 
 // --- Note Management (formerly manager.js) ---
 
@@ -221,6 +221,7 @@ function setupNoteEventListeners() {
 function initializeNotes() {
     renderNotes(getNotes());
     setupNoteEventListeners();
+    initializeTooltips();
 }
 
 initializeNotes();
