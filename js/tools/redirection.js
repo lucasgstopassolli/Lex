@@ -1,19 +1,20 @@
-import { getCurrentTab, getTabObject } from '../utils/chrome-api.js';
+import { getCurrentTab, getTabObject, getWordPressBaseUrl } from '../utils/chrome-api.js';
 import { alertTrigger, getAlertConfig } from '../utils/dom.js';
 
 function ensureSlash(termUrl) {
+    if (!termUrl) return '';
     return termUrl.endsWith('/') ? termUrl : termUrl + '/';
 }
 
 async function createRedirect(inputUrl, outputUrl) {
     const tabInfo = await getTabObject();
-    const domain = tabInfo?.origin;
-    if (!domain) {
+    const wpBase = getWordPressBaseUrl(tabInfo);
+    if (!wpBase) {
         alertTrigger(getAlertConfig("domainNotAvailable"));
         return;
     }
 
-    const redirectionUrl = ensureSlash(domain) + "wp-admin/tools.php?page=redirection.php";
+    const redirectionUrl = ensureSlash(wpBase) + "wp-admin/tools.php?page=redirection.php";
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
     await chrome.tabs.update(tab.id, { url: redirectionUrl });
@@ -28,7 +29,7 @@ async function createRedirect(inputUrl, outputUrl) {
 
 async function injectAndCreate(tabId, inputUrl, outputUrl) {
     const tabInfo = await getTabObject();
-    const domain = tabInfo?.origin;
+    const wpBase = getWordPressBaseUrl(tabInfo);
     try {
         const [{ result: nonce }] = await chrome.scripting.executeScript({
             target: { tabId },
@@ -41,8 +42,8 @@ async function injectAndCreate(tabId, inputUrl, outputUrl) {
         await chrome.scripting.executeScript({
             target: { tabId },
             world: 'MAIN',
-            func: (domain, inputUrl, outputUrl, nonce) => {
-                fetch(domain + "wp-json/redirection/v1/redirect/", {
+            func: (wpBase, inputUrl, outputUrl, nonce) => {
+                fetch(wpBase + "wp-json/redirection/v1/redirect/", {
                     headers: {
                         "accept": "application/json, */*;q=0.1",
                         "content-type": "application/json; charset=utf-8",
@@ -74,7 +75,7 @@ async function injectAndCreate(tabId, inputUrl, outputUrl) {
                 }).then(() => window.location.reload())
                 .catch(error => console.error("Request error:", error));
             },
-            args: [ensureSlash(domain), inputUrl, outputUrl, nonce]
+            args: [ensureSlash(wpBase), inputUrl, outputUrl, nonce]
         });
     } catch (error) {
         console.error("Error retrieving nonce or sending redirect:", error);
@@ -98,11 +99,11 @@ export async function initializeRedirectionTool() {
     const tabUrl = await getTabObject();
     if (tabUrl && tabUrl.hostname) {
         try {
-            const domain = tabUrl.hostname;
+            const wpBase = getWordPressBaseUrl(tabUrl);
             const slug = tabUrl.pathname;
             const url = tabUrl.href;
 
-            document.getElementById('url_domain').value = domain;
+            document.getElementById('url_domain').value = wpBase;
             document.getElementById('inputUrl').value = slug;
             document.getElementById('url_').value = ensureSlash(url);
             if (document.getElementById('outputUrl').value === '') {

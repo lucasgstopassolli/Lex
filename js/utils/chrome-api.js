@@ -40,6 +40,22 @@ export async function getTabObject() {
   return null;
 }
 
+/**
+ * Extracts the base URL of a WordPress installation.
+ * If the current URL is within /wp-admin/, it returns everything up to that point.
+ * Otherwise, it returns the origin.
+ * @param {URL} url 
+ * @returns {string}
+ */
+export function getWordPressBaseUrl(url) {
+  if (!url) return '';
+  const wpAdminIndex = url.pathname.indexOf('/wp-admin/');
+  if (wpAdminIndex !== -1) {
+    return url.origin + url.pathname.substring(0, wpAdminIndex + 1);
+  }
+  return url.origin + '/';
+}
+
 
 export function createNewTab(url) {
   if (url) {

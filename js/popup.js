@@ -1,4 +1,4 @@
-import { getTabObject, sendMessage, getCurrentTab } from "./utils/chrome-api.js";
+import { getTabObject, sendMessage, getCurrentTab, getWordPressBaseUrl } from "./utils/chrome-api.js";
 import { plugins } from "./utils/objects.js";
 import { alertTrigger, getAlertConfig } from "./utils/dom.js";
 
@@ -26,7 +26,7 @@ export function renderPluginCards() {
                 <button class="btn btn-primary btn-install"
                   data-index="${index}"
                   data-selector="#the-list > div.plugin-card${plugin.wordpressSelector} > div.plugin-card-top > div.action-links > ul > li:nth-child(1) > a"
-                  data-link="/wp-admin/plugin-install.php?s=${encodeURIComponent(plugin.searchName || plugin.name)}&tab=search&type=term"
+                  data-link="wp-admin/plugin-install.php?s=${encodeURIComponent(plugin.searchName || plugin.name)}&tab=search&type=term"
                   data-bs-toggle="tooltip"
                   data-bs-placement="left"
                   title="Download the plugin">
@@ -34,7 +34,7 @@ export function renderPluginCards() {
                 </button>
                 <button class="btn btn-outline-primary btn-view"
                   data-selector="${plugin.wordpressSelector}"
-                  data-link="/wp-admin/plugin-install.php?s=${encodeURIComponent(plugin.searchName || plugin.name)}&tab=search&type=term"
+                  data-link="wp-admin/plugin-install.php?s=${encodeURIComponent(plugin.searchName || plugin.name)}&tab=search&type=term"
                   data-bs-toggle="tooltip"
                   data-bs-placement="left"
                   title="View the plugin">
@@ -55,12 +55,13 @@ export async function handleViewPluginClick(event) {
     const button = event.currentTarget;
     try {
         const tabInfo = await getTabObject();
-        if (!tabInfo?.origin) {
+        const wpBase = getWordPressBaseUrl(tabInfo);
+        if (!wpBase) {
             alertTrigger(getAlertConfig("domainNotAvailable"));
             return;
         }
 
-        const pluginViewURL = new URL(button.dataset.link, tabInfo.origin).href;
+        const pluginViewURL = new URL(button.dataset.link, wpBase).href;
         const selector = button.dataset.selector;
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
@@ -105,12 +106,13 @@ export async function handleInstallPluginClick(event) {
     const button = event.currentTarget;
     try {
         const tabInfo = await getTabObject();
-        if (!tabInfo?.origin) {
+        const wpBase = getWordPressBaseUrl(tabInfo);
+        if (!wpBase) {
             alertTrigger(getAlertConfig("domainNotAvailable"));
             return;
         }
 
-        const pluginViewURL = new URL(button.dataset.link, tabInfo.origin).href;
+        const pluginViewURL = new URL(button.dataset.link, wpBase).href;
         const selector = button.dataset.selector;
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
