@@ -1,5 +1,6 @@
 import { getCurrentTab, getTabObject, getWordPressBaseUrl } from '../utils/chrome-api.js';
 import { alertTrigger, getAlertConfig } from '../utils/dom.js';
+import { detectWordPress } from '../utils/wordpress.js';
 
 function ensureSlash(termUrl) {
     if (!termUrl) return '';
@@ -9,12 +10,16 @@ function ensureSlash(termUrl) {
 async function checkRedirectionPlugin(wpBase) {
     const loader = document.getElementById('redirect-loader');
     const errorMsg = document.getElementById('redirect-error-msg');
+    const notWpMsg = document.getElementById('redirect-not-wp-msg');
     const content = document.getElementById('redirect-content');
     const placeholder = document.getElementById('redirect-placeholder');
 
+    errorMsg?.classList.add('d-none');
+    notWpMsg?.classList.add('d-none');
+
     if (!wpBase) {
         loader?.classList.add('d-none');
-        errorMsg?.classList.remove('d-none');
+        notWpMsg?.classList.remove('d-none');
         return false;
     }
 
@@ -130,8 +135,30 @@ export function handleRedirectEvent(event) {
 
 export async function initializeRedirectionTool() {
     const tabUrl = await getTabObject();
+    const loader = document.getElementById('redirect-loader');
+    const errorMsg = document.getElementById('redirect-error-msg');
+    const notWpMsg = document.getElementById('redirect-not-wp-msg');
+    const content = document.getElementById('redirect-content');
+    const placeholder = document.getElementById('redirect-placeholder');
+
+    // Hide all states first
+    errorMsg?.classList.add('d-none');
+    notWpMsg?.classList.add('d-none');
+    content?.classList.add('d-none');
+    placeholder?.classList.remove('d-none');
+    loader?.classList.remove('d-none');
+
     if (tabUrl && tabUrl.hostname) {
         try {
+            const wpDetection = await detectWordPress();
+            const isWP = wpDetection && (wpDetection.meta || wpDetection.api || wpDetection.dir);
+
+            if (!isWP) {
+                loader?.classList.add('d-none');
+                notWpMsg?.classList.remove('d-none');
+                return;
+            }
+
             const wpBase = getWordPressBaseUrl(tabUrl);
             const slug = tabUrl.pathname;
             const url = tabUrl.href;
@@ -149,6 +176,8 @@ export async function initializeRedirectionTool() {
             await checkRedirectionPlugin(null);
         }
     } else {
-        await checkRedirectionTool(null);
+        loader?.classList.add('d-none');
+        notWpMsg?.classList.remove('d-none');
     }
 }
+

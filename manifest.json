@@ -1,7 +1,7 @@
 {
     "name": "Lex",
-    "description": "Uma ferramenta simples que ajuda em tarefas diárias em Wordpress e Design",
-    "version": "0.9.0",
+    "description": "Uma ferramenta simples e poderosa para tarefas diárias em Wordpress e Design",
+    "version": "1.0.0",
     "manifest_version": 3,
     "permissions": [
         "storage",
