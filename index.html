@@ -211,7 +211,62 @@
               <label for="url_" class="text-white fw-semibold fs-5 user-select-none d-flex align-items-center gap-1">
                 <img draggable="false" src="https://api.iconify.design/fe:wordpress-alt.svg?color=%23ffffff" width="24"
                   alt="Wordpress" />Recursos do Wordpress</label>
+              <button class="btn" id="reload-wp-detect" title="Recarregar detecção">
+                <img src="https://api.iconify.design/material-symbols:refresh-rounded.svg?color=%23a9b5ff" width="18">
+              </button>
             </div>
+
+            <!-- Detection Panel -->
+            <div class="d-flex flex-column gap-1 p-3 mb-3 rounded-3 enter-animation"
+              style="background: var(--transparency-10); border: 1px solid var(--primary-900);">
+              <div class="d-flex flex-row gap-3 justify-content-between align-items-center mb-2">
+                <div class="d-flex justify-content-between align-items-center w-100">
+                  <span class="text-white fw-bold fs-6">Status de Detecção</span>
+                  <span id="wp-overall-status" class="badge bg-secondary">Verificando...</span>
+                </div>
+                <img id="wordpress-icon-state" src="https://api.iconify.design/fe:wordpress-alt.svg?color=%236d6e73" alt="Wordpress" width="48"/>
+              </div>
+              <div class="accordion accordion-flush" id="accordionDetalhes">
+                <div class="accordion-item bg-transparent border-0">
+                  <h2 class="accordion-header" id="headingDetalhes">
+                    <button
+                      class="accordion-button collapsed bg-transparent text-white shadow-none px-0 py-2 opacity-75"
+                      type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetalhes" aria-expanded="false"
+                      aria-controls="collapseDetalhes">
+                      <span class="small">Ver detalhes</span>
+                    </button>
+                  </h2>
+                  <div id="collapseDetalhes" class="accordion-collapse collapse" aria-labelledby="headingDetalhes"
+                    data-bs-parent="#accordionDetalhes">
+                    <div class="accordion-body px-0 py-2">
+
+                      <div class="d-flex flex-column gap-2">
+                        <div class="d-flex align-items-center justify-content-between opacity-75">
+                          <span class="small">1. Meta Tag Generator</span>
+                          <img id="status-meta"
+                            src="https://api.iconify.design/material-symbols:pending-outline.svg?color=%23ffffff"
+                            width="16">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between opacity-75">
+                          <span class="small">2. API REST Link</span>
+                          <img id="status-api"
+                            src="https://api.iconify.design/material-symbols:pending-outline.svg?color=%23ffffff"
+                            width="16">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between opacity-75">
+                          <span class="small">3. Estrutura (/wp-content)</span>
+                          <img id="status-dir"
+                            src="https://api.iconify.design/material-symbols:pending-outline.svg?color=%23ffffff"
+                            width="16">
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="d-flex gap-3 p-4 w-100 rounded-2 enter-animation flex-column" style="
                   background: var(--transparency-10);
                   border: 1px solid var(--primary-900);
@@ -272,14 +327,18 @@
             </div>
 
             <!-- Loader / Placeholder Container -->
-            <div id="redirect-placeholder" class="d-flex flex-column align-items-center justify-content-center gap-3 p-4 text-center enter-animation" style="min-height: 250px;">
+            <div id="redirect-placeholder"
+              class="d-flex flex-column align-items-center justify-content-center gap-3 p-4 text-center enter-animation"
+              style="min-height: 250px;">
               <div class="spinner-border text-primary" role="status" id="redirect-loader">
                 <span class="visually-hidden">Loading...</span>
               </div>
               <div id="redirect-error-msg" class="d-none">
-                <img src="https://api.iconify.design/material-symbols:warning-rounded.svg?color=%23ffcc00" width="48" class="mb-2">
+                <img src="https://api.iconify.design/material-symbols:warning-rounded.svg?color=%23ffcc00" width="48"
+                  class="mb-2">
                 <h5 class="text-white fw-bold">Plugin Não Encontrado</h5>
-                <p class="text-white-50 small">O plugin <b>Redirection</b> não foi detectado ou este site não é um WordPress.</p>
+                <p class="text-white-50 small">O plugin <b>Redirection</b> não foi detectado ou este site não é um
+                  WordPress.</p>
                 <p class="text-white-50 small">Instale o plugin para habilitar este recurso.</p>
               </div>
             </div>
@@ -355,9 +414,8 @@
               id="but-gradient-generator-tab" data-bs-toggle="pill" data-bs-target="#gradient-generator-tab"
               type="button" role="tab" aria-controls="gradient-generator-tab" aria-selected="false"
               data-storage-key="lastDesignTab">
-              <img draggable="false"
-                src="https://api.iconify.design/ic:baseline-gradient.svg?color=%23ffffff" width="16"
-                alt="Gradient" />CSS Gradient
+              <img draggable="false" src="https://api.iconify.design/ic:baseline-gradient.svg?color=%23ffffff"
+                width="16" alt="Gradient" />CSS Gradient
             </button>
           </li>
         </ul>
@@ -628,9 +686,8 @@
             aria-labelledby="but-gradient-generator-tab" tabindex="0">
             <div class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-2">
               <label class="text-white fw-semibold fs-5 d-flex align-items-center gap-1">
-                <img draggable="false"
-                  src="https://api.iconify.design/ic:baseline-gradient.svg?color=%23ffffff" width="20"
-                  alt="Gradient" />CSS Gradient</label>
+                <img draggable="false" src="https://api.iconify.design/ic:baseline-gradient.svg?color=%23ffffff"
+                  width="20" alt="Gradient" />CSS Gradient</label>
             </div>
 
             <div class="d-flex flex-column gap-3 p-3 rounded-3 enter-animation"
@@ -680,11 +737,13 @@
               <div class="mt-1">
                 <label class="small opacity-50 mb-1" style="font-size: 0.8rem;">CSS</label>
                 <div class="d-flex flex-row w-100">
-                  <input class="form-control" type="text" id="gradCssOutput" readonly placeholder="linear-gradient(90deg, #000000, #ffffff)" style="
+                  <input class="form-control" type="text" id="gradCssOutput" readonly
+                    placeholder="linear-gradient(90deg, #000000, #ffffff)" style="
                         border-radius: 0.4rem;
                         box-shadow: initial;
                       " />
-                  <button class="btn btn-primary ms-2 copy-color" style="padding: 0.4rem 0.8rem" data-target="gradCssOutput">
+                  <button class="btn btn-primary ms-2 copy-color" style="padding: 0.4rem 0.8rem"
+                    data-target="gradCssOutput">
                     <img src="https://api.iconify.design/material-symbols:content-copy-rounded.svg?color=%23ffffff"
                       width="18" />
                   </button>

@@ -4,6 +4,7 @@ import * as popup from "../popup.js";
 import * as redirection from "../tools/redirection.js";
 import { initializeValidationFields } from "../tools/validation-fields.js";
 import { alertTrigger, getAlertConfig, initializeTooltips } from "./dom.js";
+import { detectWordPress, updateDetectionUI } from "./wordpress.js";
 
 // Re-export for main.js
 export { initializeTooltips };
@@ -65,6 +66,17 @@ export function setupToolListeners() {
     
     // Validation fields tool
     initializeValidationFields();
+
+    // WordPress Detection Reload
+    addListener("#reload-wp-detect", "click", async () => {
+        const overallStatus = document.getElementById('wp-overall-status');
+        if (overallStatus) {
+            overallStatus.textContent = "Verificando...";
+            overallStatus.className = "badge bg-secondary";
+        }
+        const results = await detectWordPress();
+        updateDetectionUI(results);
+    });
 }
 
 
@@ -106,6 +118,15 @@ export function setupPopupListeners() {
 
     // Design mode button
     addListener("#designModeTool", "change", popup.handleDesignModeClick);
+
+    // Initial WordPress detection when opening the popup if the tab is already active
+    const wpTabBtn = document.getElementById('but-wordpress-tab');
+    if (wpTabBtn) {
+        wpTabBtn.addEventListener('click', async () => {
+            const results = await detectWordPress();
+            updateDetectionUI(results);
+        });
+    }
 }
 
 // --- Storage-related Listeners and UI Restoration ---
@@ -197,6 +218,11 @@ export function setupTabMemory() {
             // Use bootstrap.Tab.getOrCreateInstance to avoid conflicts
             const tabTrigger = new bootstrap.Tab(lastTabButton);
             tabTrigger.show();
+
+            // Trigger WordPress detection if the restored tab is the WordPress tab
+            if (lastTabId === 'but-wordpress-tab') {
+                detectWordPress().then(updateDetectionUI);
+            }
           } else {
             // If the stored ID no longer exists, click the first one
             const tabTrigger = new bootstrap.Tab(tabButtons[0]);
