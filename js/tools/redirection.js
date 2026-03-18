@@ -6,6 +6,39 @@ function ensureSlash(termUrl) {
     return termUrl.endsWith('/') ? termUrl : termUrl + '/';
 }
 
+async function checkRedirectionPlugin(wpBase) {
+    const loader = document.getElementById('redirect-loader');
+    const errorMsg = document.getElementById('redirect-error-msg');
+    const content = document.getElementById('redirect-content');
+    const placeholder = document.getElementById('redirect-placeholder');
+
+    if (!wpBase) {
+        loader?.classList.add('d-none');
+        errorMsg?.classList.remove('d-none');
+        return false;
+    }
+
+    try {
+        const checkUrl = ensureSlash(wpBase) + "wp-admin/tools.php?page=redirection.php";
+        const response = await fetch(checkUrl, { method: 'GET', credentials: 'include' });
+
+        if (response.ok && response.status === 200) {
+            placeholder?.classList.add('d-none');
+            content?.classList.remove('d-none');
+            content?.classList.add('d-flex');
+            return true;
+        } else {
+            loader?.classList.add('d-none');
+            errorMsg?.classList.remove('d-none');
+            return false;
+        }
+    } catch (error) {
+        loader?.classList.add('d-none');
+        errorMsg?.classList.remove('d-none');
+        return false;
+    }
+}
+
 async function createRedirect(inputUrl, outputUrl) {
     const tabInfo = await getTabObject();
     const wpBase = getWordPressBaseUrl(tabInfo);
@@ -109,7 +142,13 @@ export async function initializeRedirectionTool() {
             if (document.getElementById('outputUrl').value === '') {
                 document.getElementById('outputUrl').value = '/';
             }
+
+            // Verify if the plugin is actually there
+            await checkRedirectionPlugin(wpBase);
         } catch (e) {
+            await checkRedirectionPlugin(null);
         }
+    } else {
+        await checkRedirectionTool(null);
     }
 }

@@ -270,7 +270,21 @@
                   src="https://api.iconify.design/material-symbols:arrow-split-rounded.svg?color=%23ffffff" width="20"
                   style="margin-top: 1px" alt="Download" />Redirect de Páginas</label>
             </div>
-            <div class="d-flex flex-column gap-3 enter-animation">
+
+            <!-- Loader / Placeholder Container -->
+            <div id="redirect-placeholder" class="d-flex flex-column align-items-center justify-content-center gap-3 p-4 text-center enter-animation" style="min-height: 250px;">
+              <div class="spinner-border text-primary" role="status" id="redirect-loader">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <div id="redirect-error-msg" class="d-none">
+                <img src="https://api.iconify.design/material-symbols:warning-rounded.svg?color=%23ffcc00" width="48" class="mb-2">
+                <h5 class="text-white fw-bold">Plugin Não Encontrado</h5>
+                <p class="text-white-50 small">O plugin <b>Redirection</b> não foi detectado ou este site não é um WordPress.</p>
+                <p class="text-white-50 small">Instale o plugin para habilitar este recurso.</p>
+              </div>
+            </div>
+
+            <div id="redirect-content" class="d-none flex-column gap-3 enter-animation">
               <div class="d-flex flex-row gap-3 w-100 justify-content-between align-items-center user-select-none mb-3">
                 <label for="url_" class="text-white fw-semibold fs-6 user-select-none d-flex align-items-center gap-1">
                   <img draggable="false" width="24"
