@@ -19,7 +19,13 @@ export function setupCopyButtons() {
       const contentElement = document.querySelector(selector);
       if (contentElement) {
         const content = contentElement.textContent;
-        navigator.clipboard.writeText(content.trim());
+        navigator.clipboard.writeText(content.trim())
+          .then(() => {
+            alertTrigger(getAlertConfig("copyContent"));
+          })
+          .catch(() => {
+            alertTrigger(getAlertConfig("unexpectedError"));
+          });
       } else {
         alertTrigger(getAlertConfig("selectorNotFound"));
       }

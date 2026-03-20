@@ -121,14 +121,14 @@ export function initializeColorPicker() {
             if (input) {
                 navigator.clipboard.writeText(input.value)
                     .then(() => {
-                        alertTrigger(getAlertConfig("colorCopied"));
+                        alertTrigger(getAlertConfig("copyContent"));
                         // Visual feedback on button
                         const originalHtml = btn.innerHTML;
                         btn.innerHTML = '<img src="https://api.iconify.design/material-symbols:check-rounded.svg?color=%23ffffff" width="16">';
                         setTimeout(() => btn.innerHTML = originalHtml, 1500);
                     })
                     .catch(() => {
-                        alertTrigger(getAlertConfig("colorCopyError"));
+                        alertTrigger(getAlertConfig("unexpectedError"));
                     });
             }
         });

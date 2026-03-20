@@ -24,9 +24,9 @@ function handleValidationFieldCopy(item) {
 ${finalCode}<!-- END ${infoComment} -->`;
 
     copyToClipboard(finalCode).then(() => {
-        alertTrigger(getAlertConfig("codeCopied"));
+        alertTrigger(getAlertConfig("copyContent"));
     }).catch(() => {
-        alertTrigger(getAlertConfig("codeCopyError"));
+        alertTrigger(getAlertConfig("unexpectedError"));
     });
 }
 

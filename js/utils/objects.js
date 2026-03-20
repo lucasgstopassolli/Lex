@@ -217,11 +217,6 @@ export const alertContent = [
       messageHTML: "<b>Campos obrigatórios.</b><br>Preencha URL de origem e destino.",
       timeOut: 3,
     },
-    codeCopied: {
-      class: "success",
-      messageHTML: "<b>Código copiado com sucesso!</b>",
-      timeOut: 2,
-    },
     codeCopyError: {
       class: "danger",
       messageHTML: "<b>Erro ao copiar código.</b><br>Tente novamente.",
@@ -235,16 +230,6 @@ export const alertContent = [
     targetElementNotFound: {
       class: "warning",
       messageHTML: "<b>Elemento não encontrado.</b><br>Verifique o seletor configurado.",
-      timeOut: 3,
-    },
-    colorCopied: {
-      class: "success",
-      messageHTML: "<b>Cor copiada!</b><br>Acesse na área de transferência.",
-      timeOut: 2,
-    },
-    colorCopyError: {
-      class: "danger",
-      messageHTML: "<b>Erro ao copiar cor.</b><br>Tente novamente.",
       timeOut: 3,
     },
   },
