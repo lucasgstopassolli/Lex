@@ -8,8 +8,6 @@
         "activeTab",
         "scripting",
         "tabs",
-        "downloads",
-        "cookies",
         "clipboardWrite"
     ],
     "host_permissions": [
