@@ -129,7 +129,7 @@ export const validation = [
     idInput: "phoneField",
     btnSelector: "copyPhoneMask",
     infoComment: `Phone Field Mask`,
-    scriptCDN: `<script src="https://unpkg.com/imask@7/dist/imask.min.js"></script>`,
+    scriptCDN: '<' + 'script src="https://unpkg.com/imask@7/dist/imask.min.js"></' + 'script>',
     selector: `const PHONE_FIELD_SELECTOR = 'input[name="\${fieldSelectorToReplace}"]';`,
     originalCode: `document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll(PHONE_FIELD_SELECTOR).forEach(e=>{IMask(e,{mask:[{mask:"(00) 0000-0000"},{mask:"(00) 00000-0000"}],dispatch:(a,t)=>t.compiledMasks[(t.value+a).replace(/\D/g,"").length>10?1:0]})})});`,
   },
