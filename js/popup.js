@@ -1,6 +1,7 @@
 import { getTabObject, sendMessage, getCurrentTab, getWordPressBaseUrl } from "./utils/chrome-api.js";
 import { plugins } from "./utils/objects.js";
-import { alertTrigger, getAlertConfig } from "./utils/dom.js";
+import { alertTrigger, alertTriggerWhileRunning, getAlertConfig } from "./utils/dom.js";
+import { detectWordPress } from "./utils/wordpress.js";
 
 // --- UI Rendering ---
 
@@ -48,15 +49,76 @@ export function renderPluginCards() {
     }).join('');
 }
 
+export async function initializePluginsTab() {
+    const placeholder = document.getElementById("plugins-placeholder");
+    const loader = document.getElementById("plugins-loader");
+    const notWpMsg = document.getElementById("plugins-not-wp-msg");
+    const content = document.getElementById("plugins-content");
+    const tabInfo = await getTabObject();
+
+    notWpMsg?.classList.add("d-none");
+    placeholder?.classList.remove("d-none");
+    placeholder?.classList.add("d-flex");
+    loader?.classList.remove("d-none");
+    content?.classList.add("d-none");
+
+    try {
+        const wpDetection = await detectWordPress();
+        const isWP = !!(tabInfo?.hostname && wpDetection && (wpDetection.meta || wpDetection.api || wpDetection.dir));
+
+        loader?.classList.add("d-none");
+
+        if (isWP) {
+            placeholder?.classList.add("d-none");
+            placeholder?.classList.remove("d-flex");
+            content?.classList.remove("d-none");
+            return;
+        }
+
+        notWpMsg?.classList.remove("d-none");
+    } catch (error) {
+        loader?.classList.add("d-none");
+        notWpMsg?.classList.remove("d-none");
+    }
+}
+
 
 // --- Event Handlers ---
 
+function waitForTabComplete(tabId, timeoutMs = 15000) {
+    return new Promise((resolve, reject) => {
+        let timeoutId;
+
+        const cleanup = () => {
+            chrome.tabs.onUpdated.removeListener(listener);
+            clearTimeout(timeoutId);
+        };
+
+        const listener = (updatedTabId, changeInfo) => {
+            if (updatedTabId === tabId && changeInfo.status === "complete") {
+                cleanup();
+                resolve();
+            }
+        };
+
+        timeoutId = setTimeout(() => {
+            cleanup();
+            reject(new Error(`Timed out waiting for tab ${tabId} to finish loading.`));
+        }, timeoutMs);
+
+        chrome.tabs.onUpdated.addListener(listener);
+    });
+}
+
 export async function handleViewPluginClick(event) {
     const button = event.currentTarget;
+    let dismissLoadingToast = () => {};
     try {
+        dismissLoadingToast = alertTriggerWhileRunning(getAlertConfig("searchPlugin"));
         const tabInfo = await getTabObject();
         const wpBase = getWordPressBaseUrl(tabInfo);
         if (!wpBase) {
+            dismissLoadingToast();
             alertTrigger(getAlertConfig("domainNotAvailable"));
             return;
         }
@@ -66,21 +128,13 @@ export async function handleViewPluginClick(event) {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
         if (!tab || !tab.id) {
+            dismissLoadingToast();
             alertTrigger(getAlertConfig("noActiveTab"));
             return;
         }
 
         await chrome.tabs.update(tab.id, { url: pluginViewURL });
-
-        await new Promise((resolve) => {
-            const listener = (tabId, changeInfo) => {
-                if (tabId === tab.id && changeInfo.status === "complete") {
-                    chrome.tabs.onUpdated.removeListener(listener);
-                    resolve();
-                }
-            };
-            chrome.tabs.onUpdated.addListener(listener);
-        });
+        await waitForTabComplete(tab.id);
 
         await chrome.scripting.executeScript({
             target: { tabId: tab.id },
@@ -96,18 +150,23 @@ export async function handleViewPluginClick(event) {
             },
             args: [selector],
         });
+        dismissLoadingToast();
     } catch (error) {
         console.error("Error viewing plugin:", error);
+        dismissLoadingToast();
         alertTrigger(getAlertConfig("unexpectedError"));
     }
 }
 
 export async function handleInstallPluginClick(event) {
     const button = event.currentTarget;
+    let dismissLoadingToast = () => {};
     try {
+        dismissLoadingToast = alertTriggerWhileRunning(getAlertConfig("downloadPlugin"));
         const tabInfo = await getTabObject();
         const wpBase = getWordPressBaseUrl(tabInfo);
         if (!wpBase) {
+            dismissLoadingToast();
             alertTrigger(getAlertConfig("domainNotAvailable"));
             return;
         }
@@ -117,21 +176,13 @@ export async function handleInstallPluginClick(event) {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
         if (!tab || !tab.id) {
+            dismissLoadingToast();
             alertTrigger(getAlertConfig("noActiveTab"));
             return;
         }
 
         await chrome.tabs.update(tab.id, { url: pluginViewURL });
-
-        await new Promise((resolve) => {
-            const listener = (tabId, changeInfo) => {
-                if (tabId === tab.id && changeInfo.status === "complete") {
-                    chrome.tabs.onUpdated.removeListener(listener);
-                    resolve();
-                }
-            };
-            chrome.tabs.onUpdated.addListener(listener);
-        });
+        await waitForTabComplete(tab.id);
 
         const [result] = await chrome.scripting.executeScript({
             target: { tabId: tab.id },
@@ -144,19 +195,24 @@ export async function handleInstallPluginClick(event) {
 
         if (result?.result?.error) {
             console.error(result.result.error);
+            dismissLoadingToast();
             alertTrigger(getAlertConfig("downloadLinkNotFound"));
             return;
         }
 
         const pluginInstallURL = result?.result?.href;
         if (!pluginInstallURL || !pluginInstallURL.startsWith("http")) {
+            dismissLoadingToast();
             alertTrigger(getAlertConfig("invalidUrl"));
             return;
         }
 
         await chrome.tabs.update(tab.id, { url: pluginInstallURL });
+        await waitForTabComplete(tab.id);
+        dismissLoadingToast();
     } catch (error) {
         console.error("Error installing plugin:", error);
+        dismissLoadingToast();
         alertTrigger(getAlertConfig("unexpectedError"));
     }
 }

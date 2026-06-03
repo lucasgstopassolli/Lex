@@ -82,6 +82,7 @@ export function setupToolListeners() {
         }
         const results = await detectWordPress();
         updateDetectionUI(results);
+        popup.initializePluginsTab();
     });
 }
 
@@ -141,6 +142,7 @@ export function setupPopupListeners() {
         wpTabBtn.addEventListener('click', async () => {
             const results = await detectWordPress();
             updateDetectionUI(results);
+            popup.initializePluginsTab();
         });
     }
 }
@@ -237,7 +239,10 @@ export function setupTabMemory() {
 
             // Trigger WordPress detection if the restored tab is the WordPress tab
             if (lastTabId === 'but-wordpress-tab') {
-                detectWordPress().then(updateDetectionUI);
+                detectWordPress().then((results) => {
+                    updateDetectionUI(results);
+                    popup.initializePluginsTab();
+                });
             }
           } else {
             // If the stored ID no longer exists, click the first one

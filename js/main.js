@@ -1,4 +1,4 @@
-import { renderPluginCards, initializeLikeButtonState } from './popup.js';
+import { renderPluginCards, initializeLikeButtonState, initializePluginsTab } from './popup.js';
 import { 
     setupPopupListeners, 
     setupStorageListeners, 
@@ -39,6 +39,7 @@ function initializePopup() {
 
     // 4. Initialize tools and dynamic content
     fetchAndDisplayVerse();
+    initializePluginsTab();
     initializeRedirectionTool();
     initializeColorPicker();
     initializeContrastChecker();

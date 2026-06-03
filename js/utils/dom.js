@@ -81,6 +81,41 @@ export function alertTrigger(content) {
   }
 }
 
+export function alertTriggerWhileRunning(content) {
+  const printElement = document.getElementById("alertContent");
+  if (!printElement) return () => {};
+
+  const toastElement = `<div aria-live="polite" aria-atomic="true" class="position-fixed user-select-none toast-in" style="bottom: 10px; right: 10px;">
+    <div class="toast align-items-center text-bg-${content.class} fade show" role="status" aria-live="polite" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body message">
+                ${content.messageHTML}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-3 m-auto" data-bs-dismiss="toast"
+                aria-label="Close"></button>
+        </div>
+    </div>
+</div>`;
+
+  printElement.innerHTML = toastElement;
+
+  return () => {
+    const toastContainer = printElement.querySelector(".toast-in");
+    if (toastContainer) {
+      toastContainer.classList.remove("toast-in");
+      toastContainer.classList.add("toast-out");
+      setTimeout(() => {
+        if (printElement.contains(toastContainer)) {
+          printElement.innerHTML = "";
+        }
+      }, 500);
+      return;
+    }
+
+    printElement.innerHTML = "";
+  };
+}
+
 export function getAlertConfig(key, fallback = {}) {
   const presets = alertContent?.[0] || {};
   return {

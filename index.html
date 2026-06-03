@@ -308,8 +308,21 @@
                 <img draggable="false" src="https://api.iconify.design/mdi:puzzle.svg?color=%23ffffff" width="20"
                   alt="Download" />Plugins para Website</label>
             </div>
+            <div id="plugins-placeholder"
+              class="d-none flex-column align-items-center justify-content-center gap-3 p-4 text-center enter-animation"
+              style="min-height: 250px;">
+              <div class="spinner-border text-primary d-none" role="status" id="plugins-loader">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <div id="plugins-not-wp-msg" class="d-none">
+                <img src="https://api.iconify.design/material-symbols:error-rounded.svg?color=%23ff4444" width="48"
+                  class="mb-2">
+                <h5 class="text-white fw-bold">Site não é WordPress</h5>
+                <p class="text-white-50 small">Este recurso está disponível apenas para sites WordPress.</p>
+              </div>
+            </div>
             <div class="gap-3 d-flex flex-column justify-content-between text-center pe-3 w-100"
-              style="max-height: 400px; overflow-y: auto; overflow-x: hidden">
+              style="max-height: 400px; overflow-y: auto; overflow-x: hidden" id="plugins-content">
               <!-- Plugin Card Template -->
               <div id="card-container" class="d-flex flex-column gap-3 enter-animation"></div>
             </div>
