@@ -125,14 +125,6 @@ export const validation = [
     selector: `const EMAIL_FIELD_SELECTOR = 'input[name="\${fieldSelectorToReplace}"]';`,
     originalCode: `document.addEventListener("DOMContentLoaded",()=>{const e=new Set(["gmail.com","yahoo.com","hotmail.com","outlook.com","icloud.com","live.com","bol.com.br","uol.com.br","terra.com.br","aol.com","protonmail.com"]),t=e=>/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(e),o=t=>{const o=t.trim().toLowerCase().split("@")[1];return!!o&&!e.has(o)},r=e=>{e.value=e.value.trim();const r=e.value;e.setCustomValidity(""),r.length>0&&(t(r)?o(r)||e.setCustomValidity("Por favor, insira um e-mail corporativo."):e.setCustomValidity("Por favor, insira um e-mail válido."))},a=e=>{e.setAttribute("title","Por favor, insira um e-mail corporativo válido."),e.setAttribute("autocomplete","email"),e.setAttribute("type","email"),e.addEventListener("blur",()=>r(e)),e.addEventListener("input",()=>e.setCustomValidity(""))};document.querySelectorAll(EMAIL_FIELD_SELECTOR).forEach(a)});`,
   },
-  {
-    idInput: "phoneField",
-    btnSelector: "copyPhoneMask",
-    infoComment: `Phone Field Mask`,
-    scriptCDN: '<' + 'script src="https://unpkg.com/imask@7/dist/imask.min.js"></' + 'script>',
-    selector: `const PHONE_FIELD_SELECTOR = 'input[name="\${fieldSelectorToReplace}"]';`,
-    originalCode: `document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll(PHONE_FIELD_SELECTOR).forEach(e=>{IMask(e,{mask:[{mask:"(00) 0000-0000"},{mask:"(00) 00000-0000"}],dispatch:(a,t)=>t.compiledMasks[(t.value+a).replace(/\D/g,"").length>10?1:0]})})});`,
-  },
 ];
 
 export const alertContent = [
