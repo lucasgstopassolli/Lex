@@ -114,13 +114,6 @@ body {
   transition: all ease 0.4s;
   border-radius: 0.5rem;
 }
-.btn:hover {
-  transform: scale(1.09);
-}
-.btn:active {
-  transform: scale(1);
-  --bs-btn-active-border-color: transparent
-}
 .btn-primary {
   --bs-btn-color: var(--primary-50);
   --bs-btn-bg: var(--primary-500);
@@ -158,9 +151,6 @@ body {
   display: flex;
   align-items: center !important;
   justify-content: center !important;
-}
-.btn-outline-primary:hover {
-  transform: scale(1.1);
 }
 
 /* Input styles */
